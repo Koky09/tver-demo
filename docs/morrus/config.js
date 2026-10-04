@@ -39,7 +39,6 @@ window.CONFIG = {
   "tg": "https://t.me/morrus_official",
   "vk": "https://vk.com/detailingtver"
  },
- "adminPin": "0000",
  "demoPrices": true,
  "chatHints": [
   "Химчистка в пятницу после 12",
@@ -176,5 +175,5 @@ window.CONFIG = {
    ]
   }
  ],
- "notifyUrl": ""
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
 };

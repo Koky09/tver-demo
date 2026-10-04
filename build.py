@@ -4,6 +4,7 @@
     python build.py morrus     -> только один клиент
 """
 import json
+import os
 import shutil
 import sys
 import time
@@ -47,7 +48,10 @@ def make_icon(cfg, size, path):
 def build(cfg_path):
     cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
     cfg["hours"] = {int(k): v for k, v in cfg["hours"].items()}
-    cfg["notifyUrl"] = SETTINGS.get("notifyUrl", "")
+    # Адрес сервера записи (Google Apps Script /exec). Пусто — запись хранится в браузере (локальная проверка).
+    cfg["apiUrl"] = os.environ.get("API_URL", SETTINGS.get("apiUrl", ""))
+    if cfg["apiUrl"]:
+        cfg.pop("adminPin", None)  # на сервере у каждого владельца свой PIN, в код сайта он не попадает
     out = DIST / cfg["slug"]
     if out.exists():
         shutil.rmtree(out)

@@ -1,5 +1,6 @@
 /* Шаблон онлайн-записи для автосервиса / детейлинга.
-   Все данные бизнеса — в config.js (window.CONFIG). Хранилище демо — localStorage. */
+   Все данные бизнеса — в config.js (window.CONFIG).
+   С C.apiUrl записи хранятся на сервере (backend/Code.gs), без него — в localStorage (локальная проверка). */
 (function () {
   'use strict';
   const C = window.CONFIG;
@@ -21,14 +22,34 @@
   const load = (k, d) => { try { const v = localStorage.getItem(KEY(k)); return v ? JSON.parse(v) : d; } catch { return d; } };
   const save = (k, v) => { try { localStorage.setItem(KEY(k), JSON.stringify(v)); } catch {} };
 
+  const REMOTE = !!C.apiUrl;
+  let svcOv = REMOTE ? {} : load('services', {});
   function services(all) {
-    const ov = load('services', {});
-    const list = C.services.map((s) => Object.assign({}, s, ov[s.id] || {}));
+    const list = C.services.map((s) => Object.assign({}, s, svcOv[s.id] || {}));
     return all ? list : list.filter((s) => !s.hidden);
   }
   const svcById = (id) => services(true).find((s) => s.id === id);
-  let bookings;
-  const saveBookings = () => save('bookings', bookings);
+  // Локально: все записи. С сервером: у клиента — только занятость боксов, в кабинете — записи владельца.
+  let bookings = [];
+  const saveBookings = () => { if (!REMOTE) save('bookings', bookings); };
+
+  // Запрос к серверу. text/plain — чтобы браузер не делал CORS-preflight, который Apps Script не поддерживает.
+  async function api(action, data) {
+    const r = await fetch(C.apiUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(Object.assign({ action, slug: C.slug }, data)) });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  }
+  const pin = () => sessionStorage.getItem(KEY('pin')) || '';
+
+  // Свежая занятость и цены с сервера
+  async function loadState() {
+    if (!REMOTE) return;
+    const res = await api('state', {});
+    if (!res.ok) throw new Error(res.error);
+    bookings = res.busy.map((b) => ({ box: b.box, intervals: b.intervals, status: 'busy' }));
+    svcOv = res.services || {};
+  }
 
   /* ---------- helpers ---------- */
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -75,7 +96,7 @@
   const overlap = (a, b) => a.date === b.date && a.s < b.e && b.s < a.e;
   function freeBox(ints, ignoreId) {
     for (let box = 1; box <= C.boxes; box++) {
-      const busy = bookings.filter((b) => b.box === box && b.status !== 'cancelled' && b.id !== ignoreId).flatMap((b) => b.intervals);
+      const busy = bookings.filter((b) => b.box === box && b.status !== 'cancelled' && (ignoreId == null || b.id !== ignoreId)).flatMap((b) => b.intervals);
       if (!ints.some((i) => busy.some((x) => overlap(i, x)))) return box;
     }
     return 0;
@@ -93,25 +114,28 @@
   }
   function nextDays() { const out = []; const t = new Date(); for (let i = 0; i < DAYS_AHEAD; i++) out.push(ymd(addDays(t, i))); return out; }
 
-  function createBooking({ svcId, date, start, name, phone, comment, source }) {
+  // Возвращает запись, null (время заняли) или бросает ошибку сети
+  async function createBooking({ svcId, date, start, name, phone, comment, source }) {
     const svc = svcById(svcId); const ints = intervalsFor(svc, date, start); if (!ints) return null;
+    if (REMOTE) {
+      const res = await api('book', { svcId, svcName: svc.name, price: svc.price, intervals: ints, boxes: C.boxes, boxLabel: C.boxLabel,
+        clientName: C.name, name: name.trim(), phone: phone.trim(), comment: (comment || '').trim(), source, pin: source === 'phone' ? pin() : '' });
+      if (!res.ok && res.error !== 'taken') throw new Error(res.error);
+      await loadState().catch(() => {});
+      return res.ok ? res.booking : null;
+    }
     const box = freeBox(ints); if (!box) return null;
     const b = { id: uid(), svcId, svcName: svc.name, price: svc.price, date, start, end: ints[ints.length - 1].e, intervals: ints, box,
       name: name.trim(), phone: phone.trim(), comment: (comment || '').trim(), source: source || 'app', created: Date.now(), status: 'new' };
     bookings.push(b); saveBookings(); notify('booking', b); return b;
   }
 
-  // Уведомление в Telegram: через Google Apps Script (C.notifyUrl) на GitHub Pages
-  // или через локальный server.py (/api/notify). Токен бота в код сайта не попадает.
+  // Локальный режим: уведомление через server.py (/api/notify). С сервером уведомляет сам backend.
   function notify(event, b) {
-    if (!location.protocol.startsWith('http')) return;
+    if (REMOTE || !location.protocol.startsWith('http')) return;
     const days = b.intervals.length > 1 ? ` (${b.intervals.length} ${plural(b.intervals.length, 'день', 'дня', 'дней')})` : '';
     const svc = svcById(b.svcId);
-    const local = /^(localhost|127\.0\.0\.1)$/.test(location.hostname);
-    const url = local || !C.notifyUrl ? '/api/notify' : C.notifyUrl;
-    // text/plain + no-cors: Apps Script не поддерживает CORS-preflight, ответ нам не нужен
-    const opts = url === C.notifyUrl ? { mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' } } : { headers: { 'Content-Type': 'application/json' } };
-    fetch(url, { method: 'POST', ...opts, body: JSON.stringify({
+    fetch('/api/notify', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
       event, slug: C.slug, clientName: C.name, svcName: b.svcName, priceText: svc ? priceStr(svc) : rub(b.price),
       when: `${dateHuman(b.date)}, ${hm(b.start)}–${hm(b.intervals[b.intervals.length - 1].e)}${days}`,
       boxText: `${C.boxLabel || 'Бокс'} ${b.box}`, name: b.name, phone: b.phone, comment: b.comment, source: b.source,
@@ -135,8 +159,10 @@
     return list;
   }
 
-  bookings = load('bookings', null);
-  if (!bookings) { bookings = seedDemo(); saveBookings(); }
+  if (!REMOTE) {
+    bookings = load('bookings', null);
+    if (!bookings) { bookings = seedDemo(); saveBookings(); }
+  }
 
   /* ---------- иконки ---------- */
   const I = {
@@ -283,23 +309,40 @@
         if (a === 'next') state.step = 3;
         if (a === 'back') state.step = state.step === 3 ? 2 : 1;
         if (a === 'close') { closeSheet(); if (state.onDone) state.onDone(); return; }
-        if (a === 'confirm') {
-          state.name = $('#f-name', root).value; state.phone = $('#f-phone', root).value; state.comment = $('#f-comm', root).value;
-          if (state.name.trim().length < 2) return toast('Укажите имя');
-          if (state.phone.replace(/\D/g, '').length < 10) return toast('Проверьте номер телефона');
-          const b = createBooking({ svcId: state.svcId, date: state.date, start: state.start, name: state.name, phone: state.phone, comment: state.comment, source: state.admin ? 'phone' : 'app' });
-          if (!b) { toast('Это время только что заняли — выберите другое'); state.step = 2; state.start = null; return draw(); }
-          if (!state.admin) { save('name', state.name); save('phone', state.phone); }
-          state.booking = b; state.step = 4;
-        }
+        if (a === 'confirm') return confirm_(t);
       }
       draw();
     };
-    draw();
+    async function confirm_(btn) {
+      state.name = $('#f-name', root).value; state.phone = $('#f-phone', root).value; state.comment = $('#f-comm', root).value;
+      if (state.name.trim().length < 2) return toast('Укажите имя');
+      if (state.phone.replace(/\D/g, '').length < 10) return toast('Проверьте номер телефона');
+      btn.disabled = true; btn.textContent = 'Записываем…';
+      let b;
+      try {
+        b = await createBooking({ svcId: state.svcId, date: state.date, start: state.start, name: state.name, phone: state.phone, comment: state.comment, source: state.admin ? 'phone' : 'app' });
+      } catch (err) {
+        btn.disabled = false; btn.textContent = state.admin ? 'Добавить запись' : 'Записаться';
+        return toast('Нет связи с сервером. Попробуйте ещё раз или позвоните нам.');
+      }
+      if (!b) {
+        toast('Это время только что заняли — выберите другое');
+        state.step = 2; state.start = null;
+        if (!slotsFor(svcById(state.svcId), state.date).length) state.date = null; // день кончился — к ближайшему свободному
+        return draw();
+      }
+      if (!state.admin) { save('name', state.name); save('phone', state.phone); }
+      state.booking = b; state.step = 4; draw();
+    }
+    if (REMOTE) {
+      root.innerHTML = '<p class="muted" style="text-align:center;padding:40px 0">Загружаем свободное время…</p>';
+      loadState().then(draw, () => { toast('Нет связи с сервером'); draw(); });
+    } else draw();
   }
 
   /* ---------- ассистент (разбор запроса без внешнего ИИ) ---------- */
   function openChat() {
+    if (REMOTE) loadState().catch(() => {});
     const el = sheet(`<div class="sheet-head"><h3>Ассистент записи</h3><button class="x" aria-label="Закрыть">✕</button></div>
       <div class="chat" id="chat"></div>
       <div class="hints" id="hints">${(C.chatHints || []).map((h) => `<button>${esc(h)}</button>`).join('')}</div>
@@ -386,8 +429,31 @@
   }
 
   /* ---------- кабинет владельца ---------- */
+  // Загрузка записей владельца с сервера (+ обновление раз в минуту, пока открыт кабинет)
+  async function adminLoad() {
+    try {
+      const res = await api('list', { pin: pin() });
+      if (!res.ok) {
+        if (res.error === 'auth' || res.error === 'locked') { sessionStorage.removeItem(KEY('pin')); return route(); }
+        throw new Error(res.error);
+      }
+      bookings = res.bookings; svcOv = res.services || {}; adminLoad.tg = res.telegram || {};
+      adminLoad.loaded = true;
+    } catch (err) {
+      if (!adminLoad.loaded) {
+        app.innerHTML = `<div class="wrap" style="text-align:center;padding-top:60px"><p>Нет связи с сервером</p>
+          <button class="btn" onclick="location.reload()">Повторить</button></div>`;
+        return;
+      }
+      return toast('Нет связи с сервером');
+    }
+    if (location.hash === '#admin' && !$('#sheet') && !(document.activeElement && document.activeElement.matches('.edit-row input'))) renderAdmin();
+  }
+  setInterval(() => { if (REMOTE && location.hash === '#admin' && pin() && !document.hidden) adminLoad(); }, 60000);
+
   function renderAdmin() {
-    if (sessionStorage.getItem(KEY('auth')) !== '1') return renderPin();
+    if (REMOTE ? !pin() : sessionStorage.getItem(KEY('auth')) !== '1') return renderPin();
+    if (REMOTE && !adminLoad.loaded) { app.innerHTML = '<div class="wrap"><p class="muted" style="text-align:center;padding:60px 0">Загружаем записи…</p></div>'; return adminLoad(); }
     const view = renderAdmin.view || 'day';
     const day = renderAdmin.day || ymd(new Date());
     const dayBk = bookings.filter((b) => b.status !== 'cancelled' && b.intervals.some((i) => i.date === day));
@@ -427,14 +493,20 @@
           <input class="in" type="number" min="15" step="15" data-f="duration" value="${s.duration}"></div>`).join('')}`;
     } else {
       const link = location.href.split('#')[0];
+      const tgInfo = adminLoad.tg || {};
       body = `<div class="summary">
           <div><span>Ссылка для клиентов</span><span></span></div>
           <input class="in" readonly value="${esc(link)}" id="lnk">
           <button class="btn sm" data-act="copy" style="margin-top:8px">Скопировать</button>
         </div>
         <p class="muted small">Поставьте ссылку в шапку профиля ВКонтакте, Telegram, Авито, на карточку в Яндекс Картах и 2ГИС. Клиент откроет её как приложение — без установки.</p>
-        <div class="summary"><div><span>Боксов</span><span>${C.boxes}</span></div><div><span>Часы</span><span style="text-align:right">${esc(hoursText())}</span></div></div>
-        <button class="btn ghost" data-act="reset">Сбросить демо-данные</button>
+        ${REMOTE ? `<div class="summary" style="margin-top:12px">
+          <div><span>Уведомления в Telegram</span><span>${tgInfo.connected ? '✅ подключены' : 'не подключены'}</span></div>
+          ${tgInfo.link ? `<a class="btn sm" href="${esc(tgInfo.link)}" target="_blank" rel="noopener" style="margin-top:8px">${tgInfo.connected ? 'Добавить ещё один Telegram' : 'Подключить Telegram'}</a>
+          <p class="muted small" style="margin:8px 0 0">Откройте ссылку и нажмите «Старт» — новые записи будут приходить в течение минуты после подключения.</p>` : ''}
+        </div>` : ''}
+        <div class="summary" style="margin-top:12px"><div><span>${esc(C.boxLabel || 'Бокс')}ов</span><span>${C.boxes}</span></div><div><span>Часы</span><span style="text-align:right">${esc(hoursText())}</span></div></div>
+        ${REMOTE ? '' : '<button class="btn ghost" data-act="reset">Сбросить демо-данные</button>'}
         <button class="btn ghost" data-act="logout">Выйти</button>`;
     }
 
@@ -451,45 +523,74 @@
       const t = e.target.closest('[data-view],[data-day],[data-cancel],[data-act]'); if (!t) return;
       if (t.dataset.view) { renderAdmin.view = t.dataset.view; if (t.dataset.view === 'day') markSeen(); return renderAdmin(); }
       if (t.dataset.day) { renderAdmin.day = t.dataset.day; return renderAdmin(); }
-      if (t.dataset.cancel) { if (!confirm('Отменить запись?')) return; const b = bookings.find((x) => x.id === t.dataset.cancel); b.status = 'cancelled'; saveBookings(); notify('cancel', b); toast('Запись отменена'); return renderAdmin(); }
+      if (t.dataset.cancel) {
+        if (!confirm('Отменить запись?')) return;
+        if (REMOTE) {
+          t.disabled = true;
+          return api('cancel', { pin: pin(), id: t.dataset.cancel }).then((r) => { toast(r.ok ? 'Запись отменена' : 'Не удалось отменить'); adminLoad(); }, () => { t.disabled = false; toast('Нет связи с сервером'); });
+        }
+        const b = bookings.find((x) => x.id === t.dataset.cancel); b.status = 'cancelled'; saveBookings(); notify('cancel', b); toast('Запись отменена'); return renderAdmin();
+      }
       const a = t.dataset.act;
-      if (a === 'add') openBooking({ step: 1, admin: true, name: '', phone: '', onDone: renderAdmin });
+      if (a === 'add') openBooking({ step: 1, admin: true, name: '', phone: '', onDone: REMOTE ? adminLoad : renderAdmin });
       if (a === 'copy') { const i = $('#lnk'); i.select(); (navigator.clipboard ? navigator.clipboard.writeText(i.value) : Promise.resolve(document.execCommand('copy'))).then(() => toast('Ссылка скопирована')); }
       if (a === 'reset') { if (!confirm('Удалить все записи и правки цен в этом браузере?')) return; bookings = seedDemo(); saveBookings(); save('services', {}); toast('Демо-данные сброшены'); renderAdmin(); }
-      if (a === 'logout') { sessionStorage.removeItem(KEY('auth')); location.hash = ''; }
+      if (a === 'logout') { sessionStorage.removeItem(KEY('auth')); sessionStorage.removeItem(KEY('pin')); adminLoad.loaded = false; location.hash = ''; }
     };
     app.onchange = (e) => {
       const row = e.target.closest('[data-row]'); if (!row) return;
-      const ov = load('services', {}); const id = row.dataset.row; ov[id] = ov[id] || {};
+      const id = row.dataset.row; svcOv[id] = svcOv[id] || {};
       const f = e.target.dataset.f;
-      if (f === 'visible') ov[id].hidden = !e.target.checked;
-      else { const v = Math.max(0, Math.round(+e.target.value || 0)); if (f === 'duration' && v < 15) return toast('Минимум 15 минут'); ov[id][f] = v; }
-      save('services', ov); toast('Сохранено');
+      if (f === 'visible') svcOv[id].hidden = !e.target.checked;
+      else { const v = Math.max(0, Math.round(+e.target.value || 0)); if (f === 'duration' && v < 15) return toast('Минимум 15 минут'); svcOv[id][f] = v; }
+      if (!REMOTE) { save('services', svcOv); return toast('Сохранено'); }
+      api('services', { pin: pin(), overrides: svcOv }).then((r) => toast(r.ok ? 'Сохранено' : 'Не удалось сохранить'), () => toast('Нет связи с сервером'));
     };
     if (view === 'day') setTimeout(markSeen, 4000);
   }
-  function markSeen() { let ch = false; bookings.forEach((b) => { if (b.status === 'new' && b.source === 'app') { b.status = 'seen'; ch = true; } }); if (ch) saveBookings(); }
+  function markSeen() {
+    let ch = false; bookings.forEach((b) => { if (b.status === 'new' && b.source === 'app') { b.status = 'seen'; ch = true; } });
+    if (!ch) return;
+    if (REMOTE) api('seen', { pin: pin() }).catch(() => {}); else saveBookings();
+  }
 
   function renderPin() {
+    const LEN = REMOTE ? 6 : 4;
     app.innerHTML = `<div class="wrap" style="max-width:380px;text-align:center;padding-top:60px">
       <div class="hero" style="min-height:0;align-items:center;margin-bottom:20px"><div class="logo" style="margin:0">${esc(C.short)}</div></div>
       <h1 style="font-size:22px;margin:0">Кабинет владельца</h1>
       <p class="muted">${esc(C.name)}</p>
-      <form id="pf"><div class="pin">${[0, 1, 2, 3].map(() => '<input class="in" inputmode="numeric" maxlength="1" type="password">').join('')}</div>
-      <p class="muted small">Демо-доступ: PIN ${esc(C.adminPin)}</p></form>
+      <form id="pf"><div class="pin">${Array.from({ length: LEN }, () => '<input class="in" inputmode="numeric" maxlength="1" type="password">').join('')}</div>
+      <p class="muted small">${REMOTE ? 'PIN выдаётся при подключении сервиса' : `Демо-доступ: PIN ${esc(C.adminPin)}`}</p></form>
       <a class="btn ghost" href="#">← К записи</a></div>`;
     const ins = [...app.querySelectorAll('.pin input')]; ins[0].focus();
-    ins.forEach((inp, i) => inp.addEventListener('input', () => {
+    const reset = (msg) => { toast(msg); ins.forEach((x) => { x.value = ''; x.disabled = false; }); ins[0].focus(); };
+    ins.forEach((inp, i) => inp.addEventListener('input', async () => {
       if (inp.value && ins[i + 1]) ins[i + 1].focus();
       const v = ins.map((x) => x.value).join('');
-      if (v.length === 4) { if (v === String(C.adminPin)) { sessionStorage.setItem(KEY('auth'), '1'); renderAdmin(); } else { toast('Неверный PIN'); ins.forEach((x) => (x.value = '')); ins[0].focus(); } }
+      if (v.length !== LEN) return;
+      if (!REMOTE) {
+        if (v === String(C.adminPin)) { sessionStorage.setItem(KEY('auth'), '1'); renderAdmin(); } else reset('Неверный PIN');
+        return;
+      }
+      ins.forEach((x) => (x.disabled = true));
+      try {
+        const r = await api('login', { pin: v });
+        if (r.ok) { sessionStorage.setItem(KEY('pin'), v); adminLoad.loaded = false; renderAdmin(); }
+        else reset(r.error === 'locked' ? 'Слишком много попыток. Подождите 15 минут' : 'Неверный PIN');
+      } catch (err) { reset('Нет связи с сервером'); }
     }));
   }
 
   /* ---------- роутинг ---------- */
-  function route() { closeSheet(); app.onchange = null; if (location.hash === '#admin') renderAdmin(); else renderClient(); scrollTo(0, 0); }
+  function route() {
+    closeSheet(); app.onchange = null;
+    if (location.hash === '#admin') { adminLoad.loaded = false; renderAdmin(); }
+    else { if (REMOTE) bookings = []; renderClient(); if (REMOTE) loadState().then(() => { if (location.hash !== '#admin' && !$('#sheet')) renderClient(); }, () => {}); }
+    scrollTo(0, 0);
+  }
   addEventListener('hashchange', route);
-  addEventListener('storage', (e) => { if (e.key === KEY('bookings')) { bookings = load('bookings', []); if (location.hash === '#admin') renderAdmin(); } });
+  addEventListener('storage', (e) => { if (!REMOTE && e.key === KEY('bookings')) { bookings = load('bookings', []); if (location.hash === '#admin') renderAdmin(); } });
   route();
 
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});

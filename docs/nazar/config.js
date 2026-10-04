@@ -1,0 +1,148 @@
+window.CONFIG = {
+ "slug": "nazar",
+ "name": "Nazar Detailing",
+ "short": "N",
+ "tagline": "Детейлинг-студия на Куклиновке",
+ "address": "Тверь, ул. 2-я Куклиновка, 13",
+ "mapQuery": "Тверь, 2-я Куклиновка, 13",
+ "phone": "+7 996 135-63-35",
+ "phoneHref": "+79961356335",
+ "hours": {
+  "0": null,
+  "1": [
+   10,
+   19
+  ],
+  "2": [
+   10,
+   19
+  ],
+  "3": [
+   10,
+   19
+  ],
+  "4": [
+   10,
+   19
+  ],
+  "5": [
+   10,
+   19
+  ],
+  "6": [
+   10,
+   16
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#e2453c",
+ "accentInk": "#ffffff",
+ "socials": {},
+ "demoPrices": true,
+ "chatHints": [
+  "Тонировка в субботу утром",
+  "Сколько стоит керамика?",
+  "Помыть машину завтра после 5",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "wash",
+   "icon": "🫧",
+   "name": "Ручная мойка",
+   "price": 800,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "ручная"
+   ]
+  },
+  {
+   "id": "touchless",
+   "icon": "💦",
+   "name": "Бесконтактная мойка",
+   "price": 500,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "бесконтактная",
+    "бесконтакт",
+    "быстро"
+   ]
+  },
+  {
+   "id": "tint",
+   "icon": "🕶️",
+   "name": "Тонировка стёкол",
+   "price": 5000,
+   "priceFrom": true,
+   "duration": 180,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "тонер"
+   ]
+  },
+  {
+   "id": "interior",
+   "icon": "🧽",
+   "name": "Химчистка салона",
+   "price": 7000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "чистка"
+   ]
+  },
+  {
+   "id": "ceramic",
+   "icon": "💎",
+   "name": "Керамическое покрытие",
+   "price": 20000,
+   "priceFrom": true,
+   "duration": 960,
+   "keywords": [
+    "керамика",
+    "керамику",
+    "керамическое",
+    "покрытие"
+   ]
+  },
+  {
+   "id": "rain",
+   "icon": "💧",
+   "name": "Антидождь на стёкла",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "антидождь",
+    "дождь",
+    "стекла"
+   ]
+  },
+  {
+   "id": "detail",
+   "icon": "✨",
+   "name": "Детейлинг-мойка",
+   "price": 2500,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "детейлинг",
+    "детейлинг-мойка",
+    "детальная"
+   ]
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};
