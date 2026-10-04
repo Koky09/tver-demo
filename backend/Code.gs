@@ -113,7 +113,7 @@ function apiBook(slug, req) {
       svcId: clean(req.svcId, 40), svcName: clean(req.svcName, 80), price: Math.max(0, Math.round(Number(req.price) || 0)),
       name: name, phone: phone, comment: comment, source: isOwner ? 'phone' : 'app', intervals: ints
     };
-    sheet('bookings').appendRow(SHEETS.bookings.map(function (k) { return k === 'intervals' ? JSON.stringify(b.intervals) : String(b[k]); }));
+    sheet('bookings').appendRow(SHEETS.bookings.map(function (k) { return k === 'intervals' ? JSON.stringify(b.intervals) : txt(b[k]); }));
     SpreadsheetApp.flush();
   } finally {
     lock.releaseLock();
@@ -271,6 +271,10 @@ function rowToBooking(r) {
   var b = {};
   SHEETS.bookings.forEach(function (k, i) { b[k] = r[i]; });
   ['start', 'end', 'box', 'price'].forEach(function (k) { b[k] = Number(b[k]) || 0; });
+  // Таблица может сама превратить «2026-10-05» в дату — возвращаем строку
+  if (b.date instanceof Date) b.date = Utilities.formatDate(b.date, 'Europe/Moscow', 'yyyy-MM-dd');
+  if (b.created instanceof Date) b.created = b.created.toISOString();
+  ['name', 'phone', 'comment', 'svcName', 'id', 'slug', 'status', 'source', 'svcId'].forEach(function (k) { b[k] = String(b[k]); });
   try { b.intervals = JSON.parse(b.intervals); } catch (e) { b.intervals = []; }
   return b;
 }
@@ -323,6 +327,8 @@ function prop(k) { return PropertiesService.getScriptProperties().getProperty(k)
 function clean(s, n) { return String(s == null ? '' : s).replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n); }
 function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
 function trim(s) { return String(s).trim(); }
+// Значение для ячейки: «+7…», «=…», «-…», «@…» таблица считает формулой — апостроф делает его текстом
+function txt(v) { v = String(v == null ? '' : v); return /^[=+\-@]/.test(v) ? "'" + v : v; }
 function pad(n) { return (n < 10 ? '0' : '') + n; }
 function hm(m) { return pad(Math.floor(m / 60)) + ':' + pad(m % 60); }
 function humanDate(d) {

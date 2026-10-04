@@ -13,10 +13,18 @@ function makeSheet(name) {
   const rows = [];
   const sh = {
     rows,
-    appendRow: (r) => rows.push(r.map(String)),
+    // ведёт себя как Google Таблица: апостроф — признак текста, «+…»/«=…» без него — формула (#ERROR!),
+    // строка вида 2026-10-05 превращается в дату
+    appendRow: (r) => rows.push(r.map((v) => {
+      v = String(v);
+      if (v.startsWith("'")) return v.slice(1);
+      if (/^[=+]/.test(v)) return '#ERROR!';
+      if (/^\d{4}-\d{2}-\d{2}$/.test(v)) { const [y, m, d] = v.split('-').map(Number); return new Date(y, m - 1, d); }
+      return v;
+    })),
     getLastRow: () => rows.length,
     getMaxRows: () => Math.max(rows.length, 1000),
-    getDataRange: () => ({ getValues: () => rows.map((r) => r.slice()) }),
+    getDataRange: () => ({ getValues: () => rows.map((r) => r.map((v) => (v instanceof Date ? new Date(v) : v))) }),
     getRange: (row, col) => ({
       setValue: (v) => { while (rows.length < row) rows.push([]); rows[row - 1][col - 1] = String(v); },
       setNumberFormat: () => {},

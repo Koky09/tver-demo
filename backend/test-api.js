@@ -23,6 +23,10 @@ const check = (name, cond, extra) => { console.log((cond ? 'OK   ' : 'FAIL ') + 
   r = await call({ ...base, action: 'book', name: 'И', intervals: [{ date: d, s: 1000, e: 1100 }] });
   check('короткое имя отклоняется', !r.ok && r.error === 'invalid', r);
 
+  r = await call({ ...base, action: 'book', slug: 'oazis', name: '=IMPORTXML("http://x","//a")', intervals: [{ date: d, s: 600, e: 700 }] });
+  const inj = await call({ action: 'list', slug: 'oazis', pin: '123456' });
+  check('формула в имени сохраняется как обычный текст', r.ok && inj.bookings[0].name === '=IMPORTXML("http://x","//a")', inj.bookings && inj.bookings[0].name);
+
   r = await call({ ...base, action: 'book', intervals: [{ date: day(-5), s: 600, e: 700 }] });
   check('дата в прошлом отклоняется', !r.ok && r.error === 'invalid', r);
 
@@ -34,6 +38,8 @@ const check = (name, cond, extra) => { console.log((cond ? 'OK   ' : 'FAIL ') + 
 
   r = await call({ action: 'list', slug, pin: '123456' });
   check('кабинет: список записей с PIN', r.ok && r.bookings.length === 2 && r.bookings[0].name === 'Иван', r);
+  check('телефон с «+» хранится как текст, а не формула', r.ok && r.bookings[0].phone === '+7 900 111-22-33', r.bookings && r.bookings[0].phone);
+  check('дата записи возвращается строкой ГГГГ-ММ-ДД', r.ok && r.bookings[0].date === d, r.bookings && r.bookings[0].date);
   check('кабинет: ссылка подключения Telegram', r.ok && r.telegram.link === 'https://t.me/mock_bot?start=detailing69-abcdef12', r.telegram);
 
   r = await call({ action: 'cancel', slug, pin: '123456', id });
@@ -55,7 +61,8 @@ const check = (name, cond, extra) => { console.log((cond ? 'OK   ' : 'FAIL ') + 
   check('во время блокировки даже верный PIN не пускает', !r.ok, r);
 
   const sent = await fetch(URL + '/sent').then((x) => x.json());
-  check('уведомления в Telegram отправлены (2 записи + 1 отмена)', sent.length === 3 && /Новая запись/.test(sent[0].text) && /отменена/.test(sent[2].text), sent.length);
+  check('уведомления в Telegram отправлены (3 записи + 1 отмена)', sent.length === 4 && /Новая запись/.test(sent[0].text) && sent.some((s) => /отменена/.test(s.text)), sent.length);
+  check('в уведомлении об отмене правильная дата', sent.some((s) => /отменена/.test(s.text) && /октября|ноября|сентября|декабря|января/.test(s.text)), sent.map((s) => s.text.split('\n')[3]));
 
   console.log(fails ? `\nОшибок: ${fails}` : '\nВсе проверки пройдены');
   process.exit(fails ? 1 : 0);

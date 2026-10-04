@@ -121,8 +121,9 @@
       const res = await api('book', { svcId, svcName: svc.name, price: svc.price, intervals: ints, boxes: C.boxes, boxLabel: C.boxLabel,
         clientName: C.name, name: name.trim(), phone: phone.trim(), comment: (comment || '').trim(), source, pin: source === 'phone' ? pin() : '' });
       if (!res.ok && res.error !== 'taken') throw new Error(res.error);
-      await loadState().catch(() => {});
-      return res.ok ? res.booking : null;
+      if (res.ok) { loadState().catch(() => {}); return res.booking; } // расписание обновим в фоне — подтверждение показываем сразу
+      await loadState().catch(() => {}); // время заняли — нужны свежие окна, чтобы предложить другие
+      return null;
     }
     const box = freeBox(ints); if (!box) return null;
     const b = { id: uid(), svcId, svcName: svc.name, price: svc.price, date, start, end: ints[ints.length - 1].e, intervals: ints, box,
