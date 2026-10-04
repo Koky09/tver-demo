@@ -54,7 +54,7 @@ window.CONFIG = {
    "id": "wash",
    "icon": "🫧",
    "name": "Комплексная мойка",
-   "price": 900,
+   "price": 400,
    "priceFrom": true,
    "duration": 60,
    "note": "кузов + салон",

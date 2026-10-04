@@ -50,8 +50,8 @@ window.CONFIG = {
   {
    "id": "wash",
    "icon": "🫧",
-   "name": "Ручная мойка",
-   "price": 800,
+   "name": "Комплексная мойка",
+   "price": 700,
    "priceFrom": true,
    "duration": 60,
    "keywords": [
@@ -60,7 +60,8 @@ window.CONFIG = {
     "мыть",
     "мойку",
     "ручная"
-   ]
+   ],
+   "note": "кузов + салон"
   },
   {
    "id": "touchless",

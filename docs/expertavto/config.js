@@ -54,7 +54,7 @@ window.CONFIG = {
    "id": "presale",
    "icon": "🏷️",
    "name": "Предпродажная подготовка",
-   "price": 8000,
+   "price": 4500,
    "priceFrom": true,
    "duration": 360,
    "note": "мойка, салон, кузов",

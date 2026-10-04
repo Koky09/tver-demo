@@ -51,7 +51,7 @@ window.CONFIG = {
    "id": "wash",
    "icon": "🫧",
    "name": "Детейлинг-мойка",
-   "price": 2500,
+   "price": 2000,
    "priceFrom": true,
    "duration": 120,
    "keywords": [
@@ -73,6 +73,19 @@ window.CONFIG = {
     "салон",
     "чистка",
     "химчистку"
+   ]
+  },
+  {
+   "id": "headlights",
+   "icon": "💡",
+   "name": "Полировка фар",
+   "price": 800,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "фары",
+    "фар",
+    "оптика"
    ]
   },
   {

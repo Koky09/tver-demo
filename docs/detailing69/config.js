@@ -56,7 +56,7 @@ window.CONFIG = {
    "id": "interior",
    "icon": "🧽",
    "name": "Химчистка салона",
-   "price": 6000,
+   "price": 5000,
    "priceFrom": true,
    "duration": 300,
    "note": "без снятия сидений",
@@ -71,7 +71,7 @@ window.CONFIG = {
    "id": "interior-full",
    "icon": "🪛",
    "name": "Химчистка со снятием сидений",
-   "price": 10000,
+   "price": 7000,
    "priceFrom": true,
    "duration": 540,
    "keywords": [
