@@ -16,7 +16,7 @@
   document.documentElement.style.setProperty('--accent', C.accent);
   document.documentElement.style.setProperty('--accent-ink', C.accentInk || '#111');
   document.title = C.name;
-  $('meta[name=theme-color]').content = '#0f1012';
+  $('meta[name=theme-color]').content = getComputedStyle(document.documentElement).getPropertyValue('--chrome').trim() || '#15181c';
 
   /* ---------- storage ---------- */
   const load = (k, d) => { try { const v = localStorage.getItem(KEY(k)); return v ? JSON.parse(v) : d; } catch { return d; } };
@@ -81,6 +81,22 @@
     order.forEach((d) => { const h = C.hours[d]; const key = h ? `${h[0]}–${h[1]}` : 'выходной'; const g = groups[groups.length - 1];
       if (g && g.key === key) g.to = d; else groups.push({ key, from: d, to: d }); });
     return groups.map((g) => `${WD[g.from]}${g.from !== g.to ? '–' + WD[g.to] : ''}: ${g.key === 'выходной' ? g.key : g.key.replace(/(\d+)–(\d+)/, '$1:00–$2:00')}`).join(', ');
+  }
+
+  // «Открыто до 19:00» / «Откроется завтра в 10:00»
+  function statusText() {
+    const n = new Date(); const h = hoursFor(n); const m = n.getHours() * 60 + n.getMinutes();
+    if (isOpenNow()) return `Открыто до ${hm(h[1])}`;
+    if (h && m < h[0]) return `Откроется сегодня в ${hm(h[0])}`;
+    const WD_IN = ['в воскресенье', 'в понедельник', 'во вторник', 'в среду', 'в четверг', 'в пятницу', 'в субботу'];
+    for (let i = 1; i <= 7; i++) { const d = addDays(n, i); const hh = hoursFor(d); if (hh) return `Откроется ${i === 1 ? 'завтра' : WD_IN[d.getDay()]} в ${hm(hh[0])}`; }
+    return 'Сейчас закрыто';
+  }
+  // Часы по дням недели, сегодняшний выделен
+  function weekHtml() {
+    const today = new Date().getDay();
+    return `<ul class="week">${[1, 2, 3, 4, 5, 6, 0].map((d) => { const h = C.hours[d];
+      return `<li ${d === today ? 'aria-current="date"' : ''}><span>${WD[d]}${d === today ? ', сегодня' : ''}</span><span class="${h ? '' : 'off'}">${h ? `${hm(h[0] * 60)}–${hm(h[1] * 60)}` : 'выходной'}</span></li>`; }).join('')}</ul>`;
   }
 
   // Интервалы занятости, которые даст запись услуги svc на дату date со стартом start
@@ -166,12 +182,37 @@
   }
 
   /* ---------- иконки ---------- */
-  const I = {
-    phone: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>',
-    map: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>',
-    msg: '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>',
-    spark: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"/></svg>',
+  const P = {
+    phone: '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/>',
+    map: '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    msg: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+    spark: '<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 16.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/>',
+    close: '<path d="M6 6l12 12M18 6L6 18"/>',
+    send: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.8"/>',
+    // услуги
+    bucket: '<path d="M5 9.5h14l-1.6 10.5H6.6z"/><path d="M8 9.5a4 4 0 0 1 8 0"/><path d="M9 14h6"/>',
+    bubbles: '<circle cx="9" cy="14" r="5"/><circle cx="16.5" cy="7.5" r="3"/><circle cx="18" cy="16.5" r="2"/>',
+    spray: '<path d="M3 9.5h6l2 1.5v2l-2 1.5H3z"/><path d="M14 9.5l6-2.5M14 12h7M14 14.5l6 2.5"/>',
+    seat: '<path d="M8.5 3h4.5a2 2 0 0 1 2 2.2L14 13H8.8L7 5.3A2 2 0 0 1 8.5 3z"/><path d="M6 13h11.5l.8 4H6z"/><path d="M8 17v4M16 17v4"/>',
+    diamond: '<path d="M6.5 4h11L21 9l-9 11L3 9z"/><path d="M3 9h18M10 4l-1.5 5L12 20l3.5-11L14 4"/>',
+    shield: '<path d="M12 3l8 3v6c0 5-3.4 8.2-8 9-4.6-.8-8-4-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    tint: '<path d="M3.5 18L7 6h10l3.5 12z"/><path d="M9 18l3-12M13.5 18l3-12" opacity=".55"/>',
+    light: '<path d="M11 5.5a6.5 6.5 0 0 0 0 13z"/><path d="M15 8h6M15 12h6M15 16h6"/>',
+    drop: '<path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z"/><path d="M9.5 14.5a2.5 2.5 0 0 0 2.5 2.5"/>',
+    roller: '<rect x="3" y="3.5" width="14" height="6" rx="1.5"/><path d="M17 6.5h3v5h-8v3"/><rect x="10.5" y="14.5" width="3" height="6.5" rx="1"/>',
+    mute: '<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/>',
+    gear: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',
+    tag: '<path d="M3 12.2V4h8.2L21 13.8 13.8 21z"/><circle cx="7.6" cy="8.6" r="1.4"/>',
   };
+  const I = new Proxy({}, { get: (_, k) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.spark}</svg>` });
+  // Иконка услуги по id (или по названию для новых услуг), задаётся в config полем iconKey
+  const SVC_ICON = { wash: 'bubbles', detail: 'bucket', body: 'spray', touchless: 'spray', interior: 'seat', 'interior-full': 'seat', seats: 'seat',
+    leather: 'seat', plastic: 'shield', rain: 'drop', polish: 'spark', ceramic: 'diamond', coat: 'diamond', ppf: 'shield', tint: 'tint',
+    headlights: 'light', vinyl: 'roller', noise: 'mute', 'noise-doors': 'mute', engine: 'gear', presale: 'tag' };
+  const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
+    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear']];
+  const svcIcon = (s) => I[s.iconKey || SVC_ICON[s.id] || (SVC_WORDS.find(([re]) => re.test(s.name)) || [])[1] || 'spark'];
 
   /* ---------- клиентская часть ---------- */
   let deferredInstall = null;
@@ -179,49 +220,86 @@
   const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
+  // Шапка: у каждого сервиса свой характер (поле theme в clients/<slug>.json)
+  function heroHtml(open, longest, street) {
+    const demo = C.demo !== false ? '<span class="demo-tag">Демо-версия</span>' : '';
+    const name = `<h1 style="--n:${Math.max(6, longest)}">${esc(C.name)}</h1>`;
+    const tag = `<p class="tag">${esc(C.tagline)}</p>`;
+    const meta = `<div class="hero-meta"><span class="status ${open ? 'open' : ''}">${statusText()}</span><span class="addr">${esc(street)}</span></div>`;
+    const img = C.heroImage ? ` has-img" style="background-image:url('${esc(C.heroImage)}')` : '';
+    switch (C.theme) {
+      case 'atelier':
+        return `<section class="hero${img}"><div class="frame">${demo}<div class="mono" aria-hidden="true">${esc(C.short)}</div>${name}${tag}${meta}</div></section>`;
+      case 'race':
+        return `<section class="hero${img}"><div class="stripes" aria-hidden="true"></div>
+          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div><h1 style="--n:${Math.max(6, longest)}">${C.name.split(/\s+/).map((w) => `<span>${esc(w)}</span>`).join(' ')}</h1>${tag}${meta}</div></section>`;
+      case 'protocol':
+        return `<section class="hero${img}"><div class="doc-head"><span>Карточка сервиса</span>${demo}</div>
+          <div class="stamp" aria-hidden="true">${esc(C.short)}<small>Тверь</small></div>
+          ${name}${tag}
+          <dl class="fields">
+            <div><dt>Сейчас</dt><dd><span class="status ${open ? 'open' : ''}">${statusText()}</span></dd></div>
+            <div><dt>Адрес</dt><dd>${esc(street)}</dd></div>
+            <div><dt>Режим</dt><dd>${esc(hoursText())}</dd></div>
+          </dl></section>`;
+      case 'aqua':
+        return `<section class="hero${img}">
+          <svg class="bubbles" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="40" cy="60" r="14"/><circle cx="70" cy="30" r="6"/><circle cx="350" cy="80" r="22"/><circle cx="320" cy="40" r="8"/><circle cx="372" cy="150" r="7"/><circle cx="24" cy="170" r="9"/></svg>
+          ${demo}<div class="emblem" aria-hidden="true">${esc(C.short)}</div>${name}${tag}${meta}
+          <svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 60 2, 120 2, 200 20 S 340 40, 400 16 V40 H0z"/></svg></section>`;
+      case 'stitch':
+        return `<section class="hero${img}"><div class="bignum" aria-hidden="true">${esc(C.short)}</div>
+          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div>${name}${tag}${meta}</div></section>`;
+      case 'sticker':
+        return `<section class="hero${img}">
+          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div>${name}${tag}${meta}</div></section>`;
+      default:
+        return `<section class="hero${img}">
+          <svg class="crease" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 168 C 110 120, 250 112, 410 52"/><path d="M-10 182 C 120 136, 260 128, 410 70"/></svg>
+          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div>${name}${tag}${meta}</div></section>`;
+    }
+  }
+
   function renderClient() {
     const open = isOpenNow();
     const msgr = C.socials && (C.socials.tg || C.socials.vk || C.socials.max);
+    const longest = Math.max(...C.name.split(/\s+/).map((w) => w.length), Math.ceil(C.name.length / 2)); // кегль названия: длинное слово должно влезть, а длинное название — уложиться в 2–3 строки
+    const street = C.address.replace(/^Тверь,\s*/, '');
     app.innerHTML = `
     <div class="wrap">
-      <section class="hero ${C.heroImage ? 'has-img' : ''}" ${C.heroImage ? `style="background-image:url('${esc(C.heroImage)}')"` : ''}>
-        <div class="logo">${esc(C.short)}</div>
-        <h1>${esc(C.name)}</h1>
-        <p>${esc(C.tagline)}</p>
-        <div class="chips">
-          <span class="chip ${open ? 'open' : 'closed'}">${open ? '● Открыто сейчас' : '● Сейчас закрыто'}</span>
-          <span class="chip">${esc(C.address)}</span>
-          ${C.demo !== false ? '<span class="chip">Демо-версия</span>' : ''}
-        </div>
-      </section>
-      <div class="quick">
+      ${heroHtml(open, longest, street)}
+      <nav class="quick" aria-label="Связаться">
         <a href="tel:${esc(C.phoneHref)}">${I.phone}Позвонить</a>
         <a href="https://yandex.ru/maps/?text=${encodeURIComponent(C.mapQuery || C.address)}" target="_blank" rel="noopener">${I.map}Маршрут</a>
-        ${msgr ? `<a href="${esc(C.socials.tg || C.socials.vk || C.socials.max)}" target="_blank" rel="noopener">${I.msg}Написать</a>` : `<button data-act="chat">${I.msg}Ассистент</button>`}
-      </div>
+        ${msgr ? `<a href="${esc(C.socials.tg || C.socials.vk || C.socials.max)}" target="_blank" rel="noopener">${I.msg}Написать</a>` : `<button data-act="chat">${I.msg}Спросить</button>`}
+      </nav>
       ${standalone() ? '' : `<div class="install" id="install" ${deferredInstall || isIOS ? '' : 'hidden'}>
         <div class="body"><b>Добавьте на экран</b><br><span class="muted">${isIOS ? 'Нажмите «Поделиться» → «На экран „Домой“»' : 'Запись в один тап, как в приложении'}</span></div>
         ${isIOS ? '' : '<button class="btn sm" data-act="install">Добавить</button>'}
       </div>`}
-      <h2>Услуги и цены</h2>
-      ${services().map((s) => `
+      <div class="sec-head"><h2>Услуги и цены</h2><p class="muted small">Нажмите на услугу, чтобы выбрать время</p></div>
+      <div class="list">${services().map((s) => `
         <button class="svc" data-svc="${s.id}">
-          <span class="ico">${s.icon || '🚗'}</span>
-          <span class="body"><span class="name">${esc(s.name)}</span><br><span class="meta">${durStr(s.duration)}${s.note ? ' · ' + esc(s.note) : ''}</span></span>
-          <span class="price">${priceStr(s)}</span>
-        </button>`).join('')}
+          <span class="ico">${svcIcon(s)}</span>
+          <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}${s.note ? ', ' + esc(s.note) : ''}</span></span>
+          <span class="lead" aria-hidden="true"></span><span class="price">${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}</span>
+        </button>`).join('')}</div>
       ${C.gallery && C.gallery.length ? `<h2>Наши работы</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
       <h2>Как нас найти</h2>
-      <div class="summary">
-        <div><span>Адрес</span><span>${esc(C.address)}</span></div>
-        <div><span>Телефон</span><a href="tel:${esc(C.phoneHref)}">${esc(C.phone)}</a></div>
-        <div><span>Часы</span><span style="text-align:right">${esc(hoursText())}</span></div>
+      <div class="place">
+        <div class="row"><span>Адрес</span><span>${esc(C.address)}</span></div>
+        <div class="row"><span>Телефон</span><a href="tel:${esc(C.phoneHref)}">${esc(C.phone)}</a></div>
+        <div class="row"><span>Часы работы</span>${weekHtml()}</div>
       </div>
-      <div class="foot">${esc(C.name)} · онлайн-запись<br><a href="#admin">Вход для владельца</a></div>
+      <div class="foot">${esc(C.name)}, онлайн-запись<br><a href="#admin">Вход для владельца</a></div>
     </div>
     <div class="bar"><div class="inner">
       <button class="btn" data-act="book">Записаться онлайн</button>
-      <button class="btn chat-btn" data-act="chat" aria-label="Ассистент">${I.spark}</button>
+      <button class="btn chat-btn" data-act="chat" aria-label="Подобрать время с ассистентом">${I.spark}</button>
     </div></div>`;
 
     app.onclick = (e) => {
@@ -238,12 +316,19 @@
   function sheet(html) {
     closeSheet();
     const bg = document.createElement('div'); bg.className = 'sheet-bg'; bg.id = 'sheet';
-    bg.innerHTML = `<div class="sheet"><div class="grab"></div>${html}</div>`;
+    bg.innerHTML = `<div class="sheet" role="dialog" aria-modal="true" tabindex="-1"><div class="grab"></div>${html}</div>`;
     bg.addEventListener('click', (e) => { if (e.target === bg || e.target.closest('.x')) closeSheet(); });
     document.body.appendChild(bg); document.body.style.overflow = 'hidden';
+    sheet.back = document.activeElement; bg.firstElementChild.focus({ preventScroll: true });
     return bg.firstElementChild;
   }
-  function closeSheet() { const s = $('#sheet'); if (s) s.remove(); document.body.style.overflow = ''; }
+  function closeSheet() {
+    const s = $('#sheet'); if (!s) return;
+    s.remove(); document.body.style.overflow = '';
+    if (sheet.back && document.contains(sheet.back)) sheet.back.focus({ preventScroll: true });
+  }
+  addEventListener('keydown', (e) => { if (e.key === 'Escape' && $('#sheet')) closeSheet(); });
+  const xBtn = `<button class="x" aria-label="Закрыть">${I.close}</button>`;
 
   function openBooking(st) {
     const state = Object.assign({ step: 1, svcId: null, date: null, start: null, name: load('name', ''), phone: load('phone', ''), comment: '', admin: false }, st);
@@ -251,27 +336,32 @@
     const root = $('#bk', el);
     const draw = () => {
       const svc = state.svcId && svcById(state.svcId);
-      const head = (title) => `<div class="sheet-head"><h3>${title}</h3><button class="x" aria-label="Закрыть">✕</button></div>
-        <div class="steps">${[1, 2, 3].map((i) => `<i class="${i <= state.step ? 'on' : ''}"></i>`).join('')}</div>`;
+      const head = (title) => `<div class="sheet-head"><h3 id="sh-t">${title}</h3>${xBtn}</div>
+        <ol class="steps">${['Услуга', 'Время', state.admin ? 'Клиент' : 'Контакты'].map((l, i) => `<li class="${i < state.step ? 'on' : ''}" ${i + 1 === state.step ? 'aria-current="step"' : ''}>${l}</li>`).join('')}</ol>`;
+      el.setAttribute('aria-labelledby', 'sh-t');
       if (state.step === 1) {
-        root.innerHTML = head('Выберите услугу') + services().map((s) => `
+        root.innerHTML = head('Выберите услугу') + `<div class="list">${services().map((s) => `
           <button class="svc ${s.id === state.svcId ? 'sel' : ''}" data-svc="${s.id}">
-            <span class="ico">${s.icon || '🚗'}</span>
-            <span class="body"><span class="name">${esc(s.name)}</span><br><span class="meta">${durStr(s.duration)}</span></span>
-            <span class="price">${priceStr(s)}</span></button>`).join('');
+            <span class="ico">${svcIcon(s)}</span>
+            <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}</span></span>
+            <span class="price">${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}</span></button>`).join('')}</div>`;
       } else if (state.step === 2) {
         const days = nextDays();
         if (!state.date) state.date = days.find((d) => slotsFor(svc, d).length) || days[0];
         const slots = slotsFor(svc, state.date);
         const multi = svc.duration > dayLenMax();
+        const parts = [['Утро', 0, 12 * 60], ['День', 12 * 60, 17 * 60], ['Вечер', 17 * 60, 24 * 60]]
+          .map(([l, a, z]) => [l, slots.filter((t) => t >= a && t < z)]).filter(([, l]) => l.length);
+        const sd = parseYmd(state.date);
         root.innerHTML = head('Дата и время') + `
-          <div class="muted small" style="margin-bottom:10px">${esc(svc.name)} · ${durStr(svc.duration)} · ${priceStr(svc)}</div>
-          <div class="days">${days.map((d) => { const dt = parseYmd(d); const has = hoursFor(dt) && slotsFor(svc, d).length;
-            return `<button class="day ${d === state.date ? 'sel' : ''}" data-day="${d}" ${has ? '' : 'disabled'}><span>${WD[dt.getDay()]}</span><b>${dt.getDate()}</b></button>`; }).join('')}</div>
-          ${multi ? `<p class="muted small">Работа займёт ${durStr(svc.duration)} — приём автомобиля утром, мы позвоним, когда будет готово.</p>` : ''}
-          ${slots.length ? `<div class="slots">${slots.map((t) => `<button class="slot ${t === state.start ? 'sel' : ''}" data-t="${t}">${hm(t)}</button>`).join('')}</div>`
-            : `<p class="empty">На этот день свободных окон нет — выберите другой.</p>`}
-          <button class="btn" data-act="next" ${state.start == null ? 'disabled' : ''}>Далее</button>
+          <div class="pick"><span class="ico" style="color:var(--accent-text)">${svcIcon(svc)}</span><span><b>${esc(svc.name)}</b><br>${durStr(svc.duration)}, ${priceStr(svc)}</span></div>
+          <div class="days" role="group" aria-label="День">${days.map((d) => { const dt = parseYmd(d); const has = hoursFor(dt) && slotsFor(svc, d).length;
+            return `<button class="day ${d === state.date ? 'sel' : ''}" data-day="${d}" ${has ? '' : 'disabled'} aria-pressed="${d === state.date}" aria-label="${dateHuman(d)}${has ? '' : ', нет мест'}"><span>${WD[dt.getDay()]}</span><b>${dt.getDate()}</b></button>`; }).join('')}</div>
+          <p class="muted small" style="margin:6px 0 0">${dateHuman(state.date).replace(/^./, (c) => c.toUpperCase())}${hoursFor(sd) ? '' : ', выходной'}</p>
+          ${multi ? `<p class="note" style="margin:12px 0 0">Работа займёт ${durStr(svc.duration)}. Приём автомобиля утром, мы позвоним, когда будет готово.</p>` : ''}
+          ${parts.length ? parts.map(([l, list]) => `<div class="slot-group"><h4>${l}</h4><div class="slots">${list.map((t) => `<button class="slot ${t === state.start ? 'sel' : ''}" data-t="${t}" aria-pressed="${t === state.start}">${hm(t)}</button>`).join('')}</div></div>`).join('')
+            : `<p class="empty" style="margin-top:14px">На этот день свободного времени нет. Выберите другой день.</p>`}
+          <button class="btn" data-act="next" ${state.start == null ? 'disabled' : ''}>${state.start == null ? 'Выберите время' : `Далее: ${hm(state.start)}`}</button>
           <button class="btn ghost" data-act="back">Назад</button>`;
       } else if (state.step === 3) {
         root.innerHTML = head(state.admin ? 'Данные клиента' : 'Ваши контакты') + `
@@ -280,23 +370,29 @@
             <div><span>Когда</span><span>${dateHuman(state.date)}, ${hm(state.start)}</span></div>
             <div><span>Стоимость</span><span>${priceStr(svc)}</span></div>
           </div>
-          <label class="f">Имя</label><input class="in" id="f-name" autocomplete="name" value="${esc(state.name)}" placeholder="Как к вам обращаться">
-          <label class="f">Телефон</label><input class="in" id="f-phone" type="tel" autocomplete="tel" inputmode="tel" value="${esc(state.phone)}" placeholder="+7 900 000-00-00">
-          <label class="f">Марка и модель авто, комментарий</label><input class="in" id="f-comm" value="${esc(state.comment)}" placeholder="Например: Kia Rio, белая">
+          <label class="f" for="f-name">Имя</label><input class="in" id="f-name" autocomplete="name" value="${esc(state.name)}" placeholder="Как к вам обращаться">
+          <label class="f" for="f-phone">Телефон</label><input class="in" id="f-phone" type="tel" autocomplete="tel" inputmode="tel" value="${esc(state.phone)}" placeholder="+7 900 000-00-00">
+          <label class="f" for="f-comm">Марка и модель авто, комментарий</label><input class="in" id="f-comm" value="${esc(state.comment)}" placeholder="Например: Kia Rio, белая">
           <button class="btn" data-act="confirm">${state.admin ? 'Добавить запись' : 'Записаться'}</button>
           <button class="btn ghost" data-act="back">Назад</button>
           ${state.admin ? '' : '<p class="muted small" style="text-align:center">Нажимая «Записаться», вы соглашаетесь на обработку контактных данных для связи по записи.</p>'}`;
       } else if (state.step === 4) {
         const b = state.booking;
-        root.innerHTML = `<div class="sheet-head"><h3></h3><button class="x" aria-label="Закрыть">✕</button></div>
-          <div class="done"><div class="big">✓</div><h3 style="margin:0 0 4px">${state.admin ? 'Запись добавлена' : 'Вы записаны!'}</h3>
-          <p class="muted" style="margin:0">${dateHuman(b.date)}, ${hm(b.start)}</p></div>
-          <div class="summary">
-            <div><span>Услуга</span><span>${esc(b.svcName)}</span></div>
-            <div><span>Адрес</span><span>${esc(C.address)}</span></div>
-            <div><span>Телефон</span><a href="tel:${esc(C.phoneHref)}">${esc(C.phone)}</a></div>
+        const dh = dateHuman(b.date);
+        root.innerHTML = `<div class="sheet-head"><h3 id="sh-t">${state.admin ? 'Запись добавлена' : 'Талон записи'}</h3>${xBtn}</div>
+          <div class="ticket" role="status">
+            <div class="ticket-top">
+              <span class="ok">${I.check}${state.admin ? 'Запись в расписании' : 'Вы записаны'}</span>
+              <div class="ticket-when">${hm(b.start)}<span>${dh.replace(/^./, (c) => c.toUpperCase())}</span></div>
+            </div>
+            <div class="ticket-cut"></div>
+            <div class="summary">
+              <div><span>Услуга</span><span>${esc(b.svcName)}</span></div>
+              <div><span>Адрес</span><span>${esc(C.address)}</span></div>
+              <div><span>Телефон</span><a href="tel:${esc(C.phoneHref)}">${esc(C.phone)}</a></div>
+            </div>
           </div>
-          ${state.admin ? '' : '<p class="muted small" style="text-align:center">Если планы изменятся — просто позвоните нам.</p>'}
+          ${state.admin ? '' : '<p class="muted small" style="text-align:center">Если планы изменятся, позвоните нам.</p>'}
           <button class="btn" data-act="close">Готово</button>`;
       }
     };
@@ -312,7 +408,9 @@
         if (a === 'close') { closeSheet(); if (state.onDone) state.onDone(); return; }
         if (a === 'confirm') return confirm_(t);
       }
+      const strip = $('.days', root); const sl = strip ? strip.scrollLeft : 0; // лента дней не прыгает в начало при выборе
       draw();
+      if (sl && $('.days', root)) $('.days', root).scrollLeft = sl;
     };
     async function confirm_(btn) {
       state.name = $('#f-name', root).value; state.phone = $('#f-phone', root).value; state.comment = $('#f-comm', root).value;
@@ -344,10 +442,11 @@
   /* ---------- ассистент (разбор запроса без внешнего ИИ) ---------- */
   function openChat() {
     if (REMOTE) loadState().catch(() => {});
-    const el = sheet(`<div class="sheet-head"><h3>Ассистент записи</h3><button class="x" aria-label="Закрыть">✕</button></div>
-      <div class="chat" id="chat"></div>
+    const el = sheet(`<div class="sheet-head"><h3 id="sh-t">Подобрать время</h3>${xBtn}</div>
+      <div class="chat" id="chat" aria-live="polite"></div>
       <div class="hints" id="hints">${(C.chatHints || []).map((h) => `<button>${esc(h)}</button>`).join('')}</div>
-      <form class="chat-in" id="chat-f" style="margin-top:8px"><input class="in" id="chat-i" placeholder="Например: ${esc((C.chatHints || ['завтра после 18'])[0])}" autocomplete="off"><button class="btn">→</button></form>`);
+      <form class="chat-in" id="chat-f" style="margin-top:8px"><input class="in" id="chat-i" aria-label="Ваш вопрос" placeholder="Например: ${esc((C.chatHints || ['завтра после 18'])[0])}" autocomplete="off"><button class="btn" aria-label="Отправить">${I.send}</button></form>`);
+    el.setAttribute('aria-labelledby', 'sh-t');
     const chat = $('#chat', el);
     const say = (who, html, opts) => {
       const m = document.createElement('div'); m.className = 'msg ' + who; m.innerHTML = html;
@@ -472,14 +571,14 @@
         <div class="stats">
           <div class="stat"><b>${dayBk.length}</b><span>записей</span></div>
           <div class="stat"><b>${capacity ? Math.round((used / capacity) * 100) : 0}%</b><span>загрузка</span></div>
-          <div class="stat"><b>${revenue ? Math.round(revenue / 1000) + 'k' : '0'}</b><span>≈ выручка, ₽</span></div>
+          <div class="stat"><b>${revenue ? Math.round(revenue / 1000) + 'k' : '0'}</b><span>выручка ≈, ₽</span></div>
         </div>
         ${h ? '' : '<div class="note">Выходной день по графику.</div>'}
         ${Array.from({ length: C.boxes }, (_, i) => i + 1).map((box) => {
           const list = dayBk.filter((b) => b.box === box).sort((a, b) => a.start - b.start);
           return `<div class="box-col"><h4>${esc(C.boxLabel || 'Бокс')} ${box}</h4>${list.length ? list.map((b) => {
             const it = b.intervals.find((i) => i.date === day);
-            return `<div class="bk"><div><div class="t">${hm(it.s)}–${hm(it.e)} · ${esc(b.svcName)}</div>
+            return `<div class="bk"><div><div class="t"><span class="num">${hm(it.s)}–${hm(it.e)}</span><br>${esc(b.svcName)}</div>
               <div>${esc(b.name)} · <a href="tel:${esc(b.phone.replace(/[^\d+]/g, ''))}">${esc(b.phone)}</a></div>
               ${b.comment ? `<div class="muted small">${esc(b.comment)}</div>` : ''}
               <div class="muted small">${b.source === 'app' ? 'онлайн-запись' : b.source === 'phone' ? 'добавлено вручную' : 'демо'}${b.intervals.length > 1 ? ` · ${b.intervals.length} дн.` : ''} · ${rub(b.price)}</div></div>
@@ -490,8 +589,8 @@
         <div class="edit-row muted small" style="padding-top:0"><span>Услуга</span><span>Цена, ₽</span><span>Мин.</span></div>
         ${services(true).map((s) => `<div class="edit-row" data-row="${s.id}">
           <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-f="visible" ${s.hidden ? '' : 'checked'}> ${esc(s.name)}</label>
-          <input class="in" type="number" min="0" step="100" data-f="price" value="${s.price}">
-          <input class="in" type="number" min="15" step="15" data-f="duration" value="${s.duration}"></div>`).join('')}`;
+          <input class="in" type="number" min="0" step="100" data-f="price" value="${s.price}" aria-label="Цена, ₽: ${esc(s.name)}">
+          <input class="in" type="number" min="15" step="15" data-f="duration" value="${s.duration}" aria-label="Длительность, мин: ${esc(s.name)}"></div>`).join('')}`;
     } else {
       const link = location.href.split('#')[0];
       const tgInfo = adminLoad.tg || {};
@@ -512,8 +611,8 @@
     }
 
     app.innerHTML = `<div class="wrap">
-      <div class="top"><div><div class="muted small">Кабинет владельца</div><h1>${esc(C.name)}</h1></div><a class="btn sm ghost" href="#">Открыть как клиент</a></div>
-      ${newCount ? `<div class="note" style="border-style:solid;border-color:var(--accent)">🔔 Онлайн-записей от клиентов: <b>${newCount}</b> новых</div>` : ''}
+      <div class="top"><div class="top-id"><div class="emblem" aria-hidden="true">${esc(C.short)}</div><div><div class="muted small">Кабинет владельца</div><h1>${esc(C.name)}</h1></div></div><a class="btn sm ghost" href="#">Сайт</a></div>
+      ${newCount ? `<div class="note alert" role="status">Новых онлайн-записей: <b>${newCount}</b></div>` : ''}
       <div class="tabs">
         <button class="${view === 'day' ? 'on' : ''}" data-view="day">Расписание</button>
         <button class="${view === 'svc' ? 'on' : ''}" data-view="svc">Услуги</button>
@@ -557,11 +656,11 @@
 
   function renderPin() {
     const LEN = REMOTE ? 6 : 4;
-    app.innerHTML = `<div class="wrap" style="max-width:380px;text-align:center;padding-top:60px">
-      <div class="hero" style="min-height:0;align-items:center;margin-bottom:20px"><div class="logo" style="margin:0">${esc(C.short)}</div></div>
-      <h1 style="font-size:22px;margin:0">Кабинет владельца</h1>
+    app.innerHTML = `<div class="wrap pin-screen">
+      <div class="hero"><div class="emblem" aria-hidden="true">${esc(C.short)}</div></div>
+      <h1>Кабинет владельца</h1>
       <p class="muted">${esc(C.name)}</p>
-      <form id="pf"><div class="pin">${Array.from({ length: LEN }, () => '<input class="in" inputmode="numeric" maxlength="1" type="password">').join('')}</div>
+      <form id="pf"><div class="pin" role="group" aria-label="PIN-код">${Array.from({ length: LEN }, (_, i) => `<input class="in" inputmode="numeric" maxlength="1" type="password" aria-label="Цифра ${i + 1}">`).join('')}</div>
       <p class="muted small">${REMOTE ? 'PIN выдаётся при подключении сервиса' : `Демо-доступ: PIN ${esc(C.adminPin)}`}</p></form>
       <a class="btn ghost" href="#">← К записи</a></div>`;
     const ins = [...app.querySelectorAll('.pin input')]; ins[0].focus();

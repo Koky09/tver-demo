@@ -1,5 +1,6 @@
 window.CONFIG = {
  "slug": "morrus",
+ "theme": "atelier",
  "name": "МОРРУС",
  "short": "M",
  "tagline": "Детейлинг-студия в Твери с 2014 года",

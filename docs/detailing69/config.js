@@ -1,5 +1,6 @@
 window.CONFIG = {
  "slug": "detailing69",
+ "theme": "stitch",
  "name": "Детейлинг 69",
  "short": "69",
  "tagline": "Химчистка и защита салона на Громова",

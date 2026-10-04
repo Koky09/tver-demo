@@ -20,6 +20,19 @@ SETTINGS_FILE = ROOT / "settings.json"
 SETTINGS = json.loads(SETTINGS_FILE.read_text(encoding="utf-8")) if SETTINGS_FILE.exists() else {}
 
 
+# Стиль сайта (поле "theme" в clients/<slug>.json) -> шрифты Google Fonts. Все с кириллицей.
+GF = "https://fonts.googleapis.com/css2?family="
+THEME_FONTS = {
+    "lacquer": "Onest:wght@400;500;600;700&family=Unbounded:wght@500;600;700",
+    "atelier": "Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700",
+    "race": "Oswald:wght@500;600;700&family=Golos+Text:wght@400;500;600;700",
+    "protocol": "IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600",
+    "aqua": "Comfortaa:wght@600;700&family=Nunito:wght@400;500;600;700",
+    "stitch": "Unbounded:wght@500;600;800&family=Onest:wght@400;500;600;700",
+    "sticker": "Dela+Gothic+One&family=Rubik:wght@400;500;600;700",
+}
+
+
 def hex_rgb(h):
     h = h.lstrip("#")
     return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
@@ -58,6 +71,13 @@ def build(cfg_path):
     shutil.copytree(TEMPLATE, out)
 
     (out / "config.js").write_text("window.CONFIG = " + json.dumps(cfg, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
+    theme = cfg.get("theme", "lacquer")
+    if theme not in THEME_FONTS:
+        sys.exit(f"{cfg_path.name}: неизвестный theme «{theme}», есть: {', '.join(THEME_FONTS)}")
+    page = out / "index.html"
+    page.write_text(page.read_text(encoding="utf-8")
+                    .replace("<!--THEME-->", f' data-theme="{theme}"')
+                    .replace("<!--FONTS-->", f'<link rel="stylesheet" href="{GF}{THEME_FONTS[theme]}&display=swap">'), encoding="utf-8")
     sw = out / "sw.js"
     sw.write_text(sw.read_text(encoding="utf-8").replace("__VERSION__", str(int(time.time()))), encoding="utf-8")
     manifest = {
@@ -77,7 +97,7 @@ def build(cfg_path):
     (out / "manifest.webmanifest").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
     make_icon(cfg, 192, out / "icon-192.png")
     make_icon(cfg, 512, out / "icon-512.png")
-    print(f"  {cfg['slug']:<16} {cfg['name']}  ({len(cfg['services'])} услуг, {cfg.get('boxLabel', 'Бокс').lower()}ов: {cfg['boxes']})")
+    print(f"  {cfg['slug']:<16} [{theme}] {cfg['name']}  ({len(cfg['services'])} услуг, {cfg.get('boxLabel', 'Бокс').lower()}ов: {cfg['boxes']})")
     return cfg
 
 

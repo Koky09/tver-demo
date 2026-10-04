@@ -1,5 +1,6 @@
 window.CONFIG = {
  "slug": "oazis",
+ "theme": "aqua",
  "name": "Оазис",
  "short": "О",
  "tagline": "Автомойка и детейлинг на Шишкова",
