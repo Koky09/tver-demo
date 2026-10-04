@@ -1,0 +1,118 @@
+window.CONFIG = {
+ "slug": "akvalab",
+ "theme": "aqua",
+ "demo": false,
+ "city": "Екатеринбург",
+ "name": "Аквалаб",
+ "short": "АЛ",
+ "tagline": "Автомойка на Громова",
+ "address": "Екатеринбург, улица Громова, 120/1",
+ "mapQuery": "Екатеринбург, улица Громова, 120/1",
+ "phone": "+7 993 773-96-96",
+ "phoneHref": "+79937739696",
+ "hours": {
+  "0": [
+   7,
+   24
+  ],
+  "1": [
+   7,
+   24
+  ],
+  "2": [
+   7,
+   24
+  ],
+  "3": [
+   7,
+   24
+  ],
+  "4": [
+   7,
+   24
+  ],
+  "5": [
+   7,
+   24
+  ],
+  "6": [
+   7,
+   24
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Бокс",
+ "accent": "#2dd4bf",
+ "accentInk": "#042f2a",
+ "socials": {
+  "tg": "https://t.me/+79222948979"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Помыть машину сегодня вечером",
+  "Сколько стоит комплекс?",
+  "Химчистка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "wash",
+   "name": "Комплексная мойка",
+   "price": 2200,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "комплекс",
+    "комплексная"
+   ],
+   "iconKey": "bubbles"
+  },
+  {
+   "id": "touchless",
+   "name": "Бесконтактная мойка",
+   "price": 900,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "бесконтактная",
+    "бесконтакт"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона",
+   "price": 9000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка",
+    "уборка"
+   ],
+   "iconKey": "seat"
+  },
+  {
+   "id": "polish",
+   "name": "Полировка кузова",
+   "price": 8000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ],
+   "iconKey": "spark"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

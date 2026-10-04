@@ -1,0 +1,142 @@
+window.CONFIG = {
+ "slug": "pixar",
+ "theme": "sticker",
+ "demo": false,
+ "city": "Екатеринбург",
+ "name": "Pixar",
+ "short": "PX",
+ "tagline": "Тонировка, плёнка и детейлинг на Мира",
+ "address": "Екатеринбург, улица Мира, 29а",
+ "mapQuery": "Екатеринбург, улица Мира, 29а",
+ "phone": "+7 995 542-53-03",
+ "phoneHref": "+79955425303",
+ "hours": {
+  "0": null,
+  "1": [
+   10,
+   21
+  ],
+  "2": [
+   10,
+   21
+  ],
+  "3": [
+   10,
+   21
+  ],
+  "4": [
+   10,
+   21
+  ],
+  "5": [
+   10,
+   21
+  ],
+  "6": [
+   10,
+   18
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#7dd3fc",
+ "accentInk": "#0b1b33",
+ "socials": {
+  "tg": "https://wa.me/79955425303"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Тонировка завтра",
+  "Сколько стоит плёнка на фары?",
+  "Оклейка зон риска",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "tint",
+   "name": "Тонировка полусферы",
+   "price": 7500,
+   "priceFrom": true,
+   "duration": 180,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "tint2",
+   "name": "Атермальная тонировка",
+   "price": 14000,
+   "priceFrom": true,
+   "duration": 240,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "ppf",
+   "name": "Плёнка на переднюю часть",
+   "price": 35000,
+   "priceFrom": true,
+   "duration": 1440,
+   "keywords": [
+    "плёнка",
+    "пленка",
+    "бронирование",
+    "антигравийная",
+    "оклейка",
+    "зоны"
+   ],
+   "iconKey": "shield"
+  },
+  {
+   "id": "headlights",
+   "name": "Полиуретан на фары",
+   "price": 8000,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "фары",
+    "фар",
+    "оптика"
+   ],
+   "iconKey": "light"
+  },
+  {
+   "id": "ceramic",
+   "name": "Полировка + керамика",
+   "price": 30000,
+   "priceFrom": true,
+   "duration": 1440,
+   "keywords": [
+    "керамика",
+    "керамику",
+    "керамическое",
+    "покрытие",
+    "стекло"
+   ],
+   "iconKey": "diamond"
+  },
+  {
+   "id": "vinyl",
+   "name": "Чёрная глянцевая крыша",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 240,
+   "keywords": [
+    "винил",
+    "цвет",
+    "крыша"
+   ],
+   "iconKey": "roller"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

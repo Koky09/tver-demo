@@ -1,0 +1,154 @@
+{
+  "slug": "chistaya-zona",
+  "theme": "protocol",
+  "demo": false,
+  "city": "Москва",
+  "name": "Чистая Зона",
+  "short": "ЧЗ",
+  "tagline": "Автомойка у метро Кантемировская",
+  "address": "Москва, Кантемировская улица, 59а",
+  "mapQuery": "Москва, Кантемировская улица, 59а",
+  "phone": "+7 966 121-12-17",
+  "phoneHref": "+79661211217",
+  "hours": {
+    "0": [
+      9,
+      21
+    ],
+    "1": [
+      9,
+      21
+    ],
+    "2": [
+      9,
+      21
+    ],
+    "3": [
+      9,
+      21
+    ],
+    "4": [
+      9,
+      21
+    ],
+    "5": [
+      9,
+      21
+    ],
+    "6": [
+      9,
+      21
+    ]
+  },
+  "boxes": 2,
+  "boxLabel": "Бокс",
+  "accent": "#16a34a",
+  "accentInk": "#ffffff",
+  "socials": {
+    "tg": "https://wa.me/79661211217"
+  },
+  "demoPrices": false,
+  "chatHints": [
+    "Помыть машину сегодня вечером",
+    "Сколько стоит комплекс?",
+    "Химчистка на выходных",
+    "Где вы находитесь?"
+  ],
+  "services": [
+    {
+      "id": "body",
+      "name": "Стандартная мойка",
+      "price": 800,
+      "priceFrom": true,
+      "duration": 30,
+      "keywords": [
+        "кузов",
+        "кузова",
+        "коврики"
+      ],
+      "iconKey": "spray"
+    },
+    {
+      "id": "wash",
+      "name": "Комплексная мойка",
+      "price": 1600,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [
+        "мойка",
+        "помыть",
+        "мыть",
+        "мойку",
+        "комплекс",
+        "комплексная"
+      ],
+      "iconKey": "bubbles"
+    },
+    {
+      "id": "under",
+      "name": "Мойка днища",
+      "price": 2000,
+      "priceFrom": true,
+      "duration": 40,
+      "keywords": [
+        "днище",
+        "днища"
+      ],
+      "iconKey": "spray"
+    },
+    {
+      "id": "engine",
+      "name": "Мойка моторного отсека",
+      "price": 4000,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [
+        "двигатель",
+        "двигателя",
+        "мотор",
+        "подкапотное"
+      ],
+      "iconKey": "gear"
+    },
+    {
+      "id": "wax",
+      "name": "Горячий воск",
+      "price": 800,
+      "priceFrom": true,
+      "duration": 20,
+      "keywords": [
+        "воск",
+        "воском",
+        "кварц",
+        "полимер"
+      ],
+      "iconKey": "spark"
+    },
+    {
+      "id": "ozone",
+      "name": "Озонация салона",
+      "price": 1500,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [
+        "озон",
+        "озонирование",
+        "запах"
+      ],
+      "iconKey": "spark"
+    },
+    {
+      "id": "leather",
+      "name": "Кондиционер кожи",
+      "price": 1200,
+      "priceFrom": true,
+      "duration": 40,
+      "keywords": [
+        "кожа",
+        "кожи",
+        "кондиционер"
+      ],
+      "iconKey": "seat"
+    }
+  ]
+}

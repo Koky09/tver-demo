@@ -1,0 +1,120 @@
+window.CONFIG = {
+ "slug": "mat-detail",
+ "theme": "protocol",
+ "demo": false,
+ "city": "Екатеринбург",
+ "name": "Мат Detail",
+ "short": "МД",
+ "tagline": "Автомойка и детейлинг на Сиреневом бульваре",
+ "address": "Екатеринбург, Сиреневый бульвар, 12, цокольный этаж",
+ "mapQuery": "Екатеринбург, Сиреневый бульвар, 12",
+ "phone": "+7 912 291-51-51",
+ "phoneHref": "+79122915151",
+ "hours": {
+  "0": [
+   10,
+   20
+  ],
+  "1": [
+   10,
+   20
+  ],
+  "2": [
+   10,
+   20
+  ],
+  "3": [
+   10,
+   20
+  ],
+  "4": [
+   10,
+   20
+  ],
+  "5": [
+   10,
+   20
+  ],
+  "6": [
+   10,
+   20
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#64748b",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://vk.com/mat_detailing"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Помыть машину сегодня вечером",
+  "Сколько стоит комплекс?",
+  "Химчистка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "wash",
+   "name": "Комплекс: кузов и салон",
+   "price": 2250,
+   "priceFrom": false,
+   "duration": 75,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "комплекс",
+    "комплексная"
+   ],
+   "iconKey": "bubbles"
+  },
+  {
+   "id": "engine",
+   "name": "Мойка двигателя",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "подкапотное"
+   ],
+   "iconKey": "gear"
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона",
+   "price": 9000,
+   "priceFrom": true,
+   "duration": 360,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка",
+    "уборка"
+   ],
+   "iconKey": "seat"
+  },
+  {
+   "id": "polish",
+   "name": "Полировка кузова",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 480,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ],
+   "iconKey": "spark"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

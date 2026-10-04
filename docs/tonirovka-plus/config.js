@@ -1,0 +1,144 @@
+window.CONFIG = {
+ "slug": "tonirovka-plus",
+ "theme": "race",
+ "demo": false,
+ "city": "Москва",
+ "name": "Тонировка Плюс",
+ "short": "Т+",
+ "tagline": "Тонировка и плёнка в Митино, круглосуточно",
+ "address": "Москва, 1-й Митинский переулок, 25, 2 этаж",
+ "mapQuery": "Москва, 1-й Митинский переулок, 25",
+ "phone": "+7 926 003-22-76",
+ "phoneHref": "+79260032276",
+ "hours": {
+  "0": [
+   0,
+   24
+  ],
+  "1": [
+   0,
+   24
+  ],
+  "2": [
+   0,
+   24
+  ],
+  "3": [
+   0,
+   24
+  ],
+  "4": [
+   0,
+   24
+  ],
+  "5": [
+   0,
+   24
+  ],
+  "6": [
+   0,
+   24
+  ]
+ },
+ "boxes": 1,
+ "boxLabel": "Бокс",
+ "accent": "#8b5cf6",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/tonir0vka_plus"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Тонировка завтра",
+  "Сколько стоит плёнка на фары?",
+  "Оклейка зон риска",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "tint",
+   "name": "Тонировка передних стёкол",
+   "price": 3000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "tint2",
+   "name": "Тонировка задней полусферы",
+   "price": 7000,
+   "priceFrom": true,
+   "duration": 180,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "tint3",
+   "name": "Атермальная тонировка",
+   "price": 12000,
+   "priceFrom": true,
+   "duration": 240,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "headlights",
+   "name": "Тонировка фар и фонарей",
+   "price": 6000,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "фары",
+    "фар",
+    "оптика"
+   ],
+   "iconKey": "light"
+  },
+  {
+   "id": "ppf",
+   "name": "Плёнка на переднюю часть",
+   "price": 65000,
+   "priceFrom": true,
+   "duration": 1440,
+   "keywords": [
+    "плёнка",
+    "пленка",
+    "бронирование",
+    "антигравийная",
+    "оклейка",
+    "зоны"
+   ],
+   "iconKey": "shield"
+  },
+  {
+   "id": "noise",
+   "name": "Шумоизоляция",
+   "price": 20000,
+   "priceFrom": true,
+   "duration": 960,
+   "keywords": [
+    "шумоизоляция",
+    "шумка",
+    "шум"
+   ],
+   "iconKey": "mute"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

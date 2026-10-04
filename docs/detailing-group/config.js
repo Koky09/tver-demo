@@ -1,0 +1,148 @@
+window.CONFIG = {
+ "slug": "detailing-group",
+ "theme": "atelier",
+ "demo": false,
+ "city": "Москва",
+ "name": "Detailing Group",
+ "short": "DG",
+ "tagline": "Детейлинг-студия в Троицке",
+ "address": "Москва, Троицк, Калужское шоссе 41-й км, 38",
+ "mapQuery": "Москва, Троицк, Калужское шоссе 41-й км, 38",
+ "phone": "+7 995 656-98-52",
+ "phoneHref": "+79956569852",
+ "hours": {
+  "0": [
+   10,
+   20
+  ],
+  "1": [
+   10,
+   20
+  ],
+  "2": [
+   10,
+   20
+  ],
+  "3": [
+   10,
+   20
+  ],
+  "4": [
+   10,
+   20
+  ],
+  "5": [
+   10,
+   20
+  ],
+  "6": [
+   10,
+   20
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#b8c0cc",
+ "accentInk": "#111111",
+ "socials": {
+  "tg": "https://t.me/DetailingGroup"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Полировка на следующей неделе",
+  "Сколько стоит керамика?",
+  "Химчистка в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "detail",
+   "name": "Детейлинг-мойка",
+   "price": 5500,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "детейлинг",
+    "детейлинг-мойка",
+    "нано",
+    "фазная"
+   ],
+   "iconKey": "bucket"
+  },
+  {
+   "id": "body",
+   "name": "Мойка, 3 фазы",
+   "price": 2500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "polish",
+   "name": "Лёгкая полировка кузова",
+   "price": 12000,
+   "priceFrom": true,
+   "duration": 480,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ],
+   "iconKey": "spark"
+  },
+  {
+   "id": "ceramic",
+   "name": "Керамика на кузов",
+   "price": 24000,
+   "priceFrom": true,
+   "duration": 960,
+   "keywords": [
+    "керамика",
+    "керамику",
+    "керамическое",
+    "покрытие",
+    "стекло"
+   ],
+   "iconKey": "diamond"
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка без снятия сидений",
+   "price": 15000,
+   "priceFrom": true,
+   "duration": 360,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка",
+    "уборка"
+   ],
+   "iconKey": "seat"
+  },
+  {
+   "id": "ppf",
+   "name": "Плёнка на зоны риска",
+   "price": 65000,
+   "priceFrom": true,
+   "duration": 1440,
+   "keywords": [
+    "плёнка",
+    "пленка",
+    "бронирование",
+    "антигравийная",
+    "оклейка",
+    "зоны"
+   ],
+   "iconKey": "shield"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

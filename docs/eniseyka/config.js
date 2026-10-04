@@ -1,0 +1,117 @@
+window.CONFIG = {
+ "slug": "eniseyka",
+ "theme": "aqua",
+ "demo": false,
+ "city": "Москва",
+ "name": "Енисейка",
+ "short": "Е",
+ "tagline": "Автомойка у метро Медведково",
+ "address": "Москва, Енисейская улица, 43а",
+ "mapQuery": "Москва, Енисейская улица, 43а",
+ "phone": "+7 903 578-02-27",
+ "phoneHref": "+79035780227",
+ "hours": {
+  "0": [
+   7,
+   24
+  ],
+  "1": [
+   7,
+   24
+  ],
+  "2": [
+   7,
+   24
+  ],
+  "3": [
+   7,
+   24
+  ],
+  "4": [
+   7,
+   24
+  ],
+  "5": [
+   7,
+   24
+  ],
+  "6": [
+   7,
+   24
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Бокс",
+ "accent": "#38bdf8",
+ "accentInk": "#04202c",
+ "socials": {
+  "tg": "https://wa.me/79035780227"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Помыть машину сегодня вечером",
+  "Сколько стоит комплекс?",
+  "Химчистка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "body",
+   "name": "Автоматическая мойка кузова",
+   "price": 700,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "wash",
+   "name": "Комплексная мойка",
+   "price": 1550,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "комплекс",
+    "комплексная"
+   ],
+   "iconKey": "bubbles"
+  },
+  {
+   "id": "touchless",
+   "name": "Бесконтактная мойка",
+   "price": 600,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "бесконтактная",
+    "бесконтакт"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона",
+   "price": 8000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка",
+    "уборка"
+   ],
+   "iconKey": "seat"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

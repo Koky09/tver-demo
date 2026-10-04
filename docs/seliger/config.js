@@ -1,0 +1,140 @@
+window.CONFIG = {
+ "slug": "seliger",
+ "theme": "protocol",
+ "demo": false,
+ "city": "Москва",
+ "name": "Селигер",
+ "short": "СЛ",
+ "tagline": "Автомойка у метро Селигерская",
+ "address": "Москва, Селигерская улица, 18",
+ "mapQuery": "Москва, Селигерская улица, 18",
+ "phone": "+7 985 657-44-44",
+ "phoneHref": "+79856574444",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#2563eb",
+ "accentInk": "#ffffff",
+ "socials": {},
+ "demoPrices": false,
+ "chatHints": [
+  "Помыть машину сегодня вечером",
+  "Сколько стоит комплекс?",
+  "Химчистка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "body",
+   "name": "Мойка «Стандарт»",
+   "price": 900,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "wash",
+   "name": "Мойка «Комплекс»",
+   "price": 1900,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "комплекс",
+    "комплексная"
+   ],
+   "iconKey": "bubbles"
+  },
+  {
+   "id": "detail",
+   "name": "Нано-мойка, комплекс",
+   "price": 2600,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "детейлинг",
+    "детейлинг-мойка",
+    "нано",
+    "фазная"
+   ],
+   "iconKey": "bucket"
+  },
+  {
+   "id": "rain",
+   "name": "Антидождь",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 40,
+   "keywords": [
+    "антидождь",
+    "дождь"
+   ],
+   "iconKey": "drop"
+  },
+  {
+   "id": "engine",
+   "name": "Мойка двигателя",
+   "price": 3300,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "подкапотное"
+   ],
+   "iconKey": "gear"
+  },
+  {
+   "id": "ozone",
+   "name": "Озонирование салона",
+   "price": 1500,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [
+    "озон",
+    "озонирование",
+    "запах"
+   ],
+   "iconKey": "spark"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

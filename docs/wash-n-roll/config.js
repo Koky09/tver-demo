@@ -1,0 +1,133 @@
+window.CONFIG = {
+ "slug": "wash-n-roll",
+ "theme": "sticker",
+ "demo": false,
+ "city": "Москва",
+ "name": "Wash'n Roll",
+ "short": "WR",
+ "tagline": "Автомойка у метро Университет",
+ "address": "Москва, Ломоносовский проспект, 25 к2",
+ "mapQuery": "55.694512,37.531409",
+ "phone": "+7 925 231-30-94",
+ "phoneHref": "+79252313094",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#ff8fab",
+ "accentInk": "#1d0f17",
+ "socials": {
+  "tg": "https://t.me/+79252313094"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Помыть машину сегодня вечером",
+  "Сколько стоит комплекс?",
+  "Химчистка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "express",
+   "name": "Экспресс-мойка кузова",
+   "price": 700,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "экспресс",
+    "быстро"
+   ],
+   "iconKey": "drop"
+  },
+  {
+   "id": "body",
+   "name": "Стандарт: кузов и коврики",
+   "price": 1400,
+   "priceFrom": true,
+   "duration": 40,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики"
+   ],
+   "iconKey": "spray",
+   "note": "3 фазы"
+  },
+  {
+   "id": "wash",
+   "name": "Стандарт: комплекс",
+   "price": 2200,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "комплекс",
+    "комплексная"
+   ],
+   "iconKey": "bubbles",
+   "note": "3 фазы"
+  },
+  {
+   "id": "detail",
+   "name": "Детейлинг-мойка: кузов и коврики",
+   "price": 4000,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "детейлинг",
+    "детейлинг-мойка",
+    "нано",
+    "фазная"
+   ],
+   "iconKey": "bucket",
+   "note": "4 фазы"
+  },
+  {
+   "id": "detail2",
+   "name": "Детейлинг-мойка: комплекс",
+   "price": 5000,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "детейлинг",
+    "детейлинг-мойка",
+    "нано",
+    "фазная"
+   ],
+   "iconKey": "bucket",
+   "note": "4 фазы"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

@@ -9,6 +9,7 @@
   const KEY = (k) => `bk:${C.slug}:${k}`;
   const STEP = C.slotStep || 30;
   const DAYS_AHEAD = C.daysAhead || 14;
+  const CITY = C.city || C.address.split(',')[0].trim(); // город для шапки и печати
   const WD = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
   const WD_FULL = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'];
   const MON = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
@@ -89,7 +90,7 @@
   // «Открыто до 19:00» / «Откроется завтра в 10:00»
   function statusText() {
     const n = new Date(); const h = hoursFor(n); const m = n.getHours() * 60 + n.getMinutes();
-    if (isOpenNow()) return h[0] === 0 && h[1] === 1440 ? 'Открыто круглосуточно' : `Открыто до ${hm(h[1])}`;
+    if (isOpenNow()) return h[0] === 0 && h[1] === 1440 ? 'Открыто круглосуточно' : h[1] === 1440 ? 'Открыто до полуночи' : `Открыто до ${hm(h[1])}`;
     if (h && m < h[0]) return `Откроется сегодня в ${hm(h[0])}`;
     const WD_IN = ['в воскресенье', 'в понедельник', 'во вторник', 'в среду', 'в четверг', 'в пятницу', 'в субботу'];
     for (let i = 1; i <= 7; i++) { const d = addDays(n, i); const hh = hoursFor(d); if (hh) return `Откроется ${i === 1 ? 'завтра' : WD_IN[d.getDay()]} в ${hm(hh[0])}`; }
@@ -239,7 +240,7 @@
           <div><h1 style="--n:${Math.max(6, longest)}">${C.name.split(/\s+/).map((w) => `<span>${esc(w)}</span>`).join(' ')}</h1>${tag}${meta}</div></section>`;
       case 'protocol':
         return `<section class="hero${img}"><div class="doc-head"><span>Карточка сервиса</span>${demo}</div>
-          <div class="stamp" aria-hidden="true">${esc(C.short)}<small>${esc((C.address.match(/^(Тверь|Москва)/) || [])[1] || '')}</small></div>
+          <div class="stamp" aria-hidden="true">${esc(C.short)}<small>${esc(CITY.length > 9 ? ({ 'Екатеринбург': 'Екб' })[CITY] || CITY.slice(0, 8) + '.' : CITY)}</small></div>
           ${name}${tag}
           <dl class="fields">
             <div><dt>Сейчас</dt><dd><span class="status ${open ? 'open' : ''}">${statusText()}</span></dd></div>
@@ -271,7 +272,7 @@
     const open = isOpenNow();
     const msgr = C.socials && (C.socials.tg || C.socials.vk || C.socials.max);
     const longest = Math.max(...C.name.split(/\s+/).map((w) => w.length), Math.ceil(C.name.length / 2)); // кегль названия: длинное слово должно влезть, а длинное название — уложиться в 2–3 строки
-    const street = C.address.replace(/^(Тверь|Москва),\s*/, '');
+    const street = C.address.startsWith(CITY + ', ') ? C.address.slice(CITY.length + 2) : C.address;
     app.innerHTML = `
     <div class="wrap">
       ${heroHtml(open, longest, street)}

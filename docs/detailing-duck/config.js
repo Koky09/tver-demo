@@ -1,0 +1,144 @@
+window.CONFIG = {
+ "slug": "detailing-duck",
+ "theme": "sticker",
+ "demo": false,
+ "city": "Москва",
+ "name": "Детейлинг Дак",
+ "short": "ДД",
+ "tagline": "Круглосуточный детейлинг в Измайлово",
+ "address": "Москва, 1-я улица Измайловского Зверинца, 8, цокольный этаж",
+ "mapQuery": "Москва, 1-я улица Измайловского Зверинца, 8",
+ "phone": "+7 916 267-59-55",
+ "phoneHref": "+79162675955",
+ "hours": {
+  "0": [
+   0,
+   24
+  ],
+  "1": [
+   0,
+   24
+  ],
+  "2": [
+   0,
+   24
+  ],
+  "3": [
+   0,
+   24
+  ],
+  "4": [
+   0,
+   24
+  ],
+  "5": [
+   0,
+   24
+  ],
+  "6": [
+   0,
+   24
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#ffd60a",
+ "accentInk": "#1d0f17",
+ "socials": {
+  "tg": "https://t.me/Detailing_and_care"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Полировка на следующей неделе",
+  "Сколько стоит керамика?",
+  "Химчистка в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "interior",
+   "name": "Детейлинг-химчистка салона",
+   "price": 15000,
+   "priceFrom": true,
+   "duration": 480,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка",
+    "уборка"
+   ],
+   "iconKey": "seat"
+  },
+  {
+   "id": "polish",
+   "name": "Полировка кузова",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 480,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ],
+   "iconKey": "spark"
+  },
+  {
+   "id": "ceramic",
+   "name": "Полировка с керамикой",
+   "price": 22000,
+   "priceFrom": true,
+   "duration": 960,
+   "keywords": [
+    "керамика",
+    "керамику",
+    "керамическое",
+    "покрытие",
+    "стекло"
+   ],
+   "iconKey": "diamond"
+  },
+  {
+   "id": "presale",
+   "name": "Предпродажная подготовка",
+   "price": 12000,
+   "priceFrom": true,
+   "duration": 480,
+   "keywords": [
+    "предпродажная",
+    "продажа"
+   ],
+   "iconKey": "tag"
+  },
+  {
+   "id": "headlights",
+   "name": "Полировка фар",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "фары",
+    "фар",
+    "оптика"
+   ],
+   "iconKey": "light"
+  },
+  {
+   "id": "engine",
+   "name": "Детейлинг подкапотного",
+   "price": 3500,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "подкапотное"
+   ],
+   "iconKey": "gear"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

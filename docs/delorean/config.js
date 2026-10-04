@@ -1,0 +1,144 @@
+window.CONFIG = {
+ "slug": "delorean",
+ "theme": "lacquer",
+ "demo": false,
+ "city": "Екатеринбург",
+ "name": "Delorean",
+ "short": "DL",
+ "tagline": "Автомойка на проспекте Космонавтов",
+ "address": "Екатеринбург, проспект Космонавтов, 64",
+ "mapQuery": "Екатеринбург, проспект Космонавтов, 64",
+ "phone": "+7 929 212-24-24",
+ "phoneHref": "+79292122424",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#94a3b8",
+ "accentInk": "#0f172a",
+ "socials": {
+  "tg": "https://vk.com/club226872795"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Помыть машину сегодня вечером",
+  "Сколько стоит комплекс?",
+  "Химчистка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "express",
+   "name": "Экспресс-мойка кузова",
+   "price": 440,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "экспресс",
+    "быстро"
+   ],
+   "iconKey": "drop"
+  },
+  {
+   "id": "body",
+   "name": "Мойка кузова с шампунем",
+   "price": 750,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "body2",
+   "name": "Кузов, 3 фазы с воском",
+   "price": 1750,
+   "priceFrom": true,
+   "duration": 50,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "wash",
+   "name": "Комплекс: кузов и салон",
+   "price": 1950,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "мойка",
+    "помыть",
+    "мыть",
+    "мойку",
+    "комплекс",
+    "комплексная"
+   ],
+   "iconKey": "bubbles"
+  },
+  {
+   "id": "engine",
+   "name": "Мойка двигателя",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 40,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "подкапотное"
+   ],
+   "iconKey": "gear"
+  },
+  {
+   "id": "interior",
+   "name": "Комплексная химчистка",
+   "price": 14000,
+   "priceFrom": true,
+   "duration": 420,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка",
+    "уборка"
+   ],
+   "iconKey": "seat"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

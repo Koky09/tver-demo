@@ -1,0 +1,115 @@
+window.CONFIG = {
+ "slug": "as-tonirovka",
+ "theme": "lacquer",
+ "demo": false,
+ "city": "Москва",
+ "name": "АС Тонировка",
+ "short": "АС",
+ "tagline": "Тонировка стёкол в Щербинке",
+ "address": "Москва, Щербинка, улица Маршала Савицкого, 5, 2 этаж",
+ "mapQuery": "Москва, Щербинка, улица Маршала Савицкого, 5",
+ "phone": "+7 963 757-52-53",
+ "phoneHref": "+79637575253",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 1,
+ "boxLabel": "Бокс",
+ "accent": "#14b8a6",
+ "accentInk": "#04201d",
+ "socials": {
+  "tg": "https://wa.me/79637575253"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Тонировка завтра",
+  "Сколько стоит плёнка на фары?",
+  "Оклейка зон риска",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "tint",
+   "name": "Тонировка передних стёкол",
+   "price": 3000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "tint2",
+   "name": "Тонировка задней полусферы",
+   "price": 6000,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "tint3",
+   "name": "Тонировка по кругу",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 240,
+   "keywords": [
+    "тонировка",
+    "тонировку",
+    "затонировать",
+    "полусфера"
+   ],
+   "iconKey": "tint"
+  },
+  {
+   "id": "headlights",
+   "name": "Тонировка фар",
+   "price": 5000,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "фары",
+    "фар",
+    "оптика"
+   ],
+   "iconKey": "light"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};
