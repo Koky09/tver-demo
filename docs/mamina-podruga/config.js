@@ -1,6 +1,7 @@
 window.CONFIG = {
  "slug": "mamina-podruga",
  "theme": "sticker",
+ "demo": false,
  "name": "Детейлинг маминой подруги",
  "short": "МП",
  "tagline": "Детейлинг и шумоизоляция",

@@ -1,6 +1,7 @@
 {
   "slug": "oazis",
   "theme": "aqua",
+  "demo": false,
   "name": "Оазис",
   "short": "О",
   "tagline": "Автомойка и детейлинг на Шишкова",

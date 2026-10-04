@@ -1,6 +1,7 @@
 window.CONFIG = {
  "slug": "nazar",
  "theme": "race",
+ "demo": false,
  "name": "Nazar Detailing",
  "short": "N",
  "tagline": "Детейлинг-студия на Куклиновке",

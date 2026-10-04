@@ -1,6 +1,7 @@
 window.CONFIG = {
  "slug": "expertavto",
  "theme": "protocol",
+ "demo": false,
  "name": "ЭкспертАвтоТверь",
  "short": "ЭА",
  "tagline": "Детейлинг и предпродажная подготовка авто",
