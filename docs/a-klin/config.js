@@ -1,0 +1,137 @@
+window.CONFIG = {
+ "slug": "a-klin",
+ "theme": "protocol",
+ "demo": false,
+ "name": "А-клин",
+ "short": "АК",
+ "tagline": "Автомойка у метро Савёловская",
+ "address": "Москва, улица Сущёвский Вал, 13а",
+ "mapQuery": "Москва, улица Сущёвский Вал, 13а",
+ "phone": "+7 925 445-94-22",
+ "phoneHref": "+79254459422",
+ "hours": {
+  "0": [
+   8,
+   22
+  ],
+  "1": [
+   7,
+   22
+  ],
+  "2": [
+   7,
+   22
+  ],
+  "3": [
+   7,
+   22
+  ],
+  "4": [
+   7,
+   22
+  ],
+  "5": [
+   7,
+   22
+  ],
+  "6": [
+   8,
+   22
+  ]
+ },
+ "boxes": 4,
+ "boxLabel": "Бокс",
+ "accent": "#2f7de1",
+ "accentInk": "#ffffff",
+ "socials": {},
+ "demoPrices": true,
+ "chatHints": [
+  "Мойка завтра в 8",
+  "Сколько стоит химчистка?",
+  "Полировка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "touchless",
+   "name": "Бесконтактная мойка",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 40,
+   "keywords": [
+    "бесконтактная",
+    "бесконтакт"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "underbody",
+   "name": "Мойка днища",
+   "price": 900,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики",
+    "быстро"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона",
+   "price": 7000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка"
+   ]
+  },
+  {
+   "id": "nano",
+   "name": "Полная нано-обработка кузова",
+   "price": 9000,
+   "priceFrom": true,
+   "duration": 240,
+   "keywords": [
+    "керамика",
+    "керамику",
+    "керамическое",
+    "покрытие"
+   ],
+   "iconKey": "diamond"
+  },
+  {
+   "id": "polish",
+   "name": "Полировка 1K-NANO",
+   "price": 12000,
+   "priceFrom": true,
+   "duration": 480,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ]
+  },
+  {
+   "id": "headlights",
+   "name": "Полировка фары",
+   "price": 2500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "фары",
+    "фар",
+    "оптика"
+   ],
+   "note": "за одну"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

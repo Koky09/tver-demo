@@ -1,0 +1,130 @@
+window.CONFIG = {
+ "slug": "garage-spa",
+ "theme": "atelier",
+ "demo": false,
+ "name": "Гараж&СПА",
+ "short": "G&S",
+ "tagline": "Автомойка и детейлинг на Петровско-Разумовском",
+ "address": "Москва, Петровско-Разумовский проезд, 15, подземный паркинг",
+ "mapQuery": "Москва, Петровско-Разумовский проезд, 15",
+ "phone": "+7 980 214-91-93",
+ "phoneHref": "+79802149193",
+ "hours": {
+  "0": [
+   8.5,
+   23
+  ],
+  "1": [
+   8.5,
+   23
+  ],
+  "2": [
+   8.5,
+   23
+  ],
+  "3": [
+   8.5,
+   23
+  ],
+  "4": [
+   8.5,
+   23
+  ],
+  "5": [
+   8.5,
+   23
+  ],
+  "6": [
+   8.5,
+   23
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Бокс",
+ "accent": "#9cc5b0",
+ "accentInk": "#0f1a15",
+ "socials": {
+  "tg": "https://wa.me/79283279894"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Комплекс сегодня вечером",
+  "Сколько стоит химчистка?",
+  "Мойка двигателя завтра",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "complex",
+   "name": "Комплексная мойка",
+   "price": 1400,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "комплекс",
+    "комплексная",
+    "помыть",
+    "мойка",
+    "мойку",
+    "мыть"
+   ]
+  },
+  {
+   "id": "body",
+   "name": "Кузов и коврики",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 40,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики",
+    "быстро"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "nano",
+   "name": "Трёхфазная мойка кузова",
+   "price": 2200,
+   "priceFrom": true,
+   "duration": 75,
+   "keywords": [
+    "нано",
+    "koch",
+    "трёхфазная",
+    "бережная",
+    "ручная"
+   ],
+   "iconKey": "bubbles"
+  },
+  {
+   "id": "engine",
+   "name": "Мойка двигателя",
+   "price": 2500,
+   "priceFrom": false,
+   "duration": 40,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "мотора"
+   ]
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона и багажника",
+   "price": 15000,
+   "priceFrom": true,
+   "duration": 360,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка"
+   ]
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

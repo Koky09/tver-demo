@@ -1,0 +1,138 @@
+window.CONFIG = {
+ "slug": "aquamarin",
+ "theme": "aqua",
+ "demo": false,
+ "name": "Аквамарин",
+ "short": "А",
+ "tagline": "Круглосуточная автомойка на Николо-Хованской",
+ "address": "Москва, Николо-Хованская улица, 28",
+ "mapQuery": "Москва, Николо-Хованская улица, 28",
+ "phone": "+7 926 001-62-22",
+ "phoneHref": "+79260016222",
+ "hours": {
+  "0": [
+   0,
+   24
+  ],
+  "1": [
+   0,
+   24
+  ],
+  "2": [
+   0,
+   24
+  ],
+  "3": [
+   0,
+   24
+  ],
+  "4": [
+   0,
+   24
+  ],
+  "5": [
+   0,
+   24
+  ],
+  "6": [
+   0,
+   24
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Бокс",
+ "accent": "#1fb5a8",
+ "accentInk": "#04201d",
+ "socials": {},
+ "demoPrices": true,
+ "chatHints": [
+  "Помыть машину ночью",
+  "Сколько стоит химчистка?",
+  "Комплексная мойка завтра после 8",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "complex",
+   "name": "Комплексная мойка",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "комплекс",
+    "комплексная",
+    "помыть",
+    "мойка",
+    "мойку",
+    "мыть"
+   ]
+  },
+  {
+   "id": "touchless",
+   "name": "Бесконтактная мойка",
+   "price": 800,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "бесконтактная",
+    "бесконтакт"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "engine",
+   "name": "Мойка двигателя",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "мотора"
+   ]
+  },
+  {
+   "id": "underbody",
+   "name": "Мойка днища",
+   "price": 800,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "кузов",
+    "кузова",
+    "коврики",
+    "быстро"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка"
+   ]
+  },
+  {
+   "id": "polish",
+   "name": "Полировка кузова",
+   "price": 8000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ]
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

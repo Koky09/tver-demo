@@ -72,21 +72,24 @@
   const uid = () => Math.random().toString(36).slice(2, 10);
 
   /* ---------- расписание ---------- */
-  function hoursFor(date) { const h = C.hours[date.getDay()]; return h ? [h[0] * 60, h[1] * 60] : null; }
+  function hoursFor(date) { const h = C.hours[date.getDay()]; return h ? [Math.round(h[0] * 60), Math.round(h[1] * 60)] : null; }
   function dayLenMax() { return Math.max(...Object.values(C.hours).filter(Boolean).map((h) => (h[1] - h[0]) * 60)); }
   function daysNeeded(min) { return Math.ceil(min / dayLenMax()); }
   function isOpenNow() { const n = new Date(); const h = hoursFor(n); const m = n.getHours() * 60 + n.getMinutes(); return h && m >= h[0] && m < h[1]; }
+  // [8.5, 23] -> «8:30–23:00», [0, 24] -> «круглосуточно»
+  const dayHours = (h) => !h ? 'выходной' : h[0] === 0 && h[1] === 24 ? 'круглосуточно' : `${hm(Math.round(h[0] * 60))}–${hm(Math.round(h[1] * 60))}`;
   function hoursText() {
     const groups = []; const order = [1, 2, 3, 4, 5, 6, 0];
-    order.forEach((d) => { const h = C.hours[d]; const key = h ? `${h[0]}–${h[1]}` : 'выходной'; const g = groups[groups.length - 1];
+    order.forEach((d) => { const key = dayHours(C.hours[d]); const g = groups[groups.length - 1];
       if (g && g.key === key) g.to = d; else groups.push({ key, from: d, to: d }); });
-    return groups.map((g) => `${WD[g.from]}${g.from !== g.to ? '–' + WD[g.to] : ''}: ${g.key === 'выходной' ? g.key : g.key.replace(/(\d+)–(\d+)/, '$1:00–$2:00')}`).join(', ');
+    if (groups.length === 1) return `ежедневно, ${groups[0].key}`;
+    return groups.map((g) => `${WD[g.from]}${g.from !== g.to ? '–' + WD[g.to] : ''}: ${g.key}`).join(', ');
   }
 
   // «Открыто до 19:00» / «Откроется завтра в 10:00»
   function statusText() {
     const n = new Date(); const h = hoursFor(n); const m = n.getHours() * 60 + n.getMinutes();
-    if (isOpenNow()) return `Открыто до ${hm(h[1])}`;
+    if (isOpenNow()) return h[0] === 0 && h[1] === 1440 ? 'Открыто круглосуточно' : `Открыто до ${hm(h[1])}`;
     if (h && m < h[0]) return `Откроется сегодня в ${hm(h[0])}`;
     const WD_IN = ['в воскресенье', 'в понедельник', 'во вторник', 'в среду', 'в четверг', 'в пятницу', 'в субботу'];
     for (let i = 1; i <= 7; i++) { const d = addDays(n, i); const hh = hoursFor(d); if (hh) return `Откроется ${i === 1 ? 'завтра' : WD_IN[d.getDay()]} в ${hm(hh[0])}`; }
@@ -96,7 +99,7 @@
   function weekHtml() {
     const today = new Date().getDay();
     return `<ul class="week">${[1, 2, 3, 4, 5, 6, 0].map((d) => { const h = C.hours[d];
-      return `<li ${d === today ? 'aria-current="date"' : ''}><span>${WD[d]}${d === today ? ', сегодня' : ''}</span><span class="${h ? '' : 'off'}">${h ? `${hm(h[0] * 60)}–${hm(h[1] * 60)}` : 'выходной'}</span></li>`; }).join('')}</ul>`;
+      return `<li ${d === today ? 'aria-current="date"' : ''}><span>${WD[d]}${d === today ? ', сегодня' : ''}</span><span class="${h ? '' : 'off'}">${dayHours(h)}</span></li>`; }).join('')}</ul>`;
   }
 
   // Интервалы занятости, которые даст запись услуги svc на дату date со стартом start
@@ -236,7 +239,7 @@
           <div><h1 style="--n:${Math.max(6, longest)}">${C.name.split(/\s+/).map((w) => `<span>${esc(w)}</span>`).join(' ')}</h1>${tag}${meta}</div></section>`;
       case 'protocol':
         return `<section class="hero${img}"><div class="doc-head"><span>Карточка сервиса</span>${demo}</div>
-          <div class="stamp" aria-hidden="true">${esc(C.short)}<small>Тверь</small></div>
+          <div class="stamp" aria-hidden="true">${esc(C.short)}<small>${esc((C.address.match(/^(Тверь|Москва)/) || [])[1] || '')}</small></div>
           ${name}${tag}
           <dl class="fields">
             <div><dt>Сейчас</dt><dd><span class="status ${open ? 'open' : ''}">${statusText()}</span></dd></div>
@@ -268,7 +271,7 @@
     const open = isOpenNow();
     const msgr = C.socials && (C.socials.tg || C.socials.vk || C.socials.max);
     const longest = Math.max(...C.name.split(/\s+/).map((w) => w.length), Math.ceil(C.name.length / 2)); // кегль названия: длинное слово должно влезть, а длинное название — уложиться в 2–3 строки
-    const street = C.address.replace(/^Тверь,\s*/, '');
+    const street = C.address.replace(/^(Тверь|Москва),\s*/, '');
     app.innerHTML = `
     <div class="wrap">
       ${heroHtml(open, longest, street)}
@@ -350,7 +353,7 @@
         if (!state.date) state.date = days.find((d) => slotsFor(svc, d).length) || days[0];
         const slots = slotsFor(svc, state.date);
         const multi = svc.duration > dayLenMax();
-        const parts = [['Утро', 0, 12 * 60], ['День', 12 * 60, 17 * 60], ['Вечер', 17 * 60, 24 * 60]]
+        const parts = [['Ночь', 0, 6 * 60], ['Утро', 6 * 60, 12 * 60], ['День', 12 * 60, 17 * 60], ['Вечер', 17 * 60, 24 * 60]]
           .map(([l, a, z]) => [l, slots.filter((t) => t >= a && t < z)]).filter(([, l]) => l.length);
         const sd = parseYmd(state.date);
         root.innerHTML = head('Дата и время') + `

@@ -1,0 +1,124 @@
+window.CONFIG = {
+ "slug": "salvador",
+ "theme": "stitch",
+ "demo": false,
+ "name": "Сальвадор",
+ "short": "С",
+ "tagline": "Автомойка и детейлинг на улице Сервантеса",
+ "address": "Москва, улица Сервантеса, 6",
+ "mapQuery": "Москва, улица Сервантеса, 6",
+ "phone": "+7 977 445-52-25",
+ "phoneHref": "+79774455225",
+ "hours": {
+  "0": [
+   8,
+   22
+  ],
+  "1": [
+   8,
+   22
+  ],
+  "2": [
+   8,
+   22
+  ],
+  "3": [
+   8,
+   22
+  ],
+  "4": [
+   8,
+   22
+  ],
+  "5": [
+   8,
+   22
+  ],
+  "6": [
+   8,
+   22
+  ]
+ },
+ "boxes": 8,
+ "boxLabel": "Бокс",
+ "accent": "#e0592a",
+ "accentInk": "#ffffff",
+ "socials": {},
+ "demoPrices": true,
+ "chatHints": [
+  "Комплекс завтра утром",
+  "Сколько стоит химчистка?",
+  "Полировка на выходных",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "complex",
+   "name": "Комплексная мойка",
+   "price": 2200,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "комплекс",
+    "комплексная",
+    "помыть",
+    "мойка",
+    "мойку",
+    "мыть"
+   ]
+  },
+  {
+   "id": "touchless",
+   "name": "Бесконтактная мойка",
+   "price": 900,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "бесконтактная",
+    "бесконтакт"
+   ],
+   "iconKey": "spray"
+  },
+  {
+   "id": "engine",
+   "name": "Мойка двигателя",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "двигатель",
+    "двигателя",
+    "мотор",
+    "мотора"
+   ]
+  },
+  {
+   "id": "interior",
+   "name": "Химчистка салона",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 300,
+   "keywords": [
+    "химчистка",
+    "химчистку",
+    "салон",
+    "салона",
+    "чистка"
+   ]
+  },
+  {
+   "id": "polish",
+   "name": "Полировка кузова",
+   "price": 10000,
+   "priceFrom": true,
+   "duration": 360,
+   "keywords": [
+    "полировка",
+    "полировку",
+    "отполировать",
+    "царапины"
+   ]
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

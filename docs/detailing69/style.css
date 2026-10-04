@@ -312,7 +312,7 @@ label.f { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 500;
    в clients/<slug>.json, build.py ставит data-theme на <html>.
    Тема фиксирует свою палитру (не зависит от тёмного режима телефона).
    ===================================================================== */
-:root[data-theme] .hero::after { display: none; }
+:root[data-theme]:not([data-theme=lacquer]) .hero::after { display: none; }
 
 /* ---------- ателье (МОРРУС): тёмный, золото, засечки, прайс как меню ---------- */
 :root[data-theme=atelier] {
@@ -391,7 +391,8 @@ label.f { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 500;
   text-shadow: 0 2px 0 #16181b, 0 0 18px rgba(22,24,27,.6);
 }
 [data-theme=race] .hero h1 span { display: block; }
-[data-theme=race] .hero .tag { color: #c4c7cc; }
+[data-theme=race] .hero .tag { color: #c4c7cc; max-width: calc(100% - 110px); }
+[data-theme=race] .hero-meta { max-width: calc(100% - 110px); text-shadow: 0 1px 2px #16181b; }
 [data-theme=race] .quick { border-radius: 4px; margin-top: -8px; position: relative; }
 [data-theme=race] h2 { font: 600 26px/1.1 var(--display); text-transform: uppercase; letter-spacing: .01em; }
 [data-theme=race] .list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: none; border: 0; overflow: visible; }
@@ -507,9 +508,9 @@ label.f { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 500;
 
 /* ---------- прострочка (Детейлинг 69): салон, кожа, пунктирная строчка ---------- */
 :root[data-theme=stitch] {
-  --bg: #f2eff6; --surface: #ffffff; --surface-2: #f6f3fa; --line: #dad2e5;
+  --bg: color-mix(in oklab, var(--accent) 6%, #f3f2f5); --surface: #ffffff; --surface-2: color-mix(in oklab, var(--accent) 4%, #f8f7f9); --line: color-mix(in oklab, var(--accent) 14%, #dcdae0);
   --ink: #1d1526; --muted: #5d5469; --accent-text: color-mix(in oklab, var(--accent), #000 30%);
-  --accent-soft: color-mix(in oklab, var(--accent) 11%, #fff); --plum: #231831;
+  --accent-soft: color-mix(in oklab, var(--accent) 11%, #fff); --plum: color-mix(in oklab, var(--accent) 22%, #17121d);
   --stitch: color-mix(in oklab, var(--accent) 45%, var(--line));
   --display: "Unbounded", system-ui, sans-serif; --text: "Onest", system-ui, sans-serif;
   --r-lg: 20px; --r-md: 16px; --r-sm: 10px; --chrome: #231831; color-scheme: light;
@@ -535,11 +536,11 @@ label.f { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 500;
 
 /* ---------- стикеры (Мамина подруга): толстые обводки, жёсткие тени, наклон ---------- */
 :root[data-theme=sticker] {
-  --bg: #ffe9f3; --surface: #ffffff; --surface-2: #fff4f9; --line: #1d0f17;
+  --bg: color-mix(in oklab, var(--accent) 14%, #fff); --surface: #ffffff; --surface-2: color-mix(in oklab, var(--accent) 6%, #fff); --line: #1d0f17;
   --ink: #1d0f17; --muted: #5e4352; --accent-text: color-mix(in oklab, var(--accent), #000 50%);
   --accent-soft: color-mix(in oklab, var(--accent) 22%, #fff); --pop: #ffe14d;
   --display: "Dela Gothic One", "Rubik", sans-serif; --text: "Rubik", system-ui, sans-serif;
-  --r-lg: 22px; --r-md: 16px; --r-sm: 12px; --chrome: #f472b6; color-scheme: light;
+  --r-lg: 22px; --r-md: 16px; --r-sm: 12px; --chrome: var(--accent); color-scheme: light;
 }
 [data-theme=sticker] .hero {
   color: var(--ink); background: var(--accent); border: 2.5px solid var(--ink); box-shadow: 6px 6px 0 var(--ink); min-height: 0;
