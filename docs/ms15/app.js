@@ -233,10 +233,10 @@
     const img = C.heroImage ? ` has-img" style="background-image:url('${esc(C.heroImage)}')` : '';
     switch (C.theme) {
       case 'atelier':
-        return `<section class="hero${img}"><div class="frame">${demo}<div class="mono" aria-hidden="true">${esc(C.short)}</div>${name}${tag}${meta}</div></section>`;
+        return `<section class="hero${img}"><div class="frame">${demo}<img class="mono" src="icon-192.png" alt="" aria-hidden="true">${name}${tag}${meta}</div></section>`;
       case 'race':
         return `<section class="hero${img}"><div class="stripes" aria-hidden="true"></div>
-          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
           <div><h1 style="--n:${Math.max(6, longest)}">${C.name.split(/\s+/).map((w) => `<span>${esc(w)}</span>`).join(' ')}</h1>${tag}${meta}</div></section>`;
       case 'protocol':
         return `<section class="hero${img}"><div class="doc-head"><span>Карточка сервиса</span>${demo}</div>
@@ -250,20 +250,20 @@
       case 'aqua':
         return `<section class="hero${img}">
           <svg class="bubbles" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="40" cy="60" r="14"/><circle cx="70" cy="30" r="6"/><circle cx="350" cy="80" r="22"/><circle cx="320" cy="40" r="8"/><circle cx="372" cy="150" r="7"/><circle cx="24" cy="170" r="9"/></svg>
-          ${demo}<div class="emblem" aria-hidden="true">${esc(C.short)}</div>${name}${tag}${meta}
+          ${demo}<img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${name}${tag}${meta}
           <svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 60 2, 120 2, 200 20 S 340 40, 400 16 V40 H0z"/></svg></section>`;
       case 'stitch':
         return `<section class="hero${img}"><div class="bignum" aria-hidden="true">${esc(C.short)}</div>
-          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
       case 'sticker':
         return `<section class="hero${img}">
-          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
       default:
         return `<section class="hero${img}">
           <svg class="crease" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 168 C 110 120, 250 112, 410 52"/><path d="M-10 182 C 120 136, 260 128, 410 70"/></svg>
-          <div class="hero-top"><div class="emblem" aria-hidden="true">${esc(C.short)}</div>${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
     }
   }
@@ -615,7 +615,7 @@
     }
 
     app.innerHTML = `<div class="wrap">
-      <div class="top"><div class="top-id"><div class="emblem" aria-hidden="true">${esc(C.short)}</div><div><div class="muted small">Кабинет владельца</div><h1>${esc(C.name)}</h1></div></div><a class="btn sm ghost" href="#">Сайт</a></div>
+      <div class="top"><div class="top-id"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true"><div><div class="muted small">Кабинет владельца</div><h1>${esc(C.name)}</h1></div></div><a class="btn sm ghost" href="#">Сайт</a></div>
       ${newCount ? `<div class="note alert" role="status">Новых онлайн-записей: <b>${newCount}</b></div>` : ''}
       <div class="tabs">
         <button class="${view === 'day' ? 'on' : ''}" data-view="day">Расписание</button>
@@ -661,7 +661,7 @@
   function renderPin() {
     const LEN = REMOTE ? 6 : 4;
     app.innerHTML = `<div class="wrap pin-screen">
-      <div class="hero"><div class="emblem" aria-hidden="true">${esc(C.short)}</div></div>
+      <div class="hero"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true"></div>
       <h1>Кабинет владельца</h1>
       <p class="muted">${esc(C.name)}</p>
       <form id="pf"><div class="pin" role="group" aria-label="PIN-код">${Array.from({ length: LEN }, (_, i) => `<input class="in" inputmode="numeric" maxlength="1" type="password" aria-label="Цифра ${i + 1}">`).join('')}</div>

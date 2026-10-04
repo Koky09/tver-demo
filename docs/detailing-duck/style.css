@@ -587,3 +587,12 @@ label.f { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 500;
 [data-theme=sticker] .ticket-cut { border-top-color: var(--ink); }
 [data-theme=sticker] .msg { border: 2px solid var(--ink); }
 [data-theme=sticker] .tabs button.on { background: var(--accent); color: var(--ink); }
+
+/* логотип сервиса (logo.py) вместо букв в эмблеме */
+img.emblem, img.mono { display: block; object-fit: cover; padding: 0; background: none; }
+[data-theme=aqua] img.emblem { margin: 0 auto 14px; }
+[data-theme=atelier] img.mono { width: 92px; height: 92px; border: 0; box-shadow: none; border-radius: 50%; }
+img.emblem { width: 64px; height: 64px; }
+[data-theme=aqua] img.emblem { width: 76px; height: 76px; border-radius: 22px; }
+[data-theme=race] img.emblem { box-shadow: 0 0 0 2px rgba(255,255,255,.25); }
+.top img.emblem { width: 44px; height: 44px; }

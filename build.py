@@ -10,7 +10,7 @@ import sys
 import time
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+import logo
 
 ROOT = Path(__file__).parent
 TEMPLATE = ROOT / "template"
@@ -31,31 +31,6 @@ THEME_FONTS = {
     "stitch": "Unbounded:wght@500;600;800&family=Onest:wght@400;500;600;700",
     "sticker": "Dela+Gothic+One&family=Rubik:wght@400;500;600;700",
 }
-
-
-def hex_rgb(h):
-    h = h.lstrip("#")
-    return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
-
-
-def font(size):
-    for name in ("segoeuib.ttf", "arialbd.ttf", "DejaVuSans-Bold.ttf"):
-        try:
-            return ImageFont.truetype(name, size)
-        except OSError:
-            continue
-    return ImageFont.load_default()
-
-
-def make_icon(cfg, size, path):
-    img = Image.new("RGB", (size, size), hex_rgb(cfg["accent"]))
-    d = ImageDraw.Draw(img)
-    text = cfg["short"]
-    f = font(int(size * (0.5 if len(text) == 1 else 0.38)))
-    box = d.textbbox((0, 0), text, font=f)
-    w, h = box[2] - box[0], box[3] - box[1]
-    d.text(((size - w) / 2 - box[0], (size - h) / 2 - box[1]), text, font=f, fill=hex_rgb(cfg.get("accentInk", "#111111")))
-    img.save(path)
 
 
 def build(cfg_path):
@@ -86,8 +61,8 @@ def build(cfg_path):
         "start_url": "./",
         "scope": "./",
         "display": "standalone",
-        "background_color": "#0f1012",
-        "theme_color": "#0f1012",
+        "background_color": logo.splash_color(cfg),  # заставка при запуске — под цвет логотипа
+        "theme_color": logo.splash_color(cfg),
         "lang": "ru",
         "icons": [
             {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable"},
@@ -95,8 +70,9 @@ def build(cfg_path):
         ],
     }
     (out / "manifest.webmanifest").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
-    make_icon(cfg, 192, out / "icon-192.png")
-    make_icon(cfg, 512, out / "icon-512.png")
+    # Логотип сервиса: иконка на рабочий стол и эмблема в шапке (logo.py)
+    logo.make_logo(cfg, 192).save(out / "icon-192.png")
+    logo.make_logo(cfg, 512).save(out / "icon-512.png")
     print(f"  {cfg['slug']:<16} [{theme}] {cfg['name']}  ({len(cfg['services'])} услуг, {cfg.get('boxLabel', 'Бокс').lower()}ов: {cfg['boxes']})")
     return cfg
 
