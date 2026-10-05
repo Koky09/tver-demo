@@ -16,6 +16,65 @@
 
   document.documentElement.style.setProperty('--accent', C.accent);
   document.documentElement.style.setProperty('--accent-ink', C.accentInk || '#111');
+
+  /* Старые iPhone (Safari до 16.2) не понимают color-mix(): фон становится прозрачным, текст сливается.
+     Там пересчитываем такие цвета в обычные rgba. В новых браузерах этот код не выполняется. */
+  (function colorMixFallback() {
+    let force = false; try { force = localStorage.getItem('cm-fallback') === '1'; } catch (e) {}
+    if (!force && window.CSS && CSS.supports && CSS.supports('color', 'color-mix(in oklab, red, blue)')) return;
+    const root = document.documentElement;
+    const probe = document.createElement('i'); probe.style.display = 'none';
+    const toRGBA = (c) => { // любой CSS-цвет -> [r, g, b, a] через вычисленный стиль
+      const m = /^#([0-9a-f]{3}|[0-9a-f]{6}|[0-9a-f]{8})$/i.exec(c.trim());
+      if (m) { let h = m[1]; if (h.length === 3) h = h.replace(/./g, '$&$&');
+        return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16), h.length === 8 ? parseInt(h.slice(6, 8), 16) / 255 : 1]; }
+      probe.style.color = ''; probe.style.color = c.trim(); (document.body || root).appendChild(probe);
+      const v = getComputedStyle(probe).color.match(/[\d.]+/g) || [0, 0, 0]; probe.remove();
+      return [+v[0], +v[1], +v[2], v[3] == null ? 1 : +v[3]];
+    };
+    const splitTop = (s) => { const out = []; let d = 0, cur = '';
+      for (const ch of s) { if (ch === '(') d++; if (ch === ')') d--; if (ch === ',' && !d) { out.push(cur); cur = ''; } else cur += ch; }
+      out.push(cur); return out.map((x) => x.trim()); };
+    const vars = (s, depth = 0) => s.replace(/var\(\s*(--[\w-]+)\s*(?:,([^()]*))?\)/g, (_, n, fb) => {
+      const v = getComputedStyle(root).getPropertyValue(n).trim() || (fb || '').trim();
+      return depth < 8 ? vars(v, depth + 1) : v; });
+    const evalMix = (str) => {
+      let s = vars(str), guard = 0;
+      while (s.includes('color-mix(') && guard++ < 50) {
+        const i = s.lastIndexOf('color-mix('); let d = 0, j = i + 9;
+        for (; j < s.length; j++) { if (s[j] === '(') d++; if (s[j] === ')' && --d === 0) break; }
+        const args = splitTop(s.slice(i + 10, j)).slice(1);
+        const part = (a) => { const m = /\s([\d.]+)%$/.exec(a); return m ? [a.slice(0, m.index), +m[1] / 100] : [a, null]; };
+        let [c1, p1] = part(args[0]), [c2, p2] = part(args[1] || 'transparent');
+        if (p1 == null && p2 == null) p1 = p2 = .5; else if (p1 == null) p1 = 1 - p2; else if (p2 == null) p2 = 1 - p1;
+        const t = p1 + p2 || 1; p1 /= t; p2 /= t;
+        const A = toRGBA(c1), B = toRGBA(c2);
+        const a = A[3] * p1 + B[3] * p2;
+        const ch = (k) => a ? Math.round((A[k] * A[3] * p1 + B[k] * B[3] * p2) / a) : 0;
+        s = s.slice(0, i) + `rgba(${ch(0)}, ${ch(1)}, ${ch(2)}, ${+a.toFixed(3)})` + s.slice(j + 1);
+      }
+      return s;
+    };
+    const apply = (css) => {
+      css = css.replace(/\/\*[\s\S]*?\*\//g, '');
+      const names = new Set(); const extra = [];
+      for (const m of css.matchAll(/([^{}@]+)\{([^{}]*)\}/g)) {
+        const sel = m[1].trim();
+        for (const decl of m[2].split(';')) {
+          const k = decl.indexOf(':'); if (k < 0 || !decl.includes('color-mix(')) continue;
+          const prop = decl.slice(0, k).trim(), val = decl.slice(k + 1).trim();
+          if (prop.startsWith('--')) names.add(prop);
+          else if (!sel.startsWith(':root')) extra.push([sel, prop, val]);
+        }
+      }
+      for (let pass = 0; pass < 2; pass++) names.forEach((n) => { const v = getComputedStyle(root).getPropertyValue(n); if (v) root.style.setProperty(n, evalMix(v)); });
+      const st = document.createElement('style');
+      st.textContent = extra.map(([sel, prop, val]) => `${sel} { ${prop}: ${evalMix(val)}; }`).join('\n');
+      document.head.appendChild(st);
+      window.__cmFallback = { vars: names.size, rules: extra.length };
+    };
+    fetch('style.css').then((r) => r.text()).then(apply).catch(() => {});
+  })();
   document.title = C.name;
   $('meta[name=theme-color]').content = getComputedStyle(document.documentElement).getPropertyValue('--chrome').trim() || '#15181c';
 

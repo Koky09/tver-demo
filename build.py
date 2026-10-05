@@ -52,7 +52,7 @@ def build(cfg_path):
     page = out / "index.html"
     page.write_text(page.read_text(encoding="utf-8")
                     .replace("<!--THEME-->", f' data-theme="{theme}"')
-                    .replace("<!--FONTS-->", f'<link rel="stylesheet" href="{GF}{THEME_FONTS[theme]}&display=swap">'), encoding="utf-8")
+                    .replace("<!--FONTS-->", f'<link rel="stylesheet" href="{GF}{THEME_FONTS[theme]}&display=swap" media="print" onload="this.media=&#39;all&#39;">'), encoding="utf-8")
     sw = out / "sw.js"
     sw.write_text(sw.read_text(encoding="utf-8").replace("__VERSION__", str(int(time.time()))), encoding="utf-8")
     manifest = {
