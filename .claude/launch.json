@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "mock-api",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["D:/AI/tver-demo/backend/mock-server.js"],
+      "port": 8766
+    },
+    {
+      "name": "preview",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8770", "-d", "D:/AI/tver-demo/.preview"],
+      "port": 8770
+    }
+  ]
+}
