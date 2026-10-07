@@ -50,7 +50,7 @@ h2 { font-size: 15px; margin: 26px 0 10px; color: var(--muted); font-weight: 600
   <header class="top">
     <h1>Рассылка владельцам</h1>
     <div class="row">
-      <label class="name" for="me">Ваше имя в сообщениях <input id="me" placeholder="например, Роман" autocomplete="given-name"></label>
+      <label class="name" for="me">Ваше имя в сообщениях <input id="me" placeholder="Роман" autocomplete="given-name"></label>
     </div>
     <div class="row"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 из 0</span></div>
     <div class="filters" id="filters"></div>
@@ -67,7 +67,7 @@ const LS = { get(k, d) { try { const v = localStorage.getItem(k); return v == nu
 let sent = LS.get('sent', {}); let me = LS.get('me', ''); let filter = LS.get('filter', 'todo');
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const text = (it) => it.text.replace('[Имя]', me.trim() || '[Имя]');
+const text = (it) => it.text.replace('[Имя]', me.trim() || 'Роман'); // по умолчанию — имя пользователя
 function toast(t) { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2200); }
 
 function render() {
