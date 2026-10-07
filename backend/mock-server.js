@@ -75,6 +75,13 @@ for (const f of fs.readdirSync(clientsDir).filter((f) => f.endsWith('.json'))) {
   const c = JSON.parse(fs.readFileSync(path.join(clientsDir, f), 'utf8'));
   sheets.clients.appendRow([c.slug, c.name, String(c.boxes), '123456', '', 'abcdef12']);
 }
+// и рестораны из соседнего репозитория sites-restaurants: slug r-<key>, 6 столов
+const restDir = path.join(__dirname, '..', '..', 'sites-restaurants', 'sites');
+if (fs.existsSync(restDir)) {
+  for (const k of fs.readdirSync(restDir).filter((k) => fs.existsSync(path.join(restDir, k, 'index.html')))) {
+    sheets.clients.appendRow(['r-' + k.replace(/_/g, '-'), k, '6', '123456', '', 'abcdef12']);
+  }
+}
 
 http.createServer((req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
