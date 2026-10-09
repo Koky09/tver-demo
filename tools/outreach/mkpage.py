@@ -6,7 +6,7 @@ from pathlib import Path
 
 ROOT = Path(r"D:\AI\tver-demo")
 OUT = Path(__file__).parent / "out" / "outreach.html"  # out/ не идёт в git: там телефоны
-PRICE = "Стоимость — 3 500 ₽ один раз, без абонентской платы. Если интересно, подключу за день."
+PRICE = "Стоимость — 5 000 ₽ один раз, без абонентской платы. Если интересно, подключу за день."
 BASE = "https://koky09.github.io/tver-demo/"
 
 

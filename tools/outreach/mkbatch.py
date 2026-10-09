@@ -15,7 +15,7 @@ from check import check_page
 HERE = Path(__file__).parent
 ROOT = HERE.parents[1]
 BASE = "https://koky09.github.io/tver-demo/"
-PRICE = "Стоимость — 3 500 ₽ один раз, без абонентской платы. Если интересно, подключу за день."
+PRICE = "Стоимость — 5 000 ₽ один раз, без абонентской платы. Если интересно, подключу за день."
 DET = {"detail", "polish", "ceramic", "ppf", "tint", "noise", "presale"}
 
 
@@ -40,6 +40,9 @@ def text(c, b):
     det = b.get("kind") in ("detail", "tint") or len(kinds & DET) >= 3
     h24 = all(v == [0, 24] for v in c["hours"].values()) and len(c["hours"]) == 7
     what = "; ".join(s["name"][0].lower() + s["name"][1:] for s in c["services"][:3])
+    if b.get("kind") == "tire":   # у шиномонтажа перечисляем виды работ, а не размеры колёс
+        W = {"tire": "переобувка", "balance": "балансировка", "repair": "ремонт прокола", "storage": "хранение шин", "rims": "правка дисков"}
+        what = ", ".join(dict.fromkeys(W[s["id"].rstrip("0123456789")] for s in c["services"] if s["id"].rstrip("0123456789") in W))
     src = b.get("source", "2ГИС")
     where = "в 2ГИС" if src == "2ГИС" else "на Яндекс Картах"
     if b.get("rating"):
@@ -51,9 +54,13 @@ def text(c, b):
     boxes = "программа следит, чтобы посты не пересекались" if c["boxes"] > 1 else "занятое время сразу закрывается"
     prices = ("Часть цен там примерная, подправлю под ваш прайс." if c["demoPrices"]
               else f"Цены взял из вашего прайса {where}, меняете их сами в кабинете.")
-    place = "студии" if det else "мойки"
-    return (f"Здравствуйте! Меня зовут [Имя], я делаю онлайн-запись для {'детейлингов' if det else 'автомоек'} {b.get('city_gen') or city_gen(c['city'])}.\n\n"
-            f"{hook} Я сделал приложение записи для вашей {place} «{c['name']}», посмотрите:\n{BASE}{c['slug']}/\n\n"
+    tire = b.get("kind") == "tire"
+    place = "вашего шиномонтажа" if tire else "вашей студии" if det else "вашей мойки"
+    who = "шиномонтажей" if tire else "детейлингов" if det else "автомоек"
+    season = (" Сейчас сезон переобувки: клиенты могут сами занять время, а мастерам не придётся отвлекаться на звонки."
+              if tire else "")
+    return (f"Здравствуйте! Меня зовут [Имя], я делаю онлайн-запись для {who} {b.get('city_gen') or city_gen(c['city'])}.\n\n"
+            f"{hook}{season} Я сделал приложение записи для {place} «{c['name']}», посмотрите:\n{BASE}{c['slug']}/\n\n"
             f"Клиент сам выбирает услугу ({what}) и свободное время{night}, а {boxes}. Новая запись сразу приходит вам в Telegram. "
             f"Ссылку можно поставить в карточку на Яндекс Картах и в 2ГИС.\n\n{prices} {PRICE}")
 

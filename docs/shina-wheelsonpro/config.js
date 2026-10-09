@@ -1,0 +1,112 @@
+window.CONFIG = {
+ "slug": "shina-wheelsonpro",
+ "theme": "stitch",
+ "demo": false,
+ "city": "Москва",
+ "name": "WheelsOnPro",
+ "short": "W",
+ "tagline": "Шиномонтаж · Новогиреево",
+ "address": "Москва, Перовская улица, 63",
+ "mapQuery": "Москва, Перовская улица, 63",
+ "phone": "+7 926 366-19-39",
+ "phoneHref": "+79263661939",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Пост",
+ "accent": "#3b82f6",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/WheelsOnPro"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Переобуться в субботу",
+  "Сколько стоит шиномонтаж R17?",
+  "Хранение шин на зиму",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "tire",
+   "name": "Сезонная замена колес в Сборе R16",
+   "price": 3520,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "шиномонтаж",
+    "переобуть",
+    "переобувка",
+    "резина",
+    "резину",
+    "шины",
+    "колёса",
+    "колеса",
+    "сезонная"
+   ],
+   "iconKey": "wheel"
+  },
+  {
+   "id": "tire2",
+   "name": "Сезонная замена колес в Сборе R17",
+   "price": 3460,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "шиномонтаж",
+    "переобуть",
+    "переобувка",
+    "резина",
+    "резину",
+    "шины",
+    "колёса",
+    "колеса",
+    "сезонная"
+   ],
+   "iconKey": "wheel"
+  },
+  {
+   "id": "rims",
+   "name": "Заправка автокондиционеров",
+   "price": 3500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "диск",
+    "диски",
+    "правка",
+    "прокатка"
+   ],
+   "iconKey": "wheel"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

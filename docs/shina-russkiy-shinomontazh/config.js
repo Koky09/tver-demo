@@ -1,0 +1,125 @@
+window.CONFIG = {
+ "slug": "shina-russkiy-shinomontazh",
+ "theme": "stitch",
+ "demo": false,
+ "city": "Москва",
+ "name": "Русский шиномонтаж",
+ "short": "Р",
+ "tagline": "Шиномонтаж · Аэропорт",
+ "address": "Москва, 2-й Амбулаторный проезд, 2 ст1",
+ "mapQuery": "Москва, 2-й Амбулаторный проезд, 2 ст1",
+ "phone": "+7 925 731-84-21",
+ "phoneHref": "+79257318421",
+ "hours": {
+  "0": [
+   10,
+   20
+  ],
+  "1": [
+   10,
+   20
+  ],
+  "2": [
+   10,
+   20
+  ],
+  "3": [
+   10,
+   20
+  ],
+  "4": [
+   10,
+   20
+  ],
+  "5": [
+   10,
+   20
+  ],
+  "6": [
+   10,
+   20
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Пост",
+ "accent": "#f97316",
+ "accentInk": "#1c0d02",
+ "socials": {},
+ "demoPrices": false,
+ "chatHints": [
+  "Переобуться в субботу",
+  "Сколько стоит шиномонтаж R17?",
+  "Хранение шин на зиму",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "tire",
+   "name": "Шиномонтаж R15",
+   "price": 3000,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "шиномонтаж",
+    "переобуть",
+    "переобувка",
+    "резина",
+    "резину",
+    "шины",
+    "колёса",
+    "колеса",
+    "сезонная"
+   ],
+   "iconKey": "wheel"
+  },
+  {
+   "id": "tire2",
+   "name": "Шиномонтаж 20 колёс",
+   "price": 5400,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "шиномонтаж",
+    "переобуть",
+    "переобувка",
+    "резина",
+    "резину",
+    "шины",
+    "колёса",
+    "колеса",
+    "сезонная"
+   ],
+   "iconKey": "wheel"
+  },
+  {
+   "id": "repair",
+   "name": "Поставить жгут в шину",
+   "price": 400,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "прокол",
+    "ремонт",
+    "заплатка",
+    "жгут",
+    "спустило",
+    "порез"
+   ],
+   "iconKey": "gear"
+  },
+  {
+   "id": "storage",
+   "name": "Хранение колёс, шин",
+   "price": 600,
+   "priceFrom": true,
+   "duration": 10,
+   "keywords": [
+    "хранение",
+    "хранить",
+    "сезонное"
+   ],
+   "iconKey": "stack"
+  }
+ ],
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

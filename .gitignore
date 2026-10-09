@@ -8,3 +8,9 @@ kp/
 tools/outreach/out/
 .preview/
 batches/
+tools/newclient/tires-*.json
+tools/newclient/*.log
+tools/outreach/tgscan/deep*.json
+tools/outreach/tgscan/*.log
+tools/outreach/tgscan/redo.txt
+tools/outreach/tgscan/deep_report.txt

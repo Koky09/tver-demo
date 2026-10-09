@@ -267,14 +267,17 @@
     mute: '<path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/>',
     gear: '<circle cx="12" cy="12" r="3.2"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/>',
     tag: '<path d="M3 12.2V4h8.2L21 13.8 13.8 21z"/><circle cx="7.6" cy="8.6" r="1.4"/>',
+    wheel: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v5.6M12 15.4V21M3.4 9.2l5.3 1.7M15.3 13.1l5.3 1.7M6.7 19.3l3.3-4.5M14 9.2l3.3-4.5"/>',
+    stack: '<ellipse cx="12" cy="6.5" rx="7.5" ry="2.8"/><path d="M4.5 6.5v5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-5M4.5 11.5v5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-5"/>',
   };
   const I = new Proxy({}, { get: (_, k) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.spark}</svg>` });
   // Иконка услуги по id (или по названию для новых услуг), задаётся в config полем iconKey
   const SVC_ICON = { wash: 'bubbles', detail: 'bucket', body: 'spray', touchless: 'spray', interior: 'seat', 'interior-full': 'seat', seats: 'seat',
     leather: 'seat', plastic: 'shield', rain: 'drop', polish: 'spark', ceramic: 'diamond', coat: 'diamond', ppf: 'shield', tint: 'tint',
-    headlights: 'light', vinyl: 'roller', noise: 'mute', 'noise-doors': 'mute', engine: 'gear', presale: 'tag' };
+    headlights: 'light', vinyl: 'roller', noise: 'mute', 'noise-doors': 'mute', engine: 'gear', presale: 'tag',
+    tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack' };
   const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
-    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear']];
+    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel']];
   const svcIcon = (s) => I[s.iconKey || SVC_ICON[s.id] || (SVC_WORDS.find(([re]) => re.test(s.name)) || [])[1] || 'spark'];
 
   /* ---------- клиентская часть ---------- */
@@ -299,8 +302,7 @@
           <div><h1 style="--n:${Math.max(6, longest)}">${C.name.split(/\s+/).map((w) => `<span>${esc(w)}</span>`).join(' ')}</h1>${tag}${meta}</div></section>`;
       case 'protocol':
         return `<section class="hero${img}"><div class="doc-head"><span>Карточка сервиса</span>${demo}</div>
-          <div class="stamp" aria-hidden="true">${esc(C.short)}<small>${esc(CITY.length > 9 ? ({ 'Екатеринбург': 'Екб' })[CITY] || CITY.slice(0, 8) + '.' : CITY)}</small></div>
-          ${name}${tag}
+          ${name}<div class="stamp-row"><div class="stamp" aria-hidden="true">${esc(C.short)}<small>${esc(CITY.length > 9 ? ({ 'Екатеринбург': 'Екб' })[CITY] || CITY.slice(0, 8) + '.' : CITY)}</small></div>${tag}</div>
           <dl class="fields">
             <div><dt>Сейчас</dt><dd><span class="status ${open ? 'open' : ''}">${statusText()}</span></dd></div>
             <div><dt>Адрес</dt><dd>${esc(street)}</dd></div>

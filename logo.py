@@ -164,7 +164,23 @@ def sym_car(d, box):
     d.polygon(P(box, [(.51, .32), (.61, .31), (.73, .47), (.51, .47)]), fill=0)
 
 
-SYMBOLS = {"drop": sym_drop, "bubbles": sym_bubbles, "sparkle": sym_sparkle, "diamond": sym_diamond, "window": sym_window, "car": sym_car}
+def sym_wheel(d, box):
+    x, y, s = box
+    cx, cy = x + .5 * s, y + .5 * s
+    R, r, h = .46 * s, .3 * s, .1 * s
+    d.ellipse((cx - R, cy - R, cx + R, cy + R), fill=255)
+    d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=0)
+    for i in range(5):
+        a = math.radians(90 + 72 * i)
+        d.line([(cx, cy), (cx + .27 * s * math.cos(a), cy - .27 * s * math.sin(a))], fill=255, width=max(2, int(.07 * s)))
+    d.ellipse((cx - h, cy - h, cx + h, cy + h), fill=255)
+    for i in range(16):  # протектор
+        a = math.radians(360 / 16 * i)
+        px, py = cx + (R - .02 * s) * math.cos(a), cy + (R - .02 * s) * math.sin(a)
+        d.ellipse((px - .035 * s, py - .035 * s, px + .035 * s, py + .035 * s), fill=0)
+
+
+SYMBOLS = {"wheel": sym_wheel, "drop": sym_drop, "bubbles": sym_bubbles, "sparkle": sym_sparkle, "diamond": sym_diamond, "window": sym_window, "car": sym_car}
 
 
 def pick_symbol(cfg):
@@ -173,7 +189,10 @@ def pick_symbol(cfg):
     tint = sum(1 for i in ids if i in ("tint",)) + sum(1 for k in kinds if k == "tint")
     det = sum(1 for i in ids if i in ("polish", "ceramic", "ppf", "detail", "noise", "presale", "coat", "vinyl"))
     wash = sum(1 for i in ids if i in ("wash", "body", "touchless", "express", "under", "engine", "complex"))
+    tire = sum(1 for i in ids if i in ("tire", "balance", "rims", "repair", "storage"))
     v = seed(cfg["slug"], 2, "sym")
+    if tire >= 2:
+        return "wheel"
     if tint >= 2:
         return "car"
     if det > wash:
