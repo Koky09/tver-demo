@@ -88,6 +88,12 @@ def main():
         f'<a href="{c["slug"]}/"><b>{c["name"]}</b><span>{c["tagline"]}</span></a>'
         f'<a class="adm" href="{c["slug"]}/#admin">кабинет</a>' for c in all_cfgs
     )
+    # отдельные страницы (демо для крупных клиентов): extra/<имя>/ -> docs/<имя>/
+    for d in (ROOT / "extra").glob("*/"):
+        if d.is_dir():
+            if (DIST / d.name).exists():
+                shutil.rmtree(DIST / d.name)
+            shutil.copytree(d, DIST / d.name, ignore=shutil.ignore_patterns("_*"))
     # старые адреса переименованных клиентов -> переадресация на новые (redirects/<старый slug>/index.html)
     for r in (ROOT / "redirects").glob("*/index.html"):
         (DIST / r.parent.name).mkdir(parents=True, exist_ok=True)

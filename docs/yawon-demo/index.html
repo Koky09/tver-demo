@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Ya Won — Hot Pot & BBQ</title>
+<meta name="theme-color" content="#0b0a0c">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --bg:#0b0a0c; --bg2:#141217; --card:#1a171d; --line:#2b2630; --fg:#f4efe9; --muted:#a39ba6;
+  --fire:#ff4d2e; --fire2:#ff8a3d; --neon:#6b7bff; --ok:#3ddc84;
+  --r:18px; --display:"Unbounded",system-ui,sans-serif; --text:"Manrope",system-ui,sans-serif;
+}
+*{box-sizing:border-box} html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 var(--text);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
+.demo{position:fixed;top:68px;left:50%;transform:translateX(-50%);z-index:60;background:rgba(255,77,46,.14);border:1px solid rgba(255,77,46,.45);color:#ffb7a8;font-size:12px;padding:4px 10px;border-radius:99px;backdrop-filter:blur(8px);white-space:nowrap}
+/* шапка */
+header.top{position:sticky;top:0;z-index:40;background:rgba(11,10,12,.78);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:12px;height:60px}
+.logo{font:700 18px/1 var(--display);letter-spacing:.04em}
+.logo b{color:var(--fire)}
+nav.links{display:flex;gap:18px;margin-left:auto;font-size:14px;color:var(--muted)}
+nav.links a{text-decoration:none} nav.links a:hover{color:var(--fg)}
+.cartbtn{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-weight:600;font-size:14px}
+nav.links + .cartbtn{margin-left:8px}
+.cartbtn i{font-style:normal;background:var(--fire);color:#fff;border-radius:99px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:12px;padding:0 6px}
+@media(max-width:760px){nav.links{display:none}}
+/* hero */
+.hero{position:relative;min-height:min(86vh,760px);display:grid;align-items:end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,10,12,.15) 0%,rgba(11,10,12,.55) 45%,var(--bg) 100%)}
+.hero .wrap{position:relative;z-index:1;padding-bottom:40px;width:100%}
+.kicker{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:#ffd2c6;background:rgba(255,77,46,.16);border:1px solid rgba(255,77,46,.4);padding:6px 12px;border-radius:99px}
+h1{font:700 clamp(40px,9vw,88px)/.95 var(--display);margin:16px 0 12px;letter-spacing:-.01em}
+h1 span{background:linear-gradient(90deg,var(--fire),var(--fire2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:560px;color:#d9d1d3;font-size:17px;margin:0 0 22px}
+.ctas{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:14px 20px;font-weight:700;text-decoration:none;min-height:50px}
+.btn.fire{background:linear-gradient(135deg,var(--fire),var(--fire2));color:#fff;box-shadow:0 10px 30px -10px rgba(255,77,46,.7)}
+.btn.ghost{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+.facts{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:22px;color:var(--muted);font-size:14px}
+.facts b{color:var(--fg)}
+/* секции */
+section{padding:64px 0}
+h2{font:700 clamp(26px,5vw,40px)/1.1 var(--display);margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 28px}
+/* капсулы */
+.caps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.cap{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.cap img{aspect-ratio:16/10;object-fit:cover;width:100%}
+.cap .in{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cap h3{margin:0;font:700 18px/1.2 var(--display)}
+.cap p{margin:0;color:var(--muted);font-size:14px}
+.cap .row{display:flex;justify-content:space-between;align-items:end;margin-top:auto;padding-top:8px}
+.price{font:700 22px/1 var(--display)} .price small{font:500 13px var(--text);color:var(--muted)}
+.tags{display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:12px;padding:3px 9px;border-radius:99px;background:#241f28;color:#cfc6d2}
+/* меню */
+.cats{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;margin-bottom:18px;scrollbar-width:none}
+.cats::-webkit-scrollbar{display:none}
+.cats button{flex:none;background:var(--card);border:1px solid var(--line);border-radius:99px;padding:8px 14px;font-size:14px;color:var(--muted)}
+.cats button[aria-pressed=true]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.menu{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.dish{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.dish h4{margin:0;font-size:15px;font-weight:700;line-height:1.3}
+.dish .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
+.dish .p{font-weight:700}
+.add{background:#241f28;border:1px solid var(--line);border-radius:12px;height:38px;min-width:38px;padding:0 12px;font-weight:700}
+.add.on{background:var(--fire);border-color:var(--fire);color:#fff}
+.qty{display:flex;align-items:center;gap:10px;font-weight:700}
+.qty button{width:34px;height:34px;border-radius:10px;background:#241f28;border:1px solid var(--line)}
+/* фото */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.gal img{width:100%;height:100%;object-fit:cover;border-radius:14px;aspect-ratio:1}
+.gal img:nth-child(1){grid-column:span 2;grid-row:span 2}
+@media(max-width:640px){.gal{grid-template-columns:repeat(2,1fr)}}
+/* контакты */
+.info{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.info{grid-template-columns:1fr}}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.panel dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 16px} .panel dt{color:var(--muted)} .panel dd{margin:0;text-align:right}
+footer{padding:30px 0 120px;color:var(--muted);font-size:13px;text-align:center;border-top:1px solid var(--line)}
+/* шторка */
+.sheet-bg{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.sheet-bg.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:90;max-width:560px;margin:0 auto;background:var(--bg2);border:1px solid var(--line);border-bottom:0;border-radius:22px 22px 0 0;max-height:92vh;overflow:auto;transform:translateY(105%);transition:transform .25s ease;padding:18px 18px calc(18px + env(safe-area-inset-bottom))}
+.sheet.on{transform:none}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:#3a333f;margin:0 auto 14px}
+.sheet h3{font:700 20px/1.2 var(--display);margin:0 0 4px}
+.steps{display:flex;gap:6px;margin:10px 0 16px}
+.steps i{flex:1;height:4px;border-radius:4px;background:#2b2630} .steps i.on{background:var(--fire)}
+.lbl{font-size:13px;color:var(--muted);margin:14px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px;font-size:14px;min-width:56px;text-align:center}
+.chip[aria-pressed=true]{background:var(--fire);border-color:var(--fire);color:#fff}
+.chip[disabled]{opacity:.3;text-decoration:line-through;cursor:not-allowed}
+.days{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none} .days::-webkit-scrollbar{display:none}
+.days .chip{flex:none;line-height:1.2} .days .chip small{display:block;font-size:11px;opacity:.75}
+input.f,select.f{width:100%;background:var(--card);border:1px solid var(--line);border-radius:12px;color:var(--fg);padding:13px 14px;font:inherit}
+input.f:focus,select.f:focus,.btn:focus-visible,.chip:focus-visible{outline:2px solid var(--fire);outline-offset:2px}
+.sum{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:14px 0;font-size:14px}
+.sum div{display:flex;justify-content:space-between;gap:12px;padding:4px 0} .sum .t{font-weight:700;font-size:16px;border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
+.note{font-size:12px;color:var(--muted);margin:10px 0 0}
+.pay{display:grid;gap:10px;margin-top:6px}
+.paybtn{display:flex;align-items:center;justify-content:center;gap:10px;border-radius:14px;min-height:54px;font-weight:700;border:0}
+.paybtn.ya{background:#fff;color:#000} .paybtn.ya b{background:#fc3f1d;color:#fff;border-radius:6px;padding:1px 6px;font-size:13px}
+.paybtn.sbp{background:#1d1a21;border:1px solid var(--line)}
+.ok{text-align:center;padding:10px 0}
+.ok .big{width:72px;height:72px;border-radius:50%;margin:6px auto 12px;display:grid;place-items:center;background:rgba(61,220,132,.15);color:var(--ok);font-size:34px}
+.cartline{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+.warn{color:#ffb7a8;font-size:13px;margin-top:6px}
+.fab{position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:50;display:none;max-width:528px;margin:0 auto}
+.fab.on{display:flex}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="demo">Демо-версия для Ya Won · оплата не списывается</div>
+
+<header class="top"><div class="wrap">
+  <div class="logo">YA <b>WON</b></div>
+  <nav class="links"><a href="#caps">Капсулы</a><a href="#menu">Меню</a><a href="#delivery">Доставка</a><a href="#info">Контакты</a></nav>
+  <button class="cartbtn" id="cartTop" aria-label="Корзина">Корзина <i id="cartN">0</i></button>
+</div></header>
+
+<section class="hero" style="padding:0">
+  <img src="img/g3.webp" alt="Гриль для корейского барбекю на столе в Ya Won">
+  <div class="wrap">
+    <span class="kicker">🔥 Hot Pot & BBQ · м. Шелепиха</span>
+    <h1>Ya <span>Won</span></h1>
+    <p class="lead">Корейское барбекю и хот-пот прямо за вашим столом. Забронируйте капсулу онлайн за минуту — или закажите доставку домой.</p>
+    <div class="ctas">
+      <a class="btn fire" href="#caps">Забронировать капсулу</a>
+      <a class="btn ghost" href="#menu">Заказать доставку</a>
+    </div>
+    <div class="facts"><span>★ <b>5,0</b> · 520 оценок</span><span>Ежедневно <b>11:00–23:00</b></span><span>Береговой пр-д, 3</span></div>
+  </div>
+</section>
+
+<section id="caps"><div class="wrap">
+  <h2>Капсулы</h2>
+  <p class="sub">Выберите формат, дату и время — бронь подтверждается сразу после предоплаты.</p>
+  <div class="caps" id="capList"></div>
+</div></section>
+
+<section id="menu" style="background:var(--bg2)"><div class="wrap">
+  <h2>Меню и доставка</h2>
+  <p class="sub" id="delivery">Доставляем в ЖК рядом с рестораном каждый день 11:00–22:00. Добавьте блюда и оформите заказ.</p>
+  <div class="cats" id="cats"></div>
+  <div class="menu" id="menuList"></div>
+</div></section>
+
+<section id="photo"><div class="wrap">
+  <h2>Атмосфера</h2>
+  <p class="sub">Неоновый зал, веранда и мясо, которое вы готовите сами.</p>
+  <div class="gal">
+    <img src="img/g1.webp" alt="Хот-пот с мясом и овощами" loading="lazy">
+    <img src="img/g6.webp" alt="Зал ресторана" loading="lazy">
+    <img src="img/g5.webp" alt="Мраморная говядина" loading="lazy">
+    <img src="img/hero.webp" alt="Интерьер" loading="lazy">
+    <img src="img/g7.webp" alt="Веранда" loading="lazy">
+  </div>
+</div></section>
+
+<section id="info"><div class="wrap info">
+  <div class="panel">
+    <h2 style="font-size:24px">Как нас найти</h2>
+    <dl>
+      <dt>Адрес</dt><dd>Москва, Береговой проезд, 3</dd>
+      <dt>Метро</dt><dd>Шелепиха</dd>
+      <dt>Ресторан</dt><dd>ежедневно 11:00–23:00</dd>
+      <dt>Доставка</dt><dd>ежедневно 11:00–22:00</dd>
+      <dt>Телефон</dt><dd><a href="tel:+79858881508">+7 985 888-15-08</a></dd>
+    </dl>
+  </div>
+  <div class="panel">
+    <h2 style="font-size:24px">Ya Won в Telegram</h2>
+    <p class="sub" style="margin-bottom:14px">В боте — меню, доставка, бронь капсул, история заказов и связь с менеджером. Статус заказа приходит сообщением.</p>
+    <a class="btn ghost block" href="#" onclick="toast('В демо бот не подключён — появится в рабочей версии');return false">Открыть бот Ya Won</a>
+  </div>
+</div></section>
+
+<footer>© 2026 Ya Won · Москва, Береговой проезд, 3<br>Демо: фото и меню с Яндекс Карт, цены капсул и зоны доставки — примерные</footer>
+
+<button class="btn fire fab" id="fab"></button>
+<div class="sheet-bg" id="bg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"><div class="grab"></div><div id="sheetBody"></div></div>
+
+<script>
+const CAPS=[
+  {id:'hot',name:'Hot Pot капсула',img:'img/g1.webp',desc:'Котёл с двумя бульонами, мясо и морепродукты, овощи и лапша — фиксированный сет.',price:3900,per:'2 гостя',guests:[2,3,4],extra:1500,dur:2,tags:['2 бульона','2 часа']},
+  {id:'bbq',name:'BBQ капсула',img:'img/g4.webp',desc:'Гриль в столе, 5 видов мяса, банчаны и соусы. Готовите сами — мы подскажем.',price:4900,per:'2 гостя',guests:[2,3,4],extra:1900,dur:2,tags:['5 видов мяса','2 часа']},
+  {id:'vip',name:'Большая капсула',img:'img/g6.webp',desc:'Отдельная зона для компании до 8 человек: хот-пот и гриль одновременно.',price:12000,per:'до 8 гостей',guests:[5,6,7,8],extra:0,dur:3,tags:['до 8 гостей','3 часа']},
+];
+const MENU={
+ 'Роллы':[['Ролл из Рибая',2450],['Ролл осидзуси (говядина, краб, гребешок)',2150],['Ролл с угрём, лососем и манго',1600],['Ролл темпура с угрём',1450],['Темпура креветка с авокадо',1150],['Филадельфия с лососем',1450]],
+ 'Закуски':[['Карпаччо из лосося с соусом шисо',1800],['Тартар из лосося с юдзу',1500],['Кимчи',650],['Морской виноград',580],['Морская капуста',480]],
+ 'Салаты':[['Авокадо ролл с икрой',1750],['Салат с говядиной N.Y.',1250],['Салат с крабом и арахисовым муссом',1650],['Салат с уткой',1250],['Салат с угрём и страчателлой',1150]],
+ 'Супы':[['Том-ям с креветками',950],['Рамен с мраморной говядиной',1650],['Кукси',900],['Юккедян',1550]],
+ 'Горячие закуски':[['Мини-чебуреки с крабом и креветкой',1800],['Креветки темпура с соусом васаби',900],['Куриные крылья с чили',650]],
+ 'Десерты':[['Тирамису',700]],
+};
+const ZONES=[{n:'ЖК «Фили Град»',fee:0,min:2000,t:'30–40 мин'},{n:'ЖК «Береговой»',fee:0,min:2000,t:'30–40 мин'},{n:'ЖК «Сердце Столицы»',fee:290,min:2500,t:'40–50 мин'}];
+const $=s=>document.querySelector(s), fmt=n=>n.toLocaleString('ru-RU')+' ₽';
+const cart={}; let cat=Object.keys(MENU)[0];
+const items=Object.entries(MENU).flatMap(([c,l])=>l.map(([n,p],i)=>({id:c+i,c,n,p})));
+const byId=Object.fromEntries(items.map(i=>[i.id,i]));
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+$('#capList').innerHTML=CAPS.map(c=>`<article class="cap"><img src="${c.img}" alt="${esc(c.name)}" loading="lazy"><div class="in">
+ <div class="tags">${c.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div><h3>${c.name}</h3><p>${c.desc}</p>
+ <div class="row"><div class="price">${fmt(c.price)}<br><small>${c.per}</small></div><button class="btn fire" data-cap="${c.id}">Выбрать</button></div></div></article>`).join('');
+
+function renderMenu(){
+  $('#cats').innerHTML=Object.keys(MENU).map(c=>`<button aria-pressed="${c===cat}" data-cat="${esc(c)}">${c}</button>`).join('');
+  $('#menuList').innerHTML=items.filter(i=>i.c===cat).map(i=>`<div class="dish"><h4>${esc(i.n)}</h4><div class="row"><span class="p">${fmt(i.p)}</span>${
+    cart[i.id]?`<span class="qty"><button data-dec="${i.id}" aria-label="Меньше">−</button>${cart[i.id]}<button data-inc="${i.id}" aria-label="Больше">+</button></span>`:`<button class="add" data-inc="${i.id}">+ В корзину</button>`}</div></div>`).join('');
+  const n=Object.values(cart).reduce((a,b)=>a+b,0), s=total();
+  $('#cartN').textContent=n; const f=$('#fab'); f.classList.toggle('on',n>0); f.textContent=`Корзина · ${n} · ${fmt(s)}`;
+}
+const total=()=>Object.entries(cart).reduce((a,[id,q])=>a+byId[id].p*q,0);
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-cat],[data-inc],[data-dec],[data-cap]'); if(!t) return;
+  if(t.dataset.cat){cat=t.dataset.cat;renderMenu();}
+  if(t.dataset.inc){cart[t.dataset.inc]=(cart[t.dataset.inc]||0)+1;renderMenu();}
+  if(t.dataset.dec){cart[t.dataset.dec]--; if(cart[t.dataset.dec]<=0) delete cart[t.dataset.dec]; renderMenu();}
+  if(t.dataset.cap) openBooking(t.dataset.cap);
+});
+$('#fab').onclick=$('#cartTop').onclick=()=>openCart();
+$('#bg').onclick=closeSheet;
+function openSheet(h){$('#sheetBody').innerHTML=h;$('#sheet').classList.add('on');$('#bg').classList.add('on');}
+function closeSheet(){$('#sheet').classList.remove('on');$('#bg').classList.remove('on');}
+function toast(t){const d=document.createElement('div');d.textContent=t;d.style.cssText='position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#f4efe9;color:#0b0a0c;padding:10px 14px;border-radius:12px;z-index:99;font-size:14px;max-width:90vw';document.body.appendChild(d);setTimeout(()=>d.remove(),2600);}
+window.toast=toast;
+
+/* ---------- бронь капсулы ---------- */
+const DN=['вс','пн','вт','ср','чт','пт','сб'], MN=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+function days(){const out=[],d=new Date();d.setHours(0,0,0,0);for(let i=0;i<10;i++){const x=new Date(d);x.setDate(d.getDate()+i);out.push(x);}return out;}
+function slots(cap,day){const s=[];for(let h=11;h<=23-cap.dur;h++){s.push(h+':00');if(h<23-cap.dur)s.push(h+':30');}
+  const seed=day.getDate()*7+cap.id.length; return s.map((t,i)=>({t,busy:((seed+i*5)%7===0)||((seed+i)%9===0)}));}
+let B={};
+function openBooking(id){const cap=CAPS.find(c=>c.id===id);B={cap,day:days()[0],time:null,guests:cap.guests[0],name:'',phone:''};stepWhen();}
+function capPrice(){const c=B.cap;return c.price+Math.max(0,B.guests-2)*c.extra*(c.extra?1:0);}
+function stepWhen(){const c=B.cap;
+  openSheet(`<h3>${c.name}</h3><div class="steps"><i class="on"></i><i></i><i></i></div>
+  <div class="lbl">Гостей</div><div class="chips">${c.guests.map(g=>`<button class="chip" aria-pressed="${g===B.guests}" data-g="${g}">${g}</button>`).join('')}</div>
+  <div class="lbl">Дата</div><div class="days">${days().map((d,i)=>`<button class="chip" aria-pressed="${d.getTime()===B.day.getTime()}" data-d="${i}">${i===0?'Сегодня':i===1?'Завтра':DN[d.getDay()]}<small>${d.getDate()} ${MN[d.getMonth()].slice(0,3)}</small></button>`).join('')}</div>
+  <div class="lbl">Время начала · ${c.dur} ч</div><div class="chips">${slots(c,B.day).map(s=>`<button class="chip" ${s.busy?'disabled':''} aria-pressed="${s.t===B.time}" data-t="${s.t}">${s.t}</button>`).join('')}</div>
+  <div class="sum"><div><span>${c.name}, ${B.guests} гост.</span><span>${fmt(capPrice())}</span></div></div>
+  <button class="btn fire block" id="next1" ${B.time?'':'disabled'}>Далее</button>`);
+  $('#sheetBody').onclick=e=>{const t=e.target.closest('button');if(!t)return;
+    if(t.dataset.g){B.guests=+t.dataset.g;stepWhen();} if(t.dataset.d){B.day=days()[+t.dataset.d];B.time=null;stepWhen();}
+    if(t.dataset.t&&!t.disabled){B.time=t.dataset.t;stepWhen();} if(t.id==='next1')stepWho();};
+}
+function stepWho(){const pre=Math.round(capPrice()*0.3/100)*100;
+  openSheet(`<h3>Ваши данные</h3><div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+  <div class="lbl">Имя</div><input class="f" id="nm" autocomplete="given-name" value="${esc(B.name)}">
+  <div class="lbl">Телефон</div><input class="f" id="ph" type="tel" autocomplete="tel" placeholder="+7 900 000-00-00" value="${esc(B.phone)}">
+  <div class="sum"><div><span>${B.cap.name}</span><span>${B.guests} гост.</span></div><div><span>Когда</span><span>${B.day.getDate()} ${MN[B.day.getMonth()]}, ${B.time}</span></div>
+  <div><span>Стоимость сета</span><span>${fmt(capPrice())}</span></div><div class="t"><span>Предоплата 30%</span><span>${fmt(pre)}</span></div></div>
+  <p class="note">Предоплата входит в счёт. Бесплатная отмена — за 3 часа до брони.</p>
+  <button class="btn fire block" id="next2">К оплате ${fmt(pre)}</button><button class="btn ghost block" style="margin-top:8px" id="back">Назад</button>`);
+  $('#back').onclick=stepWhen;
+  $('#next2').onclick=()=>{B.name=$('#nm').value.trim();B.phone=$('#ph').value.trim();
+    if(B.name.length<2||B.phone.replace(/\D/g,'').length<10){toast('Укажите имя и телефон');return;} stepPay(pre,'бронь');};
+}
+/* ---------- оплата (демо) ---------- */
+function stepPay(sum,kind){
+  openSheet(`<h3>Оплата</h3><div class="steps"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+  <div class="sum"><div class="t" style="border:0;margin:0;padding:0"><span>К оплате</span><span>${fmt(sum)}</span></div></div>
+  <div class="pay"><button class="paybtn ya" data-pay>Оплатить с <b>Ya Pay</b></button><button class="paybtn sbp" data-pay>СБП</button><button class="paybtn sbp" data-pay>Банковская карта</button></div>
+  <p class="note">В рабочей версии — платёж через ЮKassa на счёт ресторана. В демо деньги не списываются.</p>`);
+  $('#sheetBody').onclick=e=>{if(!e.target.closest('[data-pay]'))return; e.target.closest('[data-pay]').textContent='Обработка…'; setTimeout(()=>kind==='бронь'?doneBooking():doneOrder(),900);};
+}
+function doneBooking(){
+  openSheet(`<div class="ok"><div class="big">✓</div><h3>Капсула забронирована</h3>
+  <p class="sub" style="margin:8px 0 16px">${esc(B.name)}, ждём вас ${B.day.getDate()} ${MN[B.day.getMonth()]} в ${B.time}.<br>${B.cap.name}, ${B.guests} гост.</p>
+  <div class="sum" style="text-align:left"><div><span>Предоплата</span><span style="color:var(--ok)">оплачено</span></div><div><span>Подтверждение</span><span>в Telegram и SMS</span></div></div>
+  <button class="btn fire block" onclick="closeSheet()">Готово</button></div>`);
+}
+/* ---------- корзина и доставка ---------- */
+let D={zone:0,house:'',flat:'',name:'',phone:'',when:'Как можно скорее'};
+function openCart(){const ids=Object.keys(cart); if(!ids.length){toast('Корзина пуста — добавьте блюда из меню');return;}
+  const z=ZONES[D.zone], s=total(), ok=s>=z.min;
+  openSheet(`<h3>Доставка</h3><div class="steps"><i class="on"></i><i></i><i></i></div>
+  ${ids.map(id=>`<div class="cartline"><span>${esc(byId[id].n)}</span><span class="qty"><button data-dec="${id}">−</button>${cart[id]}<button data-inc="${id}">+</button></span></div>`).join('')}
+  <div class="lbl">Куда доставить</div><select class="f" id="zone">${ZONES.map((x,i)=>`<option value="${i}" ${i===D.zone?'selected':''}>${x.n} · ${x.fee?fmt(x.fee):'бесплатно'} · ${x.t}</option>`).join('')}</select>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"><input class="f" id="house" placeholder="Корпус" value="${esc(D.house)}"><input class="f" id="flat" placeholder="Квартира" value="${esc(D.flat)}"></div>
+  <div class="sum"><div><span>Блюда</span><span>${fmt(s)}</span></div><div><span>Доставка</span><span>${z.fee?fmt(z.fee):'бесплатно'}</span></div><div class="t"><span>Итого</span><span>${fmt(s+z.fee)}</span></div></div>
+  ${ok?'':`<p class="warn">Минимальный заказ в ${z.n} — ${fmt(z.min)}. Добавьте ещё на ${fmt(z.min-s)}.</p>`}
+  <button class="btn fire block" id="toWho" ${ok?'':'disabled'}>Далее</button>
+  <p class="note">Доставка только по ЖК из списка — адрес вне зоны не принимается автоматически.</p>`);
+  const save=()=>{D.house=$('#house').value;D.flat=$('#flat').value;};
+  $('#zone').onchange=e=>{save();D.zone=+e.target.value;openCart();};
+  $('#sheetBody').onclick=e=>{const t=e.target.closest('button');if(!t)return;
+    if(t.dataset.inc||t.dataset.dec){save();setTimeout(()=>{if(Object.keys(cart).length)openCart();else closeSheet();},0);}
+    if(t.id==='toWho'){save();if(!D.house.trim()||!D.flat.trim()){toast('Укажите корпус и квартиру');return;} cartWho();}};
+}
+function cartWho(){const z=ZONES[D.zone], s=total()+z.fee;
+  openSheet(`<h3>Получатель</h3><div class="steps"><i class="on"></i><i class="on"></i><i></i></div>
+  <div class="lbl">Имя</div><input class="f" id="nm" value="${esc(D.name)}"><div class="lbl">Телефон</div><input class="f" id="ph" type="tel" placeholder="+7 900 000-00-00" value="${esc(D.phone)}">
+  <div class="lbl">Когда</div><div class="chips">${['Как можно скорее','Через час','Ко времени'].map(w=>`<button class="chip" aria-pressed="${w===D.when}" data-w="${w}">${w}</button>`).join('')}</div>
+  <div class="sum"><div><span>Адрес</span><span>${z.n}, корп. ${esc(D.house)}, кв. ${esc(D.flat)}</span></div><div class="t"><span>К оплате</span><span>${fmt(s)}</span></div></div>
+  <button class="btn fire block" id="go">К оплате ${fmt(s)}</button><button class="btn ghost block" style="margin-top:8px" id="back">Назад</button>`);
+  $('#back').onclick=openCart;
+  $('#sheetBody').onclick=e=>{const t=e.target.closest('[data-w]'); if(t){D.name=$('#nm').value;D.phone=$('#ph').value;D.when=t.dataset.w;cartWho();}};
+  $('#go').onclick=()=>{D.name=$('#nm').value.trim();D.phone=$('#ph').value.trim();
+    if(D.name.length<2||D.phone.replace(/\D/g,'').length<10){toast('Укажите имя и телефон');return;} stepPay(s,'заказ');};
+}
+function doneOrder(){const z=ZONES[D.zone];
+  openSheet(`<div class="ok"><div class="big">✓</div><h3>Заказ принят</h3><p class="sub" style="margin:8px 0 16px">Привезём в ${z.n} за ${z.t}.</p>
+  <div class="sum" style="text-align:left">${['Принят','Готовится','В пути','Доставлен'].map((s,i)=>`<div><span>${s}</span><span style="color:${i===0?'var(--ok)':'var(--muted)'}">${i===0?'сейчас':'—'}</span></div>`).join('')}</div>
+  <p class="note">Статусы приходят в Telegram-бот Ya Won.</p><button class="btn fire block" id="fin">Готово</button></div>`);
+  $('#fin').onclick=()=>{for(const k in cart)delete cart[k];renderMenu();closeSheet();};
+}
+window.closeSheet=closeSheet;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet();});
+renderMenu();
+</script>
+</body>
+</html>
