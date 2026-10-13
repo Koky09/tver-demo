@@ -1,11 +1,11 @@
 {
- "name": "Wash'n Roll — онлайн-запись",
- "short_name": "Wash'n Roll",
+ "name": "ISDetailing — онлайн-запись",
+ "short_name": "ISDetailing",
  "start_url": "./",
  "scope": "./",
  "display": "standalone",
- "background_color": "#ff8fab",
- "theme_color": "#ff8fab",
+ "background_color": "#151412",
+ "theme_color": "#151412",
  "lang": "ru",
  "icons": [
   {

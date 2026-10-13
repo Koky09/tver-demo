@@ -379,6 +379,16 @@ THEMES = {"lacquer": draw_lacquer, "atelier": draw_atelier, "race": draw_race, "
           "aqua": draw_aqua, "stitch": draw_stitch, "sticker": draw_sticker}
 
 
+def own_logo(path, size):
+    """Логотип, присланный клиентом: вписываем в квадрат на фоне цвета его углов, с отступом под маску иконки."""
+    im = Image.open(path).convert("RGB")
+    bg = im.getpixel((2, 2))
+    side = max(im.size)
+    sq = Image.new("RGB", (int(side * 1.12),) * 2, bg)
+    sq.paste(im, ((sq.width - im.width) // 2, (sq.height - im.height) // 2))
+    return sq.resize((size, size), Image.LANCZOS)
+
+
 def make_logo(cfg, size):
     S = size * SS
     u = S / 100

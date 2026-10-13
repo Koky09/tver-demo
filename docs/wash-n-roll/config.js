@@ -1,11 +1,11 @@
 window.CONFIG = {
  "slug": "wash-n-roll",
- "theme": "sticker",
+ "theme": "atelier",
  "demo": false,
  "city": "Москва",
- "name": "Wash'n Roll",
- "short": "WR",
- "tagline": "Автомойка у метро Университет",
+ "name": "ISDetailing",
+ "short": "IS",
+ "tagline": "Мойка и детейлинг",
  "address": "Москва, Ломоносовский проспект, 25 к2",
  "mapQuery": "55.694512,37.531409",
  "phone": "+7 925 231-30-94",
@@ -42,8 +42,8 @@ window.CONFIG = {
  },
  "boxes": 2,
  "boxLabel": "Бокс",
- "accent": "#ff8fab",
- "accentInk": "#1d0f17",
+ "accent": "#0f9ff8",
+ "accentInk": "#02121f",
  "socials": {
   "tg": "https://t.me/+79252313094"
  },

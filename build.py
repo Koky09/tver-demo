@@ -71,8 +71,9 @@ def build(cfg_path):
     }
     (out / "manifest.webmanifest").write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")
     # Логотип сервиса: иконка на рабочий стол и эмблема в шапке (logo.py)
-    logo.make_logo(cfg, 192).save(out / "icon-192.png")
-    logo.make_logo(cfg, 512).save(out / "icon-512.png")
+    own = ROOT / "clients" / "logos" / f"{cfg['slug']}.png"   # настоящий логотип клиента, если прислал
+    for size in (192, 512):
+        (logo.own_logo(own, size) if own.exists() else logo.make_logo(cfg, size)).save(out / f"icon-{size}.png")
     print(f"  {cfg['slug']:<16} [{theme}] {cfg['name']}  ({len(cfg['services'])} услуг, {cfg.get('boxLabel', 'Бокс').lower()}ов: {cfg['boxes']})")
     return cfg
 
