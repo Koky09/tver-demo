@@ -1,5 +1,5 @@
 // Кэш оболочки приложения: открывается мгновенно и без сети.
-const CACHE = 'shell-1791896861';
+const CACHE = 'shell-1791898276';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'config.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', (e) => {

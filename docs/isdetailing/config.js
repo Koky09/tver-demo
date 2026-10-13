@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "isdetailing",
- "theme": "atelier",
+ "theme": "sticker",
  "demo": false,
  "city": "Москва",
  "name": "ISDetailing",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Бокс",
  "accent": "#0f9ff8",
- "accentInk": "#02121f",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://t.me/+79252313094"
  },
