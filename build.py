@@ -88,6 +88,10 @@ def main():
         f'<a href="{c["slug"]}/"><b>{c["name"]}</b><span>{c["tagline"]}</span></a>'
         f'<a class="adm" href="{c["slug"]}/#admin">кабинет</a>' for c in all_cfgs
     )
+    # старые адреса переименованных клиентов -> переадресация на новые (redirects/<старый slug>/index.html)
+    for r in (ROOT / "redirects").glob("*/index.html"):
+        (DIST / r.parent.name).mkdir(parents=True, exist_ok=True)
+        shutil.copy(r, DIST / r.parent.name / "index.html")
     (DIST / "index.html").write_text(f"""<!doctype html><html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><title>Демо записи</title>
 <style>body{{margin:0;background:#0f1012;color:#f2f3f5;font:16px/1.4 system-ui,sans-serif}}

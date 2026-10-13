@@ -1,5 +1,5 @@
 window.CONFIG = {
- "slug": "wash-n-roll",
+ "slug": "isdetailing",
  "theme": "atelier",
  "demo": false,
  "city": "Москва",
