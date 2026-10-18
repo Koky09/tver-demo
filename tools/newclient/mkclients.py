@@ -5,7 +5,7 @@
 Файл партии — список заведений (пример: tools/newclient/example-batch.json):
     slug, name, short (1–2 буквы для логотипа), city, addr (без города), phone, msg (ссылка wa.me / t.me, можно ""),
     theme (lacquer|atelier|race|protocol|aqua|stitch|sticker), accent (#rrggbb), ink (цвет текста на accent),
-    tag (подзаголовок), hours ({"default": [9, 21], "0": [10, 20]} или "24/7"), boxes, kind (wash|detail|tint|tire),
+    tag (подзаголовок), hours ({"default": [9, 21], "0": [10, 20]} или "24/7"), boxes, kind (wash|detail|tint|tire|nail),
     demo (true — цены примерные, в кабинете будет подсказка), svc: [[тип, название, цена, минуты, примечание?, "от"?], ...],
     а для рассылки: rating, reviews, source ("2ГИС" или "Яндекс Карты"), tg (личный Telegram, если нашли).
 Типы услуг — ключи KW ниже (wash, body, express, interior, polish, ceramic, tint, ppf ...): от типа зависят иконка и подсказки чата.
@@ -31,18 +31,26 @@ KW = {
     "tire": ["шиномонтаж", "переобуть", "переобувка", "резина", "резину", "шины", "колёса", "колеса", "сезонная"],
     "balance": ["балансировка", "балансировку", "бьёт", "вибрация"], "storage": ["хранение", "хранить", "сезонное"],
     "repair": ["прокол", "ремонт", "заплатка", "жгут", "спустило", "порез"], "rims": ["диск", "диски", "правка", "прокатка"],
+    "mani": ["маникюр", "ногти", "ноготочки", "руки", "аппаратный", "комбинированный"], "gel": ["гель-лак", "гельлак", "покрытие", "шеллак", "гель"],
+    "pedi": ["педикюр", "ноги", "стопы", "пальчики"], "ext": ["наращивание", "нарастить", "длина", "коррекция", "акрил", "акригель"],
+    "design": ["дизайн", "френч", "стразы", "рисунок", "втирка", "слайдер"], "remove": ["снятие", "снять"],
+    "spa": ["спа", "парафин", "уход", "массаж", "увлажнение"], "brows": ["брови", "бровей", "ресницы", "ламинирование"],
 }
 ICON = {"wash": "bubbles", "body": "spray", "express": "drop", "touchless": "spray", "detail": "bucket", "interior": "seat", "seats": "seat",
         "polish": "spark", "ceramic": "diamond", "wax": "spark", "rain": "drop", "engine": "gear", "under": "spray", "headlights": "light",
         "ppf": "shield", "tint": "tint", "noise": "mute", "presale": "tag", "dent": "tag", "leather": "seat", "ozone": "spark", "chrome": "roller",
         "glass": "shield", "vinyl": "roller",
-        "tire": "wheel", "balance": "wheel", "rims": "wheel", "repair": "gear", "storage": "stack"}
+        "tire": "wheel", "balance": "wheel", "rims": "wheel", "repair": "gear", "storage": "stack",
+        "mani": "polish", "gel": "polish", "pedi": "foot", "ext": "gem", "design": "brush", "remove": "spark", "spa": "drop", "brows": "eye"}
 HINTS = {
     "wash": ["Помыть машину сегодня вечером", "Сколько стоит комплекс?", "Химчистка на выходных", "Где вы находитесь?"],
     "detail": ["Полировка на следующей неделе", "Сколько стоит керамика?", "Химчистка в субботу", "Где вы находитесь?"],
     "tint": ["Тонировка завтра", "Сколько стоит плёнка на фары?", "Оклейка зон риска", "Где вы находитесь?"],
     "tire": ["Переобуться в субботу", "Сколько стоит шиномонтаж R17?", "Хранение шин на зиму", "Где вы находитесь?"],
+    "nail": ["Маникюр с покрытием завтра вечером", "Сколько стоит педикюр?", "Наращивание в субботу", "Где вы находитесь?"],
 }
+BOX = {"tire": "Пост", "nail": "Мастер"}
+COMMENT = {"nail": ["Комментарий", "Например: к мастеру Анне, снятие + френч"]}
 THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker"}
 
 
@@ -81,9 +89,10 @@ def make(c):
     addr = f"{c['city']}, {c['addr']}"
     return {"slug": c["slug"], "theme": c["theme"], "demo": False, "city": c["city"], "name": c["name"], "short": c["short"], "tagline": c["tag"],
             "address": addr, "mapQuery": c.get("map") or addr, "phone": phone, "phoneHref": href, "hours": hours(c["hours"]),
-            "boxes": c["boxes"], "boxLabel": c.get("boxLabel", "Пост" if c.get("kind") == "tire" else "Бокс"), "accent": c["accent"], "accentInk": c["ink"],
+            "boxes": c["boxes"], "boxLabel": c.get("boxLabel", BOX.get(c.get("kind"), "Бокс")), "kind": c.get("kind", "wash"), "accent": c["accent"], "accentInk": c["ink"],
             "socials": {"tg": c["msg"]} if c.get("msg") else {}, "demoPrices": bool(c.get("demo")),
-            "chatHints": HINTS[c.get("kind", "wash")], "services": svcs}
+            "chatHints": HINTS[c.get("kind", "wash")], "services": svcs,
+            **({"commentLabel": COMMENT[c["kind"]][0], "commentPlaceholder": COMMENT[c["kind"]][1]} if c.get("kind") in COMMENT else {})}
 
 
 def main():

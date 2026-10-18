@@ -269,15 +269,21 @@
     tag: '<path d="M3 12.2V4h8.2L21 13.8 13.8 21z"/><circle cx="7.6" cy="8.6" r="1.4"/>',
     wheel: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M12 3v5.6M12 15.4V21M3.4 9.2l5.3 1.7M15.3 13.1l5.3 1.7M6.7 19.3l3.3-4.5M14 9.2l3.3-4.5"/>',
     stack: '<ellipse cx="12" cy="6.5" rx="7.5" ry="2.8"/><path d="M4.5 6.5v5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-5M4.5 11.5v5c0 1.5 3.4 2.8 7.5 2.8s7.5-1.3 7.5-2.8v-5"/>',
+    polish: '<rect x="9" y="2.5" width="6" height="5.5" rx="1"/><path d="M8 8h8l1 3v8.5a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V11z"/><path d="M7 14h10"/>',
+    foot: '<path d="M8 3c-2 2-3 6-2.5 10 .4 3.2 1.4 6 3.6 7.6 2 1.4 4.6.6 5.1-1.8.4-2-.9-3.4-.9-5.4 0-1.8 1.7-3.2 1.7-5.6C15 4.6 11 1 8 3z"/><circle cx="17.5" cy="6.5" r="1"/><circle cx="19.3" cy="9.3" r=".8"/>',
+    gem: '<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16 3-16"/>',
+    brush: '<path d="M14.5 3.5l6 6-8.5 8.5-6-6z"/><path d="M6 12l-2.2 2.2c-1.4 1.4-.8 4 .2 5 1.4 1.3 3.6 1.5 5 .2L11 17"/>',
+    eye: '<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
   };
   const I = new Proxy({}, { get: (_, k) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.spark}</svg>` });
   // Иконка услуги по id (или по названию для новых услуг), задаётся в config полем iconKey
   const SVC_ICON = { wash: 'bubbles', detail: 'bucket', body: 'spray', touchless: 'spray', interior: 'seat', 'interior-full': 'seat', seats: 'seat',
     leather: 'seat', plastic: 'shield', rain: 'drop', polish: 'spark', ceramic: 'diamond', coat: 'diamond', ppf: 'shield', tint: 'tint',
     headlights: 'light', vinyl: 'roller', noise: 'mute', 'noise-doors': 'mute', engine: 'gear', presale: 'tag',
-    tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack' };
+    tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack',
+    mani: 'polish', gel: 'polish', pedi: 'foot', ext: 'gem', design: 'brush', remove: 'spark', spa: 'drop', brows: 'eye' };
   const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
-    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel']];
+    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel'], [/педик/i, 'foot'], [/маник|покрыт|гель/i, 'polish'], [/наращ/i, 'gem'], [/дизайн|френч/i, 'brush'], [/бров|ресниц/i, 'eye']];
   const svcIcon = (s) => I[s.iconKey || SVC_ICON[s.id] || (SVC_WORDS.find(([re]) => re.test(s.name)) || [])[1] || 'spark'];
 
   /* ---------- клиентская часть ---------- */
@@ -437,7 +443,7 @@
           </div>
           <label class="f" for="f-name">Имя</label><input class="in" id="f-name" autocomplete="name" value="${esc(state.name)}" placeholder="Как к вам обращаться">
           <label class="f" for="f-phone">Телефон</label><input class="in" id="f-phone" type="tel" autocomplete="tel" inputmode="tel" value="${esc(state.phone)}" placeholder="+7 900 000-00-00">
-          <label class="f" for="f-comm">Марка и модель авто, комментарий</label><input class="in" id="f-comm" value="${esc(state.comment)}" placeholder="Например: Kia Rio, белая">
+          <label class="f" for="f-comm">${esc(C.commentLabel || 'Марка и модель авто, комментарий')}</label><input class="in" id="f-comm" value="${esc(state.comment)}" placeholder="${esc(C.commentPlaceholder || 'Например: Kia Rio, белая')}">
           <button class="btn" data-act="confirm">${state.admin ? 'Добавить запись' : 'Записаться'}</button>
           <button class="btn ghost" data-act="back">Назад</button>
           ${state.admin ? '' : '<p class="muted small" style="text-align:center">Нажимая «Записаться», вы соглашаетесь на обработку контактных данных для связи по записи.</p>'}`;

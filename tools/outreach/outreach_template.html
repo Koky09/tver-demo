@@ -108,6 +108,31 @@ document.addEventListener('change', (e) => {
   const d = e.target.closest('[data-done]'); if (!d) return;
   if (d.checked) sent[d.dataset.done] = 1; else delete sent[d.dataset.done];
   LS.set('sent', sent); render();
+  saveRemote(+d.dataset.done, d.checked);
 });
 render();
+
+/* Общая база страницы (db): отметки «Отправил» видны и Claude, и на любом устройстве.
+   Если базы нет (страница открыта вне claude.ai) — работают отметки в браузере, как раньше. */
+let DB = null;
+async function saveRemote(id, on) {
+  if (!DB) return;
+  try { await DB.collection('sent').doc('m' + id).set({ id, name: DATA[id].name, sent: !!on, at: new Date().toISOString() }); }
+  catch (e) { toast('Отметка сохранена только в этом браузере'); }
+}
+(async () => {
+  const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
+  if (!db) return;
+  let first;
+  try { first = await db.collection('sent').get(); } catch (e) { return; }
+  DB = db;
+  const remote = {};
+  first.docs.forEach((s) => { const v = s.data(); if (v && typeof v.id === 'number') remote[v.id] = v.sent ? 1 : 0; });
+  // перенести отметки, сделанные раньше только в этом браузере
+  for (const d of DATA) if (sent[d.id] && !(d.id in remote)) { await saveRemote(d.id, true); remote[d.id] = 1; }
+  db.collection('sent').onSnapshot((snap) => {
+    snap.docs.forEach((s) => { const v = s.data(); if (v && typeof v.id === 'number') sent[v.id] = v.sent ? 1 : 0; });
+    LS.set('sent', sent); render();
+  }, () => {});
+})();
 </script>

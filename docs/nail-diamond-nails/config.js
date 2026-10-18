@@ -1,0 +1,109 @@
+window.CONFIG = {
+ "slug": "nail-diamond-nails",
+ "theme": "atelier",
+ "demo": false,
+ "city": "Москва",
+ "name": "Diamond nails",
+ "short": "D",
+ "tagline": "Маникюр и педикюр · Сокольники",
+ "address": "Москва, улица Сокольническая Слободка, 3",
+ "mapQuery": "Москва, улица Сокольническая Слободка, 3",
+ "phone": "+7 981 077-77-37",
+ "phoneHref": "+79810777737",
+ "hours": {
+  "0": [
+   10,
+   21
+  ],
+  "1": [
+   10,
+   21
+  ],
+  "2": [
+   10,
+   21
+  ],
+  "3": [
+   10,
+   21
+  ],
+  "4": [
+   10,
+   21
+  ],
+  "5": [
+   10,
+   21
+  ],
+  "6": [
+   10,
+   21
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Мастер",
+ "kind": "nail",
+ "accent": "#e11d74",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://wa.me/79810777737"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Маникюр с покрытием завтра вечером",
+  "Сколько стоит педикюр?",
+  "Наращивание в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "gel",
+   "name": "Маникюр комби/аппаратный + гель-лак у PRO мастера",
+   "price": 2400,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "SMART педикюр + гель-лак у ТОП мастера",
+   "price": 3100,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "Услуга включает в себя:\n-обработка пяточек и стоп в технике "
+  },
+  {
+   "id": "design",
+   "name": "Френч/Омбре (1ногтя)",
+   "price": 100,
+   "priceFrom": true,
+   "duration": 15,
+   "keywords": [
+    "дизайн",
+    "френч",
+    "стразы",
+    "рисунок",
+    "втирка",
+    "слайдер"
+   ],
+   "iconKey": "brush"
+  }
+ ],
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

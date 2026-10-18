@@ -1,0 +1,153 @@
+window.CONFIG = {
+ "slug": "nail-no-one-else",
+ "theme": "sticker",
+ "demo": false,
+ "city": "Москва",
+ "name": "No one else",
+ "short": "NO",
+ "tagline": "Маникюр и педикюр · Нижегородский",
+ "address": "Москва, проспект Рязанский, 3Б",
+ "mapQuery": "Москва, проспект Рязанский, 3Б",
+ "phone": "+7 995 783-72-21",
+ "phoneHref": "+79957837221",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Мастер",
+ "kind": "nail",
+ "accent": "#f472b6",
+ "accentInk": "#2a0616",
+ "socials": {
+  "tg": "https://wa.me/79957837221"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Маникюр с покрытием завтра вечером",
+  "Сколько стоит педикюр?",
+  "Наращивание в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "gel",
+   "name": "Маникюр в отпуск | Полигель",
+   "price": 3700,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр без покрытия",
+   "price": 2100,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "Полная обработка стопы и пальчиков ног"
+  },
+  {
+   "id": "ext",
+   "name": "Наращивание ногтей(с покрытием гель-лак)",
+   "price": 4500,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "наращивание",
+    "нарастить",
+    "длина",
+    "коррекция",
+    "акрил",
+    "акригель"
+   ],
+   "iconKey": "gem"
+  },
+  {
+   "id": "design",
+   "name": "Френч и Сакура | 10 ногтей",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 15,
+   "keywords": [
+    "дизайн",
+    "френч",
+    "стразы",
+    "рисунок",
+    "втирка",
+    "слайдер"
+   ],
+   "iconKey": "brush"
+  },
+  {
+   "id": "remove",
+   "name": "Снятие геля",
+   "price": 600,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "снятие",
+    "снять"
+   ],
+   "iconKey": "spark"
+  },
+  {
+   "id": "spa",
+   "name": "Спа для Рук | Ног - Скраб и Маска",
+   "price": 600,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "спа",
+    "парафин",
+    "уход",
+    "массаж",
+    "увлажнение"
+   ],
+   "iconKey": "drop",
+   "note": "Устали от сухости и усталости кожи?\n\nПодарите своим ручкам и"
+  }
+ ],
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

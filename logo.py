@@ -180,7 +180,24 @@ def sym_wheel(d, box):
         d.ellipse((px - .035 * s, py - .035 * s, px + .035 * s, py + .035 * s), fill=0)
 
 
-SYMBOLS = {"wheel": sym_wheel, "drop": sym_drop, "bubbles": sym_bubbles, "sparkle": sym_sparkle, "diamond": sym_diamond, "window": sym_window, "car": sym_car}
+def sym_polish(d, box):
+    """флакон лака: крышка + скруглённый флакон с бликом"""
+    x, y, s = box
+    d.rounded_rectangle((x + .38 * s, y + .04 * s, x + .62 * s, y + .34 * s), radius=int(.04 * s), fill=255)
+    d.rectangle((x + .34 * s, y + .32 * s, x + .66 * s, y + .4 * s), fill=255)
+    d.rounded_rectangle((x + .18 * s, y + .38 * s, x + .82 * s, y + .96 * s), radius=int(.14 * s), fill=255)
+    d.rounded_rectangle((x + .28 * s, y + .5 * s, x + .36 * s, y + .82 * s), radius=int(.04 * s), fill=0)
+
+
+def sym_nail(d, box):
+    """палец с ногтем-миндалём"""
+    x, y, s = box
+    d.rounded_rectangle((x + .26 * s, y + .3 * s, x + .74 * s, y + .98 * s), radius=int(.24 * s), fill=255)
+    d.ellipse((x + .32 * s, y + .06 * s, x + .68 * s, y + .62 * s), fill=0)
+    d.ellipse((x + .36 * s, y + .1 * s, x + .64 * s, y + .58 * s), fill=255)
+
+
+SYMBOLS = {"polish": sym_polish, "nail": sym_nail, "wheel": sym_wheel, "drop": sym_drop, "bubbles": sym_bubbles, "sparkle": sym_sparkle, "diamond": sym_diamond, "window": sym_window, "car": sym_car}
 
 
 def pick_symbol(cfg):
@@ -191,6 +208,8 @@ def pick_symbol(cfg):
     wash = sum(1 for i in ids if i in ("wash", "body", "touchless", "express", "under", "engine", "complex"))
     tire = sum(1 for i in ids if i in ("tire", "balance", "rims", "repair", "storage"))
     v = seed(cfg["slug"], 2, "sym")
+    if cfg.get("kind") == "nail" or sum(1 for i in ids if i in ("mani", "gel", "pedi", "ext", "design")) >= 2:
+        return ("polish", "nail")[v]
     if tire >= 2:
         return "wheel"
     if tint >= 2:

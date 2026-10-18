@@ -1,0 +1,168 @@
+window.CONFIG = {
+ "slug": "nail-oly-charm",
+ "theme": "atelier",
+ "demo": false,
+ "city": "Москва",
+ "name": "Oly charm",
+ "short": "OC",
+ "tagline": "Маникюр и педикюр · Коммунарка",
+ "address": "Москва, Киевское шоссе 23 километр, 1",
+ "mapQuery": "Москва, Киевское шоссе 23 километр, 1",
+ "phone": "+7 999 990-98-07",
+ "phoneHref": "+79999909807",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Мастер",
+ "kind": "nail",
+ "accent": "#d4a373",
+ "accentInk": "#1f1408",
+ "socials": {
+  "tg": "https://wa.me/79999909807"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Маникюр с покрытием завтра вечером",
+  "Сколько стоит педикюр?",
+  "Наращивание в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "mani",
+   "name": "Японский маникюр",
+   "price": 2200,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "маникюр",
+    "ногти",
+    "ноготочки",
+    "руки",
+    "аппаратный",
+    "комбинированный"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "gel",
+   "name": "Покрытие гель",
+   "price": 2200,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "Smart педикюр",
+   "price": 2800,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot"
+  },
+  {
+   "id": "ext",
+   "name": "Комплексное наращивание",
+   "price": 5300,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "наращивание",
+    "нарастить",
+    "длина",
+    "коррекция",
+    "акрил",
+    "акригель"
+   ],
+   "iconKey": "gem",
+   "note": "Маникюр+наращивание+покрытие"
+  },
+  {
+   "id": "design",
+   "name": "Втирка/фольга/омбре/градиент",
+   "price": 150,
+   "priceFrom": true,
+   "duration": 15,
+   "keywords": [
+    "дизайн",
+    "френч",
+    "стразы",
+    "рисунок",
+    "втирка",
+    "слайдер"
+   ],
+   "iconKey": "brush"
+  },
+  {
+   "id": "remove",
+   "name": "Снятие лака",
+   "price": 150,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "снятие",
+    "снять"
+   ],
+   "iconKey": "spark"
+  },
+  {
+   "id": "spa",
+   "name": "Парафинотерапия",
+   "price": 350,
+   "priceFrom": true,
+   "duration": 30,
+   "keywords": [
+    "спа",
+    "парафин",
+    "уход",
+    "массаж",
+    "увлажнение"
+   ],
+   "iconKey": "drop"
+  }
+ ],
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};

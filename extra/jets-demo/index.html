@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>AERIS — продажа частных самолётов</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Unbounded:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0b0d;--bg2:#111317;--card:#15181d;--line:#23272e;--text:#eef0f3;--mut:#8b929c;--acc:#c9a96e;--acc2:#e6cf9f}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 16px/1.55 Manrope,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:Unbounded,Manrope,sans-serif;font-weight:400;letter-spacing:-.01em}
+.demo{position:fixed;right:14px;bottom:14px;z-index:60;background:#000c;border:1px solid var(--line);color:var(--mut);font-size:12px;padding:6px 10px;border-radius:20px}
+
+/* nav */
+header{position:fixed;inset:0 0 auto;z-index:50;transition:.3s}
+header.solid{background:#0a0b0dcc;backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+.logo{font-family:Unbounded;font-size:20px;letter-spacing:.28em}
+.logo b{color:var(--acc);font-weight:400}
+.menu{display:flex;gap:34px;font-size:14px;color:var(--mut)}
+.menu a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--acc);color:var(--acc2);padding:12px 22px;border-radius:2px;font-size:14px;font-weight:500;letter-spacing:.04em;transition:.25s;cursor:pointer;background:none;font-family:inherit}
+.btn:hover{background:var(--acc);color:#111}
+.btn.fill{background:var(--acc);color:#111}
+.btn.fill:hover{background:var(--acc2)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.06);animation:zoom 14s ease-out forwards}
+@keyframes zoom{to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0a0b0d55 0%,#0a0b0d10 35%,#0a0b0dcc 75%,#0a0b0d 100%)}
+.hero .wrap{position:relative;z-index:2;padding-bottom:90px;width:100%}
+.eyebrow{color:var(--acc);font-size:13px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:22px}
+.hero h1{font-size:clamp(38px,6.4vw,86px);line-height:1.02;max-width:900px;margin-bottom:28px}
+.hero p{color:#c4c8ce;max-width:520px;font-size:18px;margin-bottom:38px}
+.stats{display:flex;gap:56px;margin-top:64px;padding-top:28px;border-top:1px solid #ffffff1f;flex-wrap:wrap}
+.stats b{display:block;font-family:Unbounded;font-weight:400;font-size:30px}
+.stats span{color:var(--mut);font-size:13px}
+
+/* catalog */
+section{padding:120px 0}
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:46px;flex-wrap:wrap}
+.head h2{font-size:clamp(28px,3.6vw,46px)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:none;color:var(--mut);padding:9px 16px;border-radius:30px;font:500 13px Manrope;cursor:pointer;transition:.2s}
+.chip.on,.chip:hover{border-color:var(--acc);color:var(--acc2)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;cursor:pointer;transition:.35s;display:flex;flex-direction:column}
+.card:hover{border-color:#c9a96e66;transform:translateY(-4px)}
+.ph{position:relative;aspect-ratio:4/3;overflow:hidden}
+.ph img{width:100%;height:100%;object-fit:cover;transition:.6s}
+.card:hover .ph img{transform:scale(1.05)}
+.tag{position:absolute;left:14px;top:14px;background:#0a0b0dcc;backdrop-filter:blur(6px);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;color:var(--acc2)}
+.body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+.body h3{font-size:19px;margin-bottom:4px}
+.body .yr{color:var(--mut);font-size:13px;margin-bottom:18px}
+.spec{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:18px}
+.spec b{display:block;font-weight:600;font-size:15px}
+.spec span{color:var(--mut);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+.price{display:flex;justify-content:space-between;align-items:center;margin-top:auto}
+.price b{font-family:Unbounded;font-weight:400;font-size:20px;color:var(--acc2)}
+.price i{font-style:normal;color:var(--mut);font-size:13px}
+
+/* why */
+.why{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.why .grid{grid-template-columns:repeat(4,1fr);gap:0}
+.why .it{padding:34px 28px;border-left:1px solid var(--line)}
+.why .it:first-child{border-left:0}
+.why .n{color:var(--acc);font-family:Unbounded;font-size:13px;margin-bottom:26px}
+.why h3{font-size:17px;margin-bottom:10px}
+.why p{color:var(--mut);font-size:14px}
+
+/* contact */
+.cta{display:grid;grid-template-columns:1.1fr 1fr;gap:60px;align-items:center}
+.cta h2{font-size:clamp(28px,3.6vw,46px);margin-bottom:20px}
+.cta p{color:var(--mut);max-width:440px}
+form{display:grid;gap:14px}
+input,select{background:var(--card);border:1px solid var(--line);color:var(--text);padding:16px 18px;font:400 15px Manrope;border-radius:2px;outline:none;width:100%}
+input:focus,select:focus{border-color:var(--acc)}
+.ok{display:none;color:var(--acc2);padding:18px;border:1px solid var(--acc);text-align:center}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--mut);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:70;background:#000b;backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:20px}
+.modal.on{display:flex}
+.mbox{background:var(--bg2);border:1px solid var(--line);max-width:980px;width:100%;display:grid;grid-template-columns:1.2fr 1fr;max-height:92vh;overflow:auto;position:relative}
+.mbox img{width:100%;height:100%;object-fit:cover;min-height:320px}
+.mbox .in{padding:36px 32px}
+.mbox h3{font-size:26px;margin-bottom:6px}
+.mbox .spec{grid-template-columns:repeat(2,1fr);gap:14px 8px}
+.mbox p{color:var(--mut);font-size:14px;margin-bottom:22px}
+.x{position:absolute;right:14px;top:10px;font-size:28px;color:var(--mut);cursor:pointer;background:none;border:0;z-index:2}
+
+.rv{opacity:0;transform:translateY(24px);transition:.8s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+
+@media(max-width:960px){.grid{grid-template-columns:repeat(2,1fr)}.why .grid{grid-template-columns:repeat(2,1fr)}.why .it:nth-child(3){border-left:0}.cta{grid-template-columns:1fr}.menu{display:none}.mbox{grid-template-columns:1fr}}
+@media(max-width:620px){.wrap{padding:0 16px}.grid{grid-template-columns:1fr}.why .grid{grid-template-columns:1fr}.why .it{border-left:0;border-top:1px solid var(--line)}.stats{gap:28px}section{padding:80px 0}.nav .btn{display:none}}
+</style>
+</head>
+<body>
+<header id="hdr"><div class="wrap nav">
+  <a href="#" class="logo">AER<b>I</b>S</a>
+  <nav class="menu"><a href="#catalog">Каталог</a><a href="#why">Почему мы</a><a href="#contact">Контакты</a></nav>
+  <a href="#contact" class="btn">Подобрать самолёт</a>
+</div></header>
+
+<section class="hero" style="padding:0">
+  <img src="img/hero.jpg" alt="Бизнес-джет в небе на закате">
+  <div class="wrap">
+    <div class="eyebrow">Частная авиация · продажа</div>
+    <h1>Самолёт, который подходит вам</h1>
+    <p>Подбираем, проверяем и оформляем бизнес-джеты с налётом и без. Полная история, независимый техосмотр, перегон к вам.</p>
+    <a href="#catalog" class="btn fill">Смотреть каталог →</a>
+    <div class="stats">
+      <div><b>140+</b><span>самолётов продано</span></div>
+      <div><b>12 лет</b><span>на рынке</span></div>
+      <div><b>38</b><span>стран доставки</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="catalog"><div class="wrap">
+  <div class="head rv">
+    <h2>В наличии</h2>
+    <div class="chips" id="chips">
+      <button class="chip on" data-f="all">Все</button>
+      <button class="chip" data-f="light">Лёгкие</button>
+      <button class="chip" data-f="mid">Средние</button>
+      <button class="chip" data-f="heavy">Тяжёлые</button>
+    </div>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="why" id="why"><div class="wrap">
+  <div class="grid">
+    <div class="it rv"><div class="n">01</div><h3>Проверка до сделки</h3><p>Независимый техосмотр, журналы, история владения и ремонтов.</p></div>
+    <div class="it rv"><div class="n">02</div><h3>Юридическая чистота</h3><p>Регистрация, таможня и смена реестра под ключ.</p></div>
+    <div class="it rv"><div class="n">03</div><h3>Перегон и экипаж</h3><p>Доставим самолёт в ваш аэропорт и подберём пилотов.</p></div>
+    <div class="it rv"><div class="n">04</div><h3>Сопровождение</h3><p>Обслуживание, стоянка и управление после покупки.</p></div>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap cta">
+  <div class="rv">
+    <div class="eyebrow">Заявка</div>
+    <h2>Расскажите, куда хотите летать</h2>
+    <p>Оставьте телефон — менеджер перезвонит в течение 15 минут и пришлёт подборку под ваш бюджет и маршруты.</p>
+  </div>
+  <div class="rv">
+    <form id="f">
+      <input required placeholder="Имя">
+      <input required type="tel" placeholder="Телефон">
+      <select id="fm"><option>Любой самолёт</option></select>
+      <button class="btn fill" style="justify-content:center">Получить подборку</button>
+    </form>
+    <div class="ok" id="ok">Спасибо! Это демо — заявка никуда не отправлена.</div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© 2026 AERIS. Продажа частных самолётов</span><span>+7 (000) 000-00-00 · sales@aeris.example</span></div></footer>
+
+<div class="modal" id="m"><div class="mbox"><button class="x" id="mx">×</button><img id="mi" alt=""><div class="in"><div class="eyebrow" id="mc"></div><h3 id="mt"></h3><div class="yr" id="my" style="color:var(--mut);margin-bottom:18px"></div><div class="spec" id="ms"></div><p id="md"></p><div class="price" style="margin-bottom:22px"><b id="mp"></b></div><a href="#contact" class="btn fill" id="mb">Запросить осмотр</a></div></div></div>
+<div class="demo">Демо-версия</div>
+
+<script>
+const J=[
+ {c:'light',cl:'Лёгкий',n:'Citation CJ4',y:2019,h:'1 240',s:10,r:'4 010 км',p:'$7,9 млн',img:'jet1.jpg',d:'Самый популярный лёгкий джет: можно летать с одним пилотом, низкая стоимость часа, салон в идеальном состоянии.'},
+ {c:'light',cl:'Лёгкий',n:'Phenom 300E',y:2021,h:'610',s:9,r:'3 720 км',p:'$9,4 млн',img:'jet2.jpg',d:'Самый продаваемый лёгкий джет десятилетия. Новый салон, авионика Prodigy Touch.'},
+ {c:'mid',cl:'Средний',n:'Challenger 350',y:2018,h:'2 050',s:10,r:'5 926 км',p:'$16,5 млн',img:'jet3.jpg',d:'Москва — Дубай без посадки. Широкий салон, ровный пол, полное ТО пройдено в 2026 году.'},
+ {c:'mid',cl:'Средний',n:'Praetor 600',y:2022,h:'380',s:12,r:'7 441 км',p:'$19,8 млн',img:'jet4.jpg',d:'Межконтинентальная дальность в среднем классе, тихий салон, на гарантии производителя.'},
+ {c:'heavy',cl:'Тяжёлый',n:'Gulfstream G650ER',y:2017,h:'3 100',s:16,r:'13 890 км',p:'$41 млн',img:'jet5.jpg',d:'Флагман для дальних перелётов: Москва — Майами без посадки. Две зоны отдыха, спальня.'},
+ {c:'heavy',cl:'Тяжёлый',n:'Global 7500',y:2020,h:'1 480',s:17,r:'14 260 км',p:'$62 млн',img:'jet6.jpg',d:'Самый большой салон в классе: четыре зоны, кухня, отдельная спальня с душем.'}
+];
+const g=document.getElementById('grid'),fm=document.getElementById('fm');
+function draw(f){g.innerHTML=J.map((j,i)=>f!=='all'&&j.c!==f?'':`<div class="card rv in" data-i="${i}"><div class="ph"><img src="img/${j.img}" alt="${j.n}" loading="lazy"><span class="tag">${j.cl}</span></div><div class="body"><h3>${j.n}</h3><div class="yr">${j.y} год выпуска</div><div class="spec"><div><b>${j.s}</b><span>мест</span></div><div><b>${j.r}</b><span>дальность</span></div><div><b>${j.h}</b><span>налёт, ч</span></div></div><div class="price"><b>${j.p}</b><i>Подробнее →</i></div></div></div>`).join('')}
+draw('all');J.forEach(j=>fm.insertAdjacentHTML('beforeend',`<option>${j.n}</option>`));
+document.getElementById('chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c===b));draw(b.dataset.f)};
+const m=document.getElementById('m');
+g.onclick=e=>{const c=e.target.closest('.card');if(!c)return;const j=J[c.dataset.i];
+ mi.src='img/'+j.img;mi.alt=j.n;mc.textContent=j.cl+' джет';mt.textContent=j.n;my.textContent=j.y+' год выпуска';
+ ms.innerHTML=`<div><b>${j.s}</b><span>мест</span></div><div><b>${j.r}</b><span>дальность</span></div><div><b>${j.h}</b><span>налёт, ч</span></div><div><b>${j.y}</b><span>год</span></div>`;
+ md.textContent=j.d;mp.textContent=j.p;m.classList.add('on');mb.onclick=()=>{fm.value=j.n;m.classList.remove('on')}};
+mx.onclick=()=>m.classList.remove('on');m.onclick=e=>{if(e.target===m)m.classList.remove('on')};
+document.getElementById('f').onsubmit=e=>{e.preventDefault();e.target.style.display='none';ok.style.display='block'};
+const hdr=document.getElementById('hdr');addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>40));
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.15});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -54,6 +54,11 @@ def text(c, b):
     boxes = "программа следит, чтобы посты не пересекались" if c["boxes"] > 1 else "занятое время сразу закрывается"
     prices = ("Часть цен там примерная, подправлю под ваш прайс." if c["demoPrices"]
               else f"Цены взял из вашего прайса {where}, меняете их сами в кабинете.")
+    if b.get("kind") == "nail":   # салон: коротко, про окошки и неявки, без «боксов»
+        return (f"Здравствуйте! Меня зовут Роман, я делаю онлайн-запись для мастеров маникюра {b.get('city_gen') or city_gen(c['city'])}.\n\n"
+                f"{hook.replace('по телефону', 'по телефону или в переписке')} Я сделал для «{c['name']}» страницу записи, посмотрите:\n{BASE}{c['slug']}/\n\n"
+                f"Клиентка сама выбирает услугу и свободное окошко у мастера в любое время, даже когда вы с клиентом и не можете ответить. "
+                f"Запись сразу приходит вам в Telegram. Ссылку можно поставить в шапку ВК и Instagram, на Яндекс Карты и в 2ГИС.\n\n{prices} {PRICE}")
     tire = b.get("kind") == "tire"
     place = "вашего шиномонтажа" if tire else "вашей студии" if det else "вашей мойки"
     who = "шиномонтажей" if tire else "детейлингов" if det else "автомоек"
@@ -75,11 +80,14 @@ def main():
         tg = b.get("tg", "")
         tg = tg if tg.startswith("https://t.me/") else (f"https://t.me/{tg.lstrip('@')}" if tg else "")
         items.append(dict(id=i, group=c["city"], name=c["name"], phone=c["phone"], tg=tg, text=text(c, b),
-                          wa=d if d[1] == "9" else "", tgn=b.get("tgn", "")))
+                          wa=d if d[1] == "9" else "", tgn=b.get("tgn", ""), pre=bool(b.get("sent"))))
     key = re.sub(r"[^a-z0-9-]", "", src.stem.lower()) or "batch"
     html = (HERE / "outreach_template.html").read_text(encoding="utf-8")
     html = html.replace("<title>Рассылка владельцам</title>", f"<title>Рассылка: {title}</title>").replace("<h1>Рассылка владельцам</h1>", f"<h1>Рассылка: {title}</h1>")
     html = html.replace("localStorage.getItem(k)", f"localStorage.getItem('{key}-' + k)").replace("localStorage.setItem(k,", f"localStorage.setItem('{key}-' + k,")
+    # "sent": true в партии — уже написали: отмечено «Отправил» по умолчанию; снятая галочка хранится как 0
+    html = html.replace("let sent = LS.get('sent', {});", "let sent = LS.get('sent', {}); DATA.forEach((d) => { if (d.pre && !(d.id in sent)) sent[d.id] = 1; });")
+    html = html.replace("else delete sent[d.dataset.done];", "else sent[d.dataset.done] = 0;")
     html = html.replace('<span class="phone">${esc(it.phone)}</span></div>',
                         '<span class="phone">${esc(it.phone)}</span></div>${it.tgn ? `<div class="phone">Telegram: ${esc(it.tgn)}</div>` : ""}')
     out = HERE / "out" / f"{key}.html"

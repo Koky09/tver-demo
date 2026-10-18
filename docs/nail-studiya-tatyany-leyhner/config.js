@@ -1,0 +1,139 @@
+window.CONFIG = {
+ "slug": "nail-studiya-tatyany-leyhner",
+ "theme": "lacquer",
+ "demo": false,
+ "city": "Москва",
+ "name": "Студия Татьяны Лейхнер",
+ "short": "ТЛ",
+ "tagline": "Маникюр и педикюр · Солнцево",
+ "address": "Москва, улица Юлиана Семёнова, 8 к2",
+ "mapQuery": "Москва, улица Юлиана Семёнова, 8 к2",
+ "phone": "+7 915 479-54-74",
+ "phoneHref": "+79154795474",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Мастер",
+ "kind": "nail",
+ "accent": "#7c3aed",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://wa.me/79169882878"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Маникюр с покрытием завтра вечером",
+  "Сколько стоит педикюр?",
+  "Наращивание в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "mani",
+   "name": "Маникюр комплекс",
+   "price": 2800,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "маникюр",
+    "ногти",
+    "ноготочки",
+    "руки",
+    "аппаратный",
+    "комбинированный"
+   ],
+   "iconKey": "polish",
+   "note": "Снятие, маникюр, укрепление , покрытие гель-лак"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр",
+   "price": 1900,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "\"Педикюр Смарт дисками"
+  },
+  {
+   "id": "ext",
+   "name": "Наращивание ногтей",
+   "price": 4300,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "наращивание",
+    "нарастить",
+    "длина",
+    "коррекция",
+    "акрил",
+    "акригель"
+   ],
+   "iconKey": "gem"
+  },
+  {
+   "id": "design",
+   "name": "Френч",
+   "price": 500,
+   "priceFrom": true,
+   "duration": 15,
+   "keywords": [
+    "дизайн",
+    "френч",
+    "стразы",
+    "рисунок",
+    "втирка",
+    "слайдер"
+   ],
+   "iconKey": "brush"
+  },
+  {
+   "id": "remove",
+   "name": "Снятие геля / гель-лака",
+   "price": 800,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "снятие",
+    "снять"
+   ],
+   "iconKey": "spark"
+  }
+ ],
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+};
