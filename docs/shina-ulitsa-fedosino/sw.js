@@ -1,5 +1,5 @@
 // Кэш оболочки приложения: открывается мгновенно и без сети.
-const CACHE = 'shell-1792353874';
+const CACHE = 'shell-1792355464';
 const FILES = ['./', 'index.html', 'style.css', 'app.js', 'config.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png'];
 // фото шапки кэшируется при первом показе (обработчик fetch ниже), в FILES его нет — у многих сайтов фото нет
 
