@@ -1,6 +1,6 @@
 {
   "slug": "nail-the-litsa",
-  "theme": "stitch",
+  "theme": "vogue",
   "demo": false,
   "city": "Москва",
   "name": "The Лица",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#0d9488",
+  "accent": "#be185d",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79165739991"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Ваш лучший маникюр"
 }

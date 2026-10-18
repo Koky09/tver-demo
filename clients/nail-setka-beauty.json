@@ -1,6 +1,6 @@
 {
   "slug": "nail-setka-beauty",
-  "theme": "sticker",
+  "theme": "vogue",
   "demo": false,
   "city": "Москва",
   "name": "Setka beauty",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#fb7185",
-  "accentInk": "#2a0710",
+  "accent": "#7c3aed",
+  "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79165557072"
   },
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Тренды сезона — у нас"
 }

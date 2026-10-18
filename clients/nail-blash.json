@@ -1,6 +1,6 @@
 {
   "slug": "nail-blash",
-  "theme": "atelier",
+  "theme": "bloom",
   "demo": false,
   "city": "Москва",
   "name": "Блаш",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#d4a373",
-  "accentInk": "#1f1408",
+  "accent": "#ffb703",
+  "accentInk": "#1a1300",
   "socials": {
     "tg": "https://wa.me/79778305402"
   },
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "ringText": "маникюр • педикюр • дизайн • запись онлайн • "
 }

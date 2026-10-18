@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-no-one-else",
- "theme": "sticker",
+ "theme": "arch",
  "demo": false,
  "city": "Москва",
  "name": "No one else",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#f472b6",
- "accentInk": "#2a0616",
+ "accent": "#b5838d",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79957837221"
  },
@@ -149,5 +149,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Ногтевая студия",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

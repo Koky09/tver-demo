@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-we-nail-you",
- "theme": "lacquer",
+ "theme": "arch",
  "demo": false,
  "city": "Москва",
  "name": "We nail you",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#c084fc",
- "accentInk": "#1d0b2e",
+ "accent": "#c08552",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79654088806"
  },
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Чистый маникюр",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

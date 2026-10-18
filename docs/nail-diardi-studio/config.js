@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-diardi-studio",
- "theme": "sticker",
+ "theme": "arch",
  "demo": false,
  "city": "Москва",
  "name": "Diardi studio",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#fb7185",
- "accentInk": "#2a0710",
+ "accent": "#b07d62",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79033637770"
  },
@@ -169,5 +169,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Маникюр и уход",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

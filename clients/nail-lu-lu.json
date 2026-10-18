@@ -1,6 +1,6 @@
 {
   "slug": "nail-lu-lu",
-  "theme": "stitch",
+  "theme": "petal",
   "demo": false,
   "city": "Москва",
   "name": "Лу Лу",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#b45309",
+  "accent": "#c58fd3",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79651273939"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "маникюр и педикюр"
 }

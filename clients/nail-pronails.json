@@ -1,6 +1,6 @@
 {
   "slug": "nail-pronails",
-  "theme": "atelier",
+  "theme": "glass",
   "demo": false,
   "city": "Москва",
   "name": "Pronails",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#d4a373",
-  "accentInk": "#1f1408",
+  "accent": "#06b6d4",
+  "accentInk": "#04161a",
   "socials": {
     "tg": "https://wa.me/79857487700"
   },

@@ -1,6 +1,6 @@
 {
   "slug": "nail-floraison",
-  "theme": "lacquer",
+  "theme": "petal",
   "demo": false,
   "city": "Москва",
   "name": "Floraison",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#7c3aed",
+  "accent": "#e8879c",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79104789944"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "уход и маникюр"
 }

@@ -1,6 +1,6 @@
 {
   "slug": "nail-moskouneyls",
-  "theme": "atelier",
+  "theme": "vogue",
   "demo": false,
   "city": "Москва",
   "name": "МоскоуНейлс",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#e11d74",
+  "accent": "#e11d48",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79166549318"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Ваш лучший маникюр"
 }

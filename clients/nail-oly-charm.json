@@ -1,6 +1,6 @@
 {
   "slug": "nail-oly-charm",
-  "theme": "atelier",
+  "theme": "glass",
   "demo": false,
   "city": "Москва",
   "name": "Oly charm",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#d4a373",
-  "accentInk": "#1f1408",
+  "accent": "#8b5cf6",
+  "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79999909807"
   },

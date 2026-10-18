@@ -1,6 +1,6 @@
 {
   "slug": "nail-polly-nail",
-  "theme": "sticker",
+  "theme": "bloom",
   "demo": false,
   "city": "Москва",
   "name": "Polly nail",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#f472b6",
-  "accentInk": "#2a0616",
+  "accent": "#ff8a3d",
+  "accentInk": "#1a0d02",
   "socials": {
     "tg": "https://wa.me/79013418385"
   },
@@ -138,5 +138,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "ringText": "маникюр • покрытие • френч • запись онлайн • "
 }

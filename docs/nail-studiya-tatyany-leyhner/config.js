@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-studiya-tatyany-leyhner",
- "theme": "lacquer",
+ "theme": "arch",
  "demo": false,
  "city": "Москва",
  "name": "Студия Татьяны Лейхнер",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#7c3aed",
+ "accent": "#8a9a5b",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79169882878"
@@ -135,5 +135,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Студия красоты",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

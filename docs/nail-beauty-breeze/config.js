@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-beauty-breeze",
- "theme": "lacquer",
+ "theme": "glass",
  "demo": false,
  "city": "Москва",
  "name": "Beauty Breeze",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#7c3aed",
- "accentInk": "#ffffff",
+ "accent": "#f97316",
+ "accentInk": "#1a0a02",
  "socials": {
   "tg": "https://wa.me/74956020278"
  },
@@ -152,5 +152,6 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

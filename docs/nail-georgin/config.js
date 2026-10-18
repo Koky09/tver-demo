@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-georgin",
- "theme": "sticker",
+ "theme": "bloom",
  "demo": false,
  "city": "Москва",
  "name": "Георгин",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#f472b6",
- "accentInk": "#2a0616",
+ "accent": "#e84393",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79152328564"
  },
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "ringText": "ногти • дизайн • уход • запись 24/7 • ",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

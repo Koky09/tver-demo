@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-blash",
- "theme": "atelier",
+ "theme": "bloom",
  "demo": false,
  "city": "Москва",
  "name": "Блаш",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#d4a373",
- "accentInk": "#1f1408",
+ "accent": "#ffb703",
+ "accentInk": "#1a1300",
  "socials": {
   "tg": "https://wa.me/79778305402"
  },
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "ringText": "маникюр • педикюр • дизайн • запись онлайн • ",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

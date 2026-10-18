@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-samanic",
- "theme": "sticker",
+ "theme": "bloom",
  "demo": false,
  "city": "Москва",
  "name": "Samanic",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#f472b6",
- "accentInk": "#2a0616",
+ "accent": "#00b894",
+ "accentInk": "#04140f",
  "socials": {
   "tg": "https://wa.me/79663828000"
  },
@@ -170,5 +170,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "ringText": "маникюр • педикюр • дизайн • запись онлайн • ",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

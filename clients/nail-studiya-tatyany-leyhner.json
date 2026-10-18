@@ -1,6 +1,6 @@
 {
   "slug": "nail-studiya-tatyany-leyhner",
-  "theme": "lacquer",
+  "theme": "arch",
   "demo": false,
   "city": "Москва",
   "name": "Студия Татьяны Лейхнер",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#7c3aed",
+  "accent": "#8a9a5b",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79169882878"
@@ -134,5 +134,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Студия красоты"
 }

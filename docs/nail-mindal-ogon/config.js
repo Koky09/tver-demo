@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-mindal-ogon",
- "theme": "lacquer",
+ "theme": "noir",
  "demo": false,
  "city": "Москва",
  "name": "Миндаль&Огонь",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#c084fc",
- "accentInk": "#1d0b2e",
+ "accent": "#b76e79",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79055054554"
  },
@@ -102,5 +102,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Студия маникюра",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-fairy-nails",
- "theme": "sticker",
+ "theme": "petal",
  "demo": false,
  "city": "Москва",
  "name": "Fairy nails",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#fb7185",
- "accentInk": "#2a0710",
+ "accent": "#e3a587",
+ "accentInk": "#3a1d0e",
  "socials": {
   "tg": "https://wa.me/79957930707"
  },
@@ -116,5 +116,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "красота в деталях",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

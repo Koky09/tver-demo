@@ -327,6 +327,38 @@
         return `<section class="hero${img}">
           <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
+      case 'noir':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="gild" aria-hidden="true"></div>${demo}
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Студия маникюра')}</div>${name}${tag}${meta}</div></section>`;
+      case 'petal':
+        return `<section class="hero"><svg class="petals" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+            <ellipse cx="40" cy="70" rx="26" ry="12" transform="rotate(-30 40 70)"/><ellipse cx="372" cy="120" rx="22" ry="10" transform="rotate(40 372 120)"/>
+            <ellipse cx="30" cy="420" rx="20" ry="9" transform="rotate(20 30 420)"/><ellipse cx="360" cy="470" rx="28" ry="12" transform="rotate(-25 360 470)"/></svg>
+          ${demo}<div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <div class="inner"><span class="script">${esc(C.kicker || 'маникюр и педикюр')}</span>${name}${tag}${meta}</div></section>`;
+      case 'vogue': {
+        const mon = new Date().toLocaleDateString('ru-RU', { month: 'long' });
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div>
+          <div><div class="mast"><span>${esc(CITY)}</span>${demo}<span>${esc(mon)}</span></div>${name}</div>
+          <div class="cover-lines"><b>${esc(C.kicker || 'Маникюр, который хочется показать')}</b><span>${statusText()}</span><span>${esc(street)}</span></div>
+          <div class="issue">Онлайн-<br>запись</div></section>`;
+      }
+      case 'glass':
+        return `<div class="bgphoto" style="background-image:url('${esc(C.heroImage || '')}')"></div><div class="bgtint"></div>
+          <section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}
+          <div class="pane">${name}${tag}${meta}</div></section>`;
+      case 'arch':
+        return `<section class="hero">${demo}<div class="archwrap"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
+          <div class="kicker">${esc(C.kicker || 'Ногтевая студия')}</div>${name}${tag}${meta}</section>`;
+      case 'bloom': {
+        const ring = (C.ringText || 'маникюр • педикюр • дизайн • запись онлайн • ').toUpperCase();
+        return `<section class="hero">${demo}<div class="ringbox">
+          <svg class="ring" viewBox="0 0 300 300" aria-hidden="true"><defs><path id="rp" d="M150,150 m-128,0 a128,128 0 1,1 256,0 a128,128 0 1,1 -256,0"/></defs>
+            <text><textPath href="#rp" textLength="790">${esc(ring)}</textPath></text></svg>
+          <div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 61 36 95 36 68 56 78 90 50 70 22 90 32 56 5 36 39 36z"/></svg></div>
+          ${name}${tag}${meta}</section>`;
+      }
       default:
         return `<section class="hero${img}">
           <svg class="crease" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 168 C 110 120, 250 112, 410 52"/><path d="M-10 182 C 120 136, 260 128, 410 70"/></svg>

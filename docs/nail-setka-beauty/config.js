@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-setka-beauty",
- "theme": "sticker",
+ "theme": "vogue",
  "demo": false,
  "city": "Москва",
  "name": "Setka beauty",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#fb7185",
- "accentInk": "#2a0710",
+ "accent": "#7c3aed",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79165557072"
  },
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Тренды сезона — у нас",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

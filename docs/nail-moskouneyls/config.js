@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-moskouneyls",
- "theme": "atelier",
+ "theme": "vogue",
  "demo": false,
  "city": "Москва",
  "name": "МоскоуНейлс",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#e11d74",
+ "accent": "#e11d48",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79166549318"
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Ваш лучший маникюр",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

@@ -1,6 +1,6 @@
 {
   "slug": "nail-tsentr-pedikyura",
-  "theme": "stitch",
+  "theme": "noir",
   "demo": false,
   "city": "Москва",
   "name": "Центр педикюра",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#b45309",
-  "accentInk": "#ffffff",
+  "accent": "#d4a373",
+  "accentInk": "#17120c",
   "socials": {
     "tg": "https://wa.me/79140229914"
   },
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Ногтевая студия"
 }

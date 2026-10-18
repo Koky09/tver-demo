@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-akademiya-byuti",
- "theme": "stitch",
+ "theme": "arch",
  "demo": false,
  "city": "Москва",
  "name": "Академия бьюти",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#b45309",
+ "accent": "#7a8b99",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79361659555"
@@ -170,5 +170,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Ногтевая студия",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

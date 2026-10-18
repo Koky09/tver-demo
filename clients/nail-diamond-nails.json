@@ -1,6 +1,6 @@
 {
   "slug": "nail-diamond-nails",
-  "theme": "atelier",
+  "theme": "noir",
   "demo": false,
   "city": "Москва",
   "name": "Diamond nails",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#e11d74",
+  "accent": "#5e8b7e",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79810777737"
@@ -104,5 +104,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Маникюр премиум-класса"
 }

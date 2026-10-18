@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-narciss-beauty-home",
- "theme": "lacquer",
+ "theme": "vogue",
  "demo": false,
  "city": "Москва",
  "name": "Narciss Beauty Home",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#c084fc",
- "accentInk": "#1d0b2e",
+ "accent": "#111111",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79150091294"
  },
@@ -107,5 +107,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Маникюр, который хочется показать",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

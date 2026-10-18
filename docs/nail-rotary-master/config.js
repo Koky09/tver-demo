@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-rotary-master",
- "theme": "protocol",
+ "theme": "noir",
  "demo": false,
  "city": "Москва",
  "name": "Rotary master",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#a16207",
+ "accent": "#8e1b3a",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79944443030"
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Маникюр премиум-класса",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

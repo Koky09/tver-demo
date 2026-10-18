@@ -1,6 +1,6 @@
 {
   "slug": "nail-soroka-art-nail",
-  "theme": "lacquer",
+  "theme": "glass",
   "demo": false,
   "city": "Москва",
   "name": "Soroka art Nail",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#7c3aed",
+  "accent": "#f43f5e",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79295121372"

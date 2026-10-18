@@ -1,6 +1,6 @@
 {
   "slug": "nail-beauty-breeze",
-  "theme": "lacquer",
+  "theme": "glass",
   "demo": false,
   "city": "Москва",
   "name": "Beauty Breeze",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#7c3aed",
-  "accentInk": "#ffffff",
+  "accent": "#f97316",
+  "accentInk": "#1a0a02",
   "socials": {
     "tg": "https://wa.me/74956020278"
   },

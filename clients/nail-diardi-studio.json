@@ -1,6 +1,6 @@
 {
   "slug": "nail-diardi-studio",
-  "theme": "sticker",
+  "theme": "arch",
   "demo": false,
   "city": "Москва",
   "name": "Diardi studio",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#fb7185",
-  "accentInk": "#2a0710",
+  "accent": "#b07d62",
+  "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79033637770"
   },
@@ -168,5 +168,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Маникюр и уход"
 }

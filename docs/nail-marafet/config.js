@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-marafet",
- "theme": "sticker",
+ "theme": "arch",
  "demo": false,
  "city": "Москва",
  "name": "Марафет",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#fb7185",
- "accentInk": "#2a0710",
+ "accent": "#a0785a",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79160882948"
  },
@@ -163,5 +163,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Чистый маникюр",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

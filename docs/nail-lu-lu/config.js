@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-lu-lu",
- "theme": "stitch",
+ "theme": "petal",
  "demo": false,
  "city": "Москва",
  "name": "Лу Лу",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#b45309",
+ "accent": "#c58fd3",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79651273939"
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "маникюр и педикюр",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

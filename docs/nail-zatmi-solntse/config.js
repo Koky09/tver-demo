@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-zatmi-solntse",
- "theme": "stitch",
+ "theme": "bloom",
  "demo": false,
  "city": "Москва",
  "name": "Затми Солнце",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#0d9488",
+ "accent": "#3d9cff",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79917177407"
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "ringText": "маникюр • покрытие • френч • запись онлайн • ",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

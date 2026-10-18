@@ -1,6 +1,6 @@
 {
   "slug": "nail-akademiya-byuti",
-  "theme": "stitch",
+  "theme": "arch",
   "demo": false,
   "city": "Москва",
   "name": "Академия бьюти",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#b45309",
+  "accent": "#7a8b99",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79361659555"
@@ -169,5 +169,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Ногтевая студия"
 }

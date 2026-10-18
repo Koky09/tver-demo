@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-beauty-style",
- "theme": "atelier",
+ "theme": "vogue",
  "demo": false,
  "city": "Москва",
  "name": "Beauty&style",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#d4a373",
- "accentInk": "#1f1408",
+ "accent": "#b91c1c",
+ "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79645131353"
  },
@@ -149,5 +149,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Ногти как с обложки",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

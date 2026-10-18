@@ -1,6 +1,6 @@
 {
   "slug": "nail-rotary-master",
-  "theme": "protocol",
+  "theme": "noir",
   "demo": false,
   "city": "Москва",
   "name": "Rotary master",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#a16207",
+  "accent": "#8e1b3a",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79944443030"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Маникюр премиум-класса"
 }

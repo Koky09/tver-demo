@@ -1,6 +1,6 @@
 {
   "slug": "nail-zatmi-solntse",
-  "theme": "stitch",
+  "theme": "bloom",
   "demo": false,
   "city": "Москва",
   "name": "Затми Солнце",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#0d9488",
+  "accent": "#3d9cff",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79917177407"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "ringText": "маникюр • покрытие • френч • запись онлайн • "
 }

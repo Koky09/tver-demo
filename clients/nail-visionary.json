@@ -1,6 +1,6 @@
 {
   "slug": "nail-visionary",
-  "theme": "atelier",
+  "theme": "noir",
   "demo": false,
   "city": "Москва",
   "name": "Visionary",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#e11d74",
+  "accent": "#7d5ba6",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79035099374"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Искусство маникюра"
 }

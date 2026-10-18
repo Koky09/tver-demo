@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-star-1",
- "theme": "stitch",
+ "theme": "glass",
  "demo": false,
  "city": "Москва",
  "name": "Star №1",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#0d9488",
+ "accent": "#a855f7",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79253043907"
@@ -152,5 +152,6 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

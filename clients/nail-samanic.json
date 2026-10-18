@@ -1,6 +1,6 @@
 {
   "slug": "nail-samanic",
-  "theme": "sticker",
+  "theme": "bloom",
   "demo": false,
   "city": "Москва",
   "name": "Samanic",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#f472b6",
-  "accentInk": "#2a0616",
+  "accent": "#00b894",
+  "accentInk": "#04140f",
   "socials": {
     "tg": "https://wa.me/79663828000"
   },
@@ -169,5 +169,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "ringText": "маникюр • педикюр • дизайн • запись онлайн • "
 }

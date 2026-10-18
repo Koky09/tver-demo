@@ -1,6 +1,6 @@
 {
   "slug": "nail-fairy-nails",
-  "theme": "sticker",
+  "theme": "petal",
   "demo": false,
   "city": "Москва",
   "name": "Fairy nails",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#fb7185",
-  "accentInk": "#2a0710",
+  "accent": "#e3a587",
+  "accentInk": "#3a1d0e",
   "socials": {
     "tg": "https://wa.me/79957930707"
   },
@@ -115,5 +115,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "красота в деталях"
 }

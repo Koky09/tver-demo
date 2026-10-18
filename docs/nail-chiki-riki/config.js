@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-chiki-riki",
- "theme": "protocol",
+ "theme": "glass",
  "demo": false,
  "city": "Москва",
  "name": "Chiki riki",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#be123c",
+ "accent": "#3b82f6",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/74993981321"
@@ -166,5 +166,6 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

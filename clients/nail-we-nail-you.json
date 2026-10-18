@@ -1,6 +1,6 @@
 {
   "slug": "nail-we-nail-you",
-  "theme": "lacquer",
+  "theme": "arch",
   "demo": false,
   "city": "Москва",
   "name": "We nail you",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#c084fc",
-  "accentInk": "#1d0b2e",
+  "accent": "#c08552",
+  "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79654088806"
   },
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Чистый маникюр"
 }

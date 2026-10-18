@@ -1,6 +1,6 @@
 {
   "slug": "nail-nombre-d-or",
-  "theme": "lacquer",
+  "theme": "bloom",
   "demo": false,
   "city": "Москва",
   "name": "Nombre D`or",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#7c3aed",
+  "accent": "#7b61ff",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79932870888"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "ringText": "ногти • дизайн • уход • запись 24/7 • "
 }

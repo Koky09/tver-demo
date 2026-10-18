@@ -1,6 +1,6 @@
 {
   "slug": "nail-manik-time",
-  "theme": "stitch",
+  "theme": "glass",
   "demo": false,
   "city": "Москва",
   "name": "Manik time",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#b45309",
+  "accent": "#ec4899",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79252202911"

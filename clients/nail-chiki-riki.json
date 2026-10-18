@@ -1,6 +1,6 @@
 {
   "slug": "nail-chiki-riki",
-  "theme": "protocol",
+  "theme": "glass",
   "demo": false,
   "city": "Москва",
   "name": "Chiki riki",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#be123c",
+  "accent": "#3b82f6",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/74993981321"

@@ -1,6 +1,6 @@
 {
   "slug": "nail-imidzh",
-  "theme": "atelier",
+  "theme": "arch",
   "demo": false,
   "city": "Москва",
   "name": "Имидж",
@@ -43,8 +43,8 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#d4a373",
-  "accentInk": "#1f1408",
+  "accent": "#94776b",
+  "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79256459953"
   },
@@ -117,5 +117,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "kicker": "Студия красоты"
 }

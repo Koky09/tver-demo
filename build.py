@@ -30,6 +30,13 @@ THEME_FONTS = {
     "aqua": "Comfortaa:wght@600;700&family=Nunito:wght@400;500;600;700",
     "stitch": "Unbounded:wght@500;600;800&family=Onest:wght@400;500;600;700",
     "sticker": "Dela+Gothic+One&family=Rubik:wght@400;500;600;700",
+    # салоны красоты (template/beauty.css)
+    "noir": "Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700",
+    "petal": "Cormorant+Garamond:wght@600;700&family=Nunito:wght@400;600;700&family=Marck+Script",
+    "vogue": "Playfair+Display:ital,wght@0,700;0,900;1,600;1,700&family=Montserrat:wght@400;500;600;700",
+    "glass": "Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700",
+    "arch": "Prata&family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400",
+    "bloom": "Comfortaa:wght@600;700&family=Nunito:wght@400;600;700",
 }
 
 
@@ -44,6 +51,17 @@ def build(cfg_path):
     if out.exists():
         shutil.rmtree(out)
     shutil.copytree(TEMPLATE, out)
+    # стили салонов — в конец общего style.css (одна загрузка, и офлайн-кэш тот же)
+    beauty = out / "beauty.css"
+    if beauty.exists():
+        css = out / "style.css"
+        css.write_text(css.read_text(encoding="utf-8") + beauty.read_text(encoding="utf-8"), encoding="utf-8")
+        beauty.unlink()
+    # фото для шапки: clients/photos/<slug>.jpg -> hero.jpg
+    photo = ROOT / "clients" / "photos" / f"{cfg['slug']}.jpg"
+    if photo.exists():
+        shutil.copy(photo, out / "hero.jpg")
+        cfg["heroImage"] = "hero.jpg"
 
     (out / "config.js").write_text("window.CONFIG = " + json.dumps(cfg, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
     theme = cfg.get("theme", "lacquer")

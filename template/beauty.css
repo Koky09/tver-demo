@@ -1,0 +1,205 @@
+
+/* =====================================================================
+   Стили для салонов красоты (kind=nail): noir, petal, vogue, glass, arch, bloom.
+   У всех шапка с фото (heroImage), свои шрифты, своя подача прайса.
+   Файл дописывается в конец style.css при сборке (build.py).
+   ===================================================================== */
+:is([data-theme=noir],[data-theme=petal],[data-theme=vogue],[data-theme=glass],[data-theme=arch],[data-theme=bloom]) .hero::after { display: none; }
+:is([data-theme=noir],[data-theme=petal],[data-theme=vogue],[data-theme=glass],[data-theme=arch],[data-theme=bloom]) .hero.has-img::before { display: none; }
+
+/* ---------- noir: чёрный бархат и золото ---------- */
+:root[data-theme=noir] {
+  --bg: #0e0c0b; --surface: #181513; --surface-2: #211d1a; --line: #2f2925; --ink: #f4ede4; --muted: #a99e92;
+  --gold: color-mix(in oklab, var(--accent) 35%, #d8b46a); --accent-text: var(--gold);
+  --accent-soft: color-mix(in oklab, var(--gold) 12%, #181513);
+  --display: "Playfair Display", Georgia, serif; --text: "Manrope", system-ui, sans-serif; color-scheme: dark;
+}
+[data-theme=noir] body { background: radial-gradient(120% 60% at 50% 0%, #1d1815 0%, #0e0c0b 60%); }
+[data-theme=noir] .hero { min-height: 520px; padding: 0; border-radius: 4px; background: #000 center/cover no-repeat; justify-content: flex-end; box-shadow: 0 30px 60px -30px #000; }
+[data-theme=noir] .hero .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(14,12,11,.05) 30%, rgba(14,12,11,.92) 82%); }
+[data-theme=noir] .hero .gild { position: absolute; inset: 12px; border: 1px solid color-mix(in oklab, var(--gold) 70%, transparent); pointer-events: none; }
+[data-theme=noir] .hero .gild::after { content: ""; position: absolute; inset: 5px; border: 1px solid color-mix(in oklab, var(--gold) 30%, transparent); }
+[data-theme=noir] .hero .inner { padding: 0 32px 40px; text-align: center; display: grid; justify-items: center; }
+[data-theme=noir] .hero .kicker { font: 600 11px/1 var(--text); letter-spacing: .38em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+[data-theme=noir] .hero h1 { font: italic 600 clamp(34px, calc((min(100vw,560px) - 60px) / (var(--n,8) * .58)), 56px)/1 var(--display); letter-spacing: .01em; color: #fbf6ef; }
+[data-theme=noir] .hero .tag { margin: 14px auto 0; color: #d9cfc3; font-size: 15px; letter-spacing: .04em; }
+[data-theme=noir] .hero-meta { justify-items: center; font-size: 14px; margin-top: 18px; }
+[data-theme=noir] .demo-tag { position: absolute; top: 26px; right: 26px; border-color: color-mix(in oklab, var(--gold) 60%, transparent); color: var(--gold); }
+[data-theme=noir] .quick { background: transparent; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); border-radius: 0; margin-top: 16px; }
+[data-theme=noir] .quick .ic { color: var(--gold); }
+[data-theme=noir] h2 { font: italic 600 30px/1.1 var(--display); text-align: center; margin-top: 44px; }
+[data-theme=noir] h2::after { content: ""; display: block; width: 40px; height: 1px; background: var(--gold); margin: 12px auto 0; }
+[data-theme=noir] .sec-head p { text-align: center; margin-top: 10px; }
+[data-theme=noir] .list { background: transparent; border: 0; }
+[data-theme=noir] .svc { display: grid; grid-template-columns: 42px 1fr auto; column-gap: 14px; padding: 18px 4px; }
+[data-theme=noir] .list .svc + .svc { border-top: 1px solid var(--line); }
+[data-theme=noir] .svc .ico { width: 42px; height: 42px; border-radius: 50%; background: transparent; border: 1px solid color-mix(in oklab, var(--gold) 55%, transparent); color: var(--gold); }
+[data-theme=noir] .svc .name { font: 500 19px/1.25 var(--display); }
+[data-theme=noir] .svc .price { font: 600 17px/1.2 var(--display); color: var(--gold); }
+[data-theme=noir] .btn { background: linear-gradient(180deg, color-mix(in oklab, var(--gold) 92%, #fff), var(--gold)); color: #17120c; letter-spacing: .12em; text-transform: uppercase; font-size: 14px; border-radius: 2px; }
+[data-theme=noir] .btn.ghost, [data-theme=noir] .btn.danger, [data-theme=noir] .btn.sm { text-transform: none; letter-spacing: 0; }
+[data-theme=noir] .btn.ghost { background: transparent; color: var(--ink); }
+[data-theme=noir] .place, [data-theme=noir] .install { background: var(--surface); border-color: var(--line); border-radius: 2px; }
+[data-theme=noir] .ticket-top { background: #000; border-bottom: 1px solid var(--gold); }
+
+/* ---------- petal: пудровый, лепестки, фото в «капле» ---------- */
+:root[data-theme=petal] {
+  --bg: color-mix(in oklab, var(--accent) 7%, #fff9f7); --surface: #fff; --surface-2: color-mix(in oklab, var(--accent) 8%, #fff);
+  --line: color-mix(in oklab, var(--accent) 18%, #f1e6e3); --ink: #3b2a2e; --muted: #8a7276;
+  --accent-text: color-mix(in oklab, var(--accent), #2a0a14 30%); --accent-soft: color-mix(in oklab, var(--accent) 12%, #fff);
+  --display: "Cormorant Garamond", Georgia, serif; --text: "Nunito", system-ui, sans-serif; --script: "Marck Script", cursive; --r-md: 20px; --r-lg: 32px;
+  color-scheme: light;
+}
+[data-theme=petal] .hero { min-height: 0; padding: 26px 24px 28px; color: var(--ink); background: linear-gradient(160deg, #fff 0%, color-mix(in oklab, var(--accent) 16%, #fff) 100%); box-shadow: 0 24px 50px -30px color-mix(in oklab, var(--accent) 70%, #000); gap: 0; }
+[data-theme=petal] .hero .photo { width: 78%; aspect-ratio: 1; margin: 0 auto 6px; background: center/cover no-repeat; border-radius: 58% 42% 52% 48% / 46% 56% 44% 54%; box-shadow: 0 18px 40px -18px color-mix(in oklab, var(--accent) 80%, #000), 0 0 0 8px #fff, 0 0 0 9px color-mix(in oklab, var(--accent) 30%, #fff); animation: morph 9s ease-in-out infinite alternate; }
+@keyframes morph { to { border-radius: 44% 56% 46% 54% / 56% 44% 56% 44%; } }
+[data-theme=petal] .hero .petals { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; fill: color-mix(in oklab, var(--accent) 35%, #fff); opacity: .6; }
+[data-theme=petal] .hero .inner { text-align: center; margin-top: 18px; }
+[data-theme=petal] .hero .script { font: 32px/1 var(--script); color: var(--accent-text); display: block; margin-bottom: 2px; }
+[data-theme=petal] .hero h1 { font: 700 clamp(34px, calc((min(100vw,560px) - 70px) / (var(--n,8) * .5)), 54px)/.95 var(--display); color: var(--ink); letter-spacing: 0; }
+[data-theme=petal] .hero .tag { color: var(--muted); margin: 10px auto 0; }
+[data-theme=petal] .hero-meta { justify-items: center; margin-top: 14px; }
+[data-theme=petal] .hero-meta .addr { color: var(--muted); }
+[data-theme=petal] .demo-tag { position: absolute; top: 16px; right: 16px; color: var(--accent-text); border-color: var(--line); background: #fff; }
+[data-theme=petal] .quick { border-radius: 999px; border: 0; box-shadow: 0 8px 24px -16px color-mix(in oklab, var(--accent) 70%, #000); }
+[data-theme=petal] .quick > * + * { border-left-color: var(--line); }
+[data-theme=petal] h2 { font: 700 34px/1 var(--display); letter-spacing: 0; }
+[data-theme=petal] .list { background: transparent; border: 0; display: grid; gap: 10px; overflow: visible; }
+[data-theme=petal] .list .svc + .svc { border-top: 0; }
+[data-theme=petal] .svc { background: #fff; border-radius: 22px; box-shadow: 0 10px 24px -20px color-mix(in oklab, var(--accent) 80%, #000); padding: 14px 16px; }
+[data-theme=petal] .svc .ico { border-radius: 50%; width: 46px; height: 46px; background: linear-gradient(135deg, color-mix(in oklab, var(--accent) 22%, #fff), color-mix(in oklab, var(--accent) 45%, #fff)); }
+[data-theme=petal] .svc .name { font: 700 21px/1.1 var(--display); }
+[data-theme=petal] .svc .price { background: var(--accent-soft); color: var(--accent-text); padding: 8px 12px; border-radius: 999px; font: 700 15px/1 var(--text); }
+[data-theme=petal] .svc .price small { display: inline; margin-right: 3px; }
+[data-theme=petal] .btn { border-radius: 999px; background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent), #ffb3c7 35%)); }
+[data-theme=petal] .place { border: 0; box-shadow: 0 10px 24px -20px color-mix(in oklab, var(--accent) 80%, #000); border-radius: 22px; }
+
+/* ---------- vogue: журнальная обложка ---------- */
+:root[data-theme=vogue] {
+  --bg: #f6f3ef; --surface: #fff; --surface-2: #efebe6; --line: #1a1a1a; --ink: #111; --muted: #6b6560;
+  --accent-text: color-mix(in oklab, var(--accent), #000 25%); --accent-soft: color-mix(in oklab, var(--accent) 10%, #fff);
+  --display: "Playfair Display", Georgia, serif; --text: "Montserrat", system-ui, sans-serif; --r-md: 0px; --r-lg: 0px;
+  color-scheme: light;
+}
+[data-theme=vogue] .wrap { padding-top: 0; }
+[data-theme=vogue] .hero { margin: 0 -16px; min-height: 600px; padding: 0; border-radius: 0; background: #222 center/cover no-repeat; color: #fff; justify-content: space-between; box-shadow: none; }
+[data-theme=vogue] .hero .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(0,0,0,.4) 0%, transparent 28%, transparent 52%, rgba(0,0,0,.7) 100%); }
+[data-theme=vogue] .hero .mast { padding: calc(18px + var(--safe-top)) 20px 0; display: flex; justify-content: space-between; align-items: baseline; font: 600 11px/1 var(--text); letter-spacing: .3em; text-transform: uppercase; }
+[data-theme=vogue] .hero h1 { padding: 0 18px; margin-top: 8px; font: 900 clamp(34px, calc((min(100vw,560px) - 40px) / (var(--n,8) * .86)), 96px)/.88 var(--display); letter-spacing: -.03em; text-transform: uppercase; overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+[data-theme=vogue] .hero .cover-lines { padding: 0 20px 26px; display: grid; gap: 6px; max-width: 64%; }
+[data-theme=vogue] .hero .cover-lines b { font: italic 600 26px/1.05 var(--display); }
+[data-theme=vogue] .hero .cover-lines span { font: 500 12px/1.4 var(--text); letter-spacing: .08em; text-transform: uppercase; }
+[data-theme=vogue] .hero .issue { position: absolute; right: 18px; bottom: 26px; background: var(--accent); color: var(--accent-ink); font: 700 12px/1.2 var(--text); letter-spacing: .12em; text-transform: uppercase; padding: 10px 12px; transform: rotate(-4deg); text-align: center; }
+[data-theme=vogue] .demo-tag { border-color: rgba(255,255,255,.6); color: #fff; letter-spacing: 0; text-transform: none; }
+[data-theme=vogue] .quick { margin: 0 -16px; border-radius: 0; border-left: 0; border-right: 0; border-color: var(--line); background: var(--bg); }
+[data-theme=vogue] .quick > * + * { border-left-color: var(--line); }
+[data-theme=vogue] .quick .ic { color: var(--ink); }
+[data-theme=vogue] h2 { font: 900 44px/.9 var(--display); text-transform: uppercase; letter-spacing: -.02em; margin-top: 40px; }
+[data-theme=vogue] .sec-head p { font: 600 12px/1.4 var(--text); text-transform: uppercase; letter-spacing: .18em; margin-top: 10px; }
+[data-theme=vogue] .list { background: transparent; border: 0; border-top: 2px solid var(--line); counter-reset: v; border-radius: 0; }
+[data-theme=vogue] .list .svc + .svc { border-top: 1px solid var(--line); }
+[data-theme=vogue] .svc { counter-increment: v; padding: 18px 0; align-items: baseline; }
+[data-theme=vogue] .svc .ico { display: none; }
+[data-theme=vogue] .svc::before { content: counter(v, decimal-leading-zero); font: italic 700 28px/1 var(--display); color: var(--accent-text); min-width: 46px; }
+[data-theme=vogue] .svc .name { font: 700 17px/1.2 var(--text); text-transform: uppercase; letter-spacing: .02em; }
+[data-theme=vogue] .svc .price { font: italic 700 22px/1 var(--display); }
+[data-theme=vogue] .btn { background: #111; color: #fff; text-transform: uppercase; letter-spacing: .16em; font-size: 13px; }
+[data-theme=vogue] .btn.ghost, [data-theme=vogue] .btn.danger, [data-theme=vogue] .btn.sm { text-transform: none; letter-spacing: 0; }
+[data-theme=vogue] .btn.ghost { background: transparent; color: var(--ink); }
+[data-theme=vogue] .bar .btn { background: var(--accent); color: var(--accent-ink); }
+[data-theme=vogue] .place { background: transparent; border: 2px solid var(--line); }
+[data-theme=vogue] .install { border-radius: 0; background: var(--surface); border-color: var(--line); }
+
+/* ---------- glass: фото на весь экран и матовое стекло ---------- */
+:root[data-theme=glass] {
+  --bg: #120f16; --surface: rgba(255,255,255,.1); --surface-2: rgba(255,255,255,.16); --line: rgba(255,255,255,.2); --ink: #fff; --muted: rgba(255,255,255,.72);
+  --accent-text: color-mix(in oklab, var(--accent), #fff 35%); --accent-soft: color-mix(in oklab, var(--accent) 30%, transparent);
+  --display: "Unbounded", system-ui, sans-serif; --text: "Manrope", system-ui, sans-serif; color-scheme: dark; --r-md: 20px; --r-lg: 28px;
+}
+[data-theme=glass] body { background: #120f16; }
+[data-theme=glass] .bgphoto { position: fixed; inset: -30px; z-index: -2; background: center/cover no-repeat; filter: blur(22px) saturate(1.3) brightness(.6); }
+[data-theme=glass] .bgtint { position: fixed; inset: 0; z-index: -1; background: radial-gradient(80% 50% at 80% 0%, color-mix(in oklab, var(--accent) 45%, transparent), transparent 70%); }
+[data-theme=glass] .hero { min-height: 470px; padding: 0; background: #000 center/cover no-repeat; border: 1px solid var(--line); box-shadow: 0 30px 60px -30px #000; justify-content: flex-end; }
+[data-theme=glass] .hero .pane { margin: 14px; padding: 18px 18px 20px; border-radius: 20px; background: rgba(20,16,26,.38); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); border: 1px solid rgba(255,255,255,.22); }
+[data-theme=glass] .hero h1 { font: 700 clamp(24px, calc((min(100vw,560px) - 90px) / (var(--n,8) * .78)), 40px)/1.05 var(--display); }
+[data-theme=glass] .hero .emblem { position: absolute; top: 16px; left: 16px; }
+[data-theme=glass] .demo-tag { position: absolute; top: 22px; right: 18px; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+[data-theme=glass] .quick, [data-theme=glass] .list, [data-theme=glass] .place, [data-theme=glass] .install { background: var(--surface); border-color: var(--line); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+[data-theme=glass] .quick .ic { color: var(--accent-text); }
+[data-theme=glass] h2 { font: 600 22px/1.2 var(--display); }
+[data-theme=glass] .svc .ico { background: color-mix(in oklab, var(--accent) 35%, transparent); color: #fff; border: 1px solid rgba(255,255,255,.25); }
+[data-theme=glass] .svc .price { color: var(--accent-text); }
+[data-theme=glass] .bar { background: linear-gradient(180deg, transparent, rgba(18,15,22,.9) 50%); }
+[data-theme=glass] .btn { background: linear-gradient(135deg, var(--accent), color-mix(in oklab, var(--accent), #fff 25%)); box-shadow: 0 10px 30px -10px var(--accent); }
+[data-theme=glass] .btn.ghost, [data-theme=glass] .btn.danger { background: transparent; box-shadow: none; }
+[data-theme=glass] .sheet { background: #19151f; }
+
+/* ---------- arch: светлый минимализм, фото в арке ---------- */
+:root[data-theme=arch] {
+  --bg: #f5efe7; --surface: #fffaf4; --surface-2: #efe6da; --line: #ded2c3; --ink: #2d2520; --muted: #87776a;
+  --accent-text: color-mix(in oklab, var(--accent), #2d2520 35%); --accent-soft: color-mix(in oklab, var(--accent) 10%, #fffaf4);
+  --display: "Prata", Georgia, serif; --text: "Raleway", system-ui, sans-serif; --r-md: 14px; color-scheme: light;
+}
+[data-theme=arch] .hero { min-height: 0; padding: 28px 20px 26px; background: transparent; color: var(--ink); box-shadow: none; text-align: center; gap: 0; }
+[data-theme=arch] .hero .archwrap { position: relative; width: 74%; margin: 0 auto; }
+[data-theme=arch] .hero .archwrap::before { content: ""; position: absolute; inset: -12px -12px 18px 12px; border: 1px solid var(--accent-text); border-radius: 999px 999px 10px 10px; z-index: -1; }
+[data-theme=arch] .hero .photo { aspect-ratio: 3 / 4; background: center/cover no-repeat; border-radius: 999px 999px 10px 10px; box-shadow: 0 30px 50px -30px rgba(60,40,20,.6); }
+[data-theme=arch] .hero .kicker { margin-top: 26px; font: 600 11px/1 var(--text); letter-spacing: .34em; text-transform: uppercase; color: var(--accent-text); }
+[data-theme=arch] .hero h1 { margin-top: 12px; font: 400 clamp(30px, calc((min(100vw,560px) - 60px) / (var(--n,8) * .62)), 48px)/1.05 var(--display); letter-spacing: .01em; }
+[data-theme=arch] .hero .tag { color: var(--muted); margin: 10px auto 0; font-style: italic; }
+[data-theme=arch] .hero-meta { justify-items: center; }
+[data-theme=arch] .hero-meta .addr { color: var(--muted); }
+[data-theme=arch] .demo-tag { position: absolute; top: 10px; right: 6px; color: var(--muted); border-color: var(--line); }
+[data-theme=arch] .quick { background: transparent; border-radius: 0; border-left: 0; border-right: 0; }
+[data-theme=arch] h2 { font: 400 30px/1.1 var(--display); text-align: center; margin-top: 44px; }
+[data-theme=arch] .sec-head p { text-align: center; }
+[data-theme=arch] .list { background: transparent; border: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; overflow: visible; }
+[data-theme=arch] .list .svc + .svc { border-top: 1px solid var(--line); }
+[data-theme=arch] .svc { flex-direction: column; align-items: flex-start; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 120px 120px 14px 14px; padding: 22px 14px 16px; text-align: left; min-height: 196px; }
+[data-theme=arch] .svc .ico { background: transparent; border: 1px solid var(--line); border-radius: 50%; align-self: center; }
+[data-theme=arch] .svc .body { width: 100%; }
+[data-theme=arch] .svc .name { font: 400 17px/1.25 var(--display); }
+[data-theme=arch] .svc .meta { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+[data-theme=arch] .svc .price { margin-top: auto; text-align: left; font: 600 16px/1 var(--text); color: var(--accent-text); }
+[data-theme=arch] .svc .price small { display: inline; margin-right: 4px; }
+[data-theme=arch] .btn { border-radius: 999px; background: var(--ink); color: #fffaf4; letter-spacing: .08em; }
+[data-theme=arch] .btn.ghost, [data-theme=arch] .btn.danger { background: transparent; color: var(--ink); }
+[data-theme=arch] .bar .btn { background: var(--accent); color: var(--accent-ink); }
+[data-theme=arch] .sheet .list { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+[data-theme=arch] .sheet .svc { flex-direction: row; align-items: center; border-radius: 0; border: 0; min-height: 64px; padding: 12px 14px; }
+
+/* ---------- bloom: яркий, кольцо с текстом вокруг фото ---------- */
+:root[data-theme=bloom] {
+  --bg: color-mix(in oklab, var(--accent) 10%, #fffdf6); --surface: #fff; --surface-2: color-mix(in oklab, var(--accent) 10%, #fff);
+  --line: #151515; --ink: #151515; --muted: #555; --accent-text: color-mix(in oklab, var(--accent), #000 30%);
+  --accent-soft: color-mix(in oklab, var(--accent) 22%, #fff); --display: "Comfortaa", system-ui, sans-serif; --text: "Nunito", system-ui, sans-serif; --r-md: 20px; --r-lg: 30px;
+  color-scheme: light;
+}
+[data-theme=bloom] body { background: radial-gradient(60% 40% at 0% 0%, color-mix(in oklab, var(--accent) 30%, transparent), transparent), radial-gradient(50% 40% at 100% 30%, color-mix(in oklab, var(--accent), #ffd54f 60%) 0%, transparent 60%), var(--bg); background-attachment: fixed; }
+[data-theme=bloom] .hero { min-height: 0; padding: 22px 20px 24px; background: var(--surface); color: var(--ink); border: 2px solid var(--line); box-shadow: 6px 6px 0 var(--line); gap: 0; }
+[data-theme=bloom] .hero .ringbox { position: relative; width: 82%; aspect-ratio: 1; margin: 4px auto 8px; }
+[data-theme=bloom] .hero .ringbox .photo { position: absolute; inset: 14%; border-radius: 50%; background: center/cover no-repeat; border: 2px solid var(--line); }
+[data-theme=bloom] .hero .ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 26s linear infinite; }
+[data-theme=bloom] .hero .ring text { font: 700 15px var(--display); letter-spacing: 3px; fill: var(--ink); }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { [data-theme=bloom] .hero .ring, [data-theme=petal] .hero .photo { animation: none; } }
+[data-theme=bloom] .hero .star { position: absolute; right: 0; top: 2%; width: 22%; fill: var(--accent); stroke: var(--line); stroke-width: 2; }
+[data-theme=bloom] .hero h1 { text-align: center; font: 700 clamp(28px, calc((min(100vw,560px) - 70px) / (var(--n,8) * .7)), 46px)/1 var(--display); }
+[data-theme=bloom] .hero .tag { text-align: center; margin: 8px auto 0; color: var(--muted); }
+[data-theme=bloom] .hero-meta { justify-items: center; }
+[data-theme=bloom] .hero-meta .addr { color: var(--muted); }
+[data-theme=bloom] .demo-tag { position: absolute; top: 14px; left: 14px; color: var(--ink); border-color: var(--line); background: var(--accent-soft); }
+[data-theme=bloom] .quick { border: 2px solid var(--line); box-shadow: 4px 4px 0 var(--line); }
+[data-theme=bloom] .quick > * + * { border-left: 2px solid var(--line); }
+[data-theme=bloom] h2 { font: 700 26px/1.1 var(--display); }
+[data-theme=bloom] .list { background: transparent; border: 0; display: grid; gap: 12px; overflow: visible; }
+[data-theme=bloom] .list .svc + .svc { border-top: 2px solid var(--line); }
+[data-theme=bloom] .svc { background: var(--surface); border: 2px solid var(--line); border-radius: 20px; box-shadow: 4px 4px 0 var(--line); }
+[data-theme=bloom] .svc:nth-child(3n+1) .ico { background: var(--accent); color: var(--accent-ink); }
+[data-theme=bloom] .svc:nth-child(3n+2) .ico { background: #ffd54f; color: #151515; }
+[data-theme=bloom] .svc:nth-child(3n) .ico { background: #9ee6c8; color: #151515; }
+[data-theme=bloom] .svc .ico { border: 2px solid var(--line); border-radius: 14px; }
+[data-theme=bloom] .svc .price { font: 700 17px/1 var(--display); background: #fff3a6; padding: 8px 10px; border: 2px solid var(--line); border-radius: 12px; transform: rotate(-3deg); }
+[data-theme=bloom] .svc .price small { display: inline; margin-right: 3px; }
+[data-theme=bloom] .btn { border: 2px solid var(--line); box-shadow: 4px 4px 0 var(--line); border-radius: 16px; }
+[data-theme=bloom] .place, [data-theme=bloom] .install { border: 2px solid var(--line); box-shadow: 4px 4px 0 var(--line); }

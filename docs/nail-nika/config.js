@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-nika",
- "theme": "protocol",
+ "theme": "petal",
  "demo": false,
  "city": "Москва",
  "name": "Ника",
@@ -43,8 +43,8 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#be123c",
- "accentInk": "#ffffff",
+ "accent": "#f2a07b",
+ "accentInk": "#3a1a0e",
  "socials": {
   "tg": "https://wa.me/79256953785"
  },
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "нежный маникюр",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

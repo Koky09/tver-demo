@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-why-not",
- "theme": "stitch",
+ "theme": "vogue",
  "demo": false,
  "city": "Москва",
  "name": "Why not?",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#b45309",
+ "accent": "#0f766e",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79199628989"
@@ -135,5 +135,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Маникюр, который хочется показать",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

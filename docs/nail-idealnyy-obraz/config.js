@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "nail-idealnyy-obraz",
- "theme": "protocol",
+ "theme": "vogue",
  "demo": false,
  "city": "Москва",
  "name": "Идеальный Образ",
@@ -43,7 +43,7 @@ window.CONFIG = {
  "boxes": 2,
  "boxLabel": "Мастер",
  "kind": "nail",
- "accent": "#be123c",
+ "accent": "#65a30d",
  "accentInk": "#ffffff",
  "socials": {
   "tg": "https://wa.me/79999661611"
@@ -152,5 +152,7 @@ window.CONFIG = {
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Тренды сезона — у нас",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

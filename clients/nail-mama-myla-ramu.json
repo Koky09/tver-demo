@@ -1,6 +1,6 @@
 {
   "slug": "nail-mama-myla-ramu",
-  "theme": "protocol",
+  "theme": "bloom",
   "demo": false,
   "city": "Москва",
   "name": "Мама мыла раму",
@@ -43,7 +43,7 @@
   "boxes": 2,
   "boxLabel": "Мастер",
   "kind": "nail",
-  "accent": "#a16207",
+  "accent": "#ff5c8a",
   "accentInk": "#ffffff",
   "socials": {
     "tg": "https://wa.me/79153746669"
@@ -151,5 +151,6 @@
     }
   ],
   "commentLabel": "Комментарий",
-  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч"
+  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+  "ringText": "маникюр • педикюр • дизайн • запись онлайн • "
 }
