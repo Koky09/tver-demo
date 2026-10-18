@@ -86,6 +86,7 @@ function render() {
         ${it.wa ? `<a class="btn wa" href="https://wa.me/${it.wa}?text=${encodeURIComponent(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ''}
         ${it.tg ? `<a class="btn" href="${esc(it.tg)}" target="_blank" rel="noopener">Telegram</a>` : ''}
         <button type="button" class="btn" data-copy="${it.id}">Скопировать текст</button>
+        ${it.video ? `<a class="btn" href="${esc(it.video)}" target="_blank" rel="noopener">Видео ▶</a>` : ''}
         <label class="done"><input type="checkbox" data-done="${it.id}" ${sent[it.id] ? 'checked' : ''}> Отправил</label>
       </div></article>`;
   }

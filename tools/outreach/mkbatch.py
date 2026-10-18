@@ -56,7 +56,7 @@ def text(c, b):
               else f"Цены взял из вашего прайса {where}, меняете их сами в кабинете.")
     if b.get("kind") == "nail":   # салон: коротко, про окошки и неявки, без «боксов»
         return (f"Здравствуйте! Меня зовут Роман, я делаю онлайн-запись для мастеров маникюра {b.get('city_gen') or city_gen(c['city'])}.\n\n"
-                f"{hook.replace('по телефону', 'по телефону или в переписке')} Я сделал для «{c['name']}» страницу записи, посмотрите:\n{BASE}{c['slug']}/\n\n"
+                f"{hook.replace('по телефону', 'по телефону или в переписке')} Я сделал для «{c['name']}» страницу записи (видео на 25 секунд прикладываю), посмотрите:\n{BASE}{c['slug']}/\n\n"
                 f"Клиентка сама выбирает услугу и свободное окошко у мастера в любое время, даже когда вы с клиентом и не можете ответить. "
                 f"Запись сразу приходит вам в Telegram. Ссылку можно поставить в шапку ВК и Instagram, на Яндекс Карты и в 2ГИС.\n\n{prices} {PRICE}")
     tire = b.get("kind") == "tire"
@@ -80,7 +80,8 @@ def main():
         tg = b.get("tg", "")
         tg = tg if tg.startswith("https://t.me/") else (f"https://t.me/{tg.lstrip('@')}" if tg else "")
         items.append(dict(id=i, group=c["city"], name=c["name"], phone=c["phone"], tg=tg, text=text(c, b),
-                          wa=d if d[1] == "9" else "", tgn=b.get("tgn", ""), pre=bool(b.get("sent"))))
+                          wa=d if d[1] == "9" else "", tgn=b.get("tgn", ""), pre=bool(b.get("sent")),
+                          video=f"{BASE}v/{b['slug']}.mp4" if (ROOT / "docs" / "v" / f"{b['slug']}.mp4").exists() else ""))
     key = re.sub(r"[^a-z0-9-]", "", src.stem.lower()) or "batch"
     html = (HERE / "outreach_template.html").read_text(encoding="utf-8")
     html = html.replace("<title>Рассылка владельцам</title>", f"<title>Рассылка: {title}</title>").replace("<h1>Рассылка владельцам</h1>", f"<h1>Рассылка: {title}</h1>")

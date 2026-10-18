@@ -1,0 +1,287 @@
+nail-diamond-nails               800 КБ  30 с
+nail-lerush                      801 КБ  29 с
+nail-polly-nail                  966 КБ  28 с
+nail-manik-time                  1015 КБ  28 с
+nail-yabeauty                    854 КБ  28 с
+nail-pronails                    666 КБ  28 с
+nail-soroka-art-nail             ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-fairy-nails                 ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-zatmi-solntse               940 КБ  32 с
+nail-jungle                      832 КБ  30 с
+nail-moskouneyls                 783 КБ  29 с
+nail-we-nail-you                 907 КБ  29 с
+nail-georgin                     887 КБ  29 с
+nail-tsentr-pedikyura            1018 КБ  29 с
+nail-idealnyy-obraz              834 КБ  29 с
+nail-oly-charm                   709 КБ  29 с
+nail-floraison                   859 КБ  29 с
+nail-diardi-studio               ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-zoloto                      ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-mama-myla-ramu              801 КБ  29 с
+nail-drevesnaya-yagoda           805 КБ  29 с
+nail-narciss-beauty-home         844 КБ  33 с
+nail-samanic                     886 КБ  29 с
+nail-akademiya-byuti             976 КБ  29 с
+nail-nika                        801 КБ  28 с
+nail-beauty-style                713 КБ  29 с
+nail-studiya-tatyany-leyhner     ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    58 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-nuance                      947 КБ  29 с
+nail-star-1                      963 КБ  29 с
+nail-rotary-master               832 КБ  29 с
+nail-365                         809 КБ  28 с
+nail-mindal-ogon                 ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-cils-studio                 955 КБ  28 с
+nail-why-not                     1158 КБ  29 с
+nail-pudra                       716 КБ  29 с
+nail-blash                       ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-beauty-breeze               926 КБ  29 с
+nail-setka-beauty                993 КБ  29 с
+nail-kseniya-resnichka           971 КБ  30 с
+nail-vivi-beauty                 ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+
+nail-visionary                   763 КБ  28 с
+nail-marfa                       802 КБ  28 с
+nail-no-one-else                 988 КБ  29 с
+nail-lu-lu                       983 КБ  29 с
+nail-chiki-riki                  769 КБ  28 с
+nail-imidzh                      ОШИБКА Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator(".sheet").locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$")).nth(1)
+    - locator resolved to <button class="day sel" aria-pressed="true" data-day="2026-10-19" aria-label="завтра, 19 октября, пн">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - <div id="vcap">…</div> intercepts pointer events
+    - retrying click action
+      - waiting 100ms
+    57 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - <div id="vcap">…</div> intercepts pointer events
+     - retrying click action
+       - waiting 500ms
+    - waiting for element to be visible, enabled and stable
+    - element is visible, enabled and stable
+    - scrolling into view if needed
+
+nail-nombre-d-or                 849 КБ  30 с
+nail-marafet                     948 КБ  28 с
+nail-the-litsa                   959 КБ  28 с
+nail-albina                      792 КБ  28 с
