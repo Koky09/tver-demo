@@ -79,8 +79,12 @@ def main():
         d = re.sub(r"\D", "", c["phoneHref"])
         tg = b.get("tg", "")
         tg = tg if tg.startswith("https://t.me/") else (f"https://t.me/{tg.lstrip('@')}" if tg else "")
+        tgn = b.get("tgn", "")
+        if not tg and d[1] == "9":
+            # чат по номеру: t.me/+79991234567 открывает Telegram, если номер там есть и не скрыт
+            tg, tgn = f"https://t.me/+{d}", f"проверьте: чат по номеру +{d} (не открылся — значит Telegram нет)"
         items.append(dict(id=i, group=c["city"], name=c["name"], phone=c["phone"], tg=tg, text=text(c, b),
-                          wa=d if d[1] == "9" else "", tgn=b.get("tgn", ""), pre=bool(b.get("sent")),
+                          wa=d if d[1] == "9" else "", tgn=tgn, pre=bool(b.get("sent")),
                           video=f"{BASE}v/{b['slug']}.mp4" if (ROOT / "docs" / "v" / f"{b['slug']}.mp4").exists() else ""))
     key = re.sub(r"[^a-z0-9-]", "", src.stem.lower()) or "batch"
     html = (HERE / "outreach_template.html").read_text(encoding="utf-8")
