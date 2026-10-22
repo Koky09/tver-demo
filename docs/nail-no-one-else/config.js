@@ -3,9 +3,9 @@ window.CONFIG = {
  "theme": "arch",
  "demo": false,
  "city": "Москва",
- "name": "No one else",
+ "name": "NO ONE ELSE",
  "short": "NO",
- "tagline": "Маникюр и педикюр · Нижегородский",
+ "tagline": "Маникюр, педикюр, брови, ресницы, макияж · Рязанский проспект",
  "address": "Москва, проспект Рязанский, 3Б",
  "mapQuery": "Москва, проспект Рязанский, 3Б",
  "phone": "+7 995 783-72-21",
@@ -49,107 +49,142 @@ window.CONFIG = {
   "tg": "https://wa.me/79957837221"
  },
  "demoPrices": false,
- "chatHints": [
-  "Маникюр с покрытием завтра вечером",
-  "Сколько стоит педикюр?",
-  "Наращивание в субботу",
-  "Где вы находитесь?"
- ],
  "services": [
   {
    "id": "gel",
-   "name": "Маникюр в отпуск | Полигель",
-   "price": 3700,
-   "priceFrom": true,
-   "duration": 120,
-   "keywords": [
-    "гель-лак",
-    "гельлак",
-    "покрытие",
-    "шеллак",
-    "гель"
-   ],
+   "name": "Маникюр с покрытием гель-лака",
+   "price": 3000,
+   "priceFrom": false,
+   "duration": 90,
+   "keywords": [],
+   "iconKey": "polish",
+   "note": "комплекс: маникюр и покрытие"
+  },
+  {
+   "id": "mani",
+   "name": "Маникюр без покрытия",
+   "price": 1500,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [],
    "iconKey": "polish"
   },
   {
+   "id": "mani2",
+   "name": "Японский маникюр",
+   "price": 2300,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "polish",
+   "note": "маникюр + натуральное покрытие"
+  },
+  {
    "id": "pedi",
+   "name": "Педикюр с покрытием гель-лака",
+   "price": 3300,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [],
+   "iconKey": "foot",
+   "note": "комплекс"
+  },
+  {
+   "id": "pedi2",
    "name": "Педикюр без покрытия",
    "price": 2100,
    "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "foot"
+  },
+  {
+   "id": "duo",
+   "name": "Маникюр и педикюр в 4 руки",
+   "price": 4200,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "spark",
+   "note": "без покрытия, за одно время"
+  },
+  {
+   "id": "brows",
+   "name": "Оформление бровей",
+   "price": 2100,
+   "priceFrom": false,
+   "duration": 45,
+   "keywords": [],
+   "iconKey": "eye",
+   "note": "коррекция, окрашивание, архитектура"
+  },
+  {
+   "id": "brows2",
+   "name": "Ламинирование бровей с окрашиванием",
+   "price": 3500,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "eye"
+  },
+  {
+   "id": "lash",
+   "name": "Ламинирование ресниц",
+   "price": 2800,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "eye",
+   "note": "комплекс с окрашиванием"
+  },
+  {
+   "id": "lash2",
+   "name": "Наращивание ресниц 1D",
+   "price": 3000,
+   "priceFrom": true,
+   "duration": 80,
+   "keywords": [],
+   "iconKey": "eye"
+  },
+  {
+   "id": "pm",
+   "name": "Пудровое напыление бровей",
+   "price": 10000,
+   "priceFrom": false,
    "duration": 120,
-   "keywords": [
-    "педикюр",
-    "ноги",
-    "стопы",
-    "пальчики"
-   ],
-   "iconKey": "foot",
-   "note": "Полная обработка стопы и пальчиков ног"
+   "keywords": [],
+   "iconKey": "brush",
+   "note": "перманентный макияж"
   },
   {
-   "id": "ext",
-   "name": "Наращивание ногтей(с покрытием гель-лак)",
-   "price": 4500,
-   "priceFrom": true,
-   "duration": 150,
-   "keywords": [
-    "наращивание",
-    "нарастить",
-    "длина",
-    "коррекция",
-    "акрил",
-    "акригель"
-   ],
-   "iconKey": "gem"
-  },
-  {
-   "id": "design",
-   "name": "Френч и Сакура | 10 ногтей",
-   "price": 1000,
-   "priceFrom": true,
-   "duration": 15,
-   "keywords": [
-    "дизайн",
-    "френч",
-    "стразы",
-    "рисунок",
-    "втирка",
-    "слайдер"
-   ],
+   "id": "makeup",
+   "name": "Дневной макияж",
+   "price": 4000,
+   "priceFrom": false,
+   "duration": 45,
+   "keywords": [],
    "iconKey": "brush"
-  },
-  {
-   "id": "remove",
-   "name": "Снятие геля",
-   "price": 600,
-   "priceFrom": true,
-   "duration": 20,
-   "keywords": [
-    "снятие",
-    "снять"
-   ],
-   "iconKey": "spark"
-  },
-  {
-   "id": "spa",
-   "name": "Спа для Рук | Ног - Скраб и Маска",
-   "price": 600,
-   "priceFrom": true,
-   "duration": 30,
-   "keywords": [
-    "спа",
-    "парафин",
-    "уход",
-    "массаж",
-    "увлажнение"
-   ],
-   "iconKey": "drop",
-   "note": "Устали от сухости и усталости кожи? Подарите своим ручкам и"
   }
  ],
  "commentLabel": "Комментарий",
  "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
- "kicker": "Ногтевая студия",
+ "kicker": "Beauty studio",
+ "bookingUrl": "https://n999382.yclients.com/",
  "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
- "heroImage": "hero.jpg"
+ "heroImage": "hero.jpg",
+ "gallery": [
+  "g/01.jpg",
+  "g/02.jpg",
+  "g/03.jpg",
+  "g/04.jpg",
+  "g/05.jpg",
+  "g/06.jpg",
+  "g/07.jpg",
+  "g/08.jpg",
+  "g/09.jpg",
+  "g/10.jpg",
+  "g/11.jpg",
+  "g/12.jpg",
+  "g/13.jpg"
+ ]
 };

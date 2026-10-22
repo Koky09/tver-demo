@@ -77,6 +77,14 @@ def build(cfg_path):
     if photo.exists():
         shutil.copy(photo, out / "hero.jpg")
         cfg["heroImage"] = "hero.jpg"
+    # фото работ клиента: clients/gallery/<slug>/*.jpg -> g/ (блок «Наши работы»)
+    gal = ROOT / "clients" / "gallery" / cfg["slug"]
+    if gal.is_dir():
+        (out / "g").mkdir(exist_ok=True)
+        cfg["gallery"] = []
+        for f in sorted(gal.glob("*.jpg")):
+            shutil.copy(f, out / "g" / f.name)
+            cfg["gallery"].append(f"g/{f.name}")
 
     (out / "config.js").write_text("window.CONFIG = " + json.dumps(cfg, ensure_ascii=False, indent=1) + ";\n", encoding="utf-8")
     theme = cfg.get("theme", "lacquer")

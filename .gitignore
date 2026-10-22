@@ -25,3 +25,4 @@ tools/newclient/unsplash_*/*.jpg
 tools/newclient/unsplash_*/_get.py
 tools/newclient/unsplash_*/_ids.txt
 tools/newclient/unsplash_*/_list.txt
+clients/src/

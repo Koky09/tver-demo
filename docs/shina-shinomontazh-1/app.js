@@ -457,7 +457,7 @@
         <div class="body"><b>Добавьте на экран</b><br><span class="muted">${isIOS ? 'Нажмите «Поделиться» → «На экран „Домой“»' : W.tap}</span></div>
         ${isIOS ? '' : '<button class="btn sm" data-act="install">Добавить</button>'}
       </div>`}
-      <div class="sec-head"><h2>${W.svcH}</h2><p class="muted small">${W.svcP}</p></div>
+      <div class="sec-head"><h2>${W.svcH}</h2><p class="muted small">${C.bookingUrl ? 'Нажмите на услугу, чтобы записаться онлайн' : W.svcP}</p></div>
       <div class="list">${services().map((s) => `
         <button class="svc" data-svc="${s.id}">
           <span class="ico">${svcIcon(s)}</span>
@@ -475,11 +475,13 @@
     </div>
     <div class="bar"><div class="inner">
       <button class="btn" data-act="book">${W.cta}</button>
-      <button class="btn chat-btn" data-act="chat" aria-label="Подобрать время с ассистентом">${I.spark}</button>
+      ${C.bookingUrl ? '' : `<button class="btn chat-btn" data-act="chat" aria-label="Подобрать время с ассистентом">${I.spark}</button>`}
     </div></div>`;
 
     app.onclick = (e) => {
       const t = e.target.closest('[data-act],[data-svc]'); if (!t) return;
+      // своя онлайн-запись салона (YCLIENTS, Sonline ...): записи сразу попадают в их программу
+      if (C.bookingUrl && (t.dataset.svc || t.dataset.act === 'book')) return window.open(C.bookingUrl, '_blank', 'noopener');
       if (t.dataset.svc) return openBooking({ svcId: t.dataset.svc, step: 2 });
       const a = t.dataset.act;
       if (a === 'book') openBooking({ step: 1 });
