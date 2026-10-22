@@ -1,0 +1,151 @@
+window.CONFIG = {
+ "slug": "salon-vlghair",
+ "theme": "deco",
+ "demo": false,
+ "city": "Волгоград",
+ "name": "VlgHair",
+ "short": "V",
+ "tagline": "Салон красоты · Дзержинский район",
+ "address": "Волгоград, бульвар 30-летия Победы, 23/1",
+ "mapQuery": "Волгоград, бульвар 30-летия Победы, 23/1",
+ "phone": "+7 937 700-06-18",
+ "phoneHref": "+79377000618",
+ "hours": {
+  "0": [
+   10,
+   22
+  ],
+  "1": [
+   10,
+   22
+  ],
+  "2": [
+   10,
+   22
+  ],
+  "3": [
+   10,
+   22
+  ],
+  "4": [
+   10,
+   22
+  ],
+  "5": [
+   10,
+   22
+  ],
+  "6": [
+   10,
+   22
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#317d81",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79377000618"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Женская стрижка до лопаток",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors"
+  },
+  {
+   "id": "color",
+   "name": "Сложное окрашивание",
+   "price": 6000,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette",
+   "note": "Устали от плоского, однотонного цвета волос? Хотите глубину,"
+  },
+  {
+   "id": "style",
+   "name": "Мытьё головы + укладка",
+   "price": 1500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer"
+  },
+  {
+   "id": "care",
+   "name": "Холодное восстановление",
+   "price": 3500,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "уход",
+    "кератин",
+    "ботокс",
+    "восстановление",
+    "выпрямление",
+    "ламинирование волос"
+   ],
+   "iconKey": "drop"
+  },
+  {
+   "id": "brows",
+   "name": "SPA для бровей",
+   "price": 300,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "брови",
+    "бровей",
+    "ресницы",
+    "ламинирование"
+   ],
+   "iconKey": "eye"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

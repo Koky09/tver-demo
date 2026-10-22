@@ -5,7 +5,7 @@
 Файл партии — список заведений (пример: tools/newclient/example-batch.json):
     slug, name, short (1–2 буквы для логотипа), city, addr (без города), phone, msg (ссылка wa.me / t.me, можно ""),
     theme (lacquer|atelier|race|protocol|aqua|stitch|sticker), accent (#rrggbb), ink (цвет текста на accent),
-    tag (подзаголовок), hours ({"default": [9, 21], "0": [10, 20]} или "24/7"), boxes, kind (wash|detail|tint|tire|nail),
+    tag (подзаголовок), hours ({"default": [9, 21], "0": [10, 20]} или "24/7"), boxes, kind (wash|detail|tint|tire|nail|club|salon),
     demo (true — цены примерные, в кабинете будет подсказка), svc: [[тип, название, цена, минуты, примечание?, "от"?], ...],
     а для рассылки: rating, reviews, source ("2ГИС" или "Яндекс Карты"), tg (личный Telegram, если нашли).
 Типы услуг — ключи KW ниже (wash, body, express, interior, polish, ceramic, tint, ppf ...): от типа зависят иконка и подсказки чата.
@@ -35,23 +35,39 @@ KW = {
     "pedi": ["педикюр", "ноги", "стопы", "пальчики"], "ext": ["наращивание", "нарастить", "длина", "коррекция", "акрил", "акригель"],
     "design": ["дизайн", "френч", "стразы", "рисунок", "втирка", "слайдер"], "remove": ["снятие", "снять"],
     "spa": ["спа", "парафин", "уход", "массаж", "увлажнение"], "brows": ["брови", "бровей", "ресницы", "ламинирование"],
+    "ps": ["playstation", "плойка", "плойку", "приставка", "ps5", "ps4", "консоль", "fifa", "фифа", "mortal", "геймпад"],
+    "pc": ["пк", "компьютер", "компьютеры", "cs", "кс", "dota", "дота", "валорант", "место"],
+    "vip": ["vip", "вип", "комната", "кабина", "отдельная", "приватная"], "night": ["ночь", "ночной", "ночью", "до утра"],
+    "party": ["день рождения", "др", "праздник", "компания", "вечеринка", "аренда зала", "весь клуб"],
+    "vr": ["vr", "виртуальная", "очки", "шлем"],
+    "hair": ["стрижка", "подстричь", "постричь", "стрижку", "волосы", "чёлка", "челка", "кончики"],
+    "color": ["окрашивание", "покрасить", "краска", "цвет", "мелирование", "балаяж", "airtouch", "тонирование", "блонд", "седина"],
+    "style": ["укладка", "причёска", "прическа", "локоны", "вечерняя", "свадебная", "плетение"],
+    "care": ["уход", "кератин", "ботокс", "восстановление", "выпрямление", "ламинирование волос"],
+    "face": ["косметолог", "чистка лица", "пилинг", "лицо", "массаж лица", "уход за лицом"],
 }
 ICON = {"wash": "bubbles", "body": "spray", "express": "drop", "touchless": "spray", "detail": "bucket", "interior": "seat", "seats": "seat",
         "polish": "spark", "ceramic": "diamond", "wax": "spark", "rain": "drop", "engine": "gear", "under": "spray", "headlights": "light",
         "ppf": "shield", "tint": "tint", "noise": "mute", "presale": "tag", "dent": "tag", "leather": "seat", "ozone": "spark", "chrome": "roller",
         "glass": "shield", "vinyl": "roller",
         "tire": "wheel", "balance": "wheel", "rims": "wheel", "repair": "gear", "storage": "stack",
-        "mani": "polish", "gel": "polish", "pedi": "foot", "ext": "gem", "design": "brush", "remove": "spark", "spa": "drop", "brows": "eye"}
+        "mani": "polish", "gel": "polish", "pedi": "foot", "ext": "gem", "design": "brush", "remove": "spark", "spa": "drop", "brows": "eye",
+        "ps": "pad", "pc": "monitor", "vip": "crown", "night": "moon", "party": "cake", "vr": "vr",
+        "hair": "scissors", "color": "palette", "style": "dryer", "care": "drop", "face": "face"}
 HINTS = {
     "wash": ["Помыть машину сегодня вечером", "Сколько стоит комплекс?", "Химчистка на выходных", "Где вы находитесь?"],
     "detail": ["Полировка на следующей неделе", "Сколько стоит керамика?", "Химчистка в субботу", "Где вы находитесь?"],
     "tint": ["Тонировка завтра", "Сколько стоит плёнка на фары?", "Оклейка зон риска", "Где вы находитесь?"],
     "tire": ["Переобуться в субботу", "Сколько стоит шиномонтаж R17?", "Хранение шин на зиму", "Где вы находитесь?"],
     "nail": ["Маникюр с покрытием завтра вечером", "Сколько стоит педикюр?", "Наращивание в субботу", "Где вы находитесь?"],
+    "salon": ["Стрижка завтра вечером", "Сколько стоит окрашивание?", "Маникюр в субботу", "Где вы находитесь?"],
+    "club": ["PS5 на двоих сегодня вечером", "Сколько стоит ночь?", "День рождения в субботу", "Где вы находитесь?"],
 }
-BOX = {"tire": "Пост", "nail": "Мастер"}
-COMMENT = {"nail": ["Комментарий", "Например: к мастеру Анне, снятие + френч"]}
-THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker"}
+BOX = {"tire": "Пост", "nail": "Мастер", "club": "Зона", "salon": "Мастер"}
+COMMENT = {"nail": ["Комментарий", "Например: к мастеру Анне, снятие + френч"],
+           "salon": ["Комментарий", "Например: к мастеру Ольге, длина до плеч"],
+           "club": ["Сколько вас и во что играете", "Например: нас 4, FIFA и Mortal Kombat"]}
+THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker", "neon", "arcade", "console", "hud", "synth", "versus", "marble", "botanic", "paris", "swiss", "silk", "deco"}
 
 
 def fmt_phone(p):
@@ -91,7 +107,7 @@ def make(c):
             "address": addr, "mapQuery": c.get("map") or addr, "phone": phone, "phoneHref": href, "hours": hours(c["hours"]),
             "boxes": c["boxes"], "boxLabel": c.get("boxLabel", BOX.get(c.get("kind"), "Бокс")), "kind": c.get("kind", "wash"), "accent": c["accent"], "accentInk": c["ink"],
             "socials": {"tg": c["msg"]} if c.get("msg") else {}, "demoPrices": bool(c.get("demo")),
-            "chatHints": HINTS[c.get("kind", "wash")], "services": svcs,
+            "chatHints": HINTS[c.get("kind", "wash")], "services": svcs, **{k: c[k] for k in ("kicker", "ringText") if c.get(k)},
             **({"commentLabel": COMMENT[c["kind"]][0], "commentPlaceholder": COMMENT[c["kind"]][1]} if c.get("kind") in COMMENT else {})}
 
 

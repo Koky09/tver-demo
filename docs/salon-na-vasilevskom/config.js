@@ -1,0 +1,169 @@
+window.CONFIG = {
+ "slug": "salon-na-vasilevskom",
+ "theme": "marble",
+ "demo": false,
+ "city": "Санкт-Петербург",
+ "name": "На Васильевском",
+ "short": "В",
+ "tagline": "Салон красоты · Василеостровский район",
+ "address": "Санкт-Петербург, Бугский переулок, 6",
+ "mapQuery": "Санкт-Петербург, Бугский переулок, 6",
+ "phone": "+7 921 377-47-77",
+ "phoneHref": "+79213774777",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#6c46b8",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79213774777"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Женская стрижка",
+   "price": 3900,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors",
+   "note": "Женская стрижка"
+  },
+  {
+   "id": "color",
+   "name": "Сложное окрашивание",
+   "price": 20000,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette",
+   "note": "Сложное окрашивание"
+  },
+  {
+   "id": "style",
+   "name": "Укладка на длинные волосы",
+   "price": 2500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer",
+   "note": "Укладка на длинные волосы"
+  },
+  {
+   "id": "care",
+   "name": "Кератиновое выпрямление волос (до плеч)",
+   "price": 12500,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "уход",
+    "кератин",
+    "ботокс",
+    "восстановление",
+    "выпрямление",
+    "ламинирование волос"
+   ],
+   "iconKey": "drop",
+   "note": "Кератиновое выпрямление волос"
+  },
+  {
+   "id": "gel",
+   "name": "Покрытие гель-лак",
+   "price": 1600,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "СМАРТ педикюр",
+   "price": 3500,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

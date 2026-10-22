@@ -197,7 +197,43 @@ def sym_nail(d, box):
     d.ellipse((x + .36 * s, y + .1 * s, x + .64 * s, y + .58 * s), fill=255)
 
 
-SYMBOLS = {"polish": sym_polish, "nail": sym_nail, "wheel": sym_wheel, "drop": sym_drop, "bubbles": sym_bubbles, "sparkle": sym_sparkle, "diamond": sym_diamond, "window": sym_window, "car": sym_car}
+def sym_pad(d, box):
+    """геймпад: корпус с ручками, крестовина и кнопки"""
+    x, y, s = box
+    d.rounded_rectangle((x + .04 * s, y + .26 * s, x + .96 * s, y + .66 * s), radius=int(.2 * s), fill=255)
+    for cx in (.22, .78):
+        d.ellipse((x + (cx - .17) * s, y + .4 * s, x + (cx + .17) * s, y + .86 * s), fill=255)
+    d.rectangle((x + .17 * s, y + .38 * s, x + .27 * s, y + .62 * s), fill=0)
+    d.rectangle((x + .1 * s, y + .45 * s, x + .34 * s, y + .55 * s), fill=0)
+    for bx, by in ((.74, .37), (.74, .57), (.64, .47), (.84, .47)):
+        r = .045 * s
+        d.ellipse((x + bx * s - r, y + by * s - r, x + bx * s + r, y + by * s + r), fill=0)
+
+
+def sym_joystick(d, box):
+    """аркадный джойстик: шар, ручка, основание"""
+    x, y, s = box
+    d.ellipse((x + .32 * s, y + .04 * s, x + .68 * s, y + .4 * s), fill=255)
+    d.rectangle((x + .45 * s, y + .3 * s, x + .55 * s, y + .66 * s), fill=255)
+    d.rounded_rectangle((x + .08 * s, y + .62 * s, x + .92 * s, y + .94 * s), radius=int(.1 * s), fill=255)
+    d.ellipse((x + .68 * s, y + .7 * s, x + .82 * s, y + .84 * s), fill=0)
+
+
+def sym_scissors(d, box):
+    """ножницы: два кольца и скрещённые лезвия"""
+    x, y, s = box
+    w = max(3, int(.09 * s))
+    d.line([(x + .3 * s, y + .62 * s), (x + .86 * s, y + .06 * s)], fill=255, width=w)
+    d.line([(x + .7 * s, y + .62 * s), (x + .14 * s, y + .06 * s)], fill=255, width=w)
+    for cx in (.26, .74):
+        R, r = .17 * s, .1 * s
+        cy = .78
+        d.ellipse((x + cx * s - R, y + cy * s - R, x + cx * s + R, y + cy * s + R), fill=255)
+        d.ellipse((x + cx * s - r, y + cy * s - r, x + cx * s + r, y + cy * s + r), fill=0)
+    d.ellipse((x + .46 * s, y + .3 * s, x + .54 * s, y + .38 * s), fill=0)
+
+
+SYMBOLS = {"scissors": sym_scissors, "pad": sym_pad, "joystick": sym_joystick, "polish": sym_polish, "nail": sym_nail, "wheel": sym_wheel, "drop": sym_drop, "bubbles": sym_bubbles, "sparkle": sym_sparkle, "diamond": sym_diamond, "window": sym_window, "car": sym_car}
 
 
 def pick_symbol(cfg):
@@ -208,6 +244,10 @@ def pick_symbol(cfg):
     wash = sum(1 for i in ids if i in ("wash", "body", "touchless", "express", "under", "engine", "complex"))
     tire = sum(1 for i in ids if i in ("tire", "balance", "rims", "repair", "storage"))
     v = seed(cfg["slug"], 2, "sym")
+    if cfg.get("kind") == "salon":
+        return ("scissors", "polish")[0 if seed(cfg["slug"], 3, "sym") else 1]
+    if cfg.get("kind") == "club":
+        return ("pad", "joystick")[v]
     if cfg.get("kind") == "nail" or sum(1 for i in ids if i in ("mani", "gel", "pedi", "ext", "design")) >= 2:
         return ("polish", "nail")[v]
     if tire >= 2:

@@ -1,0 +1,163 @@
+window.CONFIG = {
+ "slug": "salon-time4me",
+ "theme": "deco",
+ "demo": false,
+ "city": "Самара",
+ "name": "Time4me",
+ "short": "T",
+ "tagline": "Салон красоты · Октябрьский район",
+ "address": "Самара, Лесная улица, 11а",
+ "mapQuery": "Самара, Лесная улица, 11а",
+ "phone": "+7 906 342-66-24",
+ "phoneHref": "+79063426624",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#313f81",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79063426624"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Стрижка женская от топ-стилиста",
+   "price": 4500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors"
+  },
+  {
+   "id": "color",
+   "name": "Имиджевое окрашивание KYDRA / KEVIN MURPHY (тонирование, окр",
+   "price": 14500,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette"
+  },
+  {
+   "id": "style",
+   "name": "Укладка (мытье головы + фен)",
+   "price": 2800,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer"
+  },
+  {
+   "id": "gel",
+   "name": "Маникюр аппаратный с покрытием гель-лак",
+   "price": 3500,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр аппаратный б/з покрытия",
+   "price": 2900,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot"
+  },
+  {
+   "id": "brows",
+   "name": "Коррекция бровей (без окрашивания)",
+   "price": 900,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "брови",
+    "бровей",
+    "ресницы",
+    "ламинирование"
+   ],
+   "iconKey": "eye"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

@@ -274,6 +274,16 @@
     gem: '<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16 3-16"/>',
     brush: '<path d="M14.5 3.5l6 6-8.5 8.5-6-6z"/><path d="M6 12l-2.2 2.2c-1.4 1.4-.8 4 .2 5 1.4 1.3 3.6 1.5 5 .2L11 17"/>',
     eye: '<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    scissors: '<circle cx="6" cy="6.5" r="2.8"/><circle cx="6" cy="17.5" r="2.8"/><path d="M8.3 8.2 20 18M8.3 15.8 20 6"/>',
+    palette: '<path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 1.6-2.2-.5-1.4.4-2.8 1.9-2.8H18a3 3 0 0 0 3-3c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="14.5" cy="7" r="1"/>',
+    dryer: '<path d="M14 5.5A5.5 5.5 0 1 0 14 16.5h5.5v-11z"/><circle cx="9" cy="11" r="2"/><path d="M11 16v5h4l1-4.5M20 8.5h2M20 11h2M20 13.5h2"/>',
+    face: '<path d="M12 3c4 0 7 3.2 7 7.5 0 5-3.3 10.5-7 10.5s-7-5.5-7-10.5C5 6.2 8 3 12 3z"/><path d="M9 11h.01M15 11h.01M9.5 15.5c1.5 1.2 3.5 1.2 5 0"/>',
+    pad: '<path d="M7 7h10a5 5 0 0 1 4.8 6.4l-1.1 3.8a2.6 2.6 0 0 1-4.5 1L14.5 16h-5l-1.7 2.2a2.6 2.6 0 0 1-4.5-1l-1.1-3.8A5 5 0 0 1 7 7z"/><path d="M7.5 10v3M6 11.5h3"/><circle cx="16" cy="10.5" r=".6"/><circle cx="17.6" cy="12.4" r=".6"/>',
+    monitor: '<rect x="2.5" y="4" width="19" height="12.5" rx="1.5"/><path d="M9 20.5h6M12 16.5v4"/>',
+    crown: '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z"/><path d="M5 21h14"/>',
+    moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
+    cake: '<path d="M4 21V12h16v9M2.5 21h19M4 15.5c2 1.5 4 1.5 5.3 0 1.4 1.5 4 1.5 5.4 0 1.3 1.5 3.3 1.5 5.3 0"/><path d="M8 12V9M12 12V9M16 12V9"/><path d="M8 6.5v.5M12 6.5v.5M16 6.5v.5"/>',
+    vr: '<path d="M3 8h18v8.5h-5.5l-2-2.5h-3l-2 2.5H3z"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/>',
   };
   const I = new Proxy({}, { get: (_, k) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.spark}</svg>` });
   // Иконка услуги по id (или по названию для новых услуг), задаётся в config полем iconKey
@@ -281,9 +291,11 @@
     leather: 'seat', plastic: 'shield', rain: 'drop', polish: 'spark', ceramic: 'diamond', coat: 'diamond', ppf: 'shield', tint: 'tint',
     headlights: 'light', vinyl: 'roller', noise: 'mute', 'noise-doors': 'mute', engine: 'gear', presale: 'tag',
     tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack',
-    mani: 'polish', gel: 'polish', pedi: 'foot', ext: 'gem', design: 'brush', remove: 'spark', spa: 'drop', brows: 'eye' };
+    mani: 'polish', gel: 'polish', pedi: 'foot', ext: 'gem', design: 'brush', remove: 'spark', spa: 'drop', brows: 'eye',
+    ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr' };
   const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
-    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel'], [/педик/i, 'foot'], [/маник|покрыт|гель/i, 'polish'], [/наращ/i, 'gem'], [/дизайн|френч/i, 'brush'], [/бров|ресниц/i, 'eye']];
+    [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel'], [/педик/i, 'foot'], [/маник|покрыт|гель/i, 'polish'], [/наращ/i, 'gem'], [/дизайн|френч/i, 'brush'], [/бров|ресниц/i, 'eye'],
+    [/vip|вип/i, 'crown'], [/ноч/i, 'moon'], [/рожден|праздн|вечеринк/i, 'cake'], [/\bvr\b|виртуал/i, 'vr'], [/\bпк\b|компьют|\bpc\b/i, 'monitor'], [/ps|playstation|плейстейш|приставк|консол|xbox/i, 'pad']];
   const svcIcon = (s) => I[s.iconKey || SVC_ICON[s.id] || (SVC_WORDS.find(([re]) => re.test(s.name)) || [])[1] || 'spark'];
 
   /* ---------- клиентская часть ---------- */
@@ -291,6 +303,11 @@
   window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredInstall = e; const el = $('#install'); if (el) el.hidden = false; });
   const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone;
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+
+  // слова записи: у игровых клубов — бронь
+  const W = C.kind === 'club'
+    ? { tap: 'Бронь в один тап, как в приложении', cta: 'Забронировать онлайн', go: 'Забронировать', ticket: 'Бронь', done: 'Место за вами', svcH: 'Тарифы', svcP: 'Нажмите на тариф, чтобы выбрать время' }
+    : { tap: 'Запись в один тап, как в приложении', cta: 'Записаться онлайн', go: 'Записаться', ticket: 'Талон записи', done: 'Вы записаны', svcH: 'Услуги и цены', svcP: 'Нажмите на услугу, чтобы выбрать время' };
 
   // Шапка: у каждого сервиса свой характер (поле theme в clients/<slug>.json)
   function heroHtml(open, longest, street) {
@@ -359,6 +376,62 @@
           <svg class="star" viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 61 36 95 36 68 56 78 90 50 70 22 90 32 56 5 36 39 36z"/></svg></div>
           ${name}${tag}${meta}</section>`;
       }
+      // салоны красоты (template/salon.css)
+      case 'marble':
+        return `<section class="hero"><div class="veins" aria-hidden="true"></div>${demo}
+          <div class="frame"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
+          <div class="kicker">${esc(C.kicker || 'Салон красоты')}</div>${name}<div class="rule" aria-hidden="true"><i></i></div>${tag}${meta}</section>`;
+      case 'botanic':
+        return `<section class="hero">${demo}
+          <svg class="leaves" viewBox="0 0 400 300" aria-hidden="true"><path d="M20 290C60 210 40 140 110 80"/><path d="M60 196c-24-10-38-34-34-58 26 6 42 30 34 58zM80 150c18-16 44-18 62-6-18 18-44 18-62 6zM96 110c-20-12-28-38-20-60 22 12 30 36 20 60z"/>
+            <path d="M390 10C340 70 360 130 300 190"/><path d="M350 100c24 8 40 30 38 54-26-4-44-28-38-54zM330 140c-18 16-44 20-62 8 18-18 44-20 62-8z"/></svg>
+          <div class="oval" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <div class="kicker">${esc(C.kicker || 'Салон красоты')}</div>${name}${tag}${meta}</section>`;
+      case 'paris':
+        return `<section class="hero"><div class="awning" aria-hidden="true"></div>${demo}
+          <div class="sign"><span class="script">${esc(C.kicker || 'салон красоты')}</span>${name}</div>
+          <div class="window" style="background-image:url('${esc(C.heroImage || '')}')"></div>${tag}${meta}</section>`;
+      case 'swiss': {
+        const no = String([...String(C.slug || C.name)].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 9973, 7) % 90 + 10);
+        return `<section class="hero"><div class="sw-top"><span>${esc(CITY)}</span><span>${esc(C.kicker || 'Салон красоты')}</span>${demo}</div>
+          ${name}<div class="sw-grid"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <div class="sw-info"><b aria-hidden="true">${no}</b>${tag}${meta}</div></div></section>`;
+      }
+      case 'silk':
+        return `<section class="hero"><div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>${demo}
+          <div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <div class="card"><div class="kicker">${esc(C.kicker || 'Салон красоты')}</div>${name}${tag}${meta}</div></section>`;
+      case 'deco':
+        return `<section class="hero">${demo}
+          <svg class="fan" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">${Array.from({ length: 13 }, (_, i) => { const a = Math.PI * (i / 12); return `<path d="M200 200L${(200 - 260 * Math.cos(a)).toFixed(1)} ${(200 - 260 * Math.sin(a)).toFixed(1)}"/>`; }).join('')}<circle cx="200" cy="200" r="70"/><circle cx="200" cy="200" r="120"/></svg>
+          <div class="step"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
+          <div class="kicker">${esc(C.kicker || 'Салон красоты')}</div>${name}${tag}${meta}</section>`;
+      // игровые клубы (template/game.css)
+      case 'neon':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="scan" aria-hidden="true"></div>${demo}
+          <div class="inner"><div class="kicker"><i></i>${esc(C.kicker || 'Игровой клуб')}</div>${name}${tag}${meta}</div></section>`;
+      case 'arcade':
+        return `<section class="hero">${demo}<div class="screen" style="background-image:url('${esc(C.heroImage || '')}')"><div class="crt" aria-hidden="true"></div></div>
+          <div class="hiscore" aria-hidden="true"><span>1UP</span><span>HI-SCORE</span><span>${esc(C.short || 'GO')}</span></div>
+          ${name}${tag}<div class="coin" aria-hidden="true">${esc(C.kicker || 'Press start')}</div>${meta}</section>`;
+      case 'console':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div>
+          <svg class="shapes" viewBox="0 0 400 300" aria-hidden="true"><path d="M40 60l20-20M40 40l20 20"/><circle cx="350" cy="56" r="14"/><path d="M330 250l16-28 16 28z"/><rect x="34" y="226" width="26" height="26"/></svg>
+          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Игровой клуб')}</div>${name}${tag}${meta}</div></section>`;
+      case 'hud':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div>
+          <div class="corners" aria-hidden="true"><i></i><i></i><i></i><i></i></div><svg class="cross" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="11"/><path d="M20 2v10M20 28v10M2 20h10M28 20h10"/></svg>
+          <div class="hud-top"><span>[ ${esc(C.kicker || 'Игровой клуб')} ]</span>${demo}</div>
+          <div class="inner">${name}${tag}${meta}</div></section>`;
+      case 'synth':
+        return `<section class="hero"><div class="sun" aria-hidden="true"></div><div class="grid" aria-hidden="true"></div>${demo}
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Игровой клуб')}</div>${name}${tag}${meta}</div></section>`;
+      case 'versus':
+        return `<section class="hero"><div class="side l" style="background-image:url('${esc(C.heroImage || '')}')"></div><div class="side r"></div>
+          <div class="vs" aria-hidden="true">VS</div>${demo}
+          <div class="bars" aria-hidden="true"><div><b>P1</b><i></i></div><div><b>P2</b><i></i></div></div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Выбери бойца')}</div>${name}${tag}${meta}</div></section>`;
       default:
         return `<section class="hero${img}">
           <svg class="crease" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 168 C 110 120, 250 112, 410 52"/><path d="M-10 182 C 120 136, 260 128, 410 70"/></svg>
@@ -381,10 +454,10 @@
         ${msgr ? `<a href="${esc(C.socials.tg || C.socials.vk || C.socials.max)}" target="_blank" rel="noopener">${I.msg}Написать</a>` : `<button data-act="chat">${I.msg}Спросить</button>`}
       </nav>
       ${standalone() ? '' : `<div class="install" id="install" ${deferredInstall || isIOS ? '' : 'hidden'}>
-        <div class="body"><b>Добавьте на экран</b><br><span class="muted">${isIOS ? 'Нажмите «Поделиться» → «На экран „Домой“»' : 'Запись в один тап, как в приложении'}</span></div>
+        <div class="body"><b>Добавьте на экран</b><br><span class="muted">${isIOS ? 'Нажмите «Поделиться» → «На экран „Домой“»' : W.tap}</span></div>
         ${isIOS ? '' : '<button class="btn sm" data-act="install">Добавить</button>'}
       </div>`}
-      <div class="sec-head"><h2>Услуги и цены</h2><p class="muted small">Нажмите на услугу, чтобы выбрать время</p></div>
+      <div class="sec-head"><h2>${W.svcH}</h2><p class="muted small">${W.svcP}</p></div>
       <div class="list">${services().map((s) => `
         <button class="svc" data-svc="${s.id}">
           <span class="ico">${svcIcon(s)}</span>
@@ -401,7 +474,7 @@
       <div class="foot">${esc(C.name)}, онлайн-запись<br><a href="#admin">Вход для владельца</a></div>
     </div>
     <div class="bar"><div class="inner">
-      <button class="btn" data-act="book">Записаться онлайн</button>
+      <button class="btn" data-act="book">${W.cta}</button>
       <button class="btn chat-btn" data-act="chat" aria-label="Подобрать время с ассистентом">${I.spark}</button>
     </div></div>`;
 
@@ -476,16 +549,16 @@
           <label class="f" for="f-name">Имя</label><input class="in" id="f-name" autocomplete="name" value="${esc(state.name)}" placeholder="Как к вам обращаться">
           <label class="f" for="f-phone">Телефон</label><input class="in" id="f-phone" type="tel" autocomplete="tel" inputmode="tel" value="${esc(state.phone)}" placeholder="+7 900 000-00-00">
           <label class="f" for="f-comm">${esc(C.commentLabel || 'Марка и модель авто, комментарий')}</label><input class="in" id="f-comm" value="${esc(state.comment)}" placeholder="${esc(C.commentPlaceholder || 'Например: Kia Rio, белая')}">
-          <button class="btn" data-act="confirm">${state.admin ? 'Добавить запись' : 'Записаться'}</button>
+          <button class="btn" data-act="confirm">${state.admin ? 'Добавить запись' : W.go}</button>
           <button class="btn ghost" data-act="back">Назад</button>
           ${state.admin ? '' : '<p class="muted small" style="text-align:center">Нажимая «Записаться», вы соглашаетесь на обработку контактных данных для связи по записи.</p>'}`;
       } else if (state.step === 4) {
         const b = state.booking;
         const dh = dateHuman(b.date);
-        root.innerHTML = `<div class="sheet-head"><h3 id="sh-t">${state.admin ? 'Запись добавлена' : 'Талон записи'}</h3>${xBtn}</div>
+        root.innerHTML = `<div class="sheet-head"><h3 id="sh-t">${state.admin ? 'Запись добавлена' : W.ticket}</h3>${xBtn}</div>
           <div class="ticket" role="status">
             <div class="ticket-top">
-              <span class="ok">${I.check}${state.admin ? 'Запись в расписании' : 'Вы записаны'}</span>
+              <span class="ok">${I.check}${state.admin ? 'Запись в расписании' : W.done}</span>
               <div class="ticket-when">${hm(b.start)}<span>${dh.replace(/^./, (c) => c.toUpperCase())}</span></div>
             </div>
             <div class="ticket-cut"></div>
@@ -524,7 +597,7 @@
       try {
         b = await createBooking({ svcId: state.svcId, date: state.date, start: state.start, name: state.name, phone: state.phone, comment: state.comment, source: state.admin ? 'phone' : 'app' });
       } catch (err) {
-        btn.disabled = false; btn.textContent = state.admin ? 'Добавить запись' : 'Записаться';
+        btn.disabled = false; btn.textContent = state.admin ? 'Добавить запись' : W.go;
         return toast('Нет связи с сервером. Попробуйте ещё раз или позвоните нам.');
       }
       if (!b) {

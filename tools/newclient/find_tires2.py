@@ -23,10 +23,11 @@ def d10(p):
     return re.sub(r"\D", "", p)[-10:]
 
 
-def yandex(name, addr, phones):
+def yandex(name, addr, phones, city="Москва"):
     """Карточка Яндекса с тем же телефоном: рейтинг, отзывы, сайты, соцсети"""
-    q = f"{re.split(r',', name)[0]} {addr or ''} Москва"
-    h = get("https://yandex.ru/maps/213/moscow/?text=" + urllib.parse.quote(q))
+    q = f"{re.split(r',', name)[0]} {addr or ''} {city}"
+    base = "https://yandex.ru/maps/213/moscow/" if city == "Москва" else "https://yandex.ru/maps/"
+    h = get(base + "?text=" + urllib.parse.quote(q))
     if "showcaptcha" in h:
         return {"captcha": True}
     orgs = list(dict.fromkeys(re.findall(r"/maps/org/([a-z0-9_]+)/(\d+)", h)))[:4]

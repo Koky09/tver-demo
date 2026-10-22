@@ -37,6 +37,20 @@ THEME_FONTS = {
     "glass": "Unbounded:wght@500;600;700&family=Manrope:wght@400;500;600;700",
     "arch": "Prata&family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400",
     "bloom": "Comfortaa:wght@600;700&family=Nunito:wght@400;600;700",
+    # салоны красоты (template/salon.css)
+    "marble": "Forum&family=Jost:wght@400;500;600;700",
+    "botanic": "Lora:ital,wght@0,500;0,600;0,700;1,500&family=Golos+Text:wght@400;500;600;700",
+    "paris": "Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Bad+Script&family=Jost:wght@400;500;600",
+    "swiss": "Inter+Tight:wght@400;500;600;800;900",
+    "silk": "Montserrat+Alternates:wght@500;600;700&family=Nunito+Sans:wght@400;600;700",
+    "deco": "Poiret+One&family=Jost:wght@400;500;600;700",
+    # игровые клубы (template/game.css)
+    "neon": "Tektur:wght@500;700;900&family=Manrope:wght@400;500;600;700",
+    "arcade": "Press+Start+2P&family=Rubik:wght@400;500;600;700",
+    "console": "Exo+2:ital,wght@0,400;0,500;0,600;0,700;0,800;1,700",
+    "hud": "Play:wght@400;700&family=JetBrains+Mono:wght@500;700",
+    "synth": "Rubik+Mono+One&family=Exo+2:wght@400;500;600;700",
+    "versus": "Russo+One&family=Rubik:ital,wght@0,400;0,500;0,600;0,700;1,800",
 }
 
 
@@ -51,12 +65,13 @@ def build(cfg_path):
     if out.exists():
         shutil.rmtree(out)
     shutil.copytree(TEMPLATE, out)
-    # стили салонов — в конец общего style.css (одна загрузка, и офлайн-кэш тот же)
-    beauty = out / "beauty.css"
-    if beauty.exists():
-        css = out / "style.css"
-        css.write_text(css.read_text(encoding="utf-8") + beauty.read_text(encoding="utf-8"), encoding="utf-8")
-        beauty.unlink()
+    # стили салонов и игровых клубов — в конец общего style.css (одна загрузка, и офлайн-кэш тот же)
+    for extra in ("beauty.css", "salon.css", "game.css"):
+        f = out / extra
+        if f.exists():
+            css = out / "style.css"
+            css.write_text(css.read_text(encoding="utf-8") + f.read_text(encoding="utf-8"), encoding="utf-8")
+            f.unlink()
     # фото для шапки: clients/photos/<slug>.jpg -> hero.jpg
     photo = ROOT / "clients" / "photos" / f"{cfg['slug']}.jpg"
     if photo.exists():

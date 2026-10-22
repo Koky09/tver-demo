@@ -17,3 +17,7 @@ tools/outreach/tgscan/deep_report.txt
 tools/newclient/nails-*.json
 tools/newclient/nails.log
 tools/outreach/video/
+tools/newclient/clubs-*.json
+clubs.log
+tools/newclient/salons-*.json
+tools/newclient/salons.log

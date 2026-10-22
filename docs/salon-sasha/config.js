@@ -1,0 +1,134 @@
+window.CONFIG = {
+ "slug": "salon-sasha",
+ "theme": "deco",
+ "demo": false,
+ "city": "Пермь",
+ "name": "Саша",
+ "short": "С",
+ "tagline": "Салон красоты · Свердловский район",
+ "address": "Пермь, улица Героев Хасана, 32",
+ "mapQuery": "Пермь, улица Героев Хасана, 32",
+ "phone": "+7 996 083-27-98",
+ "phoneHref": "+79960832798",
+ "hours": {
+  "0": [
+   10,
+   19
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#5f3181",
+ "accentInk": "#ffffff",
+ "socials": {},
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Женская стрижка + восстановление волос",
+   "price": 2500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors"
+  },
+  {
+   "id": "color",
+   "name": "Окрашивание в технике",
+   "price": 5000,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette"
+  },
+  {
+   "id": "style",
+   "name": "Укладка",
+   "price": 1200,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer"
+  },
+  {
+   "id": "care",
+   "name": "Холодное восстановление",
+   "price": 1500,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "уход",
+    "кератин",
+    "ботокс",
+    "восстановление",
+    "выпрямление",
+    "ламинирование волос"
+   ],
+   "iconKey": "drop"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

@@ -1,0 +1,24 @@
+{
+ "name": "Savva — онлайн-запись",
+ "short_name": "Savva",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#5b4d38",
+ "theme_color": "#5b4d38",
+ "lang": "ru",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}

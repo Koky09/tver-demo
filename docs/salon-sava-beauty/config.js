@@ -1,0 +1,117 @@
+window.CONFIG = {
+ "slug": "salon-sava-beauty",
+ "theme": "paris",
+ "demo": false,
+ "city": "Казань",
+ "name": "Sava beauty",
+ "short": "S",
+ "tagline": "Салон красоты · Ново-Савиновский район",
+ "address": "Казань, улица Адоратского, 1а",
+ "mapQuery": "Казань, улица Адоратского, 1а",
+ "phone": "+7 937 625-33-66",
+ "phoneHref": "+79376253366",
+ "hours": {
+  "0": [
+   10,
+   21
+  ],
+  "1": [
+   10,
+   21
+  ],
+  "2": [
+   10,
+   21
+  ],
+  "3": [
+   10,
+   21
+  ],
+  "4": [
+   10,
+   21
+  ],
+  "5": [
+   10,
+   21
+  ],
+  "6": [
+   10,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#d1475e",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79376253366"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "color",
+   "name": "Тонирование волос Standart (Insight , Италия)",
+   "price": 4000,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette",
+   "note": "Короткие - 4000 руб\nСредние - 4600 руб\nДлинные - 5200 руб\nБо"
+  },
+  {
+   "id": "gel",
+   "name": "Маникюр + покрытие цветным лаком",
+   "price": 1390,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish",
+   "note": "Снятие прозрачного или цветного лака включено в стоимость\n\nР"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр карбамидный Inki / LE NOM с обработкой пяточек",
+   "price": 1590,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "Покрытие укрепляющим лаком + снятие лака включено в стоимост"
+  }
+ ],
+ "kicker": "салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

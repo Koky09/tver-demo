@@ -1,0 +1,24 @@
+{
+ "name": "На Васильевском — онлайн-запись",
+ "short_name": "На Васильевс",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#443171",
+ "theme_color": "#443171",
+ "lang": "ru",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}

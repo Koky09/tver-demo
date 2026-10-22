@@ -1,0 +1,116 @@
+window.CONFIG = {
+ "slug": "salon-rb",
+ "theme": "botanic",
+ "demo": false,
+ "city": "Уфа",
+ "name": "RB",
+ "short": "R",
+ "tagline": "Салон красоты · Советский район",
+ "address": "Уфа, 50-летия Октября, 5",
+ "mapQuery": "Уфа, 50-летия Октября, 5",
+ "phone": "+7 927 347-06-90",
+ "phoneHref": "+79273470690",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#509559",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79273470690"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Женская стрижка",
+   "price": 1200,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors"
+  },
+  {
+   "id": "style",
+   "name": "Укладка",
+   "price": 600,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer",
+   "note": "Мужская укладка — это придание волосам желаемой формы и объе"
+  },
+  {
+   "id": "pedi",
+   "name": "Мастер Педикюр полный",
+   "price": 1400,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "Комбинированный(обрезной)/ аппаратный педикюр пальчиков ног "
+  }
+ ],
+ "kicker": "салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

@@ -1,0 +1,122 @@
+window.CONFIG = {
+ "slug": "salon-skissors-ot-manikult",
+ "theme": "silk",
+ "demo": false,
+ "city": "Ростов-на-Дону",
+ "name": "Скиссорс от Маникульт",
+ "short": "СО",
+ "tagline": "Салон красоты · Кировский район",
+ "address": "Ростов-на-Дону, Университетский переулок, 61",
+ "mapQuery": "Ростов-на-Дону, Университетский переулок, 61",
+ "phone": "+7 928 159-76-43",
+ "phoneHref": "+79281597643",
+ "hours": {
+  "0": [
+   10,
+   21
+  ],
+  "1": [
+   10,
+   21
+  ],
+  "2": [
+   10,
+   21
+  ],
+  "3": [
+   10,
+   21
+  ],
+  "4": [
+   10,
+   21
+  ],
+  "5": [
+   10,
+   21
+  ],
+  "6": [
+   10,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#da80b7",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79281597643"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Женская стрижка",
+   "price": 2800,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors",
+   "note": "Мытье головы, стрижка, укладка."
+  },
+  {
+   "id": "color",
+   "name": "Сложное окрашивание",
+   "price": 14000,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette"
+  },
+  {
+   "id": "style",
+   "name": "Сложная укладка |С",
+   "price": 3400,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer",
+   "note": "Сразу после записи с Вами свяжется администратор для уточнен"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

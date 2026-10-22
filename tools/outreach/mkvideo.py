@@ -65,13 +65,15 @@ def record(slug, cfg):
         page.wait_for_timeout(600)
         cap(page, 1, f"Ваша страница записи «{cfg['name']}»")
         page.wait_for_timeout(2600)
-        cap(page, 2, "Клиентка выбирает услугу")
+        club = cfg.get("kind") == "club"
+        guest = "Артём" if club else "Анна"
+        cap(page, 2, "Гость выбирает, во что играть" if club else "Клиентка выбирает услугу")
         page.mouse.wheel(0, 380)
         page.wait_for_timeout(1400)
-        svc = next((s for s in cfg["services"] if s["id"].startswith("gel")), cfg["services"][0])
+        svc = next((s for s in cfg["services"] if s["id"].startswith("gel")), cfg["services"][0]) if cfg.get("kind") == "nail" else cfg["services"][0]
         tap(page, page.get_by_text(svc["name"], exact=True).first)
         page.wait_for_timeout(1500)
-        cap(page, 3, "…и свободное окошко у мастера")
+        cap(page, 3, "…и свободное время" if club else "…и свободное окошко у мастера")
         sheet = page.locator(".sheet")
         days = sheet.locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$"))
         if days.count() > 1:
@@ -87,22 +89,22 @@ def record(slug, cfg):
         page.wait_for_timeout(900)
         cap(page, 4, "Оставляет имя и телефон — без звонков")
         ins = sheet.locator("input")
-        ins.nth(0).click(); ins.nth(0).type("Анна", delay=110)
+        ins.nth(0).click(); ins.nth(0).type(guest, delay=110)
         ins.nth(1).click(); ins.nth(1).type("+7 916 123-45-67", delay=60)
         page.wait_for_timeout(500)
-        tap(page, sheet.get_by_role("button", name="Записаться"))
+        tap(page, sheet.get_by_role("button", name=re.compile("^(Записаться|Забронировать)$")))
         page.wait_for_timeout(1800)
-        cap(page, 5, "Готово — клиентка записана")
+        cap(page, 5, "Готово — место за ним" if club else "Готово — клиентка записана")
         page.wait_for_timeout(1800)
         slot = sheet.inner_text()
         when = re.search(r"\d{1,2}:\d{2}", slot)
         day = re.search(r"(Сегодня|Завтра|[А-ЯЁа-яё]+),\s*\d+\s+[а-яё]+", slot)
-        msg = f"Новая запись: {svc['name']}<br>{(day.group(0) if day else 'завтра')}, {when.group(0) if when else ''} · Мастер 1<br>Анна, +7 916 123-45-67"
+        msg = ("Бронь|" if club else "Запись|") + f"Новая {'бронь' if club else 'запись'}: {svc['name']}<br>{(day.group(0) if day else 'завтра')}, {when.group(0) if when else ''} · {cfg.get('boxLabel', 'Мастер')} 1<br>{guest}, +7 916 123-45-67"
         page.evaluate("""(m)=>{const c=document.getElementById('vcap'); if(c) c.style.opacity=0;
-            const t=document.createElement('div'); t.id='vtg'; t.innerHTML='<div class=h><i></i>Telegram · сейчас</div><div class=t>Запись в «'+document.title+'»</div>'+m;
+            const t=document.createElement('div'); t.id='vtg'; t.innerHTML='<div class=h><i></i>Telegram · сейчас</div><div class=t>'+m.split('|')[0]+' в «'+document.title+'»</div>'+m.split('|')[1];
             document.body.appendChild(t); requestAnimationFrame(()=>requestAnimationFrame(()=>t.style.top='12px'));}""", msg)
         page.wait_for_timeout(900)
-        cap(page, 6, "А запись сразу приходит вам в Telegram")
+        cap(page, 6, "А бронь сразу приходит вам в Telegram" if club else "А запись сразу приходит вам в Telegram")
         page.evaluate("()=>{const c=document.getElementById('vcap'); const g=document.getElementById('vtg').getBoundingClientRect(); c.style.top=(g.bottom/2+8)+'px'}")
         page.wait_for_timeout(3600)
         ctx.close()
