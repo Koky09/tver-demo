@@ -21,3 +21,7 @@ tools/newclient/clubs-*.json
 clubs.log
 tools/newclient/salons-*.json
 tools/newclient/salons.log
+tools/newclient/unsplash_*/*.jpg
+tools/newclient/unsplash_*/_get.py
+tools/newclient/unsplash_*/_ids.txt
+tools/newclient/unsplash_*/_list.txt
