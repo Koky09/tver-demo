@@ -143,7 +143,12 @@ footer{background:var(--ink);color:#8f7a80;font-size:13px;padding:0 0 100px}
   .dock{display:none}
   footer{padding-bottom:30px}
 }
+/* анимации (Anime.js): пока библиотека не загрузилась — элементы скрыты, через 2,5 с показываются в любом случае */
+.anim .arch,.anim .hero .lead,.anim .hero .actions,.anim .hero .rating{opacity:0}
+.anim [data-reveal]>*{opacity:0}
+.btn.main{will-change:transform}
 </style>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('anim');setTimeout(()=>document.documentElement.classList.remove('anim'),2500)}</script>
 </head>
 <body>
 <main>
@@ -157,7 +162,7 @@ footer{background:var(--ink);color:#8f7a80;font-size:13px;padding:0 0 100px}
         <a class="btn main" href="https://yandex.ru/maps/org/vlghair/7051450486/?booking%5Bpage%5D=menu&booking%5Bpermalink%5D=7051450486" target="_blank" rel="noopener">Записаться онлайн</a>
         <a class="btn line" href="#price">Цены</a>
       </div>
-      <div class="rating"><b>5,0</b><span>401 отзыв<br>на Яндекс Картах</span></div>
+      <div class="rating"><b data-count="5.0">5,0</b><span><span data-count="401">401</span> отзыв<br>на Яндекс Картах</span></div>
     </div>
     <div class="arches">
       <div class="arch"><img src="img/a2.jpg" alt="Длинные гладкие волосы после реконструкции"></div>
@@ -169,7 +174,7 @@ footer{background:var(--ink);color:#8f7a80;font-size:13px;padding:0 0 100px}
 
 <section class="recon"><div class="wrap">
   <div class="head"><h2>Реконструкция волос</h2><p>Главное, за чем к нам приходят. Мастер смотрит на состояние волос и подбирает процедуру: от одного ухода до выпрямления на полгода.</p></div>
-  <div class="cards">
+  <div class="cards" data-reveal>
     <div class="card"><h3>Ботокс</h3><p>Заполняет повреждённые участки, убирает пористость и пушистость, возвращает блеск.</p><div class="row"><b>5 000 ₽</b><span>держится 1,5–3 месяца</span></div></div>
     <div class="card"><h3>Кератин</h3><p>Выпрямляет от лёгких волн до тугих завитков. Утром не нужен утюжок.</p><div class="row"><b>5 000 ₽</b><span>держится 2–5 месяцев</span></div></div>
     <div class="card"><h3>Нанопластика</h3><p>Самый долгий эффект гладкости и блеска для плотного вьющегося волоса.</p><div class="row"><b>6 000 ₽</b><span>держится 6–12 месяцев</span></div></div>
@@ -182,7 +187,7 @@ footer{background:var(--ink);color:#8f7a80;font-size:13px;padding:0 0 100px}
     <div class="ba"><img loading="lazy" src="img/ba.jpg" alt="Волосы до и после процедуры в VlgHair"></div>
     <div><h2>Результат видно сразу</h2><p>Фото гостей салона: окрашивание, кератин и ботокс. Без фильтров — так волосы выглядят, когда вы встаёте из кресла.</p></div>
   </div>
-  <div class="strip">
+  <div class="strip" data-reveal>
     <img loading="lazy" src="img/r1.jpg" alt="Длинные русые волосы после ухода">
     <img loading="lazy" src="img/r5.jpg" alt="Светлые локоны после окрашивания">
     <img loading="lazy" src="img/r2.jpg" alt="Длинные волосы с плавным переходом цвета">
@@ -201,7 +206,7 @@ footer{background:var(--ink);color:#8f7a80;font-size:13px;padding:0 0 100px}
 </div></section>
 
 <section class="space"><div class="wrap grid">
-  <div class="pics">
+  <div class="pics" data-reveal>
     <img loading="lazy" src="img/i1.jpg" alt="Розовый зал салона с арками и зеркалами">
     <img loading="lazy" src="img/i2.jpg" alt="Рабочее место мастера у арочного зеркала">
     <img loading="lazy" src="img/i5.jpg" alt="Чай и кофе для гостей">
@@ -219,7 +224,7 @@ footer{background:var(--ink);color:#8f7a80;font-size:13px;padding:0 0 100px}
 <section class="reviews"><div class="wrap">
   <h2>Отзывы гостей</h2>
   <div class="score"><b>5,0</b><span>401 отзыв на Яндекс Картах</span></div>
-  <div class="quotes">
+  <div class="quotes" data-reveal>
     <figure><blockquote>Была на кератиновом выпрямлении и холодном восстановлении. Тяжёлые вьющиеся волосы теперь легко расчёсываются с первого раза, прямые и мягкие.</blockquote><figcaption>Зоя, о мастере Анастасии</figcaption></figure>
     <figure><blockquote>Мастер подобрала идеальный оттенок, а волосы выглядят здоровыми и блестящими.</blockquote><figcaption>Дарья, об окрашивании у Дины</figcaption></figure>
     <figure><blockquote>Хожу уже несколько лет на кератин с подложкой. Мастер профессионал своего дела, атмосфера шикарная.</blockquote><figcaption>Виктория, о мастере Алине</figcaption></figure>
@@ -277,8 +282,44 @@ tabs.innerHTML = Object.keys(PRICE).map((c) => `<button role="tab" data-cat="${c
 tabs.onclick = (e) => { const b = e.target.closest('button'); if (b) show(b.dataset.cat); };
 show('Реконструкция');
 document.getElementById('neon').classList.add('on');   // вывеска «зажигается» один раз
+tabs.addEventListener('click', () => window.anime && !reduce && anime({ targets: '#menu li', opacity: [0, 1], translateY: [10, 0], delay: anime.stagger(35), duration: 450, easing: 'easeOutQuad' }));
 const dock = document.getElementById('dock');
 new IntersectionObserver(([e]) => dock.classList.toggle('on', !e.isIntersecting), { threshold: 0.1 }).observe(document.querySelector('.hero'));
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script>
+// Анимации: один «выход» первого экрана, проявление блоков при прокрутке, кнопка тянется к курсору.
+// Если пользователь просил меньше движения — ничего не двигаем.
+var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function () {
+  if (reduce || !window.anime) { document.documentElement.classList.remove('anim'); return; }
+  var tl = anime.timeline({ easing: 'easeOutExpo' });
+  tl.add({ targets: '.arch', opacity: [0, 1], translateY: [80, 0], scale: [.92, 1], duration: 1300, delay: anime.stagger(140, { from: 'center' }) })
+    .add({ targets: ['.hero .lead', '.hero .actions', '.hero .rating'], opacity: [0, 1], translateY: [16, 0], duration: 800, delay: anime.stagger(90) }, '-=900');
+  // рейтинг и число отзывов отсчитываются от нуля
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    var to = parseFloat(el.dataset.count), o = { v: 0 }, frac = String(el.dataset.count).indexOf('.') > -1;
+    anime({ targets: o, v: to, duration: 1600, delay: 500, easing: 'easeOutCubic',
+      update: function () { el.textContent = frac ? o.v.toFixed(1).replace('.', ',') : Math.round(o.v); } });
+  });
+  // блоки проявляются, когда до них доходит прокрутка (один раз)
+  var io = new IntersectionObserver(function (ents) {
+    ents.forEach(function (e) {
+      if (!e.isIntersecting) return; io.unobserve(e.target);
+      anime({ targets: e.target.children, opacity: [0, 1], translateY: [28, 0], delay: anime.stagger(90), duration: 900, easing: 'easeOutQuart' });
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+  document.documentElement.classList.remove('anim');
+  // главная кнопка мягко тянется к курсору (только мышь)
+  if (matchMedia('(pointer: fine)').matches) document.querySelectorAll('.btn.main').forEach(function (b) {
+    b.addEventListener('pointermove', function (e) {
+      var r = b.getBoundingClientRect();
+      anime.remove(b); anime({ targets: b, translateX: (e.clientX - r.left - r.width / 2) * .25, translateY: (e.clientY - r.top - r.height / 2) * .35, duration: 400, easing: 'easeOutQuad' });
+    });
+    b.addEventListener('pointerleave', function () { anime.remove(b); anime({ targets: b, translateX: 0, translateY: 0, duration: 700, easing: 'easeOutElastic(1, .5)' }); });
+  });
+})();
 </script>
 </body>
 </html>
