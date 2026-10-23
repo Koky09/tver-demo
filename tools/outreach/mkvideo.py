@@ -62,21 +62,41 @@ def record(slug, cfg):
         page = ctx.new_page()
         page.add_init_script(f"document.addEventListener('DOMContentLoaded',()=>{{const s=document.createElement('style');s.textContent='html{{zoom:2}}'+{json.dumps(CSS)};document.head.appendChild(s)}})")
         page.goto(BASE + slug + "/", wait_until="load", timeout=90000)
-        page.wait_for_timeout(1500)
+        page.wait_for_selector(".svc", timeout=60000)   # сайт дорисовался (бывает медленно)
+        page.wait_for_timeout(1200)
         page.wait_for_timeout(600)
         cap(page, 1, f"Ваша страница записи «{cfg['name']}»")
         page.wait_for_timeout(2600)
         club = cfg.get("kind") == "club"
         guest = "Артём" if club else "Анна"
-        cap(page, 2, "Гость выбирает, во что играть" if club else "Клиентка выбирает услугу")
-        page.mouse.wheel(0, 380)
-        page.wait_for_timeout(1400)
-        svc = next((s for s in cfg["services"] if s["id"].startswith("gel")), cfg["services"][0]) if cfg.get("kind") == "nail" else cfg["services"][0]
-        tap(page, page.get_by_text(svc["name"], exact=True).first)
-        page.wait_for_timeout(1500)
-        cap(page, 3, "…и свободное время" if club else "…и свободное окошко у мастера")
+        ceil = cfg.get("kind") == "ceiling"
+        if ceil:   # потолки: клиент считает цену в калькуляторе и вызывает замерщика
+            guest = "Ольга"
+            cap(page, 2, "Клиент сам считает цену своей комнаты")
+            page.locator("#calc").scroll_into_view_if_needed()
+            page.mouse.wheel(0, 160)
+            page.wait_for_timeout(900)
+            for v in range(18, 23):
+                page.fill("#c-area", str(v)); page.dispatch_event("#c-area", "input"); page.wait_for_timeout(120)
+            tap(page, page.locator('[data-ctype="1"]'))
+            page.wait_for_timeout(500)
+            for _ in range(3):
+                tap(page, page.locator('[data-cex="0"][data-d="1"]'))
+            page.wait_for_timeout(900)
+            svc = next((s for s in cfg["services"] if s["id"] == cfg.get("bookSvc")), cfg["services"][0])
+            tap(page, page.locator('[data-act="zamer"]'))
+            page.wait_for_timeout(1300)
+            cap(page, 3, "…и вызывает замерщика на удобное время")
+        else:
+            cap(page, 2, "Гость выбирает, во что играть" if club else "Клиентка выбирает услугу")
+            page.mouse.wheel(0, 380)
+            page.wait_for_timeout(1400)
+            svc = next((s for s in cfg["services"] if s["id"].startswith("gel")), cfg["services"][0]) if cfg.get("kind") == "nail" else cfg["services"][0]
+            tap(page, page.get_by_text(svc["name"], exact=True).first)
+            page.wait_for_timeout(1500)
+            cap(page, 3, "…и свободное время" if club else "…и свободное окошко у мастера")
         sheet = page.locator(".sheet")
-        days = sheet.locator("button").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$"))
+        days = sheet.locator("button:not([disabled])").filter(has_text=re.compile(r"^\s*(пн|вт|ср|чт|пт|сб|вс)\s*\d+\s*$"))
         if days.count() > 1:
             tap(page, days.nth(1))
             page.wait_for_timeout(900)
@@ -93,19 +113,20 @@ def record(slug, cfg):
         ins.nth(0).click(); ins.nth(0).type(guest, delay=110)
         ins.nth(1).click(); ins.nth(1).type("+7 916 123-45-67", delay=60)
         page.wait_for_timeout(500)
-        tap(page, sheet.get_by_role("button", name=re.compile("^(Записаться|Забронировать)$")))
+        tap(page, sheet.get_by_role("button", name=re.compile("^(Записаться|Забронировать|Записаться на замер)$")))
         page.wait_for_timeout(1800)
-        cap(page, 5, "Готово — место за ним" if club else "Готово — клиентка записана")
+        cap(page, 5, "Готово — замер назначен" if ceil else "Готово — место за ним" if club else "Готово — клиентка записана")
         page.wait_for_timeout(1800)
         slot = sheet.inner_text()
         when = re.search(r"\d{1,2}:\d{2}", slot)
         day = re.search(r"(Сегодня|Завтра|[А-ЯЁа-яё]+),\s*\d+\s+[а-яё]+", slot)
-        msg = ("Бронь|" if club else "Запись|") + f"Новая {'бронь' if club else 'запись'}: {svc['name']}<br>{(day.group(0) if day else 'завтра')}, {when.group(0) if when else ''} · {cfg.get('boxLabel', 'Мастер')} 1<br>{guest}, +7 916 123-45-67"
+        what = page.evaluate("() => (document.querySelector('#c-sum') || {}).textContent || ''") if ceil else ""
+        msg = ("Заявка на замер|" if ceil else "Бронь|" if club else "Запись|") + (f"Замер: 22 м², глянец, 3 светильника — около {what}<br>" if ceil else f"Новая {'бронь' if club else 'запись'}: {svc['name']}<br>") + f"{(day.group(0) if day else 'завтра')}, {when.group(0) if when else ''} · {cfg.get('boxLabel', 'Мастер')} 1<br>{guest}, +7 916 123-45-67"
         page.evaluate("""(m)=>{const c=document.getElementById('vcap'); if(c) c.style.opacity=0;
             const t=document.createElement('div'); t.id='vtg'; t.innerHTML='<div class=h><i></i>Telegram · сейчас</div><div class=t>'+m.split('|')[0]+' в «'+document.title+'»</div>'+m.split('|')[1];
             document.body.appendChild(t); requestAnimationFrame(()=>requestAnimationFrame(()=>t.style.top='12px'));}""", msg)
         page.wait_for_timeout(900)
-        cap(page, 6, "А бронь сразу приходит вам в Telegram" if club else "А запись сразу приходит вам в Telegram")
+        cap(page, 6, "А заявка сразу приходит вам в Telegram" if ceil else "А бронь сразу приходит вам в Telegram" if club else "А запись сразу приходит вам в Telegram")
         page.evaluate("()=>{const c=document.getElementById('vcap'); const g=document.getElementById('vtg').getBoundingClientRect(); c.style.top=(g.bottom/2+8)+'px'}")
         page.wait_for_timeout(3600)
         ctx.close()
