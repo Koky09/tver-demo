@@ -53,6 +53,7 @@ ICON = {"wash": "bubbles", "body": "spray", "express": "drop", "touchless": "spr
         "tire": "wheel", "balance": "wheel", "rims": "wheel", "repair": "gear", "storage": "stack",
         "mani": "polish", "gel": "polish", "pedi": "foot", "ext": "gem", "design": "brush", "remove": "spark", "spa": "drop", "brows": "eye",
         "ps": "pad", "pc": "monitor", "vip": "crown", "night": "moon", "party": "cake", "vr": "vr",
+        "zamer": "ruler", "matte": "layers", "gloss": "layers", "satin": "layers", "fabric": "layers", "float": "lamp", "light": "lamp", "lines": "lamp",
         "hair": "scissors", "color": "palette", "style": "dryer", "care": "drop", "face": "face"}
 HINTS = {
     "wash": ["Помыть машину сегодня вечером", "Сколько стоит комплекс?", "Химчистка на выходных", "Где вы находитесь?"],
@@ -60,14 +61,16 @@ HINTS = {
     "tint": ["Тонировка завтра", "Сколько стоит плёнка на фары?", "Оклейка зон риска", "Где вы находитесь?"],
     "tire": ["Переобуться в субботу", "Сколько стоит шиномонтаж R17?", "Хранение шин на зиму", "Где вы находитесь?"],
     "nail": ["Маникюр с покрытием завтра вечером", "Сколько стоит педикюр?", "Наращивание в субботу", "Где вы находитесь?"],
+    "ceiling": ["Замер в субботу", "Сколько стоит потолок в комнату 18 м²?", "Парящий потолок с подсветкой", "Где вы работаете?"],
     "salon": ["Стрижка завтра вечером", "Сколько стоит окрашивание?", "Маникюр в субботу", "Где вы находитесь?"],
     "club": ["PS5 на двоих сегодня вечером", "Сколько стоит ночь?", "День рождения в субботу", "Где вы находитесь?"],
 }
-BOX = {"tire": "Пост", "nail": "Мастер", "club": "Зона", "salon": "Мастер"}
+BOX = {"tire": "Пост", "nail": "Мастер", "club": "Зона", "salon": "Мастер", "ceiling": "Замерщик"}
 COMMENT = {"nail": ["Комментарий", "Например: к мастеру Анне, снятие + френч"],
+           "ceiling": ["Адрес и что нужно", "Например: ул. Ленина 5, две комнаты, глянец"],
            "salon": ["Комментарий", "Например: к мастеру Ольге, длина до плеч"],
            "club": ["Сколько вас и во что играете", "Например: нас 4, FIFA и Mortal Kombat"]}
-THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker", "neon", "arcade", "console", "hud", "synth", "versus", "marble", "botanic", "paris", "swiss", "silk", "deco"}
+THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker", "neon", "arcade", "console", "hud", "synth", "versus", "blueprint", "nordic", "loft", "gloss", "sky", "marble", "botanic", "paris", "swiss", "silk", "deco"}
 
 
 def fmt_phone(p):
@@ -98,6 +101,8 @@ def make(c):
         seen[kind] = seen.get(kind, 0) + 1
         sid = kind if seen[kind] == 1 else f"{kind}{seen[kind]}"
         o = {"id": sid, "name": name, "price": price, "priceFrom": frm, "duration": dur, "keywords": KW.get(kind, []), "iconKey": ICON.get(kind, "spark")}
+        if len(row) > 6 and row[6]:
+            o["unit"] = row[6]  # «/м²», «за шт.»
         if note:
             o["note"] = note
         svcs.append(o)
@@ -107,7 +112,7 @@ def make(c):
             "address": addr, "mapQuery": c.get("map") or addr, "phone": phone, "phoneHref": href, "hours": hours(c["hours"]),
             "boxes": c["boxes"], "boxLabel": c.get("boxLabel", BOX.get(c.get("kind"), "Бокс")), "kind": c.get("kind", "wash"), "accent": c["accent"], "accentInk": c["ink"],
             "socials": {"tg": c["msg"]} if c.get("msg") else {}, "demoPrices": bool(c.get("demo")),
-            "chatHints": HINTS[c.get("kind", "wash")], "services": svcs, **{k: c[k] for k in ("kicker", "ringText") if c.get(k)},
+            "chatHints": HINTS[c.get("kind", "wash")], "services": svcs, **{k: c[k] for k in ("kicker", "ringText", "calc", "bookSvc") if c.get(k)},
             **({"commentLabel": COMMENT[c["kind"]][0], "commentPlaceholder": COMMENT[c["kind"]][1]} if c.get("kind") in COMMENT else {})}
 
 

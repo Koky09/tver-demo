@@ -119,7 +119,8 @@
   const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); return x; };
   const hm = (min) => `${pad(Math.floor(min / 60))}:${pad(min % 60)}`;
   const rub = (n) => n.toLocaleString('ru-RU') + ' ₽';
-  const priceStr = (s) => (s.priceFrom ? 'от ' : '') + rub(s.price);
+  const priceStr = (s) => s.price === 0 ? 'Бесплатно' : (s.priceFrom ? 'от ' : '') + rub(s.price) + (s.unit ? ' ' + s.unit : '');
+  const priceHtml = (s) => s.price === 0 ? 'Бесплатно' : `${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}${s.unit ? `<small class="unit">${esc(s.unit)}</small>` : ''}`;
   const durStr = (min) => {
     if (min >= 24 * 60 || min > dayLenMax()) { const d = daysNeeded(min); return `${d} ${plural(d, 'день', 'дня', 'дней')}`; }
     const h = Math.floor(min / 60), m = min % 60;
@@ -274,6 +275,9 @@
     gem: '<path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16 3-16"/>',
     brush: '<path d="M14.5 3.5l6 6-8.5 8.5-6-6z"/><path d="M6 12l-2.2 2.2c-1.4 1.4-.8 4 .2 5 1.4 1.3 3.6 1.5 5 .2L11 17"/>',
     eye: '<path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    ruler: '<path d="M3 15.5 15.5 3 21 8.5 8.5 21z"/><path d="M7 11.5l2 2M9.5 9l1.5 1.5M12 6.5l2 2M14.5 4l1.5 1.5"/>',
+    lamp: '<path d="M12 3v5M7 13a5 5 0 0 1 10 0z"/><path d="M10 16a2 2 0 0 0 4 0M5 19l1.5-1.5M19 19l-1.5-1.5M12 20v1.5"/>',
+    layers: '<path d="M3 8l9-4 9 4-9 4z"/><path d="M3 12.5l9 4 9-4M3 17l9 4 9-4"/>',
     scissors: '<circle cx="6" cy="6.5" r="2.8"/><circle cx="6" cy="17.5" r="2.8"/><path d="M8.3 8.2 20 18M8.3 15.8 20 6"/>',
     palette: '<path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-1 1.6-2.2-.5-1.4.4-2.8 1.9-2.8H18a3 3 0 0 0 3-3c0-5.5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="14.5" cy="7" r="1"/>',
     dryer: '<path d="M14 5.5A5.5 5.5 0 1 0 14 16.5h5.5v-11z"/><circle cx="9" cy="11" r="2"/><path d="M11 16v5h4l1-4.5M20 8.5h2M20 11h2M20 13.5h2"/>',
@@ -292,7 +296,8 @@
     headlights: 'light', vinyl: 'roller', noise: 'mute', 'noise-doors': 'mute', engine: 'gear', presale: 'tag',
     tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack',
     mani: 'polish', gel: 'polish', pedi: 'foot', ext: 'gem', design: 'brush', remove: 'spark', spa: 'drop', brows: 'eye',
-    ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr' };
+zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'layers', float: 'lamp', light: 'lamp', lines: 'lamp',
+        ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr' };
   const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
     [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel'], [/педик/i, 'foot'], [/маник|покрыт|гель/i, 'polish'], [/наращ/i, 'gem'], [/дизайн|френч/i, 'brush'], [/бров|ресниц/i, 'eye'],
     [/vip|вип/i, 'crown'], [/ноч/i, 'moon'], [/рожден|праздн|вечеринк/i, 'cake'], [/\bvr\b|виртуал/i, 'vr'], [/\bпк\b|компьют|\bpc\b/i, 'monitor'], [/ps|playstation|плейстейш|приставк|консол|xbox/i, 'pad']];
@@ -305,7 +310,9 @@
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
   // слова записи: у игровых клубов — бронь
-  const W = C.kind === 'club'
+  const W = C.kind === 'ceiling'
+    ? { tap: 'Расчёт и замер в один тап', cta: 'Вызвать замерщика', go: 'Записаться на замер', ticket: 'Замер', done: 'Замерщик приедет', svcH: 'Цены', svcP: 'Цена за м² — с материалом и монтажом' }
+    : C.kind === 'club'
     ? { tap: 'Бронь в один тап, как в приложении', cta: 'Забронировать онлайн', go: 'Забронировать', ticket: 'Бронь', done: 'Место за вами', svcH: 'Тарифы', svcP: 'Нажмите на тариф, чтобы выбрать время' }
     : { tap: 'Запись в один тап, как в приложении', cta: 'Записаться онлайн', go: 'Записаться', ticket: 'Талон записи', done: 'Вы записаны', svcH: 'Услуги и цены', svcP: 'Нажмите на услугу, чтобы выбрать время' };
 
@@ -406,6 +413,24 @@
           <svg class="fan" viewBox="0 0 400 200" preserveAspectRatio="xMidYMax slice" aria-hidden="true">${Array.from({ length: 13 }, (_, i) => { const a = Math.PI * (i / 12); return `<path d="M200 200L${(200 - 260 * Math.cos(a)).toFixed(1)} ${(200 - 260 * Math.sin(a)).toFixed(1)}"/>`; }).join('')}<circle cx="200" cy="200" r="70"/><circle cx="200" cy="200" r="120"/></svg>
           <div class="step"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
           <div class="kicker">${esc(C.kicker || 'Салон красоты')}</div>${name}${tag}${meta}</section>`;
+      // натяжные потолки (template/ceiling.css)
+      case 'blueprint':
+        return `<section class="hero">${demo}<div class="bp-top"><span>${esc(C.kicker || 'Натяжные потолки')}</span><span>лист 1</span></div>
+          <div class="bp-photo"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+            <span class="dim dim-w" aria-hidden="true">4 200</span><span class="dim dim-h" aria-hidden="true">2 750</span></div>
+          ${name}${tag}${meta}</section>`;
+      case 'nordic':
+        return `<section class="hero"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')">${demo}</div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Натяжные потолки')}</div>${name}${tag}${meta}</div></section>`;
+      case 'loft':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="beams" aria-hidden="true"><i></i><i></i><i></i></div>${demo}
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Натяжные потолки')}</div>${name}${tag}${meta}</div></section>`;
+      case 'gloss':
+        return `<section class="hero"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>${demo}
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Натяжные потолки')}</div>${name}<div class="mirror" aria-hidden="true">${esc(C.name)}</div>${tag}${meta}</div></section>`;
+      case 'sky':
+        return `<section class="hero">${demo}<div class="float"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Натяжные потолки')}</div>${name}${tag}${meta}</div></section>`;
       // игровые клубы (template/game.css)
       case 'neon':
         return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="scan" aria-hidden="true"></div>${demo}
@@ -440,6 +465,47 @@
     }
   }
 
+  /* ---------- калькулятор (натяжные потолки и т.п.): C.calc = {types: [[название, ₽/м²]], extras: [[название, ₽ за шт]], area} ---------- */
+  const calc = { area: (C.calc && C.calc.area) || 15, type: 0, ex: {} };
+  const calcSum = () => {
+    const k = C.calc; if (!k) return 0;
+    let sum = calc.area * k.types[calc.type][1];
+    k.extras.forEach(([, p], i) => { sum += (calc.ex[i] || 0) * p; });
+    return Math.max(sum, k.min || 0);
+  };
+  const calcText = () => {
+    const k = C.calc; if (!k) return '';
+    const ex = k.extras.map(([n], i) => (calc.ex[i] ? `${n.toLowerCase()}: ${calc.ex[i]}` : '')).filter(Boolean).join(', ');
+    return `Расчёт: ${calc.area} м², ${k.types[calc.type][0].toLowerCase()}${ex ? ', ' + ex : ''} — около ${rub(Math.round(calcSum() / 100) * 100)}`;
+  };
+  function calcHtml() {
+    const k = C.calc; if (!k) return '';
+    return `<section class="calc" id="calc" aria-labelledby="calc-h">
+      <div class="sec-head"><h2 id="calc-h">${esc(k.title || 'Сколько будет стоить')}</h2><p class="muted small">Примерная цена с материалом и монтажом. Точную назовёт замерщик — бесплатно.</p></div>
+      <div class="calc-box">
+        <label class="c-area" for="c-area"><span>Площадь потолка</span><output id="c-area-v">${calc.area} м²</output></label>
+        <input type="range" id="c-area" min="3" max="${k.maxArea || 120}" step="1" value="${calc.area}">
+        <div class="c-lab">Потолок</div>
+        <div class="c-types" role="radiogroup" aria-label="Тип потолка">${k.types.map(([n, p], i) =>
+          `<button role="radio" aria-checked="${i === calc.type}" data-ctype="${i}"><b>${esc(n)}</b><small>${rub(p)}/м²</small></button>`).join('')}</div>
+        ${k.extras.length ? `<div class="c-lab">Дополнительно</div><div class="c-extras">${k.extras.map(([n, p, u], i) =>
+          `<div class="c-ex"><span>${esc(n)}<small>${rub(p)} за ${esc(u || 'шт.')}</small></span><span class="c-step"><button data-cex="${i}" data-d="-1" aria-label="Меньше: ${esc(n)}">−</button><output id="c-ex-${i}">${calc.ex[i] || 0}</output><button data-cex="${i}" data-d="1" aria-label="Больше: ${esc(n)}">+</button></span></div>`).join('')}</div>` : ''}
+        <div class="c-total"><span>Примерно</span><b id="c-sum">${rub(Math.round(calcSum() / 100) * 100)}</b></div>
+        <button class="btn" data-act="zamer">Вызвать замерщика бесплатно</button>
+      </div></section>`;
+  }
+  function bindCalc() {
+    const box = $('#calc'); if (!box) return;
+    const upd = () => { $('#c-sum').textContent = rub(Math.round(calcSum() / 100) * 100); };
+    $('#c-area').addEventListener('input', (e) => { calc.area = +e.target.value; $('#c-area-v').textContent = calc.area + ' м²'; upd(); });
+    box.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-ctype],[data-cex]'); if (!t) return;
+      if (t.dataset.ctype) { calc.type = +t.dataset.ctype; box.querySelectorAll('[data-ctype]').forEach((b) => b.setAttribute('aria-checked', b === t)); }
+      else { const i = +t.dataset.cex; calc.ex[i] = Math.max(0, Math.min(50, (calc.ex[i] || 0) + +t.dataset.d)); $('#c-ex-' + i).textContent = calc.ex[i]; }
+      upd();
+    });
+  }
+
   function renderClient() {
     const open = isOpenNow();
     const msgr = C.socials && (C.socials.tg || C.socials.vk || C.socials.max);
@@ -457,12 +523,13 @@
         <div class="body"><b>Добавьте на экран</b><br><span class="muted">${isIOS ? 'Нажмите «Поделиться» → «На экран „Домой“»' : W.tap}</span></div>
         ${isIOS ? '' : '<button class="btn sm" data-act="install">Добавить</button>'}
       </div>`}
+      ${calcHtml()}
       <div class="sec-head"><h2>${W.svcH}</h2><p class="muted small">${C.bookingUrl ? 'Нажмите на услугу, чтобы записаться онлайн' : W.svcP}</p></div>
       <div class="list">${services().map((s) => `
         <button class="svc" data-svc="${s.id}">
           <span class="ico">${svcIcon(s)}</span>
           <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}${s.note ? ', ' + esc(s.note) : ''}</span></span>
-          <span class="lead" aria-hidden="true"></span><span class="price">${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}</span>
+          <span class="lead" aria-hidden="true"></span><span class="price">${priceHtml(s)}</span>
         </button>`).join('')}</div>
       ${C.gallery && C.gallery.length ? `<h2>Наши работы</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
       <h2>Как нас найти</h2>
@@ -477,11 +544,14 @@
       <button class="btn" data-act="book">${W.cta}</button>
       ${C.bookingUrl ? '' : `<button class="btn chat-btn" data-act="chat" aria-label="Подобрать время с ассистентом">${I.spark}</button>`}
     </div></div>`;
+    bindCalc();
 
     app.onclick = (e) => {
       const t = e.target.closest('[data-act],[data-svc]'); if (!t) return;
       // своя онлайн-запись салона (YCLIENTS, Sonline ...): записи сразу попадают в их программу
       if (C.bookingUrl && (t.dataset.svc || t.dataset.act === 'book')) return window.open(C.bookingUrl, '_blank', 'noopener');
+      if (C.bookSvc && (t.dataset.svc || t.dataset.act === 'book')) return openBooking({ svcId: C.bookSvc, step: 2 });
+      if (t.dataset.act === 'zamer') return openBooking({ svcId: C.bookSvc, step: 2, comment: calcText() });
       if (t.dataset.svc) return openBooking({ svcId: t.dataset.svc, step: 2 });
       const a = t.dataset.act;
       if (a === 'book') openBooking({ step: 1 });
@@ -522,7 +592,7 @@
           <button class="svc ${s.id === state.svcId ? 'sel' : ''}" data-svc="${s.id}">
             <span class="ico">${svcIcon(s)}</span>
             <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}</span></span>
-            <span class="price">${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}</span></button>`).join('')}</div>`;
+            <span class="price">${priceHtml(s)}</span></button>`).join('')}</div>`;
       } else if (state.step === 2) {
         const days = nextDays();
         if (!state.date) state.date = days.find((d) => slotsFor(svc, d).length) || days[0];

@@ -1,0 +1,195 @@
+{
+  "slug": "ceil-idilliya",
+  "theme": "blueprint",
+  "demo": false,
+  "city": "Волгоград",
+  "name": "Идиллия",
+  "short": "И",
+  "tagline": "Натяжные потолки под ключ · Дзержинский район",
+  "address": "Волгоград, Нильская улица, 4",
+  "mapQuery": "Волгоград, Нильская улица, 4",
+  "phone": "+7 904 756-66-04",
+  "phoneHref": "+79047566604",
+  "hours": {
+    "0": [
+      8,
+      20
+    ],
+    "1": [
+      8,
+      20
+    ],
+    "2": [
+      8,
+      20
+    ],
+    "3": [
+      8,
+      20
+    ],
+    "4": [
+      8,
+      20
+    ],
+    "5": [
+      8,
+      20
+    ],
+    "6": [
+      8,
+      20
+    ]
+  },
+  "boxes": 2,
+  "boxLabel": "Замерщик",
+  "kind": "ceiling",
+  "accent": "#30e8e8",
+  "accentInk": "#0b0b10",
+  "socials": {
+    "tg": "https://t.me/+79047566604"
+  },
+  "demoPrices": true,
+  "chatHints": [
+    "Замер в субботу",
+    "Сколько стоит потолок в комнату 18 м²?",
+    "Парящий потолок с подсветкой",
+    "Где вы работаете?"
+  ],
+  "services": [
+    {
+      "id": "zamer",
+      "name": "Бесплатный замер",
+      "price": 0,
+      "priceFrom": false,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "ruler",
+      "note": "приедем, измерим и посчитаем точно"
+    },
+    {
+      "id": "matte",
+      "name": "Матовый потолок",
+      "price": 500,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "с материалом и монтажом"
+    },
+    {
+      "id": "gloss",
+      "name": "Глянцевый потолок",
+      "price": 560,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "визуально поднимает комнату"
+    },
+    {
+      "id": "satin",
+      "name": "Сатиновый потолок",
+      "price": 620,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "мягкий перламутровый блеск"
+    },
+    {
+      "id": "fabric",
+      "name": "Тканевый потолок",
+      "price": 1340,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "без нагрева, дышит"
+    },
+    {
+      "id": "float",
+      "name": "Парящий потолок с подсветкой",
+      "price": 1460,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "lamp",
+      "unit": "/м²",
+      "note": "светодиодная лента по периметру"
+    },
+    {
+      "id": "lines",
+      "name": "Световые линии",
+      "price": 2800,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "lamp",
+      "unit": "/пог. м",
+      "note": "встроенные светодиодные линии"
+    },
+    {
+      "id": "light",
+      "name": "Установка светильника",
+      "price": 450,
+      "priceFrom": true,
+      "duration": 15,
+      "keywords": [],
+      "iconKey": "lamp",
+      "unit": "/шт."
+    }
+  ],
+  "kicker": "Натяжные потолки",
+  "calc": {
+    "types": [
+      [
+        "Матовый",
+        500
+      ],
+      [
+        "Глянцевый",
+        560
+      ],
+      [
+        "Сатиновый",
+        620
+      ],
+      [
+        "Тканевый",
+        1340
+      ],
+      [
+        "Парящий",
+        1460
+      ]
+    ],
+    "extras": [
+      [
+        "Светильники",
+        450
+      ],
+      [
+        "Люстра",
+        650
+      ],
+      [
+        "Обход трубы",
+        350
+      ],
+      [
+        "Скрытый карниз, метров",
+        1700,
+        "м"
+      ]
+    ],
+    "area": 18,
+    "min": 5000
+  },
+  "bookSvc": "zamer",
+  "commentLabel": "Адрес и что нужно",
+  "commentPlaceholder": "Например: ул. Ленина 5, две комнаты, глянец"
+}

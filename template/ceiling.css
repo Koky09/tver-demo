@@ -1,0 +1,163 @@
+
+/* =====================================================================
+   Натяжные потолки (kind=ceiling): калькулятор стоимости + стили blueprint, nordic, loft, gloss, sky.
+   Файл дописывается в конец style.css при сборке (build.py).
+   ===================================================================== */
+
+/* ---------- калькулятор (общий для всех стилей) ---------- */
+.calc .calc-box { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-lg, 18px); padding: 18px 16px; display: grid; gap: 12px; }
+.calc .c-area { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; }
+.calc .c-area output { font: 700 26px/1 var(--display); color: var(--accent-text); }
+.calc input[type=range] { width: 100%; accent-color: var(--accent); height: 28px; }
+.calc .c-lab { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.calc .c-types { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 8px; }
+.calc .c-types button { display: grid; gap: 2px; text-align: left; padding: 10px 12px; border-radius: var(--r-md, 12px); border: 1px solid var(--line); background: transparent; color: var(--ink); font: inherit; cursor: pointer; min-height: 52px; }
+.calc .c-types button b { font-weight: 600; font-size: 15px; }
+.calc .c-types button small { color: var(--muted); font-size: 13px; }
+.calc .c-types button[aria-checked=true] { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.calc .c-extras { display: grid; gap: 6px; }
+.calc .c-ex { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 4px 0; }
+.calc .c-ex small { display: block; color: var(--muted); font-size: 13px; }
+.calc .c-step { display: inline-flex; align-items: center; gap: 4px; }
+.calc .c-step button { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--ink); font-size: 20px; cursor: pointer; }
+.calc .c-step output { min-width: 28px; text-align: center; font-weight: 700; }
+.calc .c-total { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); padding-top: 12px; margin-top: 4px; }
+.calc .c-total b { font: 700 30px/1 var(--display); color: var(--accent-text); }
+.calc .btn { width: 100%; }
+.svc .price small.unit { display: inline; margin-left: 2px; font-size: .75em; }
+
+:is([data-theme=blueprint],[data-theme=nordic],[data-theme=loft],[data-theme=gloss],[data-theme=sky]) .hero::after { display: none; }
+:is([data-theme=blueprint],[data-theme=nordic],[data-theme=loft],[data-theme=gloss],[data-theme=sky]) .hero.has-img::before { display: none; }
+:is([data-theme=blueprint],[data-theme=nordic],[data-theme=loft],[data-theme=gloss],[data-theme=sky]) .hero h1 { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+
+/* ---------- blueprint: чертёж замерщика ---------- */
+:root[data-theme=blueprint] {
+  --bg: #0f2a4a; --surface: #133457; --surface-2: #184068; --line: rgba(190,220,255,.28); --ink: #eaf3ff; --muted: #9fbbd9;
+  --accent-text: color-mix(in oklab, var(--accent), #fff 35%); --accent-soft: color-mix(in oklab, var(--accent) 22%, #133457);
+  --display: "Roboto Condensed", system-ui, sans-serif; --text: "Roboto Condensed", system-ui, sans-serif; --mono: "Roboto Mono", monospace; --r-md: 4px; --r-lg: 6px; color-scheme: dark;
+}
+[data-theme=blueprint] body { background-color: #0f2a4a; background-image: linear-gradient(rgba(190,220,255,.07) 1px, transparent 1px), linear-gradient(90deg, rgba(190,220,255,.07) 1px, transparent 1px), linear-gradient(rgba(190,220,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(190,220,255,.12) 1px, transparent 1px); background-size: 12px 12px, 12px 12px, 60px 60px, 60px 60px; }
+[data-theme=blueprint] .hero { min-height: 0; padding: 14px 16px 22px; background: transparent; border: 1.5px solid var(--line); border-radius: 4px; box-shadow: none; gap: 0; }
+[data-theme=blueprint] .hero .bp-top { display: flex; justify-content: space-between; font: 500 12px/1 var(--mono); color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 18px; }
+[data-theme=blueprint] .hero .bp-photo { position: relative; margin: 6px 26px 18px 0; }
+[data-theme=blueprint] .hero .photo { aspect-ratio: 4 / 3; background: center/cover no-repeat; filter: saturate(.85); border: 1.5px solid #eaf3ff; }
+[data-theme=blueprint] .hero .dim { position: absolute; font: 500 12px/1 var(--mono); color: #eaf3ff; }
+[data-theme=blueprint] .hero .dim-w { left: 0; right: 0; bottom: -18px; text-align: center; border-top: 1px solid #eaf3ff; padding-top: 4px; }
+[data-theme=blueprint] .hero .dim-w::before, [data-theme=blueprint] .hero .dim-w::after { content: ""; position: absolute; top: -5px; width: 1px; height: 9px; background: #eaf3ff; }
+[data-theme=blueprint] .hero .dim-w::before { left: 0; } [data-theme=blueprint] .hero .dim-w::after { right: 0; }
+[data-theme=blueprint] .hero .dim-h { top: 0; bottom: 0; right: -26px; writing-mode: vertical-rl; display: flex; align-items: center; justify-content: center; border-left: 1px solid #eaf3ff; padding-left: 4px; }
+[data-theme=blueprint] .hero h1 { margin-top: 16px; font: 700 clamp(30px, calc((min(100vw,560px) - 50px) / (var(--n,8) * .56)), 58px)/1 var(--display); text-transform: uppercase; letter-spacing: .02em; }
+[data-theme=blueprint] .hero .tag { color: var(--muted); font-family: var(--mono); font-size: 13px; margin-top: 8px; }
+[data-theme=blueprint] .hero-meta { font-family: var(--mono); font-size: 13px; }
+[data-theme=blueprint] .demo-tag { position: absolute; top: 40px; right: 16px; z-index: 2; border-radius: 2px; border-color: #eaf3ff; color: #eaf3ff; background: #0f2a4a; }
+[data-theme=blueprint] .quick, [data-theme=blueprint] .list, [data-theme=blueprint] .place, [data-theme=blueprint] .install { background: rgba(19,52,87,.85); border-color: var(--line); border-radius: 4px; }
+[data-theme=blueprint] .quick .ic, [data-theme=blueprint] .svc .ico { color: #eaf3ff; }
+[data-theme=blueprint] .svc .ico { background: transparent; border: 1px dashed var(--line); border-radius: 2px; }
+[data-theme=blueprint] h2 { font: 700 26px/1.1 var(--display); text-transform: uppercase; letter-spacing: .03em; }
+[data-theme=blueprint] .svc .price { font-family: var(--mono); color: var(--accent-text); }
+[data-theme=blueprint] .btn { border-radius: 2px; text-transform: uppercase; letter-spacing: .06em; }
+[data-theme=blueprint] .calc .calc-box { background: rgba(19,52,87,.9); border-style: dashed; }
+[data-theme=blueprint] .calc .c-area output, [data-theme=blueprint] .calc .c-total b { font-family: var(--mono); }
+[data-theme=blueprint] .sheet { background: #10304f; }
+
+/* ---------- nordic: белый, дерево, воздух ---------- */
+:root[data-theme=nordic] {
+  --bg: #f7f6f3; --surface: #fff; --surface-2: #f0ede7; --line: #e4dfd6; --ink: #24272a; --muted: #7b7f83;
+  --wood: #c8a27a; --accent-text: color-mix(in oklab, var(--accent), #24272a 25%); --accent-soft: color-mix(in oklab, var(--accent) 10%, #fff);
+  --display: "Commissioner", system-ui, sans-serif; --text: "Commissioner", system-ui, sans-serif; --r-md: 16px; --r-lg: 24px; color-scheme: light;
+}
+[data-theme=nordic] .hero { min-height: 0; padding: 0; background: var(--surface); color: var(--ink); border-radius: 24px; overflow: hidden; box-shadow: 0 30px 60px -40px rgba(40,40,30,.35); gap: 0; }
+[data-theme=nordic] .hero .photo { position: relative; aspect-ratio: 4 / 3.4; background: center/cover no-repeat; }
+[data-theme=nordic] .hero .photo::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 10px; background: repeating-linear-gradient(90deg, var(--wood) 0 22px, color-mix(in oklab, var(--wood), #fff 25%) 22px 24px); }
+[data-theme=nordic] .hero .inner { padding: 22px 20px 24px; }
+[data-theme=nordic] .hero .kicker { font: 500 14px/1 var(--text); color: var(--accent-text); margin-bottom: 10px; }
+[data-theme=nordic] .hero h1 { font: 300 clamp(32px, calc((min(100vw,560px) - 60px) / (var(--n,8) * .58)), 56px)/1.02 var(--display); letter-spacing: -.02em; }
+[data-theme=nordic] .hero .tag { color: var(--muted); margin-top: 10px; }
+[data-theme=nordic] .hero-meta .addr { color: var(--muted); }
+[data-theme=nordic] .demo-tag { position: absolute; top: 14px; right: 14px; background: #fff; color: var(--ink); border-color: transparent; }
+[data-theme=nordic] .quick { background: var(--surface); border-color: var(--line); border-radius: 999px; }
+[data-theme=nordic] .quick .ic { color: var(--accent-text); }
+[data-theme=nordic] h2 { font: 300 32px/1.05 var(--display); letter-spacing: -.02em; }
+[data-theme=nordic] .list { background: var(--surface); border-color: var(--line); border-radius: 20px; }
+[data-theme=nordic] .svc .ico { border-radius: 50%; background: var(--surface-2); color: var(--accent-text); }
+[data-theme=nordic] .svc .price { font-weight: 600; }
+[data-theme=nordic] .btn { border-radius: 999px; }
+[data-theme=nordic] .calc .calc-box { border-radius: 24px; box-shadow: 0 20px 50px -40px rgba(40,40,30,.4); }
+
+/* ---------- loft: бетон и световые линии ---------- */
+:root[data-theme=loft] {
+  --bg: #1c1d1f; --surface: #242628; --surface-2: #2c2e31; --line: #393c40; --ink: #f1efea; --muted: #a3a29e;
+  --glow: color-mix(in oklab, var(--accent), #fff 20%); --accent-text: var(--glow); --accent-soft: color-mix(in oklab, var(--accent) 16%, #242628);
+  --display: "Oswald", system-ui, sans-serif; --text: "Manrope", system-ui, sans-serif; --r-md: 6px; --r-lg: 8px; color-scheme: dark;
+}
+[data-theme=loft] body { background: radial-gradient(120% 60% at 50% 0%, #2a2b2e, #1c1d1f 60%); }
+[data-theme=loft] .hero { min-height: 520px; padding: 0; border-radius: 8px; background: #111 center/cover no-repeat; justify-content: flex-end; overflow: hidden; }
+[data-theme=loft] .hero .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(28,29,31,.2) 25%, rgba(28,29,31,.95) 82%); }
+[data-theme=loft] .hero .beams i { position: absolute; left: -10%; right: -10%; height: 3px; border-radius: 3px; background: var(--glow); box-shadow: 0 0 12px 2px var(--glow), 0 0 40px 6px color-mix(in oklab, var(--glow) 50%, transparent); transform: rotate(-9deg); }
+[data-theme=loft] .hero .beams i:nth-child(1) { top: 13%; } [data-theme=loft] .hero .beams i:nth-child(2) { top: 22%; left: 30%; } [data-theme=loft] .hero .beams i:nth-child(3) { top: 31%; right: 40%; }
+[data-theme=loft] .hero .inner { padding: 0 20px 26px; }
+[data-theme=loft] .hero .kicker { font: 500 13px/1 var(--text); color: var(--glow); letter-spacing: .08em; margin-bottom: 10px; }
+[data-theme=loft] .hero h1 { font: 600 clamp(36px, calc((min(100vw,560px) - 40px) / (var(--n,8) * .52)), 72px)/.95 var(--display); text-transform: uppercase; }
+[data-theme=loft] .hero .tag { color: #cfcdc8; margin-top: 10px; }
+[data-theme=loft] .demo-tag { position: absolute; top: 16px; right: 16px; border-color: var(--glow); color: var(--glow); }
+[data-theme=loft] .quick, [data-theme=loft] .list, [data-theme=loft] .place, [data-theme=loft] .install { background: var(--surface); border-color: var(--line); }
+[data-theme=loft] .quick .ic, [data-theme=loft] .svc .ico { color: var(--glow); }
+[data-theme=loft] .svc .ico { background: var(--surface-2); box-shadow: inset 0 -2px 0 var(--glow); }
+[data-theme=loft] h2 { font: 600 30px/1 var(--display); text-transform: uppercase; }
+[data-theme=loft] h2::after { content: ""; display: block; width: 56px; height: 3px; margin-top: 10px; background: var(--glow); box-shadow: 0 0 10px var(--glow); border-radius: 3px; }
+[data-theme=loft] .svc .price { color: var(--glow); font-weight: 700; }
+[data-theme=loft] .btn { box-shadow: 0 0 24px -6px var(--glow); }
+[data-theme=loft] .calc .c-area output, [data-theme=loft] .calc .c-total b { color: var(--glow); text-shadow: 0 0 14px color-mix(in oklab, var(--glow) 60%, transparent); }
+[data-theme=loft] .sheet { background: #202224; }
+
+/* ---------- gloss: глянец и отражение ---------- */
+:root[data-theme=gloss] {
+  --bg: #0b0c10; --surface: #14161c; --surface-2: #1b1e26; --line: #2a2e38; --ink: #f4f5f8; --muted: #9ba1ae;
+  --accent-text: color-mix(in oklab, var(--accent), #fff 35%); --accent-soft: color-mix(in oklab, var(--accent) 18%, #14161c);
+  --display: "Literata", Georgia, serif; --text: "Manrope", system-ui, sans-serif; --r-md: 14px; --r-lg: 20px; color-scheme: dark;
+}
+[data-theme=gloss] body { background: linear-gradient(180deg, #13151b, #0b0c10 40%); }
+[data-theme=gloss] .hero { min-height: 0; padding: 0 0 22px; background: linear-gradient(180deg, #181b22, #0e1015); border-radius: 20px; overflow: hidden; gap: 0; box-shadow: inset 0 1px 0 rgba(255,255,255,.12), 0 30px 60px -30px #000; }
+[data-theme=gloss] .hero .photo { aspect-ratio: 16 / 11; background: center/cover no-repeat; -webkit-mask: linear-gradient(180deg, #000 70%, transparent); mask: linear-gradient(180deg, #000 70%, transparent); }
+[data-theme=gloss] .hero .inner { padding: 0 20px; margin-top: -30px; position: relative; }
+[data-theme=gloss] .hero .kicker { font: 500 13px/1 var(--text); color: var(--accent-text); margin-bottom: 10px; }
+[data-theme=gloss] .hero h1 { font: 600 clamp(30px, calc((min(100vw,560px) - 50px) / (var(--n,8) * .56)), 54px)/1 var(--display); background: linear-gradient(180deg, #fff 30%, #b9c0cf); -webkit-background-clip: text; background-clip: text; color: transparent; }
+[data-theme=gloss] .hero .mirror { font: 600 clamp(30px, calc((min(100vw,560px) - 50px) / (var(--n,8) * .56)), 54px)/1 var(--display); transform: scaleY(-1); margin-top: -4px; height: .55em; overflow: hidden; color: #fff; opacity: .16; -webkit-mask: linear-gradient(0deg, #000, transparent 90%); mask: linear-gradient(0deg, #000, transparent 90%); filter: blur(.5px); overflow-wrap: normal; word-break: keep-all; }
+[data-theme=gloss] .hero .tag { color: var(--muted); margin-top: 4px; }
+[data-theme=gloss] .demo-tag { position: absolute; top: 14px; right: 14px; }
+[data-theme=gloss] .quick, [data-theme=gloss] .list, [data-theme=gloss] .place, [data-theme=gloss] .install { background: var(--surface); border-color: var(--line); box-shadow: inset 0 1px 0 rgba(255,255,255,.06); }
+[data-theme=gloss] .quick .ic { color: var(--accent-text); }
+[data-theme=gloss] h2 { font: 600 28px/1.1 var(--display); }
+[data-theme=gloss] .svc .ico { background: linear-gradient(180deg, #2a2f3b, #161920); color: #fff; box-shadow: inset 0 1px 0 rgba(255,255,255,.18); }
+[data-theme=gloss] .svc .price { color: var(--accent-text); font-weight: 700; }
+[data-theme=gloss] .btn { background: linear-gradient(180deg, color-mix(in oklab, var(--accent), #fff 22%), var(--accent)); box-shadow: inset 0 1px 0 rgba(255,255,255,.35), 0 12px 30px -12px var(--accent); }
+[data-theme=gloss] .btn.ghost, [data-theme=gloss] .btn.danger { background: transparent; box-shadow: none; }
+[data-theme=gloss] .calc .calc-box { box-shadow: inset 0 1px 0 rgba(255,255,255,.08); }
+[data-theme=gloss] .sheet { background: #12141a; }
+
+/* ---------- sky: парящий потолок с подсветкой ---------- */
+:root[data-theme=sky] {
+  --bg: #eef4fb; --surface: #fff; --surface-2: #e8f0fa; --line: #d6e2f0; --ink: #1d2a3a; --muted: #6a7b90;
+  --halo: color-mix(in oklab, var(--accent), #fff 30%); --accent-text: color-mix(in oklab, var(--accent), #1d2a3a 30%); --accent-soft: color-mix(in oklab, var(--accent) 12%, #fff);
+  --display: "Montserrat", system-ui, sans-serif; --text: "Nunito", system-ui, sans-serif; --r-md: 16px; --r-lg: 22px; color-scheme: light;
+}
+[data-theme=sky] body { background: linear-gradient(180deg, #dfeaf7 0%, #eef4fb 30%, #f6f9fd 100%); background-attachment: fixed; }
+[data-theme=sky] .hero { min-height: 0; padding: 26px 18px 24px; background: transparent; color: var(--ink); box-shadow: none; gap: 0; overflow: visible; }
+[data-theme=sky] .hero .float { position: relative; margin: 6px 4px 30px; }
+[data-theme=sky] .hero .float::before { content: ""; position: absolute; inset: -6px; border-radius: 26px; background: var(--halo); filter: blur(16px); opacity: .8; animation: halo 4s ease-in-out infinite alternate; }
+@keyframes halo { to { opacity: .45; filter: blur(22px); } }
+@media (prefers-reduced-motion: reduce) { [data-theme=sky] .hero .float::before { animation: none; } }
+[data-theme=sky] .hero .photo { position: relative; aspect-ratio: 4 / 3; border-radius: 22px; background: center/cover no-repeat; box-shadow: 0 0 0 2px #fff, 0 24px 40px -24px rgba(29,42,58,.6); }
+[data-theme=sky] .hero .kicker { font: 600 13px/1 var(--text); color: var(--accent-text); margin-bottom: 8px; }
+[data-theme=sky] .hero h1 { font: 700 clamp(28px, calc((min(100vw,560px) - 50px) / (var(--n,8) * .64)), 50px)/1.05 var(--display); letter-spacing: -.02em; }
+[data-theme=sky] .hero .tag { color: var(--muted); margin-top: 8px; }
+[data-theme=sky] .hero-meta .addr { color: var(--muted); }
+[data-theme=sky] .demo-tag { position: absolute; top: 34px; right: 26px; z-index: 2; background: #fff; color: var(--ink); border-color: transparent; }
+[data-theme=sky] .quick { background: var(--surface); border-color: var(--line); border-radius: 999px; }
+[data-theme=sky] .quick .ic { color: var(--accent-text); }
+[data-theme=sky] h2 { font: 700 26px/1.1 var(--display); letter-spacing: -.01em; }
+[data-theme=sky] .list { background: var(--surface); border-color: var(--line); border-radius: 22px; }
+[data-theme=sky] .svc .ico { border-radius: 50%; background: var(--accent-soft); color: var(--accent-text); box-shadow: 0 0 0 4px #fff, 0 0 14px var(--halo); }
+[data-theme=sky] .svc .price { font-weight: 700; color: var(--accent-text); }
+[data-theme=sky] .btn { border-radius: 999px; box-shadow: 0 12px 30px -12px var(--accent); }
+[data-theme=sky] .calc .calc-box { border-radius: 22px; box-shadow: 0 0 0 1px var(--line), 0 18px 40px -30px var(--accent); border: 0; }

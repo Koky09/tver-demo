@@ -1,0 +1,24 @@
+{
+ "name": "Так и живем в Самаре — онлайн-запись",
+ "short_name": "Так и живем ",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#956f0e",
+ "theme_color": "#956f0e",
+ "lang": "ru",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}

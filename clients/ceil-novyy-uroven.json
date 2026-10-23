@@ -1,0 +1,191 @@
+{
+  "slug": "ceil-novyy-uroven",
+  "theme": "blueprint",
+  "demo": false,
+  "city": "Ростов-на-Дону",
+  "name": "Новый уровень",
+  "short": "НУ",
+  "tagline": "Натяжные потолки под ключ · Ворошиловский район",
+  "address": "Ростов-на-Дону, проспект Королёва, 21в",
+  "mapQuery": "Ростов-на-Дону, проспект Королёва, 21в",
+  "phone": "+7 989 523-60-50",
+  "phoneHref": "+79895236050",
+  "hours": {
+    "1": [
+      8,
+      20
+    ],
+    "2": [
+      8,
+      20
+    ],
+    "3": [
+      8,
+      20
+    ],
+    "4": [
+      8,
+      20
+    ],
+    "5": [
+      8,
+      20
+    ],
+    "6": [
+      8,
+      20
+    ]
+  },
+  "boxes": 2,
+  "boxLabel": "Замерщик",
+  "kind": "ceiling",
+  "accent": "#30e85b",
+  "accentInk": "#0b0b10",
+  "socials": {
+    "tg": "https://wa.me/79895236050"
+  },
+  "demoPrices": true,
+  "chatHints": [
+    "Замер в субботу",
+    "Сколько стоит потолок в комнату 18 м²?",
+    "Парящий потолок с подсветкой",
+    "Где вы работаете?"
+  ],
+  "services": [
+    {
+      "id": "zamer",
+      "name": "Бесплатный замер",
+      "price": 0,
+      "priceFrom": false,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "ruler",
+      "note": "приедем, измерим и посчитаем точно"
+    },
+    {
+      "id": "matte",
+      "name": "Матовый потолок",
+      "price": 410,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "с материалом и монтажом"
+    },
+    {
+      "id": "gloss",
+      "name": "Глянцевый потолок",
+      "price": 450,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "визуально поднимает комнату"
+    },
+    {
+      "id": "satin",
+      "name": "Сатиновый потолок",
+      "price": 500,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "мягкий перламутровый блеск"
+    },
+    {
+      "id": "fabric",
+      "name": "Тканевый потолок",
+      "price": 1090,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "layers",
+      "unit": "/м²",
+      "note": "без нагрева, дышит"
+    },
+    {
+      "id": "float",
+      "name": "Парящий потолок с подсветкой",
+      "price": 1180,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "lamp",
+      "unit": "/м²",
+      "note": "светодиодная лента по периметру"
+    },
+    {
+      "id": "lines",
+      "name": "Световые линии",
+      "price": 2280,
+      "priceFrom": true,
+      "duration": 60,
+      "keywords": [],
+      "iconKey": "lamp",
+      "unit": "/пог. м",
+      "note": "встроенные светодиодные линии"
+    },
+    {
+      "id": "light",
+      "name": "Установка светильника",
+      "price": 360,
+      "priceFrom": true,
+      "duration": 15,
+      "keywords": [],
+      "iconKey": "lamp",
+      "unit": "/шт."
+    }
+  ],
+  "kicker": "Натяжные потолки",
+  "calc": {
+    "types": [
+      [
+        "Матовый",
+        410
+      ],
+      [
+        "Глянцевый",
+        450
+      ],
+      [
+        "Сатиновый",
+        500
+      ],
+      [
+        "Тканевый",
+        1090
+      ],
+      [
+        "Парящий",
+        1180
+      ]
+    ],
+    "extras": [
+      [
+        "Светильники",
+        350
+      ],
+      [
+        "Люстра",
+        550
+      ],
+      [
+        "Обход трубы",
+        250
+      ],
+      [
+        "Скрытый карниз, метров",
+        1350,
+        "м"
+      ]
+    ],
+    "area": 18,
+    "min": 5000
+  },
+  "bookSvc": "zamer",
+  "commentLabel": "Адрес и что нужно",
+  "commentPlaceholder": "Например: ул. Ленина 5, две комнаты, глянец"
+}

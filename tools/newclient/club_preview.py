@@ -22,10 +22,19 @@ if KIND == "salon":
            ["gel", "Маникюр с покрытием гель-лак", 1600, 120, "с укреплением и снятием", "от"], ["brows", "Брови: коррекция и окрашивание", 900, 45, None, "от"]]
     THEMES = [("marble", "#a07850", "#ffffff", 19, "Белла"), ("botanic", "#5c8a5e", "#ffffff", 104, "Шалфей"), ("paris", "#c8506a", "#ffffff", 33, "Мадемуазель"),
               ("swiss", "#e2231a", "#ffffff", 91, "Форма"), ("silk", "#d98ad6", "#ffffff", 100, "Лавандовый Сад"), ("deco", "#2f7a62", "#ffffff", 136, "Гэтсби")]
+EXTRA = {}
+if KIND == "ceiling":
+    import mk_ceil_batch as mc
+    U = ROOT / "tools" / "newclient" / "unsplash_ceil"
+    ORDER = (U / "_order.txt").read_text().split()
+    SVC = mc.SVC
+    THEMES = [("blueprint", "#1aa0e6", "#ffffff", 48, "Потолок Мастер"), ("nordic", "#a0673a", "#ffffff", 1, "Белый Лист"),
+              ("loft", "#ffb020", "#1c1d1f", 104, "Лофт Лайт"), ("gloss", "#3b82f6", "#ffffff", 103, "Глянец Про"), ("sky", "#22a6e0", "#ffffff", 34, "Парящий Мир")]
+    EXTRA = {"calc": mc.CALC, "bookSvc": "zamer", "kicker": "Натяжные потолки"}
 batch = [{"slug": f"{KIND}test-{t}", "name": n, "short": n[0], "city": "Москва" if KIND == "club" else "Казань", "addr": "Профсоюзная улица, 56", "phone": "+79161234567", "msg": "",
-          "theme": t, "accent": a, "ink": ink, "tag": "PlayStation 5 и ПК · Черёмушки" if KIND == "club" else "Салон красоты · Центральный район",
+          "theme": t, "accent": a, "ink": ink, "tag": {"club": "PlayStation 5 и ПК · Черёмушки", "salon": "Салон красоты · Центральный район"}.get(KIND, "Натяжные потолки под ключ · Советский район"),
           "hours": {"default": [12, 24]} if KIND == "club" else {"default": [9, 21]}, "boxes": 4 if KIND == "club" else 3, "kind": KIND,
-          "demo": True, "svc": SVC} for t, a, ink, ph, n in THEMES]
+          "demo": True, "svc": SVC, **EXTRA} for t, a, ink, ph, n in THEMES]
 tmp = ROOT / "tools" / "newclient" / "_clubtest.json"
 tmp.write_text(json.dumps(batch, ensure_ascii=False), encoding="utf-8")
 slugs = [b["slug"] for b in batch]

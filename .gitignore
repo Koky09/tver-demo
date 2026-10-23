@@ -26,3 +26,5 @@ tools/newclient/unsplash_*/_get.py
 tools/newclient/unsplash_*/_ids.txt
 tools/newclient/unsplash_*/_list.txt
 clients/src/
+tools/newclient/ceil-*.json
+tools/newclient/ceil.log

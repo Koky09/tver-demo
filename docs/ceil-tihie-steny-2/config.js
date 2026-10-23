@@ -1,0 +1,197 @@
+window.CONFIG = {
+ "slug": "ceil-tihie-steny-2",
+ "theme": "blueprint",
+ "demo": false,
+ "city": "Казань",
+ "name": "Тихие стены",
+ "short": "ТС",
+ "tagline": "Натяжные потолки под ключ · Ново-Савиновский район",
+ "address": "Казань, проспект Ямашева, 83",
+ "mapQuery": "Казань, проспект Ямашева, 83",
+ "phone": "+7 927 042-65-02",
+ "phoneHref": "+79270426502",
+ "hours": {
+  "0": [
+   9,
+   18
+  ],
+  "1": [
+   9,
+   18
+  ],
+  "2": [
+   9,
+   18
+  ],
+  "3": [
+   9,
+   18
+  ],
+  "4": [
+   9,
+   18
+  ],
+  "5": [
+   9,
+   18
+  ],
+  "6": [
+   9,
+   18
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Замерщик",
+ "kind": "ceiling",
+ "accent": "#305be8",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/oksana_quietwalls_kzn"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Замер в субботу",
+  "Сколько стоит потолок в комнату 18 м²?",
+  "Парящий потолок с подсветкой",
+  "Где вы работаете?"
+ ],
+ "services": [
+  {
+   "id": "zamer",
+   "name": "Бесплатный замер",
+   "price": 0,
+   "priceFrom": false,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "ruler",
+   "note": "приедем, измерим и посчитаем точно"
+  },
+  {
+   "id": "matte",
+   "name": "Матовый потолок",
+   "price": 410,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "layers",
+   "unit": "/м²",
+   "note": "с материалом и монтажом"
+  },
+  {
+   "id": "gloss",
+   "name": "Глянцевый потолок",
+   "price": 450,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "layers",
+   "unit": "/м²",
+   "note": "визуально поднимает комнату"
+  },
+  {
+   "id": "satin",
+   "name": "Сатиновый потолок",
+   "price": 500,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "layers",
+   "unit": "/м²",
+   "note": "мягкий перламутровый блеск"
+  },
+  {
+   "id": "fabric",
+   "name": "Тканевый потолок",
+   "price": 1090,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "layers",
+   "unit": "/м²",
+   "note": "без нагрева, дышит"
+  },
+  {
+   "id": "float",
+   "name": "Парящий потолок с подсветкой",
+   "price": 1180,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "lamp",
+   "unit": "/м²",
+   "note": "светодиодная лента по периметру"
+  },
+  {
+   "id": "lines",
+   "name": "Световые линии",
+   "price": 2280,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "lamp",
+   "unit": "/пог. м",
+   "note": "встроенные светодиодные линии"
+  },
+  {
+   "id": "light",
+   "name": "Установка светильника",
+   "price": 360,
+   "priceFrom": true,
+   "duration": 15,
+   "keywords": [],
+   "iconKey": "lamp",
+   "unit": "/шт."
+  }
+ ],
+ "kicker": "Натяжные потолки",
+ "calc": {
+  "types": [
+   [
+    "Матовый",
+    410
+   ],
+   [
+    "Глянцевый",
+    450
+   ],
+   [
+    "Сатиновый",
+    500
+   ],
+   [
+    "Тканевый",
+    1090
+   ],
+   [
+    "Парящий",
+    1180
+   ]
+  ],
+  "extras": [
+   [
+    "Светильники",
+    350
+   ],
+   [
+    "Люстра",
+    550
+   ],
+   [
+    "Обход трубы",
+    250
+   ],
+   [
+    "Скрытый карниз, метров",
+    1350,
+    "м"
+   ]
+  ],
+  "area": 18,
+  "min": 5000
+ },
+ "bookSvc": "zamer",
+ "commentLabel": "Адрес и что нужно",
+ "commentPlaceholder": "Например: ул. Ленина 5, две комнаты, глянец",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

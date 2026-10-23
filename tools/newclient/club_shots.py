@@ -6,6 +6,8 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2]
 out = sys.argv[1]
 slugs = sys.argv[2:] or [f"clubtest-{t}" for t in ("neon", "arcade", "console", "hud", "synth", "versus")]
+if slugs == ["ceiling"]:
+    slugs = [f"ceilingtest-{t}" for t in ("blueprint", "nordic", "loft", "gloss", "sky")]
 if slugs == ["salon"]:
     slugs = [f"salontest-{t}" for t in ("marble", "botanic", "paris", "swiss", "silk", "deco")]
 srv = http.server.ThreadingHTTPServer(("127.0.0.1", 8771), functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT / ".preview")))
