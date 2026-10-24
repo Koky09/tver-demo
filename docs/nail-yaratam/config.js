@@ -1,0 +1,158 @@
+window.CONFIG = {
+ "slug": "nail-yaratam",
+ "theme": "botanic",
+ "demo": false,
+ "city": "Казань",
+ "name": "Яратам",
+ "short": "Я",
+ "tagline": "Маникюр и педикюр · Московский район",
+ "address": "Казань, улица Декабристов, 205",
+ "mapQuery": "Казань, улица Декабристов, 205",
+ "phone": "+7 962 576-29-99",
+ "phoneHref": "+79625762999",
+ "hours": {
+  "0": [
+   8,
+   21
+  ],
+  "1": [
+   8,
+   21
+  ],
+  "2": [
+   8,
+   21
+  ],
+  "3": [
+   8,
+   21
+  ],
+  "4": [
+   8,
+   21
+  ],
+  "5": [
+   8,
+   21
+  ],
+  "6": [
+   8,
+   21
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Мастер",
+ "kind": "nail",
+ "accent": "#5c8a5e",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://wa.me/79625762999"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Маникюр с покрытием завтра вечером",
+  "Сколько стоит педикюр?",
+  "Наращивание в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "mani",
+   "name": "Маникюр без покрытия",
+   "price": 1300,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "маникюр",
+    "ногти",
+    "ноготочки",
+    "руки",
+    "аппаратный",
+    "комбинированный"
+   ],
+   "iconKey": "polish",
+   "note": "классический или аппаратный"
+  },
+  {
+   "id": "gel",
+   "name": "Маникюр с покрытием гель-лак",
+   "price": 2300,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish",
+   "note": "с укреплением и снятием"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр с покрытием гель-лак",
+   "price": 2900,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot"
+  },
+  {
+   "id": "ext",
+   "name": "Наращивание ногтей",
+   "price": 3500,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "наращивание",
+    "нарастить",
+    "длина",
+    "коррекция",
+    "акрил",
+    "акригель"
+   ],
+   "iconKey": "gem",
+   "note": "любая длина и форма"
+  },
+  {
+   "id": "design",
+   "name": "Дизайн",
+   "price": 100,
+   "priceFrom": true,
+   "duration": 15,
+   "keywords": [
+    "дизайн",
+    "френч",
+    "стразы",
+    "рисунок",
+    "втирка",
+    "слайдер"
+   ],
+   "iconKey": "brush",
+   "note": "за 1 ноготь"
+  },
+  {
+   "id": "remove",
+   "name": "Снятие покрытия",
+   "price": 400,
+   "priceFrom": true,
+   "duration": 20,
+   "keywords": [
+    "снятие",
+    "снять"
+   ],
+   "iconKey": "spark"
+  }
+ ],
+ "kicker": "студия маникюра",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Анне, снятие + френч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

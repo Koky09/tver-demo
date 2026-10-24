@@ -1,4 +1,4 @@
-"""Партия маникюрных студий из nails-found.json -> batches/<имя>.json (формат mkclients.py).
+"""Партия маникюрных студий из nails-found.json (или своего списка: 3-й аргумент) -> batches/<имя>.json (формат mkclients.py).
     python tools/newclient/mk_nail_batch.py moscow-nails-2026-10-18 [сколько]
 Цены — с вкладки «Цены» Яндекс Карт (если есть), иначе примерные (demo). Часы — из 2ГИС."""
 import json, re, sys, time
@@ -45,7 +45,8 @@ def pick(pr):
 def main():
     name = sys.argv[1]
     limit = int(sys.argv[2]) if len(sys.argv) > 2 else 999
-    found = json.loads((HERE / "nails-found.json").read_text(encoding="utf-8"))
+    src = sys.argv[3] if len(sys.argv) > 3 else "nails-found.json"   # можно передать свой список кандидатов
+    found = json.loads((HERE / src).read_text(encoding="utf-8"))
     found = [x for x in found if not re.search(r"парикмах|hair|барбер|подолог", x["name"], re.I)]
     rank = lambda x: (0 if re.search(r"nail|нейл|маник|ногт|педик", x["name"], re.I) else 1 if re.search(r"студи", x["name"], re.I) else 2, -x["reviews"])
     found.sort(key=rank)
@@ -87,7 +88,7 @@ def main():
         words = [w for w in re.findall(r"[A-Za-zА-Яа-яЁё0-9]+", title) if w.lower() not in ("маникюр", "на", "в", "студия", "nail", "nails") and len(w) > 1 and not w[0].isdigit()]
         short = ((words[0][:1] + (words[1][:1] if len(words) > 1 else "")) if words else "М").upper()
         batch.append({
-            "slug": slug, "name": title, "short": short, "city": "Москва", "addr": x["address"], "phone": phone, "msg": msg,
+            "slug": slug, "name": title, "short": short, "city": x.get("city") or "Москва", "addr": x["address"], "phone": phone, "msg": msg,
             "theme": THEMES[i % len(THEMES)], "accent": acc, "ink": ink,
             "tag": "Маникюр и педикюр" + (" · " + x["adm"][-1] if x.get("adm") else ""),
             "hours": hours(x.get("schedule")), "boxes": 2, "kind": "nail", "demo": demo, "svc": svc,

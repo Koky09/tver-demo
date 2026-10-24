@@ -28,3 +28,5 @@ tools/newclient/unsplash_*/_list.txt
 clients/src/
 tools/newclient/ceil-*.json
 tools/newclient/ceil.log
+tools/newclient/nailc-*.json
+tools/newclient/nails-free.json
