@@ -151,7 +151,12 @@ footer{border-top:1px solid var(--soft);padding:22px 0 100px;font-size:13px;colo
   .dock{display:none}
   footer{padding-bottom:28px}
 }
+/* анимации (Anime.js): до загрузки библиотеки элементы скрыты, через 2,5 с показываются в любом случае */
+.anim .hero h1 span,.anim .hero .lead,.anim .hero .actions,.anim .hero .rating,.anim .hero .photo{opacity:0}
+.anim [data-reveal]>*{opacity:0}
+.hero h1 span{will-change:transform}
 </style>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('anim');setTimeout(()=>document.documentElement.classList.remove('anim'),2500)}</script>
 </head>
 <body>
 
@@ -171,7 +176,7 @@ footer{border-top:1px solid var(--soft);padding:22px 0 100px;font-size:13px;colo
         <a class="btn main" href="https://n999382.yclients.com/" target="_blank" rel="noopener">Записаться онлайн</a>
         <a class="btn line" href="#price">Цены</a>
       </div>
-      <div class="rating"><b>5,0</b><span>353 отзыва<br><a href="https://yandex.ru/maps/org/229392019797/reviews/" target="_blank" rel="noopener">на Яндекс Картах</a></span></div>
+      <div class="rating"><b data-count="5.0">5,0</b><span><span data-count="353">353</span> отзыва<br><a href="https://yandex.ru/maps/org/229392019797/reviews/" target="_blank" rel="noopener">на Яндекс Картах</a></span></div>
     </div>
     <div class="pwrap"><svg class="print" id="print" viewBox="-200 -200 400 400" aria-hidden="true"></svg>
       <div class="photo"><img src="img/hero.jpg" alt="Вход в салон NO ONE ELSE на Рязанском проспекте" fetchpriority="high"></div></div>
@@ -192,7 +197,7 @@ footer{border-top:1px solid var(--soft);padding:22px 0 100px;font-size:13px;colo
 
 <section class="works" id="works">
   <div class="wrap head"><h2>Работы мастеров</h2><p>Снято в салоне, без фильтров и ретуши.</p></div>
-  <div class="strip">
+  <div class="strip" data-reveal>
     <figure><img loading="lazy" src="img/w1.jpg" alt="Оливковый гель-лак на коротких ногтях"><figcaption>Маникюр, гель-лак</figcaption></figure>
     <figure><img loading="lazy" src="img/w7.jpg" alt="Наращённые ресницы крупным планом"><figcaption>Наращивание ресниц</figcaption></figure>
     <figure><img loading="lazy" src="img/w2.jpg" alt="Тёмный вишнёвый маникюр"><figcaption>Маникюр, гель-лак</figcaption></figure>
@@ -205,14 +210,14 @@ footer{border-top:1px solid var(--soft);padding:22px 0 100px;font-size:13px;colo
 </section>
 
 <section class="space"><div class="wrap grid">
-  <div class="pics">
+  <div class="pics" data-reveal>
     <img loading="lazy" src="img/s1.jpg" alt="Вход в салон с вывеской NO ONE ELSE">
     <img loading="lazy" src="img/s2.jpg" alt="Зона ожидания с креслом и столиком">
     <img loading="lazy" src="img/s3.jpg" alt="Раковина из камня в уборной салона">
   </div>
   <div>
     <h2>Можно выдохнуть</h2>
-    <div class="facts">
+    <div class="facts" data-reveal>
       <div><h3>Стерильно</h3><p>Инструменты проходят обработку перед каждым клиентом, расходники одноразовые.</p></div>
       <div><h3>Без спешки</h3><p>Время записи рассчитано с запасом: мастер не торопится и не задерживает следующую гостью.</p></div>
       <div><h3>Вместе за одно время</h3><p>Маникюр и педикюр можно сделать в четыре руки — за час вместо двух.</p></div>
@@ -223,7 +228,7 @@ footer{border-top:1px solid var(--soft);padding:22px 0 100px;font-size:13px;colo
 <section class="reviews" id="reviews"><div class="wrap">
   <h2>Что говорят гости</h2>
   <div class="score"><b>5,0</b><span>353 отзыва на Яндекс Картах</span></div>
-  <div class="cards">
+  <div class="cards" data-reveal>
     <figure><blockquote>Чудесное место! Сервис, мастера, атмосфера — на высшем уровне. Хочется возвращаться за красотой.</blockquote><figcaption>Юлия, октябрь</figcaption></figure>
     <figure><blockquote>Мастер внимательная, маникюр аккуратный, атмосфера комфортная. Рекомендую!</blockquote><figcaption>Марина, октябрь</figcaption></figure>
     <figure><blockquote>Всё просто супер, очень понравилось. Уютная атмосфера и качественный маникюр.</blockquote><figcaption>Каролина, октябрь</figcaption></figure>
@@ -302,6 +307,7 @@ function show(cat) {
 tabs.innerHTML = Object.keys(PRICE).map((c) => `<button role="tab" data-cat="${c}">${c}</button>`).join('');
 tabs.onclick = (e) => { const b = e.target.closest('button'); if (b) show(b.dataset.cat); };
 show('Маникюр');
+tabs.addEventListener('click', () => window.anime && !reduce && anime({ targets: '#menu li', opacity: [0, 1], translateX: [-12, 0], delay: anime.stagger(30), duration: 450, easing: 'easeOutQuad' }));
 
 // отпечаток пальца: петли с небольшой неровностью, рисуются один раз при загрузке
 (function () {
@@ -326,6 +332,35 @@ show('Маникюр');
 // кнопка записи внизу появляется, когда первый экран прокручен
 const dock = document.getElementById('dock'), hero = document.querySelector('.hero');
 new IntersectionObserver(([e]) => dock.classList.toggle('on', !e.isIntersecting), { threshold: 0.1 }).observe(hero);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+<script>
+// Анимации: выход первого экрана (название по словам, фото в арке), отсчёт рейтинга, проявление блоков, кнопка тянется к курсору.
+var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function () {
+  if (reduce || !window.anime) { document.documentElement.classList.remove('anim'); return; }
+  anime.timeline({ easing: 'easeOutExpo' })
+    .add({ targets: '.hero h1 span', opacity: [0, 1], translateY: ['60%', 0], duration: 1200, delay: anime.stagger(160) })
+    .add({ targets: '.hero .photo', opacity: [0, 1], scale: [.94, 1], translateY: [40, 0], duration: 1400 }, '-=1000')
+    .add({ targets: ['.hero .lead', '.hero .actions', '.hero .rating'], opacity: [0, 1], translateY: [14, 0], duration: 800, delay: anime.stagger(90) }, '-=1100');
+  document.querySelectorAll('[data-count]').forEach(function (el) {
+    var to = parseFloat(el.dataset.count), o = { v: 0 }, frac = String(el.dataset.count).indexOf('.') > -1;
+    anime({ targets: o, v: to, duration: 1600, delay: 700, easing: 'easeOutCubic', update: function () { el.textContent = frac ? o.v.toFixed(1).replace('.', ',') : Math.round(o.v); } });
+  });
+  var io = new IntersectionObserver(function (ents) {
+    ents.forEach(function (e) {
+      if (!e.isIntersecting) return; io.unobserve(e.target);
+      anime({ targets: e.target.children, opacity: [0, 1], translateY: [26, 0], delay: anime.stagger(90), duration: 900, easing: 'easeOutQuart' });
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+  document.documentElement.classList.remove('anim');
+  if (matchMedia('(pointer: fine)').matches) document.querySelectorAll('.btn.main').forEach(function (b) {
+    b.addEventListener('pointermove', function (e) { var r = b.getBoundingClientRect(); anime.remove(b);
+      anime({ targets: b, translateX: (e.clientX - r.left - r.width / 2) * .25, translateY: (e.clientY - r.top - r.height / 2) * .35, duration: 400, easing: 'easeOutQuad' }); });
+    b.addEventListener('pointerleave', function () { anime.remove(b); anime({ targets: b, translateX: 0, translateY: 0, duration: 700, easing: 'easeOutElastic(1, .5)' }); });
+  });
+})();
 </script>
 </body>
 </html>
