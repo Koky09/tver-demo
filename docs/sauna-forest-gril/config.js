@@ -1,0 +1,153 @@
+window.CONFIG = {
+ "slug": "sauna-forest-gril",
+ "theme": "frost",
+ "demo": false,
+ "city": "Волгоград",
+ "name": "Форест гриль",
+ "short": "ФГ",
+ "tagline": "Баня и сауна с онлайн-бронью · Дзержинский район",
+ "address": "Волгоград, улица Землячки, 74н",
+ "mapQuery": "Волгоград, улица Землячки, 74н",
+ "phone": "+7 937 565-44-55",
+ "phoneHref": "+79375654455",
+ "hours": {
+  "0": [
+   12,
+   24
+  ],
+  "1": [
+   12,
+   24
+  ],
+  "2": [
+   12,
+   24
+  ],
+  "3": [
+   12,
+   24
+  ],
+  "4": [
+   12,
+   24
+  ],
+  "5": [
+   12,
+   24
+  ],
+  "6": [
+   12,
+   24
+  ]
+ },
+ "boxes": 2,
+ "boxLabel": "Зал",
+ "kind": "sauna",
+ "accent": "#a0e028",
+ "accentInk": "#0b0b10",
+ "socials": {
+  "tg": "https://t.me/glill_club"
+ },
+ "demoPrices": true,
+ "chatHints": [
+  "Баня на вечер пятницы",
+  "Сколько стоит 3 часа на компанию?",
+  "Есть ли веники и полотенца?",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "bath2",
+   "name": "Баня на 2 часа",
+   "price": 2650,
+   "priceFrom": false,
+   "duration": 120,
+   "keywords": [],
+   "iconKey": "steam",
+   "note": "до 4–6 гостей: парная, отдых, чай"
+  },
+  {
+   "id": "bath3",
+   "name": "Баня на 3 часа",
+   "price": 4000,
+   "priceFrom": false,
+   "duration": 180,
+   "keywords": [],
+   "iconKey": "steam",
+   "note": "больше времени — дешевле час"
+  },
+  {
+   "id": "bigroom",
+   "name": "Большой зал на 3 часа",
+   "price": 6400,
+   "priceFrom": false,
+   "duration": 180,
+   "keywords": [],
+   "iconKey": "steam",
+   "note": "для компании до 10–12 гостей"
+  },
+  {
+   "id": "parmaster",
+   "name": "Парение с пармастером",
+   "price": 1600,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [],
+   "iconKey": "broom",
+   "note": "веники, травы, контраст"
+  }
+ ],
+ "kicker": "Баня и сауна",
+ "calc": {
+  "title": "Сколько будет стоить",
+  "hint": "Примерная цена. Точную подтвердит администратор.",
+  "qtyLabel": "Сколько часов",
+  "unit": "ч",
+  "area": 3,
+  "minArea": 2,
+  "maxArea": 12,
+  "typesLabel": "Зал",
+  "types": [
+   [
+    "Малый зал",
+    1350
+   ],
+   [
+    "Большой зал",
+    2150
+   ]
+  ],
+  "extras": [
+   [
+    "Веник",
+    350
+   ],
+   [
+    "Полотенце и простыня",
+    200,
+    "комплект"
+   ],
+   [
+    "Пармастер",
+    1600,
+    "сеанс"
+   ]
+  ],
+  "min": 2650,
+  "cta": "Забронировать"
+ },
+ "commentLabel": "Сколько гостей и пожелания",
+ "commentPlaceholder": "Например: 6 человек, нужны веники и полотенца",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg",
+ "gallery": [
+  "g/01.jpg",
+  "g/02.jpg",
+  "g/03.jpg",
+  "g/04.jpg",
+  "g/05.jpg",
+  "g/06.jpg",
+  "g/07.jpg",
+  "g/08.jpg"
+ ]
+};

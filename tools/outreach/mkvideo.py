@@ -65,10 +65,11 @@ def record(slug, cfg):
         page.wait_for_selector(".svc", timeout=60000)   # сайт дорисовался (бывает медленно)
         page.wait_for_timeout(1200)
         page.wait_for_timeout(600)
-        cap(page, 1, f"Ваша страница записи «{cfg['name']}»")
+        cap(page, 1, f"Ваш сайт «{cfg['name']}» — с вашими фото" if cfg.get("kind") == "sauna" else f"Ваша страница записи «{cfg['name']}»")
         page.wait_for_timeout(2600)
-        club = cfg.get("kind") == "club"
-        guest = "Артём" if club else "Анна"
+        sauna = cfg.get("kind") == "sauna"
+        club = cfg.get("kind") == "club" or sauna
+        guest = "Дмитрий" if sauna else "Артём" if club else "Анна"
         ceil = cfg.get("kind") == "ceiling"
         if ceil:   # потолки: клиент считает цену в калькуляторе и вызывает замерщика
             guest = "Ольга"
@@ -88,7 +89,7 @@ def record(slug, cfg):
             page.wait_for_timeout(1300)
             cap(page, 3, "…и вызывает замерщика на удобное время")
         else:
-            cap(page, 2, "Гость выбирает, во что играть" if club else "Клиентка выбирает услугу")
+            cap(page, 2, "Гость выбирает зал и сколько часов" if sauna else "Гость выбирает, во что играть" if club else "Клиентка выбирает услугу")
             page.mouse.wheel(0, 380)
             page.wait_for_timeout(1400)
             svc = next((s for s in cfg["services"] if s["id"].startswith("gel")), cfg["services"][0]) if cfg.get("kind") == "nail" else cfg["services"][0]
@@ -115,7 +116,7 @@ def record(slug, cfg):
         page.wait_for_timeout(500)
         tap(page, sheet.get_by_role("button", name=re.compile("^(Записаться|Забронировать|Записаться на замер)$")))
         page.wait_for_timeout(1800)
-        cap(page, 5, "Готово — замер назначен" if ceil else "Готово — место за ним" if club else "Готово — клиентка записана")
+        cap(page, 5, "Готово — замер назначен" if ceil else "Готово — время за ним" if sauna else "Готово — место за ним" if club else "Готово — клиентка записана")
         page.wait_for_timeout(1800)
         slot = sheet.inner_text()
         when = re.search(r"\d{1,2}:\d{2}", slot)

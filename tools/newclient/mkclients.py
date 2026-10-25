@@ -53,7 +53,7 @@ ICON = {"wash": "bubbles", "body": "spray", "express": "drop", "touchless": "spr
         "tire": "wheel", "balance": "wheel", "rims": "wheel", "repair": "gear", "storage": "stack",
         "mani": "polish", "gel": "polish", "pedi": "foot", "ext": "gem", "design": "brush", "remove": "spark", "spa": "drop", "brows": "eye",
         "ps": "pad", "pc": "monitor", "vip": "crown", "night": "moon", "party": "cake", "vr": "vr",
-        "zamer": "ruler", "matte": "layers", "gloss": "layers", "satin": "layers", "fabric": "layers", "float": "lamp", "light": "lamp", "lines": "lamp",
+        "bath2": "steam", "bath3": "steam", "bigroom": "steam", "parmaster": "broom", "zamer": "ruler", "matte": "layers", "gloss": "layers", "satin": "layers", "fabric": "layers", "float": "lamp", "light": "lamp", "lines": "lamp",
         "hair": "scissors", "color": "palette", "style": "dryer", "care": "drop", "face": "face"}
 HINTS = {
     "wash": ["Помыть машину сегодня вечером", "Сколько стоит комплекс?", "Химчистка на выходных", "Где вы находитесь?"],
@@ -61,16 +61,18 @@ HINTS = {
     "tint": ["Тонировка завтра", "Сколько стоит плёнка на фары?", "Оклейка зон риска", "Где вы находитесь?"],
     "tire": ["Переобуться в субботу", "Сколько стоит шиномонтаж R17?", "Хранение шин на зиму", "Где вы находитесь?"],
     "nail": ["Маникюр с покрытием завтра вечером", "Сколько стоит педикюр?", "Наращивание в субботу", "Где вы находитесь?"],
+    "sauna": ["Баня на вечер пятницы", "Сколько стоит 3 часа на компанию?", "Есть ли веники и полотенца?", "Где вы находитесь?"],
     "ceiling": ["Замер в субботу", "Сколько стоит потолок в комнату 18 м²?", "Парящий потолок с подсветкой", "Где вы работаете?"],
     "salon": ["Стрижка завтра вечером", "Сколько стоит окрашивание?", "Маникюр в субботу", "Где вы находитесь?"],
     "club": ["PS5 на двоих сегодня вечером", "Сколько стоит ночь?", "День рождения в субботу", "Где вы находитесь?"],
 }
-BOX = {"tire": "Пост", "nail": "Мастер", "club": "Зона", "salon": "Мастер", "ceiling": "Замерщик"}
+BOX = {"tire": "Пост", "nail": "Мастер", "club": "Зона", "salon": "Мастер", "ceiling": "Замерщик", "sauna": "Зал"}
 COMMENT = {"nail": ["Комментарий", "Например: к мастеру Анне, снятие + френч"],
+           "sauna": ["Сколько гостей и пожелания", "Например: 6 человек, нужны веники и полотенца"],
            "ceiling": ["Адрес и что нужно", "Например: ул. Ленина 5, две комнаты, глянец"],
            "salon": ["Комментарий", "Например: к мастеру Ольге, длина до плеч"],
            "club": ["Сколько вас и во что играете", "Например: нас 4, FIFA и Mortal Kombat"]}
-THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker", "neon", "arcade", "console", "hud", "synth", "versus", "blueprint", "nordic", "loft", "gloss", "sky", "marble", "botanic", "paris", "swiss", "silk", "deco"}
+THEMES = {"lacquer", "atelier", "race", "protocol", "aqua", "stitch", "sticker", "neon", "arcade", "console", "hud", "synth", "versus", "blueprint", "nordic", "loft", "gloss", "sky", "timber", "ember", "pine", "frost", "marble", "botanic", "paris", "swiss", "silk", "deco"}
 
 
 def fmt_phone(p):

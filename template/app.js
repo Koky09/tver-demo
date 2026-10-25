@@ -287,6 +287,8 @@
     crown: '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z"/><path d="M5 21h14"/>',
     moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
     cake: '<path d="M4 21V12h16v9M2.5 21h19M4 15.5c2 1.5 4 1.5 5.3 0 1.4 1.5 4 1.5 5.4 0 1.3 1.5 3.3 1.5 5.3 0"/><path d="M8 12V9M12 12V9M16 12V9"/><path d="M8 6.5v.5M12 6.5v.5M16 6.5v.5"/>',
+    steam: '<path d="M8 3c-1.5 1.5 1.5 3 0 4.5M12 3c-1.5 1.5 1.5 3 0 4.5M16 3c-1.5 1.5 1.5 3 0 4.5"/><path d="M3.5 11h17v3.5a6.5 6.5 0 0 1-6.5 6.5h-4a6.5 6.5 0 0 1-6.5-6.5z"/>',
+    broom: '<path d="M19 3l-6.5 8.5"/><path d="M12.5 11.5c-3 0-6 1.5-7.5 4.5l-1.5 4.5 4.5-1.5c3-1.5 4.5-4.5 4.5-7.5z"/><path d="M6.5 15.5l2 2M9 13.5l2 2"/>',
     vr: '<path d="M3 8h18v8.5h-5.5l-2-2.5h-3l-2 2.5H3z"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/>',
   };
   const I = new Proxy({}, { get: (_, k) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.spark}</svg>` });
@@ -297,7 +299,7 @@
     tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack',
     mani: 'polish', gel: 'polish', pedi: 'foot', ext: 'gem', design: 'brush', remove: 'spark', spa: 'drop', brows: 'eye',
 zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'layers', float: 'lamp', light: 'lamp', lines: 'lamp',
-        ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr' };
+        ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr', bath2: 'steam', bath3: 'steam', bigroom: 'steam', parmaster: 'broom' };
   const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
     [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel'], [/педик/i, 'foot'], [/маник|покрыт|гель/i, 'polish'], [/наращ/i, 'gem'], [/дизайн|френч/i, 'brush'], [/бров|ресниц/i, 'eye'],
     [/vip|вип/i, 'crown'], [/ноч/i, 'moon'], [/рожден|праздн|вечеринк/i, 'cake'], [/\bvr\b|виртуал/i, 'vr'], [/\bпк\b|компьют|\bpc\b/i, 'monitor'], [/ps|playstation|плейстейш|приставк|консол|xbox/i, 'pad']];
@@ -310,7 +312,9 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
   // слова записи: у игровых клубов — бронь
-  const W = C.kind === 'ceiling'
+  const W = C.kind === 'sauna'
+    ? { tap: 'Бронь в один тап, как в приложении', cta: 'Забронировать', go: 'Забронировать', ticket: 'Бронь', done: 'Время за вами', svcH: 'Тарифы', svcP: 'Нажмите на тариф, чтобы выбрать день и время' }
+    : C.kind === 'ceiling'
     ? { tap: 'Расчёт и замер в один тап', cta: 'Вызвать замерщика', go: 'Записаться на замер', ticket: 'Замер', done: 'Замерщик приедет', svcH: 'Цены', svcP: 'Цена за м² — с материалом и монтажом' }
     : C.kind === 'club'
     ? { tap: 'Бронь в один тап, как в приложении', cta: 'Забронировать онлайн', go: 'Забронировать', ticket: 'Бронь', done: 'Место за вами', svcH: 'Тарифы', svcP: 'Нажмите на тариф, чтобы выбрать время' }
@@ -431,6 +435,21 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       case 'sky':
         return `<section class="hero">${demo}<div class="float"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
           <div class="inner"><div class="kicker">${esc(C.kicker || 'Натяжные потолки')}</div>${name}${tag}${meta}</div></section>`;
+      // бани и сауны (template/sauna.css): главное — их настоящие фото
+      case 'timber':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>${demo}
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Баня')}</div>${name}${tag}${meta}</div></section>`;
+      case 'ember':
+        return `<section class="hero">${demo}<div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div><div class="glow" aria-hidden="true"></div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Сауна')}</div>${name}${tag}${meta}</div></section>`;
+      case 'pine':
+        return `<section class="hero">${demo}<div class="photo" style="background-image:url('${esc(C.heroImage || '')}')">
+          <svg class="pines" viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 L0 52 L18 30 L12 30 L28 8 L44 30 L38 30 L56 52 L70 40 L64 40 L82 14 L100 40 L94 40 L112 60 L130 34 L124 34 L144 4 L164 34 L158 34 L176 58 L196 36 L190 36 L210 10 L230 36 L224 36 L244 62 L262 44 L256 44 L276 18 L296 44 L290 44 L310 66 L328 46 L322 46 L342 20 L362 46 L356 46 L376 64 L400 50 L400 80 Z"/></svg></div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Баня')}</div>${name}${tag}${meta}</div></section>`;
+      case 'frost':
+        return `<section class="hero">${demo}<div class="split"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <div class="temps" aria-hidden="true"><b class="hot">+90°</b><b class="cold">−5°</b></div></div>
+          <div class="kicker">${esc(C.kicker || 'Баня')}</div>${name}${tag}${meta}</section>`;
       // игровые клубы (template/game.css)
       case 'neon':
         return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="scan" aria-hidden="true"></div>${demo}
@@ -476,28 +495,28 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
   const calcText = () => {
     const k = C.calc; if (!k) return '';
     const ex = k.extras.map(([n], i) => (calc.ex[i] ? `${n.toLowerCase()}: ${calc.ex[i]}` : '')).filter(Boolean).join(', ');
-    return `Расчёт: ${calc.area} м², ${k.types[calc.type][0].toLowerCase()}${ex ? ', ' + ex : ''} — около ${rub(Math.round(calcSum() / 100) * 100)}`;
+    return `Расчёт: ${calc.area} ${k.unit || 'м²'}, ${k.types[calc.type][0].toLowerCase()}${ex ? ', ' + ex : ''} — около ${rub(Math.round(calcSum() / 100) * 100)}`;
   };
   function calcHtml() {
     const k = C.calc; if (!k) return '';
     return `<section class="calc" id="calc" aria-labelledby="calc-h">
-      <div class="sec-head"><h2 id="calc-h">${esc(k.title || 'Сколько будет стоить')}</h2><p class="muted small">Примерная цена с материалом и монтажом. Точную назовёт замерщик — бесплатно.</p></div>
+      <div class="sec-head"><h2 id="calc-h">${esc(k.title || 'Сколько будет стоить')}</h2><p class="muted small">${esc(k.hint || 'Примерная цена с материалом и монтажом. Точную назовёт замерщик — бесплатно.')}</p></div>
       <div class="calc-box">
-        <label class="c-area" for="c-area"><span>Площадь потолка</span><output id="c-area-v">${calc.area} м²</output></label>
-        <input type="range" id="c-area" min="3" max="${k.maxArea || 120}" step="1" value="${calc.area}">
-        <div class="c-lab">Потолок</div>
+        <label class="c-area" for="c-area"><span>${esc(k.qtyLabel || 'Площадь потолка')}</span><output id="c-area-v">${calc.area} ${esc(k.unit || 'м²')}</output></label>
+        <input type="range" id="c-area" min="${k.minArea || 3}" max="${k.maxArea || 120}" step="1" value="${calc.area}">
+        <div class="c-lab">${esc(k.typesLabel || 'Потолок')}</div>
         <div class="c-types" role="radiogroup" aria-label="Тип потолка">${k.types.map(([n, p], i) =>
-          `<button role="radio" aria-checked="${i === calc.type}" data-ctype="${i}"><b>${esc(n)}</b><small>${rub(p)}/м²</small></button>`).join('')}</div>
+          `<button role="radio" aria-checked="${i === calc.type}" data-ctype="${i}"><b>${esc(n)}</b><small>${rub(p)}/${esc(k.unit || 'м²')}</small></button>`).join('')}</div>
         ${k.extras.length ? `<div class="c-lab">Дополнительно</div><div class="c-extras">${k.extras.map(([n, p, u], i) =>
           `<div class="c-ex"><span>${esc(n)}<small>${rub(p)} за ${esc(u || 'шт.')}</small></span><span class="c-step"><button data-cex="${i}" data-d="-1" aria-label="Меньше: ${esc(n)}">−</button><output id="c-ex-${i}">${calc.ex[i] || 0}</output><button data-cex="${i}" data-d="1" aria-label="Больше: ${esc(n)}">+</button></span></div>`).join('')}</div>` : ''}
         <div class="c-total"><span>Примерно</span><b id="c-sum">${rub(Math.round(calcSum() / 100) * 100)}</b></div>
-        <button class="btn" data-act="zamer">Вызвать замерщика бесплатно</button>
+        <button class="btn" data-act="zamer">${esc(k.cta || 'Вызвать замерщика бесплатно')}</button>
       </div></section>`;
   }
   function bindCalc() {
     const box = $('#calc'); if (!box) return;
     const upd = () => { $('#c-sum').textContent = rub(Math.round(calcSum() / 100) * 100); };
-    $('#c-area').addEventListener('input', (e) => { calc.area = +e.target.value; $('#c-area-v').textContent = calc.area + ' м²'; upd(); });
+    $('#c-area').addEventListener('input', (e) => { calc.area = +e.target.value; $('#c-area-v').textContent = calc.area + ' ' + (C.calc.unit || 'м²'); upd(); });
     box.addEventListener('click', (e) => {
       const t = e.target.closest('[data-ctype],[data-cex]'); if (!t) return;
       if (t.dataset.ctype) { calc.type = +t.dataset.ctype; box.querySelectorAll('[data-ctype]').forEach((b) => b.setAttribute('aria-checked', b === t)); }
@@ -531,14 +550,14 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
           <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}${s.note ? ', ' + esc(s.note) : ''}</span></span>
           <span class="lead" aria-hidden="true"></span><span class="price">${priceHtml(s)}</span>
         </button>`).join('')}</div>
-      ${C.gallery && C.gallery.length ? `<h2>Наши работы</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
+      ${C.gallery && C.gallery.length ? `<h2>${C.kind === 'sauna' ? 'Как у нас' : 'Наши работы'}</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
       <h2>Как нас найти</h2>
       <div class="place">
         <div class="row"><span>Адрес</span><span>${esc(C.address)}</span></div>
         <div class="row"><span>Телефон</span><a href="tel:${esc(C.phoneHref)}">${esc(C.phone)}</a></div>
         <div class="row"><span>Часы работы</span>${weekHtml()}</div>
       </div>
-      <div class="foot">${esc(C.name)}, онлайн-запись<br><a href="#admin">Вход для владельца</a></div>
+      <div class="foot">${esc(C.name)}, ${C.kind === 'sauna' || C.kind === 'club' ? 'онлайн-бронь' : 'онлайн-запись'}<br><a href="#admin">Вход для владельца</a></div>
     </div>
     <div class="bar"><div class="inner">
       <button class="btn" data-act="book">${W.cta}</button>
@@ -551,7 +570,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       // своя онлайн-запись салона (YCLIENTS, Sonline ...): записи сразу попадают в их программу
       if (C.bookingUrl && (t.dataset.svc || t.dataset.act === 'book')) return window.open(C.bookingUrl, '_blank', 'noopener');
       if (C.bookSvc && (t.dataset.svc || t.dataset.act === 'book')) return openBooking({ svcId: C.bookSvc, step: 2 });
-      if (t.dataset.act === 'zamer') return openBooking({ svcId: C.bookSvc, step: 2, comment: calcText() });
+      if (t.dataset.act === 'zamer') return openBooking(C.bookSvc ? { svcId: C.bookSvc, step: 2, comment: calcText() } : { step: 1, comment: calcText() });
       if (t.dataset.svc) return openBooking({ svcId: t.dataset.svc, step: 2 });
       const a = t.dataset.act;
       if (a === 'book') openBooking({ step: 1 });

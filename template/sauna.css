@@ -1,0 +1,113 @@
+
+/* =====================================================================
+   Бани и сауны (kind=sauna): timber, ember, pine, frost. Шапка — настоящее фото заведения (с Яндекс Карт).
+   Файл дописывается в конец style.css при сборке (build.py).
+   ===================================================================== */
+:is([data-theme=timber],[data-theme=ember],[data-theme=pine],[data-theme=frost]) .hero::after { display: none; }
+:is([data-theme=timber],[data-theme=ember],[data-theme=pine],[data-theme=frost]) .hero.has-img::before { display: none; }
+:is([data-theme=timber],[data-theme=ember],[data-theme=pine],[data-theme=frost]) .hero h1 { overflow-wrap: normal; word-break: keep-all; hyphens: none; }
+@media (prefers-reduced-motion: reduce) { :is([data-theme=timber],[data-theme=ember]) .hero * { animation: none !important; } }
+
+/* ---------- timber: сруб, тёплое дерево, пар ---------- */
+:root[data-theme=timber] {
+  --bg: #f3e9dc; --surface: #fffaf3; --surface-2: #f1e3d0; --line: #e2cdb2; --ink: #2e1f14; --muted: #7d6450;
+  --amber: color-mix(in oklab, var(--accent), #e2913a 40%); --accent-text: color-mix(in oklab, var(--accent), #2e1f14 30%);
+  --accent-soft: color-mix(in oklab, var(--accent) 12%, #fffaf3);
+  --display: "Rubik", system-ui, sans-serif; --text: "Rubik", system-ui, sans-serif; --r-md: 14px; --r-lg: 20px; color-scheme: light;
+}
+[data-theme=timber] body { background: repeating-linear-gradient(0deg, #f3e9dc 0 46px, #efe2d1 46px 48px); }
+[data-theme=timber] .hero { min-height: 520px; padding: 0; border-radius: 20px; background: #2e1f14 center/cover no-repeat; justify-content: flex-end; overflow: hidden; box-shadow: 0 30px 60px -30px rgba(46,31,20,.7); }
+[data-theme=timber] .hero .shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(46,31,20,.05) 25%, rgba(46,31,20,.9) 80%); }
+[data-theme=timber] .hero .steam i { position: absolute; bottom: 20%; width: 60%; height: 50%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255,255,255,.35), transparent); filter: blur(18px); animation: steam 9s ease-in-out infinite; opacity: 0; }
+[data-theme=timber] .hero .steam i:nth-child(1) { left: -10%; } [data-theme=timber] .hero .steam i:nth-child(2) { left: 30%; animation-delay: -3s; } [data-theme=timber] .hero .steam i:nth-child(3) { left: 55%; animation-delay: -6s; }
+@keyframes steam { 0% { transform: translateY(40px) scale(.8); opacity: 0; } 30% { opacity: .9; } 100% { transform: translateY(-160px) scale(1.3); opacity: 0; } }
+[data-theme=timber] .hero .inner { padding: 0 22px 26px; color: #fff8ef; }
+[data-theme=timber] .hero .kicker { display: inline-block; font: 600 13px/1 var(--text); background: var(--amber); color: #2e1f14; padding: 6px 12px; border-radius: 999px; margin-bottom: 12px; }
+[data-theme=timber] .hero h1 { font: 800 clamp(34px, calc((min(100vw,560px) - 50px) / (var(--n,8) * .7)), 62px)/1 var(--display); }
+[data-theme=timber] .hero .tag { color: #f1dcc4; margin-top: 10px; }
+[data-theme=timber] .demo-tag { position: absolute; top: 16px; right: 16px; background: rgba(255,248,239,.9); color: #2e1f14; border-color: transparent; }
+[data-theme=timber] .quick, [data-theme=timber] .list, [data-theme=timber] .place, [data-theme=timber] .install { background: var(--surface); border-color: var(--line); }
+[data-theme=timber] .quick .ic, [data-theme=timber] .svc .ico { color: var(--accent-text); }
+[data-theme=timber] .svc .ico { background: var(--accent-soft); border-radius: 12px; }
+[data-theme=timber] h2 { font: 800 28px/1.1 var(--display); }
+[data-theme=timber] .svc .price { font-weight: 700; color: var(--accent-text); }
+[data-theme=timber] .btn { border-radius: 14px; }
+[data-theme=timber] .calc .calc-box { background: var(--surface); }
+
+/* ---------- ember: тёмный, жар камней ---------- */
+:root[data-theme=ember] {
+  --bg: #141010; --surface: #1d1716; --surface-2: #261e1c; --line: #3a2d29; --ink: #f6ece6; --muted: #b29f96;
+  --heat: color-mix(in oklab, var(--accent), #ff5a1f 35%); --accent-text: color-mix(in oklab, var(--heat), #fff 25%);
+  --accent-soft: color-mix(in oklab, var(--heat) 16%, #1d1716);
+  --display: "Oswald", system-ui, sans-serif; --text: "Manrope", system-ui, sans-serif; --r-md: 10px; --r-lg: 14px; color-scheme: dark;
+}
+[data-theme=ember] body { background: radial-gradient(90% 50% at 50% 100%, color-mix(in oklab, var(--heat) 22%, transparent), transparent 60%), #141010; background-attachment: fixed; }
+[data-theme=ember] .hero { min-height: 0; padding: 0 0 24px; background: var(--surface); border-radius: 14px; overflow: hidden; gap: 0; box-shadow: 0 30px 60px -30px #000; }
+[data-theme=ember] .hero .photo { aspect-ratio: 4 / 3.3; background: #000 center/cover no-repeat; }
+[data-theme=ember] .hero .glow { height: 4px; background: linear-gradient(90deg, transparent, var(--heat), #ffd166, var(--heat), transparent); box-shadow: 0 0 24px 4px var(--heat); animation: ember 3s ease-in-out infinite alternate; }
+@keyframes ember { to { opacity: .55; } }
+[data-theme=ember] .hero .inner { padding: 20px 20px 0; }
+[data-theme=ember] .hero .kicker { font: 500 13px/1 var(--text); color: var(--accent-text); letter-spacing: .06em; margin-bottom: 8px; }
+[data-theme=ember] .hero h1 { font: 600 clamp(34px, calc((min(100vw,560px) - 40px) / (var(--n,8) * .56)), 64px)/.98 var(--display); text-transform: uppercase; }
+[data-theme=ember] .hero .tag { color: var(--muted); margin-top: 8px; }
+[data-theme=ember] .demo-tag { position: absolute; top: 14px; right: 14px; background: rgba(20,16,16,.7); }
+[data-theme=ember] .quick, [data-theme=ember] .list, [data-theme=ember] .place, [data-theme=ember] .install { background: var(--surface); border-color: var(--line); }
+[data-theme=ember] .quick .ic, [data-theme=ember] .svc .ico { color: var(--accent-text); }
+[data-theme=ember] .svc .ico { background: var(--accent-soft); box-shadow: inset 0 -2px 0 var(--heat); }
+[data-theme=ember] h2 { font: 600 30px/1 var(--display); text-transform: uppercase; }
+[data-theme=ember] .svc .price { color: var(--accent-text); font-weight: 700; }
+[data-theme=ember] .btn { background: linear-gradient(180deg, color-mix(in oklab, var(--heat), #ffd166 25%), var(--heat)); color: #1a0b05; box-shadow: 0 10px 30px -10px var(--heat); }
+[data-theme=ember] .btn.ghost, [data-theme=ember] .btn.danger { background: transparent; color: var(--ink); box-shadow: none; }
+[data-theme=ember] .sheet { background: #1a1413; }
+
+/* ---------- pine: лес, хвоя, туман ---------- */
+:root[data-theme=pine] {
+  --bg: #eef2ec; --surface: #fbfdf9; --surface-2: #e6ede3; --line: #cfdcca; --ink: #1d2b22; --muted: #5f7366;
+  --needle: color-mix(in oklab, var(--accent), #2f5d3a 40%); --accent-text: var(--needle); --accent-soft: color-mix(in oklab, var(--accent) 12%, #fbfdf9);
+  --display: "Lora", Georgia, serif; --text: "Golos Text", system-ui, sans-serif; --r-md: 16px; --r-lg: 22px; color-scheme: light;
+}
+[data-theme=pine] .hero { min-height: 0; padding: 0 0 24px; color: var(--ink); background: var(--surface); border-radius: 22px; overflow: hidden; gap: 0; box-shadow: 0 24px 50px -34px var(--needle); }
+[data-theme=pine] .hero .photo { position: relative; aspect-ratio: 4 / 3.2; background: center/cover no-repeat; }
+[data-theme=pine] .hero .pines { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 60px; fill: var(--surface); }
+[data-theme=pine] .hero .inner { padding: 6px 22px 0; }
+[data-theme=pine] .hero .kicker { font: italic 500 17px/1 var(--display); color: var(--needle); margin-bottom: 6px; }
+[data-theme=pine] .hero h1 { font: 700 clamp(30px, calc((min(100vw,560px) - 60px) / (var(--n,8) * .56)), 52px)/1.04 var(--display); }
+[data-theme=pine] .hero .tag { color: var(--muted); margin-top: 8px; }
+[data-theme=pine] .hero-meta .addr { color: var(--muted); }
+[data-theme=pine] .demo-tag { position: absolute; top: 14px; right: 14px; background: #fbfdf9; color: var(--ink); border-color: transparent; }
+[data-theme=pine] .quick { border-radius: 999px; background: var(--surface); border-color: var(--line); }
+[data-theme=pine] .quick .ic, [data-theme=pine] .svc .ico { color: var(--needle); }
+[data-theme=pine] .svc .ico { background: var(--accent-soft); border-radius: 50%; }
+[data-theme=pine] h2 { font: 700 28px/1.1 var(--display); }
+[data-theme=pine] .list, [data-theme=pine] .place, [data-theme=pine] .install { background: var(--surface); border-color: var(--line); }
+[data-theme=pine] .svc .price { font-weight: 700; color: var(--needle); }
+[data-theme=pine] .btn { border-radius: 999px; background: var(--needle); color: #fbfdf9; }
+[data-theme=pine] .btn.ghost, [data-theme=pine] .btn.danger { background: transparent; color: var(--ink); }
+
+/* ---------- frost: жар и мороз ---------- */
+:root[data-theme=frost] {
+  --bg: #f4f8fb; --surface: #fff; --surface-2: #eaf2f8; --line: #d6e4ee; --ink: #15202b; --muted: #627385;
+  --hot: color-mix(in oklab, var(--accent), #e8572a 40%); --cold: #2f8fd8; --accent-text: color-mix(in oklab, var(--hot), #15202b 25%);
+  --accent-soft: color-mix(in oklab, var(--hot) 10%, #fff);
+  --display: "Unbounded", system-ui, sans-serif; --text: "Manrope", system-ui, sans-serif; --r-md: 14px; --r-lg: 20px; color-scheme: light;
+}
+[data-theme=frost] body { background: linear-gradient(180deg, #e8f2fa, #f4f8fb 30%); background-attachment: fixed; }
+[data-theme=frost] .hero { min-height: 0; padding: 18px 18px 22px; background: var(--surface); color: var(--ink); border-radius: 20px; gap: 0; box-shadow: 0 24px 50px -34px rgba(21,32,43,.5); }
+[data-theme=frost] .hero .split { position: relative; }
+[data-theme=frost] .hero .photo { aspect-ratio: 4 / 3; border-radius: 14px; background: center/cover no-repeat; }
+[data-theme=frost] .hero .temps { position: absolute; left: 10px; right: 10px; bottom: -16px; display: flex; justify-content: space-between; }
+[data-theme=frost] .hero .temps b { font: 700 16px/1 var(--display); padding: 9px 14px; border-radius: 999px; color: #fff; box-shadow: 0 8px 20px -8px rgba(0,0,0,.4); }
+[data-theme=frost] .hero .temps .hot { background: var(--hot); } [data-theme=frost] .hero .temps .cold { background: var(--cold); }
+[data-theme=frost] .hero .kicker { margin-top: 30px; font: 600 13px/1 var(--text); color: var(--muted); letter-spacing: .04em; }
+[data-theme=frost] .hero h1 { margin-top: 8px; font: 700 clamp(26px, calc((min(100vw,560px) - 60px) / (var(--n,8) * .82)), 44px)/1.05 var(--display); }
+[data-theme=frost] .hero .tag { color: var(--muted); margin-top: 8px; }
+[data-theme=frost] .hero-meta .addr { color: var(--muted); }
+[data-theme=frost] .demo-tag { position: absolute; top: 28px; right: 28px; z-index: 2; background: #fff; color: var(--ink); border-color: transparent; }
+[data-theme=frost] .quick, [data-theme=frost] .list, [data-theme=frost] .place, [data-theme=frost] .install { background: var(--surface); border-color: var(--line); }
+[data-theme=frost] .quick .ic { color: var(--cold); }
+[data-theme=frost] .svc .ico { background: linear-gradient(135deg, color-mix(in oklab, var(--hot) 18%, #fff), color-mix(in oklab, var(--cold) 18%, #fff)); color: var(--ink); border-radius: 12px; }
+[data-theme=frost] h2 { font: 700 24px/1.1 var(--display); }
+[data-theme=frost] .svc .price { font-weight: 800; color: var(--accent-text); }
+[data-theme=frost] .btn { background: linear-gradient(90deg, var(--hot), color-mix(in oklab, var(--hot), var(--cold) 55%)); color: #fff; border-radius: 14px; }
+[data-theme=frost] .btn.ghost, [data-theme=frost] .btn.danger { background: transparent; color: var(--ink); }
+[data-theme=frost] .calc .c-total b { background: linear-gradient(90deg, var(--hot), var(--cold)); -webkit-background-clip: text; background-clip: text; color: transparent; }

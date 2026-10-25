@@ -30,3 +30,8 @@ tools/newclient/ceil-*.json
 tools/newclient/ceil.log
 tools/newclient/nailc-*.json
 tools/newclient/nails-free.json
+tools/newclient/sauna-*.json
+tools/newclient/sauna.log
+tools/newclient/sauna_photos/
+tools/newclient/sauna2.log
+tools/newclient/sauna-batch.log

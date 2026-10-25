@@ -44,6 +44,11 @@ THEME_FONTS = {
     "swiss": "Inter+Tight:wght@400;500;600;800;900",
     "silk": "Montserrat+Alternates:wght@500;600;700&family=Nunito+Sans:wght@400;600;700",
     "deco": "Poiret+One&family=Jost:wght@400;500;600;700",
+    # бани и сауны (template/sauna.css)
+    "timber": "Rubik:wght@400;500;600;700;800",
+    "ember": "Oswald:wght@500;600&family=Manrope:wght@400;500;600;700",
+    "pine": "Lora:ital,wght@0,600;0,700;1,500&family=Golos+Text:wght@400;500;600;700",
+    "frost": "Unbounded:wght@600;700&family=Manrope:wght@400;500;600;700",
     # натяжные потолки (template/ceiling.css)
     "blueprint": "Roboto+Condensed:wght@400;500;700&family=Roboto+Mono:wght@500",
     "nordic": "Commissioner:wght@300;400;500;600;700",
@@ -72,7 +77,7 @@ def build(cfg_path):
         shutil.rmtree(out)
     shutil.copytree(TEMPLATE, out)
     # стили салонов и игровых клубов — в конец общего style.css (одна загрузка, и офлайн-кэш тот же)
-    for extra in ("beauty.css", "salon.css", "game.css", "ceiling.css"):
+    for extra in ("beauty.css", "salon.css", "game.css", "ceiling.css", "sauna.css"):
         f = out / extra
         if f.exists():
             css = out / "style.css"
