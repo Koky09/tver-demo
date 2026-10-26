@@ -105,8 +105,12 @@ def build(cfg_path):
     page.write_text(page.read_text(encoding="utf-8")
                     .replace("<!--THEME-->", f' data-theme="{theme}"')
                     .replace("<!--FONTS-->", f'<link rel="stylesheet" href="{GF}{THEME_FONTS[theme]}&display=swap" media="print" onload="this.media=&#39;all&#39;">'), encoding="utf-8")
+    ver = str(int(time.time()))
     sw = out / "sw.js"
-    sw.write_text(sw.read_text(encoding="utf-8").replace("__VERSION__", str(int(time.time()))), encoding="utf-8")
+    sw.write_text(sw.read_text(encoding="utf-8").replace("__VERSION__", ver), encoding="utf-8")
+    # новый логотип сразу виден у всех: браузер не возьмёт старую картинку из кэша
+    for f in (page, out / "app.js"):
+        f.write_text(f.read_text(encoding="utf-8").replace('"icon-192.png"', f'"icon-192.png?v={ver}"'), encoding="utf-8")
     manifest = {
         "name": f"{cfg['name']} — онлайн-запись",
         "short_name": cfg["name"][:12],
