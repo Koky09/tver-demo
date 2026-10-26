@@ -1,6 +1,6 @@
 window.CONFIG = {
  "slug": "isdetailing",
- "theme": "sticker",
+ "theme": "gta",
  "demo": false,
  "city": "Москва",
  "name": "ISDetailing",
@@ -129,5 +129,7 @@ window.CONFIG = {
    "note": "4 фазы"
   }
  ],
- "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec"
+ "kicker": "Мойка",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
 };

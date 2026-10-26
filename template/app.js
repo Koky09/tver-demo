@@ -351,6 +351,14 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
         return `<section class="hero${img}"><div class="bignum" aria-hidden="true">${esc(C.short)}</div>
           <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
+      case 'gta': {
+        const bg = `background-image:url('${esc(C.heroImage || 'icon-512.png')}')`;
+        return `<section class="hero"><div class="cover" aria-hidden="true">
+            <div class="p p1" style="${bg}"></div><div class="p p2" style="${bg}"></div>
+            <div class="p p3"><span>${esc(C.kicker || 'Мойка')}</span></div><div class="p p4" style="${bg}"></div></div>
+          <div class="wanted" aria-hidden="true">★★★★★</div>${demo}
+          <div class="inner">${name}${tag}${meta}</div></section>`;
+      }
       case 'sticker':
         return `<section class="hero${img}">
           <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
