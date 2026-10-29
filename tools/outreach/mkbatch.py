@@ -15,7 +15,12 @@ from check import check_page
 HERE = Path(__file__).parent
 ROOT = HERE.parents[1]
 BASE = "https://koky09.github.io/tver-demo/"
-PRICE = "Стоимость — 5 000 ₽ один раз, без абонентской платы. Если интересно, подключу за день."
+# пример настоящего клиента и оплата после запуска: снимают страх «а вдруг обман»
+PROOF = "Такая запись уже работает, например, у детейлинга ISDetailing в Москве."
+PRICE = f"{PROOF} Стоимость — 5 000 ₽ один раз, без абонентской платы, оплата после запуска, когда всё проверите. Если интересно, подключу за день."
+# что сделано — для короткого первого сообщения и напоминания (по виду бизнеса из партии)
+WHAT = {"sauna": "сайт с онлайн-бронью и вашими фото", "ceiling": "сайт с калькулятором цены и записью на бесплатный замер",
+        "nail": "страницу онлайн-записи", "salon": "страницу онлайн-записи", "club": "страницу онлайн-брони"}
 DET = {"detail", "polish", "ceramic", "ppf", "tint", "noise", "presale"}
 
 
@@ -66,7 +71,7 @@ def text(c, b):
         return (f"Здравствуйте! Меня зовут Роман. {h}\n\n"
                 f"Я сделал для «{c['name']}» сайт с онлайн-бронью и вашими фото (видео 30 секунд прикладываю):\n{BASE}{c['slug']}/\n\n"
                 f"Гость сам выбирает зал и время в любой момент — бронь сразу приходит вам в Telegram. Цены там примерные, поставлю ваши.\n\n"
-                f"Стоимость — 5 000 ₽ один раз, без абонентской платы.")
+                f"{PROOF} Стоимость — 5 000 ₽ один раз, без абонентской платы, оплата после запуска.")
     if b.get("kind") == "ceiling":   # натяжные потолки: калькулятор и бесплатный замер, заявки в Telegram
         n = int(b.get("reviews") or 0)
         h = (f"У вас {str(b['rating']).replace('.', ',')} {where} ({n} {word(n)}), но своего сайта нет — клиент видит только телефон."
@@ -100,6 +105,27 @@ def text(c, b):
             f"Ссылку можно поставить в карточку на Яндекс Картах и в 2ГИС.\n\n{prices} {PRICE}")
 
 
+def first(c, b):
+    """Шаг 1: коротко и без ссылки — незнакомцу без ссылки реже жмут «спам»; ссылку шлём, когда ответят."""
+    what = WHAT.get(b.get("kind"), "приложение онлайн-записи")
+    return (f"Здравствуйте! Меня зовут Роман. Я сделал для «{c['name']}» {what} — посмотреть можно бесплатно, ни к чему не обязывает. "
+            f"Скинуть ссылку?")
+
+
+def after(t):
+    """Шаг 2 (ответили): полный текст без повторного «Здравствуйте, меня зовут…»."""
+    return "Спасибо, что ответили! " + t.split("\n\n", 1)[1]
+
+
+def remind(c, b, old=False):
+    """Одно напоминание через 3 дня. old — первым сообщением ушёл полный текст со ссылкой (старый порядок)."""
+    what = {"sauna": "сайт", "ceiling": "сайт", "club": "страницу брони"}.get(b.get("kind"), "страницу записи" if b.get("kind") in ("nail", "salon") else "приложение записи")
+    if old:
+        return f"Здравствуйте! Писал вам про {what} для «{c['name']}» — успели посмотреть? Если неактуально, просто напишите, больше не побеспокою."
+    return (f"Здравствуйте! Напомню про {what} для «{c['name']}»: всё уже готово, могу скинуть ссылку и видео на 30 секунд. "
+            f"Если неактуально, просто напишите, больше не побеспокою.")
+
+
 def main():
     src, title = Path(sys.argv[1]), sys.argv[2]
     batch = json.loads(src.read_text(encoding="utf-8"))
@@ -113,7 +139,9 @@ def main():
         if not tg and d[1] == "9":
             # чат по номеру: t.me/+79991234567 открывает Telegram, если номер там есть и не скрыт
             tg, tgn = f"https://t.me/+{d}", f"проверьте: чат по номеру +{d} (не открылся — значит Telegram нет)"
-        items.append(dict(id=i, group=c["city"], name=c["name"], phone=c["phone"], tg=tg, text=text(c, b),
+        full = text(c, b)
+        items.append(dict(id=i, group=c["city"], name=c["name"], phone=c["phone"], tg=tg, text=after(full), first=first(c, b),
+                          remind=remind(c, b), remind_old=remind(c, b, old=True),
                           wa=d if d[1] == "9" else "", tgn=tgn, pre=bool(b.get("sent")),
                           video=f"{BASE}v/{b['slug']}.mp4" if (ROOT / "docs" / "v" / f"{b['slug']}.mp4").exists() else ""))
     key = re.sub(r"[^a-z0-9-]", "", src.stem.lower()) or "batch"
@@ -121,8 +149,7 @@ def main():
     html = html.replace("<title>Рассылка владельцам</title>", f"<title>Рассылка: {title}</title>").replace("<h1>Рассылка владельцам</h1>", f"<h1>Рассылка: {title}</h1>")
     html = html.replace("localStorage.getItem(k)", f"localStorage.getItem('{key}-' + k)").replace("localStorage.setItem(k,", f"localStorage.setItem('{key}-' + k,")
     # "sent": true в партии — уже написали: отмечено «Отправил» по умолчанию; снятая галочка хранится как 0
-    html = html.replace("let sent = LS.get('sent', {});", "let sent = LS.get('sent', {}); DATA.forEach((d) => { if (d.pre && !(d.id in sent)) sent[d.id] = 1; });")
-    html = html.replace("else delete sent[d.dataset.done];", "else sent[d.dataset.done] = 0;")
+    html = html.replace("/*PRESENT*/", "DATA.forEach((d) => { if (d.pre && !(d.id in st)) st[d.id] = { sent: 1, v: 1 }; });")
     html = html.replace('<span class="phone">${esc(it.phone)}</span></div>',
                         '<span class="phone">${esc(it.phone)}</span></div>${it.tgn ? `<div class="phone">Telegram: ${esc(it.tgn)}</div>` : ""}')
     out = HERE / "out" / f"{key}.html"

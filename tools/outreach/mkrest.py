@@ -108,8 +108,7 @@ html = html.replace("<title>Рассылка владельцам</title>", "<ti
 html = html.replace('<span class="phone">${esc(it.phone)}</span></div>', '<span class="phone">${esc(it.phone)}</span></div>${it.tgn ? `<div class="phone">Telegram: ${esc(it.tgn)}</div>` : ""}')
 html = html.replace("localStorage.getItem(k)", "localStorage.getItem('r-' + k)").replace("localStorage.setItem(k,", "localStorage.setItem('r-' + k,")
 # отметка «Отправил» по умолчанию для SENT; снятая галочка хранится как 0, чтобы не вернулась
-html = html.replace("let sent = LS.get('sent', {});", "let sent = LS.get('sent', {}); DATA.forEach((d) => { if (d.pre && !(d.id in sent)) sent[d.id] = 1; });")
-html = html.replace("else delete sent[d.dataset.done];", "else sent[d.dataset.done] = 0;")
+html = html.replace("/*PRESENT*/", "DATA.forEach((d) => { if (d.pre && !(d.id in st)) st[d.id] = { sent: 1, v: 1 }; });")
 assert "d.pre &&" in html and "= 0;" in html
 OUT = HERE / "out" / "outreach-rest.html"  # out/ не идёт в git: там телефоны
 OUT.write_text(html.replace("/*DATA*/[]", json.dumps(items, ensure_ascii=False)), encoding="utf-8")

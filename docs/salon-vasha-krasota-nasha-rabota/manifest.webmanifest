@@ -1,0 +1,24 @@
+{
+ "name": "Ваша красота-Наша работа — онлайн-запись",
+ "short_name": "Ваша красота",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#502a27",
+ "theme_color": "#502a27",
+ "lang": "ru",
+ "icons": [
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any maskable"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any maskable"
+  }
+ ]
+}

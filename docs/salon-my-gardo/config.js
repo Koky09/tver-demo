@@ -1,0 +1,129 @@
+window.CONFIG = {
+ "slug": "salon-my-gardo",
+ "theme": "marble",
+ "demo": false,
+ "city": "Иркутск",
+ "name": "My Gardo",
+ "short": "MG",
+ "tagline": "Салон красоты · Октябрьский район",
+ "address": "Иркутск, Красноказачья, 74/2",
+ "mapQuery": "Иркутск, Красноказачья, 74/2",
+ "phone": "+7 950 060-68-86",
+ "phoneHref": "+79500606886",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#b87f46",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/gardostudio2"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "style",
+   "name": "Локоны в Иркутске",
+   "price": 2700,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer",
+   "note": "Стоимость 2700-3500 ₽. Стоимость локонов варьируется в завис"
+  },
+  {
+   "id": "gel",
+   "name": "Маникюр с покрытием гель-лак (с укреплением)",
+   "price": 2800,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish",
+   "note": "ТОП МАСТЕР - 2800Р\nВИП МАСТЕР - 3300Р"
+  },
+  {
+   "id": "pedi",
+   "name": "SMART педикюр пальчики без покрытия в Иркутске",
+   "price": 2700,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "ТОП - 2700 ₽\nВИП - 3000 ₽\n\nМы бережно удаляем ороговевшую ко"
+  },
+  {
+   "id": "brows",
+   "name": "Оформление и окрашивание бровей в Иркутске",
+   "price": 1800,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "брови",
+    "бровей",
+    "ресницы",
+    "ламинирование"
+   ],
+   "iconKey": "eye",
+   "note": "ТОП - 1800 ₽\nВИП - 2200 ₽\n\nХотите идеально оформленные брови"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

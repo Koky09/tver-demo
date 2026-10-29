@@ -1,0 +1,108 @@
+window.CONFIG = {
+ "slug": "salon-lakmuss",
+ "theme": "deco",
+ "demo": false,
+ "city": "Красноярск",
+ "name": "ЛакМусс",
+ "short": "Л",
+ "tagline": "Салон красоты · Советский район",
+ "address": "Красноярск, улица Алексеева, 21",
+ "mapQuery": "Красноярск, улица Алексеева, 21",
+ "phone": "+7 967 612-79-95",
+ "phoneHref": "+79676127995",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#317d81",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79676127995"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "gel",
+   "name": "Маникюр гель-лак",
+   "price": 1800,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр гель-лак",
+   "price": 2500,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot"
+  },
+  {
+   "id": "brows",
+   "name": "Коррекция бровей",
+   "price": 600,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "брови",
+    "бровей",
+    "ресницы",
+    "ламинирование"
+   ],
+   "iconKey": "eye"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

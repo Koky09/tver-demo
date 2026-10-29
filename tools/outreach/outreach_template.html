@@ -1,26 +1,24 @@
 <title>Рассылка владельцам</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap">
 <style>
-/* Рабочий список: шапка с именем и прогрессом, ниже карточки по группам; отправленные гаснут */
+/* Рабочий список в два шага: короткое первое сообщение -> «Ответил» -> полный текст со ссылкой; через 3 дня без ответа — «Напомнить» */
 :root {
   --bg: #eef1f0; --card: #ffffff; --fg: #17201c; --muted: #5b6862; --line: #d4ddd8;
-  --accent: #1f7a55; --accent-ink: #ffffff; --wa: #1fa855; --done: #9aa8a1;
+  --accent: #1f7a55; --accent-ink: #ffffff; --wa: #1fa855; --done: #9aa8a1; --warn: #b35f00;
   --font: "Golos Text", "Segoe UI", system-ui, sans-serif;
 }
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
   --bg: #121715; --card: #1b221f; --fg: #e8eeeb; --muted: #9db0a7; --line: #2c3631;
-  --accent: #4cc38a; --accent-ink: #08140e; --wa: #3ccf75; --done: #5f6e67; color-scheme: dark } }
+  --accent: #4cc38a; --accent-ink: #08140e; --wa: #3ccf75; --done: #5f6e67; --warn: #f0a33a; color-scheme: dark } }
 :root[data-theme="dark"] {
   --bg: #121715; --card: #1b221f; --fg: #e8eeeb; --muted: #9db0a7; --line: #2c3631;
-  --accent: #4cc38a; --accent-ink: #08140e; --wa: #3ccf75; --done: #5f6e67; color-scheme: dark }
+  --accent: #4cc38a; --accent-ink: #08140e; --wa: #3ccf75; --done: #5f6e67; --warn: #f0a33a; color-scheme: dark }
 * { box-sizing: border-box; }
 body { background: var(--bg); color: var(--fg); font: 16px/1.5 var(--font); }
 .wrap { max-width: 720px; margin: 0 auto; padding-inline: 16px; padding-block: 16px 48px; }
 header.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; border-bottom: 1px solid var(--line); display: grid; gap: 10px; }
 h1 { margin: 0; font-size: 22px; line-height: 1.2; text-wrap: balance; }
 .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-label.name { display: flex; gap: 8px; align-items: center; font-size: 14px; color: var(--muted); }
-input#me { font: inherit; color: var(--fg); background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; width: 170px; }
 .bar { flex: 1; min-width: 140px; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; }
 .bar i { display: block; height: 100%; background: var(--accent); width: 0; transition: width .3s; }
 .count { font-size: 14px; font-variant-numeric: tabular-nums; color: var(--muted); }
@@ -29,15 +27,23 @@ input#me { font: inherit; color: var(--fg); background: var(--card); border: 1px
 .filters button[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
 h2 { font-size: 15px; margin: 26px 0 10px; color: var(--muted); font-weight: 600; letter-spacing: .02em; }
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; display: grid; gap: 10px; margin-bottom: 10px; }
-.card.sent { opacity: .55; }
-.card.sent .msg { display: none; }
+.card.wait { opacity: .7; }
+.card.no { opacity: .45; }
+.card.due { border-color: var(--warn); }
+.card.replied { border-color: var(--accent); }
 .head { display: flex; gap: 10px; align-items: baseline; justify-content: space-between; flex-wrap: wrap; }
 .head b { font-size: 17px; }
+.step { font-size: 13px; font-weight: 600; color: var(--muted); }
+.card.due .step { color: var(--warn); }
+.card.replied .step { color: var(--accent); }
+.badge { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 2px 9px; background: var(--bg); color: var(--muted); vertical-align: 2px; }
+.badge.ok { background: var(--accent); color: var(--accent-ink); }
 .phone { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; user-select: all; }
 .msg { white-space: pre-wrap; font-size: 14px; line-height: 1.5; background: var(--bg); border-radius: 10px; padding: 10px 12px; max-height: 9.5em; overflow: auto; min-width: 0; overflow-wrap: anywhere; }
 .acts { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .btn { font: inherit; font-size: 15px; font-weight: 600; border-radius: 10px; padding: 9px 14px; border: 1px solid var(--line); background: var(--card); color: var(--fg); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; min-height: 42px; }
 .btn.wa { background: var(--wa); border-color: var(--wa); color: #fff; }
+.btn.ok { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
 .btn:focus-visible, .filters button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .done { margin-left: auto; display: flex; gap: 6px; align-items: center; font-size: 15px; cursor: pointer; }
 .done input { width: 22px; height: 22px; accent-color: var(--accent); }
@@ -49,78 +55,120 @@ h2 { font-size: 15px; margin: 26px 0 10px; color: var(--muted); font-weight: 600
 <div class="wrap">
   <header class="top">
     <h1>Рассылка владельцам</h1>
-    <div class="row">
-      <label class="name" for="me">Ваше имя в сообщениях <input id="me" placeholder="Роман" autocomplete="given-name"></label>
-    </div>
     <div class="row"><div class="bar"><i id="bar"></i></div><span class="count" id="count">0 из 0</span></div>
     <div class="filters" id="filters"></div>
   </header>
-  <p class="note" style="margin-top:12px">Кнопка WhatsApp открывает чат с номером и уже вставленным текстом: проверьте и нажмите «Отправить». В Telegram текст не вставляется, поэтому сначала скопируйте его. Если у номера нет WhatsApp, позвоните или найдите их в Telegram по номеру.</p>
+  <p class="note" style="margin-top:12px">Пишем в два шага — так меньше жалоб на спам. <b>1.</b> Короткое сообщение без ссылки, отметьте «Отправил». <b>2.</b> Ответили — нажмите «Ответил»: появится полный текст со ссылкой и кнопка видео. Нет ответа 3 дня — карточка попадёт в «Напомнить» (одно короткое напоминание). WhatsApp вставляет текст сам, для Telegram сначала скопируйте его.</p>
   <main id="list"></main>
 </div>
 <div class="toast" id="toast" hidden></div>
 
 <script>
 const DATA = /*DATA*/[];
+const WAIT = 3 * 864e5;   // через сколько напоминать
 const LS = { get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
              set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} } };
-let sent = LS.get('sent', {}); let me = LS.get('me', ''); let filter = LS.get('filter', 'todo');
+// по каждому: sent (отправил первое), at (когда), status ('' | 'replied' | 'no'), rem (когда напомнил),
+// v: 2 — писали по-новому (сначала короткое), 1 — сразу полный текст со ссылкой (старые отметки)
+let st = LS.get('st', {}); let filter = LS.get('filter', 'todo');
+/*PRESENT*/
 const $ = (s) => document.querySelector(s);
 const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const text = (it) => it.text.replace('[Имя]', me.trim() || 'Роман'); // по умолчанию — имя пользователя
+const S = (id) => st[id] || {};
+const fill = (t) => (t || '').replace('[Имя]', 'Роман');
 function toast(t) { const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => el.hidden = true, 2200); }
-
+function stage(it) {
+  const s = S(it.id);
+  if (!s.sent) return 'todo';
+  if (s.status) return s.status;
+  if (!s.rem && s.at && Date.now() - Date.parse(s.at) >= WAIT) return 'due';
+  return 'wait';
+}
+function msgFor(it, stg) {   // какой текст сейчас отправлять
+  if (stg === 'todo') return it.first || it.text;
+  if (stg === 'replied') return it.text;
+  if (stg === 'due') return S(it.id).v === 2 ? it.remind || '' : it.remind_old || it.remind || '';
+  return '';
+}
+const day = (iso) => iso ? new Date(iso).toLocaleDateString('ru', { day: 'numeric', month: 'long' }) : '';
+function card(it) {
+  const stg = stage(it), s = S(it.id), t = fill(msgFor(it, stg));
+  const step = {
+    todo: it.first ? 'Шаг 1 — короткое сообщение без ссылки' : 'Сообщение',
+    wait: `Отправлено ${day(s.at)}${s.rem ? ', напомнил ' + day(s.rem) : ''} — ждём ответа`,
+    due: `Отправлено ${day(s.at)}, ответа нет — напомните один раз`,
+    replied: 'Ответили — шаг 2: ссылка и видео', no: 'Отказались',
+  }[stg];
+  const send = t ? `${it.wa ? `<a class="btn wa" href="https://wa.me/${it.wa}?text=${encodeURIComponent(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ''}
+        ${it.tg ? `<a class="btn" href="${esc(it.tg)}" target="_blank" rel="noopener">Telegram</a>` : ''}
+        <button type="button" class="btn" data-copy="${it.id}">Скопировать текст</button>` : '';
+  const answer = `<button type="button" class="btn ok" data-st="replied" data-id="${it.id}">Ответил</button><button type="button" class="btn" data-st="no" data-id="${it.id}">Отказ</button>`;
+  const acts = {
+    todo: `${send}<label class="done"><input type="checkbox" data-sent="${it.id}"> Отправил</label>`,
+    wait: `${answer}<label class="done"><input type="checkbox" data-sent="${it.id}" checked> Отправил</label>`,
+    due: `${send}<button type="button" class="btn" data-rem="${it.id}">Напомнил</button>${answer}`,
+    replied: `${send}${it.video ? `<a class="btn" href="${esc(it.video)}" target="_blank" rel="noopener">Видео ▶</a>` : ''}<button type="button" class="btn" data-st="no" data-id="${it.id}">Отказ</button>`,
+    no: `<button type="button" class="btn" data-st="" data-id="${it.id}">Вернуть</button>`,
+  }[stg];
+  const badge = stg === 'replied' ? ' <span class="badge ok">ответили</span>' : stg === 'no' ? ' <span class="badge">отказ</span>' : '';
+  return `<article class="card ${stg}" data-id="${it.id}">
+      <div class="head"><b>${esc(it.name)}${badge}</b><span class="phone">${esc(it.phone)}</span></div>
+      <div class="step">${esc(step)}</div>
+      ${t ? `<div class="msg" id="m${it.id}">${esc(t)}</div>` : ''}
+      <div class="acts">${acts}</div></article>`;
+}
 function render() {
   const groups = [...new Set(DATA.map((d) => d.group))];
-  $('#filters').innerHTML = [['todo', 'Не отправлено'], ['all', 'Все'], ...groups.map((g) => [g, g.replace(' — ', ': ')])]
+  const cnt = (k) => DATA.filter((d) => stage(d) === k).length;
+  const due = cnt('due'), rep = cnt('replied'), no = cnt('no');
+  $('#filters').innerHTML = [['todo', 'Не отправлено'], ['due', 'Напомнить' + (due ? ' · ' + due : '')], ['replied', 'Ответили' + (rep ? ' · ' + rep : '')],
+                             ['all', 'Все'], ...groups.map((g) => [g, g.replace(' — ', ': ')])]
     .map(([k, l]) => `<button type="button" data-f="${esc(k)}" aria-pressed="${filter === k}">${esc(l)}</button>`).join('');
-  const shown = DATA.filter((d) => filter === 'all' || (filter === 'todo' ? !sent[d.id] : d.group === filter));
+  const byStage = ['todo', 'due', 'replied'].includes(filter);
+  const shown = DATA.filter((d) => filter === 'all' || (byStage ? stage(d) === filter : d.group === filter));
   let html = '', cur = null;
   for (const it of shown) {
     if (it.group !== cur) { cur = it.group; html += `<h2>${esc(cur)}</h2>`; }
-    const t = text(it);
-    html += `<article class="card ${sent[it.id] ? 'sent' : ''}" data-id="${it.id}">
-      <div class="head"><b>${esc(it.name)}</b><span class="phone">${esc(it.phone)}</span></div>
-      <div class="msg" id="m${it.id}">${esc(t)}</div>
-      <div class="acts">
-        ${it.wa ? `<a class="btn wa" href="https://wa.me/${it.wa}?text=${encodeURIComponent(t)}" target="_blank" rel="noopener">WhatsApp</a>` : ''}
-        ${it.tg ? `<a class="btn" href="${esc(it.tg)}" target="_blank" rel="noopener">Telegram</a>` : ''}
-        <button type="button" class="btn" data-copy="${it.id}">Скопировать текст</button>
-        ${it.video ? `<a class="btn" href="${esc(it.video)}" target="_blank" rel="noopener">Видео ▶</a>` : ''}
-        <label class="done"><input type="checkbox" data-done="${it.id}" ${sent[it.id] ? 'checked' : ''}> Отправил</label>
-      </div></article>`;
+    html += card(it);
   }
-  $('#list').innerHTML = html || '<p class="note" style="margin-top:20px">Здесь пусто: все сообщения из этого списка отмечены как отправленные.</p>';
-  const n = DATA.filter((d) => sent[d.id]).length;
-  $('#count').textContent = `${n} из ${DATA.length} отправлено`;
+  const empty = { todo: 'Все сообщения отправлены.', due: 'Напоминать пока некому: прошло меньше 3 дней или все ответили.', replied: 'Пока никто не ответил.' }[filter] || 'Здесь пусто.';
+  $('#list').innerHTML = html || `<p class="note" style="margin-top:20px">${empty}</p>`;
+  const n = DATA.filter((d) => S(d.id).sent).length;
+  $('#count').textContent = `${n} из ${DATA.length} отправлено · ответили ${rep} · отказ ${no}`;
   $('#bar').style.width = (n / DATA.length * 100) + '%';
 }
+function change(id, patch) {
+  st[id] = Object.assign({}, S(id), patch);
+  LS.set('st', st); render(); saveRemote(id);
+}
 
-$('#me').value = me;
-$('#me').addEventListener('input', (e) => { me = e.target.value; LS.set('me', me); render(); });
 document.addEventListener('click', async (e) => {
   const f = e.target.closest('[data-f]'); if (f) { filter = f.dataset.f; LS.set('filter', filter); render(); return; }
+  const b = e.target.closest('[data-st]');
+  if (b) { change(+b.dataset.id, { status: b.dataset.st }); toast(b.dataset.st === 'replied' ? 'Теперь отправьте ссылку и видео' : 'Сохранено'); return; }
+  const r = e.target.closest('[data-rem]'); if (r) { change(+r.dataset.rem, { rem: new Date().toISOString() }); toast('Напоминание отмечено'); return; }
   const c = e.target.closest('[data-copy]');
-  if (c) { const it = DATA[+c.dataset.copy]; const t = text(it);
+  if (c) { const it = DATA[+c.dataset.copy]; const t = fill(msgFor(it, stage(it)));
     try { await navigator.clipboard.writeText(t); toast('Текст скопирован'); }
-    catch (err) { const m = document.getElementById('m' + it.id); const r = document.createRange(); r.selectNodeContents(m); const s = getSelection(); s.removeAllRanges(); s.addRange(r); toast('Текст выделен, скопируйте его'); } }
+    catch (err) { const m = document.getElementById('m' + it.id); const rg = document.createRange(); rg.selectNodeContents(m); const s = getSelection(); s.removeAllRanges(); s.addRange(rg); toast('Текст выделен, скопируйте его'); } }
 });
 document.addEventListener('change', (e) => {
-  const d = e.target.closest('[data-done]'); if (!d) return;
-  if (d.checked) sent[d.dataset.done] = 1; else delete sent[d.dataset.done];
-  LS.set('sent', sent); render();
-  saveRemote(+d.dataset.done, d.checked);
+  const d = e.target.closest('[data-sent]'); if (!d) return;
+  const id = +d.dataset.sent;
+  change(id, d.checked ? { sent: 1, at: new Date().toISOString(), v: 2 } : { sent: 0, at: null, status: '', rem: null });
 });
 render();
 
-/* Общая база страницы (db): отметки «Отправил» видны и Claude, и на любом устройстве.
-   Если базы нет (страница открыта вне claude.ai) — работают отметки в браузере, как раньше. */
+/* Общая база страницы (db), коллекция sent, документы m<id>: отметки видны и Claude, и на любом устройстве.
+   Если базы нет (страница открыта вне claude.ai) — отметки хранятся в браузере. */
 let DB = null;
-async function saveRemote(id, on) {
+async function saveRemote(id) {
   if (!DB) return;
-  try { await DB.collection('sent').doc('m' + id).set({ id, name: DATA[id].name, sent: !!on, at: new Date().toISOString() }); }
+  const s = S(id);
+  try { await DB.collection('sent').doc('m' + id).set({ id, name: DATA[id].name, sent: !!s.sent, at: s.at || null, status: s.status || '', rem: s.rem || null, v: s.v || 1 }); }
   catch (e) { toast('Отметка сохранена только в этом браузере'); }
 }
+const fromDoc = (v) => ({ sent: v.sent ? 1 : 0, at: v.at || null, status: v.status || '', rem: v.rem || null, v: v.v || 1 });
 (async () => {
   const db = window.claude && window.claude.use ? await window.claude.use('db') : null;
   if (!db) return;
@@ -128,12 +176,12 @@ async function saveRemote(id, on) {
   try { first = await db.collection('sent').get(); } catch (e) { return; }
   DB = db;
   const remote = {};
-  first.docs.forEach((s) => { const v = s.data(); if (v && typeof v.id === 'number') remote[v.id] = v.sent ? 1 : 0; });
+  first.docs.forEach((s) => { const v = s.data(); if (v && typeof v.id === 'number') remote[v.id] = 1; });
   // перенести отметки, сделанные раньше только в этом браузере
-  for (const d of DATA) if (sent[d.id] && !(d.id in remote)) { await saveRemote(d.id, true); remote[d.id] = 1; }
+  for (const d of DATA) if (S(d.id).sent && !(d.id in remote)) await saveRemote(d.id);
   db.collection('sent').onSnapshot((snap) => {
-    snap.docs.forEach((s) => { const v = s.data(); if (v && typeof v.id === 'number') sent[v.id] = v.sent ? 1 : 0; });
-    LS.set('sent', sent); render();
+    snap.docs.forEach((s) => { const v = s.data(); if (v && typeof v.id === 'number') st[v.id] = fromDoc(v); });
+    LS.set('st', st); render();
   }, () => {});
 })();
 </script>

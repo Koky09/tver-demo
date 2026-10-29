@@ -63,7 +63,8 @@ cb.DUR = {"hair": 60, "color": 150, "style": 60, "care": 120, "gel": 120, "pedi"
 def main():
     name = sys.argv[1]
     limit = int(sys.argv[2]) if len(sys.argv) > 2 else 100
-    found = json.loads((HERE / "salons-found.json").read_text(encoding="utf-8"))
+    src = sys.argv[3] if len(sys.argv) > 3 else "salons-found.json"   # вторая партия: salons2-found.json
+    found = json.loads((HERE / src).read_text(encoding="utf-8"))
     by = {}
     for x in sorted(found, key=lambda x: -x["reviews"]):
         by.setdefault(x["city"], []).append(x)

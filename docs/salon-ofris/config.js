@@ -1,0 +1,144 @@
+window.CONFIG = {
+ "slug": "salon-ofris",
+ "theme": "deco",
+ "demo": false,
+ "city": "Самара",
+ "name": "Офрис",
+ "short": "О",
+ "tagline": "Салон красоты · Промышленный район",
+ "address": "Самара, улица Георгия Димитрова, 90",
+ "mapQuery": "Самара, улица Георгия Димитрова, 90",
+ "phone": "+7 919 800-51-55",
+ "phoneHref": "+79198005155",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#815931",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79198005155"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "hair",
+   "name": "Женские стрижки",
+   "price": 1800,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "стрижка",
+    "подстричь",
+    "постричь",
+    "стрижку",
+    "волосы",
+    "чёлка",
+    "челка",
+    "кончики"
+   ],
+   "iconKey": "scissors",
+   "note": "Стоимость зависит от длинны , густоты , и креативности стриж"
+  },
+  {
+   "id": "style",
+   "name": "Укладка волос утюжком или феном",
+   "price": 2000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer"
+  },
+  {
+   "id": "gel",
+   "name": "Маникюр с покрытием гель - лак",
+   "price": 2300,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "гель-лак",
+    "гельлак",
+    "покрытие",
+    "шеллак",
+    "гель"
+   ],
+   "iconKey": "polish"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр пяток",
+   "price": 1200,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot"
+  },
+  {
+   "id": "brows",
+   "name": "Коррекция бровей",
+   "price": 500,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "брови",
+    "бровей",
+    "ресницы",
+    "ламинирование"
+   ],
+   "iconKey": "eye"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};

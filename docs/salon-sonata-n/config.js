@@ -1,0 +1,150 @@
+window.CONFIG = {
+ "slug": "salon-sonata-n",
+ "theme": "swiss",
+ "demo": false,
+ "city": "Новосибирск",
+ "name": "Соната-Н",
+ "short": "С",
+ "tagline": "Салон красоты · Октябрьский район",
+ "address": "Новосибирск, улица Бориса Богаткова, 196",
+ "mapQuery": "Новосибирск, улица Бориса Богаткова, 196",
+ "phone": "+7 913 915-84-62",
+ "phoneHref": "+79139158462",
+ "hours": {
+  "0": [
+   9,
+   21
+  ],
+  "1": [
+   9,
+   21
+  ],
+  "2": [
+   9,
+   21
+  ],
+  "3": [
+   9,
+   21
+  ],
+  "4": [
+   9,
+   21
+  ],
+  "5": [
+   9,
+   21
+  ],
+  "6": [
+   9,
+   21
+  ]
+ },
+ "boxes": 3,
+ "boxLabel": "Мастер",
+ "kind": "salon",
+ "accent": "#be185d",
+ "accentInk": "#ffffff",
+ "socials": {
+  "tg": "https://t.me/+79139158462"
+ },
+ "demoPrices": false,
+ "chatHints": [
+  "Стрижка завтра вечером",
+  "Сколько стоит окрашивание?",
+  "Маникюр в субботу",
+  "Где вы находитесь?"
+ ],
+ "services": [
+  {
+   "id": "color",
+   "name": "Мелирование",
+   "price": 5500,
+   "priceFrom": true,
+   "duration": 150,
+   "keywords": [
+    "окрашивание",
+    "покрасить",
+    "краска",
+    "цвет",
+    "мелирование",
+    "балаяж",
+    "airtouch",
+    "тонирование",
+    "блонд",
+    "седина"
+   ],
+   "iconKey": "palette",
+   "note": "От 5500 руб"
+  },
+  {
+   "id": "style",
+   "name": "Укладка волос",
+   "price": 1000,
+   "priceFrom": true,
+   "duration": 60,
+   "keywords": [
+    "укладка",
+    "причёска",
+    "прическа",
+    "локоны",
+    "вечерняя",
+    "свадебная",
+    "плетение"
+   ],
+   "iconKey": "dryer",
+   "note": "От 1000 руб"
+  },
+  {
+   "id": "care",
+   "name": "Коллагеновое восстановление",
+   "price": 5000,
+   "priceFrom": true,
+   "duration": 120,
+   "keywords": [
+    "уход",
+    "кератин",
+    "ботокс",
+    "восстановление",
+    "выпрямление",
+    "ламинирование волос"
+   ],
+   "iconKey": "drop",
+   "note": "От 5000 руб"
+  },
+  {
+   "id": "pedi",
+   "name": "Педикюр пальцев с покрытием",
+   "price": 2100,
+   "priceFrom": true,
+   "duration": 90,
+   "keywords": [
+    "педикюр",
+    "ноги",
+    "стопы",
+    "пальчики"
+   ],
+   "iconKey": "foot",
+   "note": "Педикюр пальцев с покрытием"
+  },
+  {
+   "id": "brows",
+   "name": "Комплекс оформление + окрашивание бровей",
+   "price": 1200,
+   "priceFrom": true,
+   "duration": 45,
+   "keywords": [
+    "брови",
+    "бровей",
+    "ресницы",
+    "ламинирование"
+   ],
+   "iconKey": "eye"
+  }
+ ],
+ "kicker": "Салон красоты",
+ "commentLabel": "Комментарий",
+ "commentPlaceholder": "Например: к мастеру Ольге, длина до плеч",
+ "apiUrl": "https://script.google.com/macros/s/AKfycbzEZvz_n9eroTJT-bECMbX0lxYBIfquozjOw2Cc4p9a68wdUfXKLcR5Kj2ZbS6vEUyujg/exec",
+ "heroImage": "hero.jpg"
+};
