@@ -121,6 +121,13 @@
   const rub = (n) => n.toLocaleString('ru-RU') + ' ₽';
   const priceStr = (s) => s.price === 0 ? 'Бесплатно' : (s.priceFrom ? 'от ' : '') + rub(s.price) + (s.unit ? ' ' + s.unit : '');
   const priceHtml = (s) => s.price === 0 ? 'Бесплатно' : `${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}${s.unit ? `<small class="unit">${esc(s.unit)}</small>` : ''}`;
+  // полный прайс без записи: C.priceTables = [{title, note, groups: [{name, rows: [[название, цена или [мин, макс]]]}]}]
+  const ptabHtml = () => (C.priceTables || []).map((t) => `
+      <details class="ptab"><summary><span>${esc(t.title)}</span><span class="muted small">${t.groups.reduce((n, g) => n + g.rows.length, 0)} позиций</span></summary>
+        ${t.note ? `<p class="muted small">${esc(t.note)}</p>` : ''}
+        ${t.groups.map((g) => `${g.name ? `<h3>${esc(g.name)}</h3>` : ''}<div class="place">${g.rows.map(([n, p]) => `<div class="row"><span>${esc(n)}</span><b>${
+          Array.isArray(p) ? (p[0] === p[1] ? rub(p[0]) : `${p[0].toLocaleString('ru-RU')}–${rub(p[1])}`) : rub(p)}</b></div>`).join('')}</div>`).join('')}
+      </details>`).join('');
   const durStr = (min) => {
     if (min >= 24 * 60 || min > dayLenMax()) { const d = daysNeeded(min); return `${d} ${plural(d, 'день', 'дня', 'дней')}`; }
     const h = Math.floor(min / 60), m = min % 60;
@@ -287,6 +294,8 @@
     crown: '<path d="M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5z"/><path d="M5 21h14"/>',
     moon: '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>',
     cake: '<path d="M4 21V12h16v9M2.5 21h19M4 15.5c2 1.5 4 1.5 5.3 0 1.4 1.5 4 1.5 5.4 0 1.3 1.5 3.3 1.5 5.3 0"/><path d="M8 12V9M12 12V9M16 12V9"/><path d="M8 6.5v.5M12 6.5v.5M16 6.5v.5"/>',
+    steam: '<path d="M8 3c-1.5 1.5 1.5 3 0 4.5M12 3c-1.5 1.5 1.5 3 0 4.5M16 3c-1.5 1.5 1.5 3 0 4.5"/><path d="M3.5 11h17v3.5a6.5 6.5 0 0 1-6.5 6.5h-4a6.5 6.5 0 0 1-6.5-6.5z"/>',
+    broom: '<path d="M19 3l-6.5 8.5"/><path d="M12.5 11.5c-3 0-6 1.5-7.5 4.5l-1.5 4.5 4.5-1.5c3-1.5 4.5-4.5 4.5-7.5z"/><path d="M6.5 15.5l2 2M9 13.5l2 2"/>',
     vr: '<path d="M3 8h18v8.5h-5.5l-2-2.5h-3l-2 2.5H3z"/><circle cx="7.5" cy="12" r="1.5"/><circle cx="16.5" cy="12" r="1.5"/>',
   };
   const I = new Proxy({}, { get: (_, k) => `<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.spark}</svg>` });
@@ -297,7 +306,7 @@
     tire: 'wheel', balance: 'wheel', rims: 'wheel', repair: 'gear', storage: 'stack',
     mani: 'polish', gel: 'polish', pedi: 'foot', ext: 'gem', design: 'brush', remove: 'spark', spa: 'drop', brows: 'eye',
 zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'layers', float: 'lamp', light: 'lamp', lines: 'lamp',
-        ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr' };
+        ps: 'pad', pc: 'monitor', vip: 'crown', night: 'moon', party: 'cake', vr: 'vr', bath2: 'steam', bath3: 'steam', bigroom: 'steam', parmaster: 'broom' };
   const SVC_WORDS = [[/мойк/i, 'bubbles'], [/химчист|салон/i, 'seat'], [/керамик|покрыт/i, 'diamond'], [/плёнк|пленк|защит/i, 'shield'],
     [/тонир/i, 'tint'], [/фар/i, 'light'], [/дожд/i, 'drop'], [/винил/i, 'roller'], [/шум/i, 'mute'], [/двигат/i, 'gear'], [/хранен/i, 'stack'], [/шин|колес|колёс|баланс|переобув|диск/i, 'wheel'], [/педик/i, 'foot'], [/маник|покрыт|гель/i, 'polish'], [/наращ/i, 'gem'], [/дизайн|френч/i, 'brush'], [/бров|ресниц/i, 'eye'],
     [/vip|вип/i, 'crown'], [/ноч/i, 'moon'], [/рожден|праздн|вечеринк/i, 'cake'], [/\bvr\b|виртуал/i, 'vr'], [/\bпк\b|компьют|\bpc\b/i, 'monitor'], [/ps|playstation|плейстейш|приставк|консол|xbox/i, 'pad']];
@@ -310,7 +319,9 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
   const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
 
   // слова записи: у игровых клубов — бронь
-  const W = C.kind === 'ceiling'
+  const W = C.kind === 'sauna'
+    ? { tap: 'Бронь в один тап, как в приложении', cta: 'Забронировать', go: 'Забронировать', ticket: 'Бронь', done: 'Время за вами', svcH: 'Тарифы', svcP: 'Нажмите на тариф, чтобы выбрать день и время' }
+    : C.kind === 'ceiling'
     ? { tap: 'Расчёт и замер в один тап', cta: 'Вызвать замерщика', go: 'Записаться на замер', ticket: 'Замер', done: 'Замерщик приедет', svcH: 'Цены', svcP: 'Цена за м² — с материалом и монтажом' }
     : C.kind === 'club'
     ? { tap: 'Бронь в один тап, как в приложении', cta: 'Забронировать онлайн', go: 'Забронировать', ticket: 'Бронь', done: 'Место за вами', svcH: 'Тарифы', svcP: 'Нажмите на тариф, чтобы выбрать время' }
@@ -325,10 +336,10 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
     const img = C.heroImage ? ` has-img" style="background-image:url('${esc(C.heroImage)}')` : '';
     switch (C.theme) {
       case 'atelier':
-        return `<section class="hero${img}"><div class="frame">${demo}<img class="mono" src="icon-192.png" alt="" aria-hidden="true">${name}${tag}${meta}</div></section>`;
+        return `<section class="hero${img}"><div class="frame">${demo}<img class="mono" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${name}${tag}${meta}</div></section>`;
       case 'race':
         return `<section class="hero${img}"><div class="stripes" aria-hidden="true"></div>
-          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${demo}</div>
           <div><h1 style="--n:${Math.max(6, longest)}">${C.name.split(/\s+/).map((w) => `<span>${esc(w)}</span>`).join(' ')}</h1>${tag}${meta}</div></section>`;
       case 'protocol':
         return `<section class="hero${img}"><div class="doc-head"><span>Карточка сервиса</span>${demo}</div>
@@ -341,15 +352,23 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       case 'aqua':
         return `<section class="hero${img}">
           <svg class="bubbles" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="40" cy="60" r="14"/><circle cx="70" cy="30" r="6"/><circle cx="350" cy="80" r="22"/><circle cx="320" cy="40" r="8"/><circle cx="372" cy="150" r="7"/><circle cx="24" cy="170" r="9"/></svg>
-          ${demo}<img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${name}${tag}${meta}
+          ${demo}<img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${name}${tag}${meta}
           <svg class="wave" viewBox="0 0 400 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C 60 2, 120 2, 200 20 S 340 40, 400 16 V40 H0z"/></svg></section>`;
       case 'stitch':
         return `<section class="hero${img}"><div class="bignum" aria-hidden="true">${esc(C.short)}</div>
-          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
+      case 'gta': {
+        const bg = `background-image:url('${esc(C.heroImage || 'icon-512.png')}')`;
+        return `<section class="hero"><div class="cover" aria-hidden="true">
+            <div class="p p1" style="${bg}"></div><div class="p p2" style="${bg}"></div>
+            <div class="p p3"><span>${esc(C.kicker || 'Мойка')}</span></div><div class="p p4" style="${bg}"></div></div>
+          <div class="wanted" aria-hidden="true">★★★★★</div>${demo}
+          <div class="inner">${name}${tag}${meta}</div></section>`;
+      }
       case 'sticker':
         return `<section class="hero${img}">
-          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
       case 'noir':
         return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="gild" aria-hidden="true"></div>${demo}
@@ -369,7 +388,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       }
       case 'glass':
         return `<div class="bgphoto" style="background-image:url('${esc(C.heroImage || '')}')"></div><div class="bgtint"></div>
-          <section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}
+          <section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${demo}
           <div class="pane">${name}${tag}${meta}</div></section>`;
       case 'arch':
         return `<section class="hero">${demo}<div class="archwrap"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
@@ -431,6 +450,21 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       case 'sky':
         return `<section class="hero">${demo}<div class="float"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div></div>
           <div class="inner"><div class="kicker">${esc(C.kicker || 'Натяжные потолки')}</div>${name}${tag}${meta}</div></section>`;
+      // бани и сауны (template/sauna.css): главное — их настоящие фото
+      case 'timber':
+        return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="steam" aria-hidden="true"><i></i><i></i><i></i></div>${demo}
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Баня')}</div>${name}${tag}${meta}</div></section>`;
+      case 'ember':
+        return `<section class="hero">${demo}<div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div><div class="glow" aria-hidden="true"></div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Сауна')}</div>${name}${tag}${meta}</div></section>`;
+      case 'pine':
+        return `<section class="hero">${demo}<div class="photo" style="background-image:url('${esc(C.heroImage || '')}')">
+          <svg class="pines" viewBox="0 0 400 80" preserveAspectRatio="none" aria-hidden="true"><path d="M0 80 L0 52 L18 30 L12 30 L28 8 L44 30 L38 30 L56 52 L70 40 L64 40 L82 14 L100 40 L94 40 L112 60 L130 34 L124 34 L144 4 L164 34 L158 34 L176 58 L196 36 L190 36 L210 10 L230 36 L224 36 L244 62 L262 44 L256 44 L276 18 L296 44 L290 44 L310 66 L328 46 L322 46 L342 20 L362 46 L356 46 L376 64 L400 50 L400 80 Z"/></svg></div>
+          <div class="inner"><div class="kicker">${esc(C.kicker || 'Баня')}</div>${name}${tag}${meta}</div></section>`;
+      case 'frost':
+        return `<section class="hero">${demo}<div class="split"><div class="photo" style="background-image:url('${esc(C.heroImage || '')}')"></div>
+          <div class="temps" aria-hidden="true"><b class="hot">+90°</b><b class="cold">−5°</b></div></div>
+          <div class="kicker">${esc(C.kicker || 'Баня')}</div>${name}${tag}${meta}</section>`;
       // игровые клубы (template/game.css)
       case 'neon':
         return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div><div class="scan" aria-hidden="true"></div>${demo}
@@ -442,7 +476,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       case 'console':
         return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div>
           <svg class="shapes" viewBox="0 0 400 300" aria-hidden="true"><path d="M40 60l20-20M40 40l20 20"/><circle cx="350" cy="56" r="14"/><path d="M330 250l16-28 16 28z"/><rect x="34" y="226" width="26" height="26"/></svg>
-          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${demo}</div>
           <div class="inner"><div class="kicker">${esc(C.kicker || 'Игровой клуб')}</div>${name}${tag}${meta}</div></section>`;
       case 'hud':
         return `<section class="hero" style="background-image:url('${esc(C.heroImage || '')}')"><div class="shade"></div>
@@ -460,7 +494,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       default:
         return `<section class="hero${img}">
           <svg class="crease" viewBox="0 0 400 260" preserveAspectRatio="none" aria-hidden="true"><path d="M-10 168 C 110 120, 250 112, 410 52"/><path d="M-10 182 C 120 136, 260 128, 410 70"/></svg>
-          <div class="hero-top"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true">${demo}</div>
+          <div class="hero-top"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true">${demo}</div>
           <div>${name}${tag}${meta}</div></section>`;
     }
   }
@@ -476,28 +510,28 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
   const calcText = () => {
     const k = C.calc; if (!k) return '';
     const ex = k.extras.map(([n], i) => (calc.ex[i] ? `${n.toLowerCase()}: ${calc.ex[i]}` : '')).filter(Boolean).join(', ');
-    return `Расчёт: ${calc.area} м², ${k.types[calc.type][0].toLowerCase()}${ex ? ', ' + ex : ''} — около ${rub(Math.round(calcSum() / 100) * 100)}`;
+    return `Расчёт: ${calc.area} ${k.unit || 'м²'}, ${k.types[calc.type][0].toLowerCase()}${ex ? ', ' + ex : ''} — около ${rub(Math.round(calcSum() / 100) * 100)}`;
   };
   function calcHtml() {
     const k = C.calc; if (!k) return '';
     return `<section class="calc" id="calc" aria-labelledby="calc-h">
-      <div class="sec-head"><h2 id="calc-h">${esc(k.title || 'Сколько будет стоить')}</h2><p class="muted small">Примерная цена с материалом и монтажом. Точную назовёт замерщик — бесплатно.</p></div>
+      <div class="sec-head"><h2 id="calc-h">${esc(k.title || 'Сколько будет стоить')}</h2><p class="muted small">${esc(k.hint || 'Примерная цена с материалом и монтажом. Точную назовёт замерщик — бесплатно.')}</p></div>
       <div class="calc-box">
-        <label class="c-area" for="c-area"><span>Площадь потолка</span><output id="c-area-v">${calc.area} м²</output></label>
-        <input type="range" id="c-area" min="3" max="${k.maxArea || 120}" step="1" value="${calc.area}">
-        <div class="c-lab">Потолок</div>
+        <label class="c-area" for="c-area"><span>${esc(k.qtyLabel || 'Площадь потолка')}</span><output id="c-area-v">${calc.area} ${esc(k.unit || 'м²')}</output></label>
+        <input type="range" id="c-area" min="${k.minArea || 3}" max="${k.maxArea || 120}" step="1" value="${calc.area}">
+        <div class="c-lab">${esc(k.typesLabel || 'Потолок')}</div>
         <div class="c-types" role="radiogroup" aria-label="Тип потолка">${k.types.map(([n, p], i) =>
-          `<button role="radio" aria-checked="${i === calc.type}" data-ctype="${i}"><b>${esc(n)}</b><small>${rub(p)}/м²</small></button>`).join('')}</div>
+          `<button role="radio" aria-checked="${i === calc.type}" data-ctype="${i}"><b>${esc(n)}</b><small>${rub(p)}/${esc(k.unit || 'м²')}</small></button>`).join('')}</div>
         ${k.extras.length ? `<div class="c-lab">Дополнительно</div><div class="c-extras">${k.extras.map(([n, p, u], i) =>
           `<div class="c-ex"><span>${esc(n)}<small>${rub(p)} за ${esc(u || 'шт.')}</small></span><span class="c-step"><button data-cex="${i}" data-d="-1" aria-label="Меньше: ${esc(n)}">−</button><output id="c-ex-${i}">${calc.ex[i] || 0}</output><button data-cex="${i}" data-d="1" aria-label="Больше: ${esc(n)}">+</button></span></div>`).join('')}</div>` : ''}
         <div class="c-total"><span>Примерно</span><b id="c-sum">${rub(Math.round(calcSum() / 100) * 100)}</b></div>
-        <button class="btn" data-act="zamer">Вызвать замерщика бесплатно</button>
+        <button class="btn" data-act="zamer">${esc(k.cta || 'Вызвать замерщика бесплатно')}</button>
       </div></section>`;
   }
   function bindCalc() {
     const box = $('#calc'); if (!box) return;
     const upd = () => { $('#c-sum').textContent = rub(Math.round(calcSum() / 100) * 100); };
-    $('#c-area').addEventListener('input', (e) => { calc.area = +e.target.value; $('#c-area-v').textContent = calc.area + ' м²'; upd(); });
+    $('#c-area').addEventListener('input', (e) => { calc.area = +e.target.value; $('#c-area-v').textContent = calc.area + ' ' + (C.calc.unit || 'м²'); upd(); });
     box.addEventListener('click', (e) => {
       const t = e.target.closest('[data-ctype],[data-cex]'); if (!t) return;
       if (t.dataset.ctype) { calc.type = +t.dataset.ctype; box.querySelectorAll('[data-ctype]').forEach((b) => b.setAttribute('aria-checked', b === t)); }
@@ -531,14 +565,15 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
           <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}${s.note ? ', ' + esc(s.note) : ''}</span></span>
           <span class="lead" aria-hidden="true"></span><span class="price">${priceHtml(s)}</span>
         </button>`).join('')}</div>
-      ${C.gallery && C.gallery.length ? `<h2>Наши работы</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
+      ${ptabHtml()}
+      ${C.gallery && C.gallery.length ? `<h2>${C.kind === 'sauna' ? 'Как у нас' : 'Наши работы'}</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
       <h2>Как нас найти</h2>
       <div class="place">
         <div class="row"><span>Адрес</span><span>${esc(C.address)}</span></div>
         <div class="row"><span>Телефон</span><a href="tel:${esc(C.phoneHref)}">${esc(C.phone)}</a></div>
         <div class="row"><span>Часы работы</span>${weekHtml()}</div>
       </div>
-      <div class="foot">${esc(C.name)}, онлайн-запись<br><a href="#admin">Вход для владельца</a></div>
+      <div class="foot">${esc(C.name)}, ${C.kind === 'sauna' || C.kind === 'club' ? 'онлайн-бронь' : 'онлайн-запись'}<br><a href="#admin">Вход для владельца</a></div>
     </div>
     <div class="bar"><div class="inner">
       <button class="btn" data-act="book">${W.cta}</button>
@@ -551,7 +586,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
       // своя онлайн-запись салона (YCLIENTS, Sonline ...): записи сразу попадают в их программу
       if (C.bookingUrl && (t.dataset.svc || t.dataset.act === 'book')) return window.open(C.bookingUrl, '_blank', 'noopener');
       if (C.bookSvc && (t.dataset.svc || t.dataset.act === 'book')) return openBooking({ svcId: C.bookSvc, step: 2 });
-      if (t.dataset.act === 'zamer') return openBooking({ svcId: C.bookSvc, step: 2, comment: calcText() });
+      if (t.dataset.act === 'zamer') return openBooking(C.bookSvc ? { svcId: C.bookSvc, step: 2, comment: calcText() } : { step: 1, comment: calcText() });
       if (t.dataset.svc) return openBooking({ svcId: t.dataset.svc, step: 2 });
       const a = t.dataset.act;
       if (a === 'book') openBooking({ step: 1 });
@@ -859,7 +894,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
     }
 
     app.innerHTML = `<div class="wrap">
-      <div class="top"><div class="top-id"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true"><div><div class="muted small">Кабинет владельца</div><h1>${esc(C.name)}</h1></div></div><a class="btn sm ghost" href="#">Сайт</a></div>
+      <div class="top"><div class="top-id"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true"><div><div class="muted small">Кабинет владельца</div><h1>${esc(C.name)}</h1></div></div><a class="btn sm ghost" href="#">Сайт</a></div>
       ${newCount ? `<div class="note alert" role="status">Новых онлайн-записей: <b>${newCount}</b></div>` : ''}
       <div class="tabs">
         <button class="${view === 'day' ? 'on' : ''}" data-view="day">Расписание</button>
@@ -905,7 +940,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
   function renderPin() {
     const LEN = REMOTE ? 6 : 4;
     app.innerHTML = `<div class="wrap pin-screen">
-      <div class="hero"><img class="emblem" src="icon-192.png" alt="" aria-hidden="true"></div>
+      <div class="hero"><img class="emblem" src="icon-192.png?v=1793797010" alt="" aria-hidden="true"></div>
       <h1>Кабинет владельца</h1>
       <p class="muted">${esc(C.name)}</p>
       <form id="pf"><div class="pin" role="group" aria-label="PIN-код">${Array.from({ length: LEN }, (_, i) => `<input class="in" inputmode="numeric" maxlength="1" type="password" aria-label="Цифра ${i + 1}">`).join('')}</div>

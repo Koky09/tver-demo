@@ -79,3 +79,7 @@
 [data-theme=gta] .ticket h3, [data-theme=gta] .ok h3 { font: 700 26px/1 var(--display); text-transform: uppercase; color: var(--gold); text-shadow: 2px 2px 0 #000; }
 [data-theme=gta] .gallery img { border-radius: 0; outline: 4px solid #000; }
 [data-theme=gta] .foot { color: var(--muted); }
+
+[data-theme=gta] .ptab summary { background: var(--surface); border: 0; border-radius: 0; backdrop-filter: blur(6px); text-transform: uppercase; }
+[data-theme=gta] .ptab .place .row > b { color: var(--money); }
+[data-theme=gta] .ptab h3 { color: #fff; text-transform: uppercase; text-shadow: 1px 1px 0 #000; }

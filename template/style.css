@@ -148,6 +148,16 @@ h2 { font: 600 19px/1.25 var(--display); margin: 32px 0 12px; letter-spacing: -.
 .gallery { display: grid; grid-auto-flow: column; grid-auto-columns: 72%; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; }
 .gallery img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--r-md); scroll-snap-align: start; background: var(--surface); }
 
+/* полный прайс (раскрывается) */
+.ptab { margin-top: 12px; }
+.ptab summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; cursor: pointer; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); font-weight: 600; list-style: none; }
+.ptab summary::-webkit-details-marker { display: none; }
+.ptab summary::after { content: "+"; font-size: 20px; line-height: 1; color: var(--muted); }
+.ptab[open] summary::after { content: "–"; }
+.ptab h3 { margin: 16px 0 8px; font-size: 15px; }
+.ptab > p { margin: 10px 2px; }
+.ptab .place .row > span:first-child { color: var(--ink); }
+.ptab .place .row > b { white-space: nowrap; font-variant-numeric: tabular-nums; }
 /* как нас найти */
 .place { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-md); padding: 4px 16px; }
 .place .row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; }

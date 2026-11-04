@@ -121,6 +121,13 @@
   const rub = (n) => n.toLocaleString('ru-RU') + ' ₽';
   const priceStr = (s) => s.price === 0 ? 'Бесплатно' : (s.priceFrom ? 'от ' : '') + rub(s.price) + (s.unit ? ' ' + s.unit : '');
   const priceHtml = (s) => s.price === 0 ? 'Бесплатно' : `${s.priceFrom ? '<small>от</small>' : ''}${rub(s.price)}${s.unit ? `<small class="unit">${esc(s.unit)}</small>` : ''}`;
+  // полный прайс без записи: C.priceTables = [{title, note, groups: [{name, rows: [[название, цена или [мин, макс]]]}]}]
+  const ptabHtml = () => (C.priceTables || []).map((t) => `
+      <details class="ptab"><summary><span>${esc(t.title)}</span><span class="muted small">${t.groups.reduce((n, g) => n + g.rows.length, 0)} позиций</span></summary>
+        ${t.note ? `<p class="muted small">${esc(t.note)}</p>` : ''}
+        ${t.groups.map((g) => `${g.name ? `<h3>${esc(g.name)}</h3>` : ''}<div class="place">${g.rows.map(([n, p]) => `<div class="row"><span>${esc(n)}</span><b>${
+          Array.isArray(p) ? (p[0] === p[1] ? rub(p[0]) : `${p[0].toLocaleString('ru-RU')}–${rub(p[1])}`) : rub(p)}</b></div>`).join('')}</div>`).join('')}
+      </details>`).join('');
   const durStr = (min) => {
     if (min >= 24 * 60 || min > dayLenMax()) { const d = daysNeeded(min); return `${d} ${plural(d, 'день', 'дня', 'дней')}`; }
     const h = Math.floor(min / 60), m = min % 60;
@@ -558,6 +565,7 @@ zamer: 'ruler', matte: 'layers', gloss: 'layers', satin: 'layers', fabric: 'laye
           <span class="body"><span class="name">${esc(s.name)}</span><span class="meta">${durStr(s.duration)}${s.note ? ', ' + esc(s.note) : ''}</span></span>
           <span class="lead" aria-hidden="true"></span><span class="price">${priceHtml(s)}</span>
         </button>`).join('')}</div>
+      ${ptabHtml()}
       ${C.gallery && C.gallery.length ? `<h2>${C.kind === 'sauna' ? 'Как у нас' : 'Наши работы'}</h2><div class="gallery">${C.gallery.map((g) => `<img loading="lazy" src="${esc(g)}" alt="">`).join('')}</div>` : ''}
       <h2>Как нас найти</h2>
       <div class="place">
